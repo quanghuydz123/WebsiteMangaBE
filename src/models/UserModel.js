@@ -2,10 +2,22 @@ const { Double } = require("mongodb");
 const { default: mongoose } = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-    fullname:{type:String},
-    email:{type:String,require:true},
-    password:{type:String,require:true},
-
+    userName:{type:String},
+    email:{type:String,required:true},
+    password:{type:String},
+    isDeleted:{type:Boolean},
+    account_type:{type:String,required:true},
+    reading_history:[{
+        idChapter:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'chapters',
+        },
+    }],
+    idRole:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'roles',
+        required:true
+    },
 },
 {
     timestamps: true
