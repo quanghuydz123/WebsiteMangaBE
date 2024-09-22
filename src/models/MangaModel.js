@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 
 const MangaSchema = new mongoose.Schema({
-    name:{type:String,required:true},
+    name:{type:String,required:true,unique:true},
     summary:{type:String},
     imageUrl:{type:String},
     authorName:{type:String},

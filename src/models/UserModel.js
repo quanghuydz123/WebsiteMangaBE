@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
     userName:{type:String},
     email:{type:String,required:true},
     password:{type:String},
-    isDeleted:{type:Boolean},
+    isDeleted:{type:Boolean,default:false},
     account_type:{type:String,required:true},
     reading_history:[{
         idChapter:{

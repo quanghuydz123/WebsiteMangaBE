@@ -6,8 +6,8 @@ const ChapterSchema = new mongoose.Schema({
         ref: 'manga',
         required:true
     },
-    title:{type:String,required:true},
-    isDeleted:{type:Boolean,default:false},
+    title:{type:String,required:true,unique:true},
+    isDeleted:{type:Boolean,default:false}, 
     imageLinks:[{
         imageLink:{type:String},
         index:{type:Number}
