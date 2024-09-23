@@ -1,0 +1,3725 @@
+{
+    "db_CMPMM": {
+        "tb_Manga": [
+            {
+                "_id": "66f1812835029f5058744e97",
+                "name": " A World of Gold to You",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/dai-phap-su-mo-nha-hang.jpg",
+                "summary": "Once upon a time, the world had been divided into the Moon Kingdom, inhabited by humans, and the Sun Kingdom, inhabited by demons. Estelle, a knight of the Moon Kingdom, loses her family to an ambush from the demons and is sentenced to life in exile after becoming entangled with a mysterious demon child. To survive, she sets out to a mysterious tower in the north with her companions. A timid knight, a slave boy, and a shadow who was once the Demon King. This is an alluring story about three people embarking on an phiêu lưu to find their true selves.\n\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3376148806,
+                "publish_date": 1705324200839,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e48",
+                    "66f18ac5ab25c97ba8d69e51"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e98",
+                "name": " HOLY EMPEROR’S GRANDSON IS A NEClãng mạnR",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/nhan-vien-thuc-tap-kim-cheolsu.jpg",
+                "summary": "Our MC dies from an accidental electrocution and ends up inhabiting the body of a young prince in another world, his new profession being the Neclãng mạnr he chose in the game he was playing before his untimely demise. However, things are not what they seem – including his own Necromancy skills!\n\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 2440201771,
+                "publish_date": 1705569438224,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e3d",
+                    "66f18ac5ab25c97ba8d69e43",
+                    "66f18ac5ab25c97ba8d69e51"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e99",
+                "name": " I Took Over the Demonic Sect Master",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/ket-thuc-cua-nhan-vat-phan-dien-chi-co-the-la-cai-chet.jpg",
+                "summary": "Once Wang Bai awakes, he realises he’s somehow crossed over into a giả tưởng world, and that he’s even lying in a coffin! After receiving a portion of his memories, he realises that this body is the sect master of the Demon Sect, who has committed unthinkable crimes and made millions of enemies. Worst of all… he has lost all of his cultivation, and his previous disciples who harbour ill intent towards him have all become big shots Σ(っ °Д °;) the Ruler of the Palace of Five Poisons, the Lord of the Temple of the Demon God, the Leader of the righteous Way… should I just lie back down in the coffin and never get out?\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0b"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 102992048,
+                "publish_date": 1705477087265,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e29",
+                    "66f18ac5ab25c97ba8d69e37",
+                    "66f18ac5ab25c97ba8d69e48"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e9a",
+                "name": " I’m Actually A Peerless Powerhouse",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/cao-vo-ha-canh-den-mot-van-nam-sau.jpg",
+                "summary": "Jiang Chen transmigrated to the world of immortals, but he did not have any talent for cultivation and was destined to be a mortal. The one at the door? Oh,it’s just Jiang Chen’s legendary golden-winged bird.\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0c"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 705976742,
+                "publish_date": 1705102342311,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e30",
+                    "66f18ac5ab25c97ba8d69e33",
+                    "66f18ac5ab25c97ba8d69e34",
+                    "66f18ac5ab25c97ba8d69e32",
+                    "66f18ac5ab25c97ba8d69e2d"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e9b",
+                "name": " Transferred to another world, but I'm saving the world of an Otome game!?",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/tenohira-kaitaku-mura-de-isekai-kenkokuki-fueteku-yome-tachi-to-nonbiri-mujintou-life.jpg",
+                "summary": "A two-part oneshot about a guy accidentally transported to an Otome game by his sister. To get out, he needs to clear a love route but he tries his best to find another way.\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0d"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 4085788200,
+                "publish_date": 1705141140168,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e30"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e9d",
+                "name": "9Th Class Sword Master: The Guardian Of The Sword",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/ke-pha-hoai-to-doi.jpg",
+                "summary": "In the year 237 of the Imperial Era, the ‘Divine War’ concludes – a war fought to protect humanity from ‘corruption.’ At the end of this battle, the Sword Saint, Kyril McGyver, faces betrayal from his closest friend and Emperor, Oliver.\nIn the end, after killing the Emperor, Kyril decides to correct all the wrongs by returning to the past.\nNow, with a power he could not acquire in his past life – the power of the sword and magic – he stands at the apex of both paths, ready to change the future.\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0e"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 1708547472,
+                "publish_date": 1704971572226,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e3d",
+                    "66f18ac5ab25c97ba8d69e2e",
+                    "66f18ac5ab25c97ba8d69e46",
+                    "66f18ac5ab25c97ba8d69e4f",
+                    "66f18ac5ab25c97ba8d69e4d",
+                    "66f18ac5ab25c97ba8d69e3c",
+                    "66f18ac5ab25c97ba8d69e44"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e9e",
+                "name": "A Divorced Evil Lady Bakes Cakes",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/maiko-san-chi-no-makanai-san.jpg",
+                "summary": "I had been in the position of Duchess for nine years for my quiet and indifferent husband, but all I had left was contempt and indifference, and the only thing I was accused of having a love affair: “There’s a limit to what I can endure for this marriage. No matter how much you cry or plead to the Emperor, I can’t stand it anymore.” “Can I sign here?” “So if you pretend to be poor like last time, this time… what?” I waved divorce papers on an indifferent day. “I’m done. Can I go now?” “Oh, you don’t have to talk about alimony, dowry, just give me back my dowry” “What are you gonna do with that little money?” My husband, who had not cared what he had done for the past nine years, asked me a question in his voice. I laughed confidently and answered: – “I’m going to open a dessert cafe.”\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3297127911,
+                "publish_date": 1705184906696,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e54",
+                    "66f18ac5ab25c97ba8d69e39",
+                    "66f18ac5ab25c97ba8d69e43",
+                    "66f18ac5ab25c97ba8d69e35",
+                    "66f18ac5ab25c97ba8d69e3b",
+                    "66f18ac5ab25c97ba8d69e34",
+                    "66f18ac5ab25c97ba8d69e40"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744e9f",
+                "name": "A Princess Who Reads Fortune",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/nu-do-de-ai-nay-deu-muon-giet-ta.jpg",
+                "summary": "Top actress Lee Sia has the ability to see ghosts. After an accident, she wakes up in the body of 'Camilla Sorfelle'.\nBut here's the problem.\n\"Oh, Father, help me!\"\nThis woman's fate always ends in death!\nI need to extend my life, so might as well talk to the ghosts first.\nUgh, but why do I keep getting involved with people I want to avoid!?\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 4008844760,
+                "publish_date": 1705563020450,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e2f",
+                    "66f18ac5ab25c97ba8d69e45",
+                    "66f18ac5ab25c97ba8d69e35",
+                    "66f18ac5ab25c97ba8d69e39",
+                    "66f18ac5ab25c97ba8d69e3a",
+                    "66f18ac5ab25c97ba8d69e48",
+                    "66f18ac5ab25c97ba8d69e37"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea0",
+                "name": "A Tipsy Marriage Proposal for the Emperor",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/ta-bi-nhot-tai-cung-mot-ngay-muoi-van-nam.jpg",
+                "summary": "Whether it's beauty, status, or a Ph.D, Elliere has it all. But one thing she doesn't have is luck with men, which she discovers when her prideful fiance dumps her for \"being a know-it-all.\"\nEnraged, Elliere storms to the bar and drunkenly rants about her troubles to a mysterious stranger, whose good looks inspire her to ask for his hand in marriage.\nUnfortunately for her, the man is none other than the cold-blooded Emperor Ropherce, who actually accepts her proposal!\nPoor Elliere has a feeling she'll need more than liquid courage to survive as the tyrant's unlucky new empress...\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0f"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 2623714668,
+                "publish_date": 1705546757631,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e48",
+                    "66f18ac5ab25c97ba8d69e2c",
+                    "66f18ac5ab25c97ba8d69e2b",
+                    "66f18ac5ab25c97ba8d69e2f",
+                    "66f18ac5ab25c97ba8d69e2a",
+                    "66f18ac5ab25c97ba8d69e30",
+                    "66f18ac5ab25c97ba8d69e53"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea1",
+                "name": "A World-Class Walkthrough",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/nhat-quyen-bao-tinh.jpg",
+                "summary": "The main character, Kim Kyung-Sam, is an orphan preparing for the civil service exam while working part-time at a convenience store.While immersed in the game God Forsaken World' and playing the scenario of Gilosan Ello D' Baltic', the fallen Third Prince of The Empire, without realizing it, he is transmigrated into that character.The worst part is that at the time it happened, the fallen Third Prince, better known as The Pig Prince', has been kidnapped and is on the verge of execution!We will see how Kyung-Sam uses his knowledge of the game to overcome various cris\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f10"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 1768911135,
+                "publish_date": 1705105080364,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e37",
+                    "66f18ac5ab25c97ba8d69e3d",
+                    "66f18ac5ab25c97ba8d69e49",
+                    "66f18ac5ab25c97ba8d69e3e"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea2",
+                "name": "Abandoned Universe",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/thanh-khu.jpg",
+                "summary": "One day, the earth’s vitality changed, and people began to practice ancient võ thuật. Seventeen years later, alien invaders invaded the earth, As a result, human beings were slaughtered and enslaved.\nIn order to stop the alien invaders, all the sovereign countries on the earth united and began to resist, opening the nuclear era on the earth, but they still could not get rid of the enslavement…\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f11"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3210856027,
+                "publish_date": 1704957956910,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e4c",
+                    "66f18ac5ab25c97ba8d69e52",
+                    "66f18ac5ab25c97ba8d69e2c",
+                    "66f18ac5ab25c97ba8d69e4b",
+                    "66f18ac5ab25c97ba8d69e2e",
+                    "66f18ac5ab25c97ba8d69e3d",
+                    "66f18ac5ab25c97ba8d69e30"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea3",
+                "name": "Academy’s Genius Swordmaster",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/mao-hiem-gia-cuoi-cung.jpg",
+                "summary": "Ronan lived a wasteful life filled with regrets. A second chance befalls him at the end of his futile life. He went back to the time when he was a ten-year-old child! For the people who sacrificed themselves for him, he becomes determined to live a new life.\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 2423114234,
+                "publish_date": 1705374832382,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e2d"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea4",
+                "name": "Administrator Kang Jin Lee",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/song-nhu-mot-dien-vien.jpg",
+                "summary": "Gwanjeon – Lee Kang-jin is a Manga/Manhwa/Manhua in (English/Raw) language, Manhwa series is written by Updating This Comic is About\nIs he crazy?\nOr just the typical attention seeker?\nLee Kwang-Jin, who doesn't understand the difference in people, and his Master Kwak No who's the one helping him to understand the differences of people. A warm human story of a student and his Master.\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 1230717775,
+                "publish_date": 1705185956857,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e40",
+                    "66f18ac5ab25c97ba8d69e3e",
+                    "66f18ac5ab25c97ba8d69e50",
+                    "66f18ac5ab25c97ba8d69e4c"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea5",
+                "name": "After Improperly Licking a Dog, I Became a Billionaire",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/su-tro-lai-cua-huyen-thoai.jpg",
+                "summary": "Lin Xinben was an ordinary licking dog. After being dumped, he got the Shenhao system, and he got trillions at the beginning! The bad thing is that this money can only be spent on girls! No way, in order to spend the money, Lin Xin embarked on an unusual path of Shenhao’s counterattack!\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3334778809,
+                "publish_date": 1705472924415,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e41"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea6",
+                "name": "Aiming to Be the Strongest While Remaining at the Absolute Lowest Level With My Worthless Run Away Skill",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/vua-choi-da-co-tai-khoan-vuong-gia.jpg",
+                "summary": "Dungeons that suddenly appeared on Earth have become a part of everyday life. A reclusive young man, Yuuto Kurashiki, steps into a dungeon, hoping to overturn his stagnant life. However, the unique skill bestowed upon him is, ironically, the ability to “run away.” It’s a troublesome skill to wield, with a downside of reducing his overall abilities – a disastrous draw in the skill lottery. Yet, unbeknownst to him, this skill harbors an outrageous potential!\n\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 577362572,
+                "publish_date": 1705566521808,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e35",
+                    "66f18ac5ab25c97ba8d69e32",
+                    "66f18ac5ab25c97ba8d69e52",
+                    "66f18ac5ab25c97ba8d69e3a",
+                    "66f18ac5ab25c97ba8d69e41",
+                    "66f18ac5ab25c97ba8d69e29"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea7",
+                "name": "Akane-banashi",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/su-dieu-tri-dac-biet-cua-tinh-linh.jpg",
+                "summary": "Rakugo--the ultimate form of storytelling, where everything in a story is expressed with just your body and words. Shinta and his daughter Akane have been seduced by this wonderful form of classical entertainment. Having observed her father strive to pass the shin'uchi rakugo test, Akane will take her own steps into this unique world!\n\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f12"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 1077823582,
+                "publish_date": 1705490509630,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e3e",
+                    "66f18ac5ab25c97ba8d69e2c",
+                    "66f18ac5ab25c97ba8d69e32",
+                    "66f18ac5ab25c97ba8d69e34",
+                    "66f18ac5ab25c97ba8d69e40",
+                    "66f18ac5ab25c97ba8d69e47"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea8",
+                "name": "All Hail the Sect Leader",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/thoi-han-cuoi-cung-dang-tran-ngap-tren-cua-so-trang-thai.jpg",
+                "summary": "All the members of my sect are abnormally strong. All my disciples turn out to be big shots, and I’ll definitely become invincible in this world!\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 980311988,
+                "publish_date": 1704367433953,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e55",
+                    "66f18ac5ab25c97ba8d69e2c",
+                    "66f18ac5ab25c97ba8d69e48",
+                    "66f18ac5ab25c97ba8d69e49",
+                    "66f18ac5ab25c97ba8d69e30",
+                    "66f18ac5ab25c97ba8d69e46"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ea9",
+                "name": "All Soccer Talents Are Mine",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg",
+                "summary": "Uho-yeong had dreamed of becoming a soccer player. However, he was not blessed with the talent and died without realizing his dream, struck by lightning. It was then that the demon Mammon appeared, offering the ability to covet everyone's talents...\n\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f13"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3377231371,
+                "publish_date": 1705489238453,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e47",
+                    "66f18ac5ab25c97ba8d69e38"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744eaa",
+                "name": "An Ice Lamp: Gira Chronicles",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/3-kiep-xui-xeo-kiep-nay-cung-ta-than-kinh.jpg",
+                "summary": "She is a 14-year-old smart girl who was raised as a boy. Thinking about whether to leave the monastery empty or become a slave to the nobility, the transcendent Maharita offers to plant her eggs in her body and grant her wishes in return for showing the fully swollen moonlight each time. After accepting Maharita's suggestion, she had a man's voice for 10 years. There are even a lot of ladies and knights who have to fight, and even a magician holding her ankle\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f14"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3300550475,
+                "publish_date": 1705103122329,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e48",
+                    "66f18ac5ab25c97ba8d69e2a",
+                    "66f18ac5ab25c97ba8d69e2f",
+                    "66f18ac5ab25c97ba8d69e38",
+                    "66f18ac5ab25c97ba8d69e4d",
+                    "66f18ac5ab25c97ba8d69e44"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744eab",
+                "name": "Arcana giả tưởng",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/xa-thu-tai-di-gioi.jpg",
+                "summary": "Arcana giả tưởng, a mobile game, has taken the world by storm. However, players lose consciousness in the real world and are trapped in the game until someone completes it. Can Yoon, the son of a pro gamer, find his father in the virtual world?\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f15"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 458291375,
+                "publish_date": 1705289094647,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e2e",
+                    "66f18ac5ab25c97ba8d69e29",
+                    "66f18ac5ab25c97ba8d69e2c",
+                    "66f18ac5ab25c97ba8d69e4b",
+                    "66f18ac5ab25c97ba8d69e2a"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744eac",
+                "name": "Arcane Ascension",
+                "summary": "Five years ago, Corin Cadence's brother entered the Serpent Spire a colossal tower with ever-shifting rooms, traps, and monsters. Those who survive the spire's trials return home with an attunement: a mark granting the bearer magical powers. According to legend, those few who reach the top of the tower will be granted a boon by the spire's goddess. He never returned. Now, it's Corin's turn. He's headed to the top floor, on a mission to meet the goddess.\n",
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/ngao-du-tai-chon-di-gioi.jpg",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f16"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 2556195499,
+                "publish_date": 1705384714402,
+                "status": 1,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e50",
+                    "66f18ac5ab25c97ba8d69e29",
+                    "66f18ac5ab25c97ba8d69e43",
+                    "66f18ac5ab25c97ba8d69e4f",
+                    "66f18ac5ab25c97ba8d69e56",
+                    "66f18ac5ab25c97ba8d69e4c"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744ead",
+                "name": "Ari no Su Dungeon e Youkoso!",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/tono-kanri-o-shite-miyou.jpg",
+                "summary": "When I woke up, all I had were an unfamiliar room, a crystal, and no memories—just “me.” Awakened as a Dungeon Master, Dan starts with a few points and uses them to summon ant monsters to expand his dungeon. Alongside the ever-increasing and evolving ants, he repels intruding enemies, occasionally recruits allies, builds an impregnable mega-dungeon, and aims to find new happiness and everyday life within the dungeon!\n\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3875096345,
+                "publish_date": 1705493165836,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e46",
+                    "66f18ac5ab25c97ba8d69e44"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744eae",
+                "name": "Arifureta Shokugyou de Sekai Saikyou",
+                "status": "",
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/ke-bat-binh-thuong-o-di-gioi.jpg",
+                "summary": "Among the class transported to another world, Nagumo Hajime is an ordinary male student who didn’t have ambition nor aspiration in life, and thus called “Incompetent” by his classmates. The class was summoned to become heroes and save a country from destruction. Students of the class were blessed with cheat specifications and cool job class, however, it was not the case with Hajime, with his profession as a “Synergist”, and his very mediocre stats. “Synergist”, to put it in another word was just artisan class. Being the weakest, he then falls to the depth of the abyss when he and his classmates were exploring a dungeon. What did he find in the depth of the abyss, and can he survive?\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f17"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 800221802,
+                "publish_date": 1704332771020,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e4a",
+                    "66f18ac5ab25c97ba8d69e3e",
+                    "66f18ac5ab25c97ba8d69e51"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744eaf",
+                "name": "Arknights: OPERATORS!",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/the-villainess-will-crush-her-destruction-end-through-modern-firepower.jpg",
+                "summary": "",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f18"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 3362549975,
+                "publish_date": 1705470585432,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e45",
+                    "66f18ac5ab25c97ba8d69e49",
+                    "66f18ac5ab25c97ba8d69e47",
+                    "66f18ac5ab25c97ba8d69e4e",
+                    "66f18ac5ab25c97ba8d69e44"
+                ]
+            },
+            {
+                "_id": "66f1812835029f5058744eb0",
+                "name": "Assassin’s Creed: Forgotten Temple",
+                "status": 1,
+                "imageUrl": "https://static2.truyentranhonl.com/img-comic/thang-cap-vo-han-trong-murim.jpg",
+                "summary": "Edward Kenway returns to take the leap of faith in an all-new phiêu lưu. The high-seas hunt is on for a long-lost treasure left by Those Who Came Before. But this time, The Templars aren’t the only ones after the prize. Join history’s most cunning pirate in an epic journey around the Chinese Sea.\n",
+                "author": [
+                    "66f18ac5ab25c97ba8d69f0a"
+                ],
+                "isDeleted": false,
+                "publisher": "66f1812835029f5058744e9c",
+                "views": 1891141360,
+                "publish_date": 1705096725930,
+                "genres": [
+                    "66f18ac5ab25c97ba8d69e30"
+                ]
+            }
+        ],
+        "tb_Genre": [
+            {
+                "_id": "66f18ac5ab25c97ba8d69e29",
+                "name": "18+",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e2a",
+                "name": "Hành động",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e2b",
+                "name": "Phiêu lưu",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e2c",
+                "name": "Hài hước",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e2d",
+                "name": "Tâm lý",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e2e",
+                "name": "Fantasy",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e2f",
+                "name": "Kinh dị",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e30",
+                "name": "Huyền bí",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e31",
+                "name": "Tâm lý",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e32",
+                "name": "Lãng mạn",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e33",
+                "name": "Khoa học viễn tưởng",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e34",
+                "name": "Đời thường",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e35",
+                "name": "Thể thao",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e36",
+                "name": "Siêu nhiên",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e37",
+                "name": "Lịch sử",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e38",
+                "name": "Thế giới khác",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e39",
+                "name": "Robot",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e3a",
+                "name": "Quân sự",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e3b",
+                "name": "Âm nhạc",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e3c",
+                "name": "Học đường",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e3d",
+                "name": "Shoujo",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e3e",
+                "name": "Shounen",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e3f",
+                "name": "Seinen",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e40",
+                "name": "Josei",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e41",
+                "name": "Parody",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e42",
+                "name": "Kinh dị tâm lý",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e43",
+                "name": "Bi kịch",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e44",
+                "name": "Hành động - Phiêu lưu",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e45",
+                "name": "Lãng mạn - Tâm lý",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e46",
+                "name": "Fantasy - Phiêu lưu",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e47",
+                "name": "Khoa học viễn tưởng Fantasy",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e48",
+                "name": "Lịch sử Fantasy",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e49",
+                "name": "Siêu nhiên - Lãng mạn",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e4a",
+                "name": "Hài hước - Lãng mạn",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e4b",
+                "name": "Thể thao - Tâm lý",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e4c",
+                "name": "Khoa học viễn tưởng - Kinh dị",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e4d",
+                "name": "Hành động - Hài hước",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e4e",
+                "name": "Thế giới khác - Fantasy",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e4f",
+                "name": "Khoa học viễn tưởng - Phiêu lưu",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e50",
+                "name": "Huyền bí - Lãng mạn",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e51",
+                "name": "Hài hước - Đời thường",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e52",
+                "name": "Hành động - Huyền bí",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e53",
+                "name": "Fantasy - Hài hước",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e54",
+                "name": "Lịch sử - Lãng mạn",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e55",
+                "name": "Shoujo-Ai",
+                "isDeleted": false,
+                "slug": "không biết"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e56",
+                "name": "Shounen-Ai",
+                "isDeleted": false,
+                "slug": "không biết"
+            }
+        ],
+        "tb_Following": [
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744e97"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e97"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744e98"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744e99"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e99"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e9a"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e9a"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744e9a"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744e9b"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e9b"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744e9b"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744e9b"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e9b"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e9d"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744e9d"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744e9e"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e9e"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744e9e"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744e9e"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e9f"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744e9f"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea0"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ea0"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ea0"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744ea0"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ea0"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744ea1"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ea1"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744ea2"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744ea2"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744ea4"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ea4"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea4"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744ea5"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744ea5"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea5"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ea6"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea7"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744ea7"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ea8"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744ea8"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744ea8"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea9"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744eaa"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744eaa"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744eaa"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744eab"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744eab"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744eab"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744eac"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744eac"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744eac"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744eac"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744eac"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744ead"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ead"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ead"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ead"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ead"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744eae"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744eae"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744eae"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744eaf"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744eb0"
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744eb0"
+            }
+        ],
+        "tb_Comment": [
+            {
+                "_id": "66f18ac5ab25c97ba8d69e57",
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "text": "Cốt truyện thật sự rất bất ngờ!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e9a"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e58",
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "text": "When is the next chapter coming out?",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e9b"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e59",
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "text": "Tôi rất thích nghệ thuật trong chương này.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e9d"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e5a",
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "text": "I loved the art in this one.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e9e"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e5b",
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "text": "Chương này hay quá!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e5c",
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "text": "Great chapter!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea8"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e5d",
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "text": "This manga keeps getting better.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eb0"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e5e",
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "text": "Hy vọng chương sau dài hơn.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea8"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e5f",
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "text": "Cốt truyện thật sự rất bất ngờ!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e97"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e60",
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "text": "Hy vọng chương sau dài hơn.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eb0"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e61",
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "text": "This manga keeps getting better.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eab"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e62",
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "text": "Tôi rất thích nghệ thuật trong chương này.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eae"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e63",
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "text": "I loved the art in this one.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ead"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e64",
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "text": "This manga keeps getting better.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eac"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e65",
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "text": "This manga keeps getting better.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea7"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e66",
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "text": "Bộ truyện này ngày càng hay hơn.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea8"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e67",
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "text": "When is the next chapter coming out?",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea5"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e68",
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "text": "Tôi rất thích nghệ thuật trong chương này.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea1"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e69",
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "text": "Hy vọng chương sau dài hơn.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea2"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e6a",
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "text": "The plot twist was amazing!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea3"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e6b",
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "text": "I loved the art in this one.",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea4"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e6c",
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "text": "Great chapter!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744ea5"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e6d",
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "text": "The plot twist was amazing!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eab"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e6e",
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "text": "I didn't expect that ending!",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e9d"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e6f",
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "text": "Khi nào chương tiếp theo ra mắt vậy?",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744eb0"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69e70",
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "text": "Khi nào chương tiếp theo ra mắt vậy?",
+                "isDeleted": false,
+                "idManga": "66f1812835029f5058744e9d"
+            }
+        ],
+        "tb_Rating": [
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e97",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744e97",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744e97",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e98",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e98",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e98",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e99",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744e99",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744e99",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e9a",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e9a",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744e9a",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e9b",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744e9b",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744e9b",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e9d",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744e9d",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e9d",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744e9e",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744e9e",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744e9e",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744e9f",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744e9f",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744e9f",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea0",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ea0",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea0",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744ea1",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744ea1",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea1",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea2",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744ea2",
+                "star": 2
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ea2",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ea3",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea3",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ea3",
+                "star": 2
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ea4",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea4",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744ea4",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea5",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ea5",
+                "star": 2
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744ea5",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744ea6",
+                "star": 2
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744ea6",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ea6",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea7",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744ea7",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744ea7",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "idManga": "66f1812835029f5058744ea8",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ea8",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744ea8",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744ea9",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ea9",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744ea9",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744eaa",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744eaa",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "idManga": "66f1812835029f5058744eaa",
+                "star": 2
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744eab",
+                "star": 3
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744eab",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744eab",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744eac",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "idManga": "66f1812835029f5058744eac",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "idManga": "66f1812835029f5058744eac",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744ead",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744ead",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744ead",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744eae",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744eae",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744eae",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "idManga": "66f1812835029f5058744eaf",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "idManga": "66f1812835029f5058744eaf",
+                "star": 4
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "idManga": "66f1812835029f5058744eaf",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "idManga": "66f1812835029f5058744eb0",
+                "star": 1
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "idManga": "66f1812835029f5058744eb0",
+                "star": 5
+            },
+            {
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "idManga": "66f1812835029f5058744eb0",
+                "star": 2
+            }
+        ],
+        "tb_Chapter": [
+            {
+                "idManga": "66f1812835029f5058744e97",
+                "_id": "66f18ac5ab25c97ba8d69e71",
+                "title": "chapter - 1: The Beginning",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-17.jpg",
+                    "https://i.bumcheo1.info/12/12696/331.jpg",
+                    "https://i.bumcheo1.info/12/12696/255.jpg",
+                    "https://i.bumcheo1.info/12/12696/673.jpg",
+                    "https://i.bumcheo1.info/12/12696/870.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-11.jpg",
+                    "https://i.bumcheo1.info/12/12696/455.jpg",
+                    "https://i.bumcheo1.info/12/12696/018.jpg",
+                    "https://i.bumcheo1.info/12/12696/975.jpg",
+                    "https://i.bumcheo1.info/12/12696/26.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e98",
+                "_id": "66f18ac5ab25c97ba8d69e72",
+                "title": "chapter - 1: A New Journey",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/credit-2.jpg",
+                    "https://i.bumcheo1.info/12/12696/008.jpg",
+                    "https://i.bumcheo1.info/12/12696/673.jpg",
+                    "https://i.bumcheo1.info/12/12696/522.jpg",
+                    "https://i.bumcheo1.info/12/12696/660.jpg",
+                    "https://i.bumcheo1.info/12/12696/29.jpg",
+                    "https://i.bumcheo1.info/12/12696/68.jpg",
+                    "https://i.bumcheo1.info/12/12696/324.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-26.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e99",
+                "_id": "66f18ac5ab25c97ba8d69e73",
+                "title": "chapter - 1: Unexpected Encounter",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/689.jpg",
+                    "https://i.bumcheo1.info/12/12696/957.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/496.jpg",
+                    "https://i.bumcheo1.info/12/12696/925.jpg",
+                    "https://i.bumcheo1.info/12/12696/455.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9a",
+                "_id": "66f18ac5ab25c97ba8d69e74",
+                "title": "chapter - 1: The Hidden Village",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/405.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-4.jpg",
+                    "https://i.bumcheo1.info/12/12696/272.jpg",
+                    "https://i.bumcheo1.info/12/12696/1.jpg",
+                    "https://i.bumcheo1.info/12/12696/682.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9b",
+                "_id": "66f18ac5ab25c97ba8d69e75",
+                "title": "chapter - 1: The Rival Appears",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/017-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/575.jpg",
+                    "https://i.bumcheo1.info/12/12696/credit-2.jpg",
+                    "https://i.bumcheo1.info/12/12696/331.jpg",
+                    "https://i.bumcheo1.info/12/12696/26.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/164.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9d",
+                "_id": "66f18ac5ab25c97ba8d69e76",
+                "title": "chapter - 1: Training Begins",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-6.jpg",
+                    "https://i.bumcheo1.info/12/12696/007.jpg",
+                    "https://i.bumcheo1.info/12/12696/qskms.jpg",
+                    "https://i.bumcheo1.info/12/12696/49.jpg",
+                    "https://i.bumcheo1.info/12/12696/227.jpg",
+                    "https://i.bumcheo1.info/12/12696/62.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-47.jpg",
+                    "https://i.bumcheo1.info/12/12696/421.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9e",
+                "_id": "66f18ac5ab25c97ba8d69e77",
+                "title": "chapter - 1: The First Mission",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/794-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/331.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-10.jpg",
+                    "https://i.bumcheo1.info/12/12696/870.jpg",
+                    "https://i.bumcheo1.info/12/12696/260-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-44.jpg",
+                    "https://i.bumcheo1.info/12/12696/794-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9f",
+                "_id": "66f18ac5ab25c97ba8d69e78",
+                "title": "chapter - 1: The Mysterious Forest",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-7.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-38.jpg",
+                    "https://i.bumcheo1.info/12/12696/360.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-29.jpg",
+                    "https://i.bumcheo1.info/12/12696/002.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-40.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/389.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea0",
+                "_id": "66f18ac5ab25c97ba8d69e79",
+                "title": "chapter - 1: The Ancient Ruins",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/015.jpg",
+                    "https://i.bumcheo1.info/12/12696/486.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/uv1xa.jpg",
+                    "https://i.bumcheo1.info/12/12696/010.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-40.jpg",
+                    "https://i.bumcheo1.info/12/12696/101.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-41.jpg",
+                    "https://i.bumcheo1.info/12/12696/36.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea1",
+                "_id": "66f18ac5ab25c97ba8d69e7a",
+                "title": "chapter - 1: The Secret Weapon",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-6.jpg",
+                    "https://i.bumcheo1.info/12/12696/49.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-49.jpg",
+                    "https://i.bumcheo1.info/12/12696/824.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-21.jpg",
+                    "https://i.bumcheo1.info/12/12696/360.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea2",
+                "_id": "66f18ac5ab25c97ba8d69e7b",
+                "title": "chapter - 1: The Battle Begins",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/404.jpg",
+                    "https://i.bumcheo1.info/12/12696/jghv1.jpg",
+                    "https://i.bumcheo1.info/12/12696/260-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-46.jpg",
+                    "https://i.bumcheo1.info/12/12696/002.jpg",
+                    "https://i.bumcheo1.info/12/12696/739.jpg",
+                    "https://i.bumcheo1.info/12/12696/515.jpg",
+                    "https://i.bumcheo1.info/12/12696/868.jpg",
+                    "https://i.bumcheo1.info/12/12696/629.jpg",
+                    "https://i.bumcheo1.info/12/12696/36.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea3",
+                "_id": "66f18ac5ab25c97ba8d69e7c",
+                "title": "chapter - 1: The Dark Past",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/37.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-41.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/393.jpg",
+                    "https://i.bumcheo1.info/12/12696/26.jpg",
+                    "https://i.bumcheo1.info/12/12696/49.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/003.jpg",
+                    "https://i.bumcheo1.info/12/12696/925.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea4",
+                "_id": "66f18ac5ab25c97ba8d69e7d",
+                "title": "chapter - 1: The Power Within",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-4.jpg",
+                    "https://i.bumcheo1.info/12/12696/016.jpg",
+                    "https://i.bumcheo1.info/12/12696/68.jpg",
+                    "https://i.bumcheo1.info/12/12696/645.jpg",
+                    "https://i.bumcheo1.info/12/12696/b1q8q.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea5",
+                "_id": "66f18ac5ab25c97ba8d69e7e",
+                "title": "chapter - 1: The Lost Friend",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/020-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/625.jpg",
+                    "https://i.bumcheo1.info/12/12696/27.jpg",
+                    "https://i.bumcheo1.info/12/12696/62.jpg",
+                    "https://i.bumcheo1.info/12/12696/383.jpg",
+                    "https://i.bumcheo1.info/12/12696/723.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea6",
+                "_id": "66f18ac5ab25c97ba8d69e7f",
+                "title": "chapter - 1: The Forbidden Technique",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/33.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-32.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-25.jpg",
+                    "https://i.bumcheo1.info/12/12696/013-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/783.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea7",
+                "_id": "66f18ac5ab25c97ba8d69e80",
+                "title": "chapter - 1: The Final Test",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/975.jpg",
+                    "https://i.bumcheo1.info/12/12696/26.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg",
+                    "https://i.bumcheo1.info/12/12696/926.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/bbuyd.jpg",
+                    "https://i.bumcheo1.info/12/12696/25.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea8",
+                "_id": "66f18ac5ab25c97ba8d69e81",
+                "title": "chapter - 1: The Great Tournament",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/689-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-49.jpg",
+                    "https://i.bumcheo1.info/12/12696/255.jpg",
+                    "https://i.bumcheo1.info/12/12696/007.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-26.jpg",
+                    "https://i.bumcheo1.info/12/12696/405.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea9",
+                "_id": "66f18ac5ab25c97ba8d69e82",
+                "title": "chapter - 1: The Legendary Warrior",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/002.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-42.jpg",
+                    "https://i.bumcheo1.info/12/12696/004-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/at17o.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-32.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-4.jpg",
+                    "https://i.bumcheo1.info/12/12696/504.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-48.jpg",
+                    "https://i.bumcheo1.info/12/12696/edikj.jpg",
+                    "https://i.bumcheo1.info/12/12696/469.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaa",
+                "_id": "66f18ac5ab25c97ba8d69e83",
+                "title": "chapter - 1: The Betrayal",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/469-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/68.jpg",
+                    "https://i.bumcheo1.info/12/12696/892.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-33.jpg",
+                    "https://i.bumcheo1.info/12/12696/26.jpg",
+                    "https://i.bumcheo1.info/12/12696/656.jpg",
+                    "https://i.bumcheo1.info/12/12696/42.jpg",
+                    "https://i.bumcheo1.info/12/12696/596.jpg",
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-13.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eab",
+                "_id": "66f18ac5ab25c97ba8d69e84",
+                "title": "chapter - 1: The Rescue Mission",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/272.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/013-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-31.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-37.jpg",
+                    "https://i.bumcheo1.info/12/12696/kq6xz.jpg",
+                    "https://i.bumcheo1.info/12/12696/010.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eac",
+                "_id": "66f18ac5ab25c97ba8d69e85",
+                "title": "chapter - 1: The Hidden Truth",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/016-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/fhrkb.jpg",
+                    "https://i.bumcheo1.info/12/12696/155.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/016-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-10.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-14.jpg",
+                    "https://i.bumcheo1.info/12/12696/q9buz.jpg",
+                    "https://i.bumcheo1.info/12/12696/56.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ead",
+                "_id": "66f18ac5ab25c97ba8d69e86",
+                "title": "chapter - 1: The Ultimate Challenge",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/782.jpg",
+                    "https://i.bumcheo1.info/12/12696/957.jpg",
+                    "https://i.bumcheo1.info/12/12696/edikj.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-3.jpg",
+                    "https://i.bumcheo1.info/12/12696/001.jpg",
+                    "https://i.bumcheo1.info/12/12696/009-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/56.jpg",
+                    "https://i.bumcheo1.info/12/12696/722.jpg",
+                    "https://i.bumcheo1.info/12/12696/39.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-35.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eae",
+                "_id": "66f18ac5ab25c97ba8d69e87",
+                "title": "chapter - 1: The Return Home",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/360.jpg",
+                    "https://i.bumcheo1.info/12/12696/008-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/002-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/892.jpg",
+                    "https://i.bumcheo1.info/12/12696/68.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaf",
+                "_id": "66f18ac5ab25c97ba8d69e88",
+                "title": "chapter - 1: The New Threat",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/274.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg",
+                    "https://i.bumcheo1.info/12/12696/455.jpg",
+                    "https://i.bumcheo1.info/12/12696/021.jpg",
+                    "https://i.bumcheo1.info/12/12696/34.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-18.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-2.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-45.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/783.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eb0",
+                "_id": "66f18ac5ab25c97ba8d69e89",
+                "title": "chapter - 1: The Sacred Artifact",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/bpbvq.jpg",
+                    "https://i.bumcheo1.info/12/12696/002.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/814.jpg",
+                    "https://i.bumcheo1.info/12/12696/qskms.jpg",
+                    "https://i.bumcheo1.info/12/12696/018-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e97",
+                "_id": "66f18ac5ab25c97ba8d69e8a",
+                "title": "chapter - 2: The Hero's Resolve",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/541.jpg",
+                    "https://i.bumcheo1.info/12/12696/782.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-31.jpg",
+                    "https://i.bumcheo1.info/12/12696/255.jpg",
+                    "https://i.bumcheo1.info/12/12696/629.jpg",
+                    "https://i.bumcheo1.info/12/12696/270.jpg",
+                    "https://i.bumcheo1.info/12/12696/021.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-45.jpg",
+                    "https://i.bumcheo1.info/12/12696/012-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/34.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e98",
+                "_id": "66f18ac5ab25c97ba8d69e8b",
+                "title": "chapter - 2: The Shadow's Lair",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/56.jpg",
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/012-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/925.jpg",
+                    "https://i.bumcheo1.info/12/12696/886.jpg",
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/522.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-32.jpg",
+                    "https://i.bumcheo1.info/12/12696/989.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e99",
+                "_id": "66f18ac5ab25c97ba8d69e8c",
+                "title": "chapter - 2: The Fierce Battle",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/nvwvw.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-19.jpg",
+                    "https://i.bumcheo1.info/12/12696/1.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-44.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9a",
+                "_id": "66f18ac5ab25c97ba8d69e8d",
+                "title": "chapter - 2: The Awakening",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/689-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-34.jpg",
+                    "https://i.bumcheo1.info/12/12696/706.jpg",
+                    "https://i.bumcheo1.info/12/12696/926.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-21.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-24.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-43.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-38.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9b",
+                "_id": "66f18ac5ab25c97ba8d69e8e",
+                "title": "chapter - 2: The Unseen Enemy",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/32.jpg",
+                    "https://i.bumcheo1.info/12/12696/009.jpg",
+                    "https://i.bumcheo1.info/12/12696/629.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/nvwvw.jpg",
+                    "https://i.bumcheo1.info/12/12696/37.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9d",
+                "_id": "66f18ac5ab25c97ba8d69e8f",
+                "title": "chapter - 2: The Last Stand",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/008.jpg",
+                    "https://i.bumcheo1.info/12/12696/002.jpg",
+                    "https://i.bumcheo1.info/12/12696/vlbwd.jpg",
+                    "https://i.bumcheo1.info/12/12696/36.jpg",
+                    "https://i.bumcheo1.info/12/12696/006-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/62.jpg",
+                    "https://i.bumcheo1.info/12/12696/33.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-14.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9e",
+                "_id": "66f18ac5ab25c97ba8d69e90",
+                "title": "chapter - 2: The Hero's Sacrifice",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/kq6xz.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-24.jpg",
+                    "https://i.bumcheo1.info/12/12696/240.jpg",
+                    "https://i.bumcheo1.info/12/12696/020-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/389.jpg",
+                    "https://i.bumcheo1.info/12/12696/515.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-19.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9f",
+                "_id": "66f18ac5ab25c97ba8d69e91",
+                "title": "chapter - 2: The New Dawn",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/24.jpg",
+                    "https://i.bumcheo1.info/12/12696/013-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/fmg7n.jpg",
+                    "https://i.bumcheo1.info/12/12696/bpbvq.jpg",
+                    "https://i.bumcheo1.info/12/12696/006.jpg",
+                    "https://i.bumcheo1.info/12/12696/49-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/017.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea0",
+                "_id": "66f18ac5ab25c97ba8d69e92",
+                "title": "chapter - 2: The Reunion",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/486.jpg",
+                    "https://i.bumcheo1.info/12/12696/at17o.jpg",
+                    "https://i.bumcheo1.info/12/12696/884.jpg",
+                    "https://i.bumcheo1.info/12/12696/015-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/575.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea1",
+                "_id": "66f18ac5ab25c97ba8d69e93",
+                "title": "chapter - 2: The Journey Continues",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/427.jpg",
+                    "https://i.bumcheo1.info/12/12696/656.jpg",
+                    "https://i.bumcheo1.info/12/12696/255.jpg",
+                    "https://i.bumcheo1.info/12/12696/020-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/q9buz.jpg",
+                    "https://i.bumcheo1.info/12/12696/839.jpg",
+                    "https://i.bumcheo1.info/12/12696/383.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea2",
+                "_id": "66f18ac5ab25c97ba8d69e94",
+                "title": "chapter - 2: The Ancient Prophecy",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/004.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-29.jpg",
+                    "https://i.bumcheo1.info/12/12696/49.jpg",
+                    "https://i.bumcheo1.info/12/12696/qel5b.jpg",
+                    "https://i.bumcheo1.info/12/12696/b1q8q.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea3",
+                "_id": "66f18ac5ab25c97ba8d69e95",
+                "title": "chapter - 2: The Secret Training",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/34.jpg",
+                    "https://i.bumcheo1.info/12/12696/441.jpg",
+                    "https://i.bumcheo1.info/12/12696/016.jpg",
+                    "https://i.bumcheo1.info/12/12696/005-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/11.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea4",
+                "_id": "66f18ac5ab25c97ba8d69e96",
+                "title": "chapter - 2: The Dark Alliance",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-46.jpg",
+                    "https://i.bumcheo1.info/12/12696/005-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/331.jpg",
+                    "https://i.bumcheo1.info/12/12696/edikj.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-29.jpg",
+                    "https://i.bumcheo1.info/12/12696/017.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-37.jpg",
+                    "https://i.bumcheo1.info/12/12696/1.jpg",
+                    "https://i.bumcheo1.info/12/12696/553.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea5",
+                "_id": "66f18ac5ab25c97ba8d69e97",
+                "title": "chapter - 2: The Final Countdown",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/rdnlj.jpg",
+                    "https://i.bumcheo1.info/12/12696/38.jpg",
+                    "https://i.bumcheo1.info/12/12696/001.jpg",
+                    "https://i.bumcheo1.info/12/12696/26.jpg",
+                    "https://i.bumcheo1.info/12/12696/227.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea6",
+                "_id": "66f18ac5ab25c97ba8d69e98",
+                "title": "chapter - 2: The Hero's Return",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/274.jpg",
+                    "https://i.bumcheo1.info/12/12696/638.jpg",
+                    "https://i.bumcheo1.info/12/12696/427.jpg",
+                    "https://i.bumcheo1.info/12/12696/zva4x.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg",
+                    "https://i.bumcheo1.info/12/12696/012-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/723.jpg",
+                    "https://i.bumcheo1.info/12/12696/014.jpg",
+                    "https://i.bumcheo1.info/12/12696/255.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea7",
+                "_id": "66f18ac5ab25c97ba8d69e99",
+                "title": "chapter - 2: The Lost Kingdom",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/001-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/017-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/27.jpg",
+                    "https://i.bumcheo1.info/12/12696/227.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/25.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea8",
+                "_id": "66f18ac5ab25c97ba8d69e9a",
+                "title": "chapter - 2: The Hidden Power",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/625.jpg",
+                    "https://i.bumcheo1.info/12/12696/884.jpg",
+                    "https://i.bumcheo1.info/12/12696/011.jpg",
+                    "https://i.bumcheo1.info/12/12696/689-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/011.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-22.jpg",
+                    "https://i.bumcheo1.info/12/12696/682.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea9",
+                "_id": "66f18ac5ab25c97ba8d69e9b",
+                "title": "chapter - 2: The Ultimate Weapon",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/270.jpg",
+                    "https://i.bumcheo1.info/12/12696/541.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-30.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-6.jpg",
+                    "https://i.bumcheo1.info/12/12696/673.jpg",
+                    "https://i.bumcheo1.info/12/12696/11.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-48.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaa",
+                "_id": "66f18ac5ab25c97ba8d69e9c",
+                "title": "chapter - 2: The Final Battle",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/009.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/42.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-11.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-46.jpg",
+                    "https://i.bumcheo1.info/12/12696/004-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/164.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eab",
+                "_id": "66f18ac5ab25c97ba8d69e9d",
+                "title": "chapter - 2: The Hero's Legacy",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/009-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/469.jpg",
+                    "https://i.bumcheo1.info/12/12696/019-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/331.jpg",
+                    "https://i.bumcheo1.info/12/12696/ssmxi.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-3.jpg",
+                    "https://i.bumcheo1.info/12/12696/kq6xz.jpg",
+                    "https://i.bumcheo1.info/12/12696/013-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/edikj.jpg",
+                    "https://i.bumcheo1.info/12/12696/486.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eac",
+                "_id": "66f18ac5ab25c97ba8d69e9e",
+                "title": "chapter - 2: The New Era",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/360.jpg",
+                    "https://i.bumcheo1.info/12/12696/nvwvw.jpg",
+                    "https://i.bumcheo1.info/12/12696/22f0z.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/200.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ead",
+                "_id": "66f18ac5ab25c97ba8d69e9f",
+                "title": "chapter - 2: The Rising Threat",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-47.jpg",
+                    "https://i.bumcheo1.info/12/12696/35-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/202.jpg",
+                    "https://i.bumcheo1.info/12/12696/101.jpg",
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eae",
+                "_id": "66f18ac5ab25c97ba8d69ea0",
+                "title": "chapter - 2: The Hidden Enemy",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/783.jpg",
+                    "https://i.bumcheo1.info/12/12696/012-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/164.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-14.jpg",
+                    "https://i.bumcheo1.info/12/12696/35.jpg",
+                    "https://i.bumcheo1.info/12/12696/421.jpg",
+                    "https://i.bumcheo1.info/12/12696/020.jpg",
+                    "https://i.bumcheo1.info/12/12696/4kfll.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaf",
+                "_id": "66f18ac5ab25c97ba8d69ea1",
+                "title": "chapter - 2: The Hero's Challenge",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/nvwvw.jpg",
+                    "https://i.bumcheo1.info/12/12696/008-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/010.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-13.jpg",
+                    "https://i.bumcheo1.info/12/12696/4kfll.jpg",
+                    "https://i.bumcheo1.info/12/12696/870.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eb0",
+                "_id": "66f18ac5ab25c97ba8d69ea2",
+                "title": "chapter - 2: The Secret Plan",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/409.jpg",
+                    "https://i.bumcheo1.info/12/12696/019-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-46.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/123.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e97",
+                "_id": "66f18ac5ab25c97ba8d69ea3",
+                "title": "chapter - 3: The Great Escape",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-43.jpg",
+                    "https://i.bumcheo1.info/12/12696/ssmxi.jpg",
+                    "https://i.bumcheo1.info/12/12696/b1q8q.jpg",
+                    "https://i.bumcheo1.info/12/12696/23.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-30.jpg",
+                    "https://i.bumcheo1.info/12/12696/455.jpg",
+                    "https://i.bumcheo1.info/12/12696/975.jpg",
+                    "https://i.bumcheo1.info/12/12696/568.jpg",
+                    "https://i.bumcheo1.info/12/12696/at17o.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e98",
+                "_id": "66f18ac5ab25c97ba8d69ea4",
+                "title": "chapter - 3: The Hero's Journey",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/638.jpg",
+                    "https://i.bumcheo1.info/12/12696/003-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/925.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-2.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/989.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-9.jpg",
+                    "https://i.bumcheo1.info/12/12696/825.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e99",
+                "_id": "66f18ac5ab25c97ba8d69ea5",
+                "title": "chapter - 3: The Dark Secret",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-27.jpg",
+                    "https://i.bumcheo1.info/12/12696/56.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-46.jpg",
+                    "https://i.bumcheo1.info/12/12696/jghv1.jpg",
+                    "https://i.bumcheo1.info/12/12696/ssmxi.jpg",
+                    "https://i.bumcheo1.info/12/12696/005.jpg",
+                    "https://i.bumcheo1.info/12/12696/915.jpg",
+                    "https://i.bumcheo1.info/12/12696/870.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9a",
+                "_id": "66f18ac5ab25c97ba8d69ea6",
+                "title": "chapter - 3: The Final Confrontation",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/019.jpg",
+                    "https://i.bumcheo1.info/12/12696/018.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/glerv.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-47.jpg",
+                    "https://i.bumcheo1.info/12/12696/vlbwd.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9b",
+                "_id": "66f18ac5ab25c97ba8d69ea7",
+                "title": "chapter - 3: The Hero's Destiny",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/31.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/360-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/469.jpg",
+                    "https://i.bumcheo1.info/12/12696/005.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-48.jpg",
+                    "https://i.bumcheo1.info/12/12696/427.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9d",
+                "_id": "66f18ac5ab25c97ba8d69ea8",
+                "title": "chapter - 3: The New Beginning",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/020-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/240.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-13.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-14.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-40.jpg",
+                    "https://i.bumcheo1.info/12/12696/915.jpg",
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-25.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9e",
+                "_id": "66f18ac5ab25c97ba8d69ea9",
+                "title": "chapter - 3: The Hidden Path",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/59.jpg",
+                    "https://i.bumcheo1.info/12/12696/zva4x.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-7.jpg",
+                    "https://i.bumcheo1.info/12/12696/017.jpg",
+                    "https://i.bumcheo1.info/12/12696/518.jpg",
+                    "https://i.bumcheo1.info/12/12696/008-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/383.jpg",
+                    "https://i.bumcheo1.info/12/12696/660.jpg",
+                    "https://i.bumcheo1.info/12/12696/24.jpg",
+                    "https://i.bumcheo1.info/12/12696/393.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9f",
+                "_id": "66f18ac5ab25c97ba8d69eaa",
+                "title": "chapter - 3: The Hero's Quest",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/886.jpg",
+                    "https://i.bumcheo1.info/12/12696/469-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/glerv.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-24.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-4.jpg",
+                    "https://i.bumcheo1.info/12/12696/1.jpg",
+                    "https://i.bumcheo1.info/12/12696/404.jpg",
+                    "https://i.bumcheo1.info/12/12696/975.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea0",
+                "_id": "66f18ac5ab25c97ba8d69eab",
+                "title": "chapter - 3: The Dark Forest",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/qel5b.jpg",
+                    "https://i.bumcheo1.info/12/12696/001.jpg",
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/004.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea1",
+                "_id": "66f18ac5ab25c97ba8d69eac",
+                "title": "chapter - 3: The Secret of the Past",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/010-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/fmg7n.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-16.jpg",
+                    "https://i.bumcheo1.info/12/12696/825.jpg",
+                    "https://i.bumcheo1.info/12/12696/825.jpg",
+                    "https://i.bumcheo1.info/12/12696/575.jpg",
+                    "https://i.bumcheo1.info/12/12696/645.jpg",
+                    "https://i.bumcheo1.info/12/12696/q9buz.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea2",
+                "_id": "66f18ac5ab25c97ba8d69ead",
+                "title": "chapter - 3: The Hero's Awakening",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/629.jpg",
+                    "https://i.bumcheo1.info/12/12696/003.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/nvwvw.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-7.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea3",
+                "_id": "66f18ac5ab25c97ba8d69eae",
+                "title": "chapter - 3: The Final Test",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/782.jpg",
+                    "https://i.bumcheo1.info/12/12696/34.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-20.jpg",
+                    "https://i.bumcheo1.info/12/12696/884.jpg",
+                    "https://i.bumcheo1.info/12/12696/014-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea4",
+                "_id": "66f18ac5ab25c97ba8d69eaf",
+                "title": "chapter - 3: The Great War",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/014-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/uv1xa.jpg",
+                    "https://i.bumcheo1.info/12/12696/rdnlj.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-40.jpg",
+                    "https://i.bumcheo1.info/12/12696/glerv.jpg",
+                    "https://i.bumcheo1.info/12/12696/49.jpg",
+                    "https://i.bumcheo1.info/12/12696/29.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-27.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea5",
+                "_id": "66f18ac5ab25c97ba8d69eb0",
+                "title": "chapter - 3: The Hero's Triumph",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/783.jpg",
+                    "https://i.bumcheo1.info/12/12696/zva4x.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-39.jpg",
+                    "https://i.bumcheo1.info/12/12696/jghv1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-27.jpg",
+                    "https://i.bumcheo1.info/12/12696/638.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-45.jpg",
+                    "https://i.bumcheo1.info/12/12696/164.jpg",
+                    "https://i.bumcheo1.info/12/12696/013-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea6",
+                "_id": "66f18ac5ab25c97ba8d69eb1",
+                "title": "chapter - 3: The New World",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/673.jpg",
+                    "https://i.bumcheo1.info/12/12696/739.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-30.jpg",
+                    "https://i.bumcheo1.info/12/12696/660.jpg",
+                    "https://i.bumcheo1.info/12/12696/272.jpg",
+                    "https://i.bumcheo1.info/12/12696/at17o.jpg",
+                    "https://i.bumcheo1.info/12/12696/469.jpg",
+                    "https://i.bumcheo1.info/12/12696/006.jpg",
+                    "https://i.bumcheo1.info/12/12696/928.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea7",
+                "_id": "66f18ac5ab25c97ba8d69eb2",
+                "title": "chapter - 3: The Hidden Village",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/155.jpg",
+                    "https://i.bumcheo1.info/12/12696/1.jpg",
+                    "https://i.bumcheo1.info/12/12696/38.jpg",
+                    "https://i.bumcheo1.info/12/12696/001-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/56.jpg",
+                    "https://i.bumcheo1.info/12/12696/896.jpg",
+                    "https://i.bumcheo1.info/12/12696/645.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea8",
+                "_id": "66f18ac5ab25c97ba8d69eb3",
+                "title": "chapter - 3: The Hero's Resolve",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/33.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-20.jpg",
+                    "https://i.bumcheo1.info/12/12696/496.jpg",
+                    "https://i.bumcheo1.info/12/12696/012-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/200.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea9",
+                "_id": "66f18ac5ab25c97ba8d69eb4",
+                "title": "chapter - 3: The Dark Power",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-28.jpg",
+                    "https://i.bumcheo1.info/12/12696/260-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/006-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-24.jpg",
+                    "https://i.bumcheo1.info/12/12696/682.jpg",
+                    "https://i.bumcheo1.info/12/12696/fhrkb.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaa",
+                "_id": "66f18ac5ab25c97ba8d69eb5",
+                "title": "chapter - 3: The Final Showdown",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-16.jpg",
+                    "https://i.bumcheo1.info/12/12696/bbuyd.jpg",
+                    "https://i.bumcheo1.info/12/12696/324.jpg",
+                    "https://i.bumcheo1.info/12/12696/989.jpg",
+                    "https://i.bumcheo1.info/12/12696/011-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eab",
+                "_id": "66f18ac5ab25c97ba8d69eb6",
+                "title": "chapter - 3: The Hero's Victory",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-43.jpg",
+                    "https://i.bumcheo1.info/12/12696/455.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-20.jpg",
+                    "https://i.bumcheo1.info/12/12696/25.jpg",
+                    "https://i.bumcheo1.info/12/12696/393.jpg",
+                    "https://i.bumcheo1.info/12/12696/003.jpg",
+                    "https://i.bumcheo1.info/12/12696/723.jpg",
+                    "https://i.bumcheo1.info/12/12696/496.jpg",
+                    "https://i.bumcheo1.info/12/12696/002.jpg",
+                    "https://i.bumcheo1.info/12/12696/975.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eac",
+                "_id": "66f18ac5ab25c97ba8d69eb7",
+                "title": "chapter - 3: The New Challenge",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/25.jpg",
+                    "https://i.bumcheo1.info/12/12696/016-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/020.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-28.jpg",
+                    "https://i.bumcheo1.info/12/12696/957.jpg",
+                    "https://i.bumcheo1.info/12/12696/017.jpg",
+                    "https://i.bumcheo1.info/12/12696/272.jpg",
+                    "https://i.bumcheo1.info/12/12696/68.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ead",
+                "_id": "66f18ac5ab25c97ba8d69eb8",
+                "title": "chapter - 3: The Hidden Treasure",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-5.jpg",
+                    "https://i.bumcheo1.info/12/12696/018-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/012.jpg",
+                    "https://i.bumcheo1.info/12/12696/32.jpg",
+                    "https://i.bumcheo1.info/12/12696/404.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/925.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-30.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eae",
+                "_id": "66f18ac5ab25c97ba8d69eb9",
+                "title": "chapter - 3: The Hero's Journey",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/926.jpg",
+                    "https://i.bumcheo1.info/12/12696/574.jpg",
+                    "https://i.bumcheo1.info/12/12696/019-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/625.jpg",
+                    "https://i.bumcheo1.info/12/12696/017.jpg",
+                    "https://i.bumcheo1.info/12/12696/jghv1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaf",
+                "_id": "66f18ac5ab25c97ba8d69eba",
+                "title": "chapter - 3: The Dark Alliance",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/014.jpg",
+                    "https://i.bumcheo1.info/12/12696/504.jpg",
+                    "https://i.bumcheo1.info/12/12696/ssmxi.jpg",
+                    "https://i.bumcheo1.info/12/12696/441.jpg",
+                    "https://i.bumcheo1.info/12/12696/020.jpg",
+                    "https://i.bumcheo1.info/12/12696/33.jpg",
+                    "https://i.bumcheo1.info/12/12696/496.jpg",
+                    "https://i.bumcheo1.info/12/12696/007.jpg",
+                    "https://i.bumcheo1.info/12/12696/013.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eb0",
+                "_id": "66f18ac5ab25c97ba8d69ebb",
+                "title": "chapter - 3: The Final Battle",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/405.jpg",
+                    "https://i.bumcheo1.info/12/12696/37.jpg",
+                    "https://i.bumcheo1.info/12/12696/886.jpg",
+                    "https://i.bumcheo1.info/12/12696/011.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/qskms.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e97",
+                "_id": "66f18ac5ab25c97ba8d69ebc",
+                "title": "chapter - 4: The Hero's Legacy",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/409.jpg",
+                    "https://i.bumcheo1.info/12/12696/uv1xa.jpg",
+                    "https://i.bumcheo1.info/12/12696/023.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-48.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/bpbvq.jpg",
+                    "https://i.bumcheo1.info/12/12696/522.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e98",
+                "_id": "66f18ac5ab25c97ba8d69ebd",
+                "title": "chapter - 4: The New Era",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/599.jpg",
+                    "https://i.bumcheo1.info/12/12696/272.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-34.jpg",
+                    "https://i.bumcheo1.info/12/12696/673.jpg",
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-2.jpg",
+                    "https://i.bumcheo1.info/12/12696/49-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/018-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e99",
+                "_id": "66f18ac5ab25c97ba8d69ebe",
+                "title": "chapter - 4: The Rising Threat",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/019.jpg",
+                    "https://i.bumcheo1.info/12/12696/825.jpg",
+                    "https://i.bumcheo1.info/12/12696/896.jpg",
+                    "https://i.bumcheo1.info/12/12696/62.jpg",
+                    "https://i.bumcheo1.info/12/12696/782.jpg",
+                    "https://i.bumcheo1.info/12/12696/27.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9a",
+                "_id": "66f18ac5ab25c97ba8d69ebf",
+                "title": "chapter - 4: The Hidden Enemy",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-25.jpg",
+                    "https://i.bumcheo1.info/12/12696/38.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-40.jpg",
+                    "https://i.bumcheo1.info/12/12696/302.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-8.jpg",
+                    "https://i.bumcheo1.info/12/12696/007-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/227.jpg",
+                    "https://i.bumcheo1.info/12/12696/255.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9b",
+                "_id": "66f18ac5ab25c97ba8d69ec0",
+                "title": "chapter - 4: The Hero's Challenge",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/360-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/957.jpg",
+                    "https://i.bumcheo1.info/12/12696/469.jpg",
+                    "https://i.bumcheo1.info/12/12696/009-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/31.jpg",
+                    "https://i.bumcheo1.info/12/12696/638.jpg",
+                    "https://i.bumcheo1.info/12/12696/575.jpg",
+                    "https://i.bumcheo1.info/12/12696/660.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-24.jpg",
+                    "https://i.bumcheo1.info/12/12696/010-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9d",
+                "_id": "66f18ac5ab25c97ba8d69ec1",
+                "title": "chapter - 4: The Secret Plan",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/884.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-28.jpg",
+                    "https://i.bumcheo1.info/12/12696/005.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-25.jpg",
+                    "https://i.bumcheo1.info/12/12696/30.jpg",
+                    "https://i.bumcheo1.info/12/12696/782.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9e",
+                "_id": "66f18ac5ab25c97ba8d69ec2",
+                "title": "chapter - 4: The Great Escape",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/010-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/553.jpg",
+                    "https://i.bumcheo1.info/12/12696/915.jpg",
+                    "https://i.bumcheo1.info/12/12696/689-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/36.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-49.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e9f",
+                "_id": "66f18ac5ab25c97ba8d69ec3",
+                "title": "chapter - 4: The Hero's Journey",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/331.jpg",
+                    "https://i.bumcheo1.info/12/12696/427.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-24.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/11.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-33.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea0",
+                "_id": "66f18ac5ab25c97ba8d69ec4",
+                "title": "chapter - 4: The Dark Secret",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/28.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-11.jpg",
+                    "https://i.bumcheo1.info/12/12696/11.jpg",
+                    "https://i.bumcheo1.info/12/12696/009.jpg",
+                    "https://i.bumcheo1.info/12/12696/rdnlj.jpg",
+                    "https://i.bumcheo1.info/12/12696/bbuyd.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-27.jpg",
+                    "https://i.bumcheo1.info/12/12696/660.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-2.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea1",
+                "_id": "66f18ac5ab25c97ba8d69ec5",
+                "title": "chapter - 4: The Final Confrontation",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/qel5b.jpg",
+                    "https://i.bumcheo1.info/12/12696/du2i5.jpg",
+                    "https://i.bumcheo1.info/12/12696/892.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-37.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-36.jpg",
+                    "https://i.bumcheo1.info/12/12696/486.jpg",
+                    "https://i.bumcheo1.info/12/12696/989.jpg",
+                    "https://i.bumcheo1.info/12/12696/021.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea2",
+                "_id": "66f18ac5ab25c97ba8d69ec6",
+                "title": "chapter - 4: The Hero's Destiny",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-3.jpg",
+                    "https://i.bumcheo1.info/12/12696/441.jpg",
+                    "https://i.bumcheo1.info/12/12696/164.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-18.jpg",
+                    "https://i.bumcheo1.info/12/12696/839.jpg",
+                    "https://i.bumcheo1.info/12/12696/22f0z.jpg",
+                    "https://i.bumcheo1.info/12/12696/783.jpg",
+                    "https://i.bumcheo1.info/12/12696/123.jpg",
+                    "https://i.bumcheo1.info/12/12696/88.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea3",
+                "_id": "66f18ac5ab25c97ba8d69ec7",
+                "title": "chapter - 4: The New Beginning",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/101.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/884.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/009-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/005-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea4",
+                "_id": "66f18ac5ab25c97ba8d69ec8",
+                "title": "chapter - 4: The Hidden Path",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/021-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/rdnlj.jpg",
+                    "https://i.bumcheo1.info/12/12696/kq6xz.jpg",
+                    "https://i.bumcheo1.info/12/12696/496.jpg",
+                    "https://i.bumcheo1.info/12/12696/008.jpg",
+                    "https://i.bumcheo1.info/12/12696/723.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-38.jpg",
+                    "https://i.bumcheo1.info/12/12696/37.jpg",
+                    "https://i.bumcheo1.info/12/12696/36.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea5",
+                "_id": "66f18ac5ab25c97ba8d69ec9",
+                "title": "chapter - 4: The Hero's Quest",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/fhrkb.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/739.jpg",
+                    "https://i.bumcheo1.info/12/12696/005-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/023.jpg",
+                    "https://i.bumcheo1.info/12/12696/32.jpg",
+                    "https://i.bumcheo1.info/12/12696/fmg7n.jpg",
+                    "https://i.bumcheo1.info/12/12696/018-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea6",
+                "_id": "66f18ac5ab25c97ba8d69eca",
+                "title": "chapter - 4: The Dark Forest",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/928.jpg",
+                    "https://i.bumcheo1.info/12/12696/324.jpg",
+                    "https://i.bumcheo1.info/12/12696/22f0z.jpg",
+                    "https://i.bumcheo1.info/12/12696/164.jpg",
+                    "https://i.bumcheo1.info/12/12696/260.jpg",
+                    "https://i.bumcheo1.info/12/12696/016-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/012-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea7",
+                "_id": "66f18ac5ab25c97ba8d69ecb",
+                "title": "chapter - 4: The Secret of the Past",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-5.jpg",
+                    "https://i.bumcheo1.info/12/12696/819.jpg",
+                    "https://i.bumcheo1.info/12/12696/892.jpg",
+                    "https://i.bumcheo1.info/12/12696/ssmxi.jpg",
+                    "https://i.bumcheo1.info/12/12696/437.jpg",
+                    "https://i.bumcheo1.info/12/12696/008.jpg",
+                    "https://i.bumcheo1.info/12/12696/794-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/ekc29.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/020-1.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea8",
+                "_id": "66f18ac5ab25c97ba8d69ecc",
+                "title": "chapter - 4: The Hero's Awakening",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-10.jpg",
+                    "https://i.bumcheo1.info/12/12696/qskms.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-5.jpg",
+                    "https://i.bumcheo1.info/12/12696/660.jpg",
+                    "https://i.bumcheo1.info/12/12696/723.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ea9",
+                "_id": "66f18ac5ab25c97ba8d69ecd",
+                "title": "chapter - 4: The Final Test",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/010-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/518.jpg",
+                    "https://i.bumcheo1.info/12/12696/915.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/123.jpg",
+                    "https://i.bumcheo1.info/12/12696/008-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/202.jpg",
+                    "https://i.bumcheo1.info/12/12696/rdnlj.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaa",
+                "_id": "66f18ac5ab25c97ba8d69ece",
+                "title": "chapter - 4: The Great War",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/vlbwd.jpg",
+                    "https://i.bumcheo1.info/12/12696/bpbvq.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-49.jpg",
+                    "https://i.bumcheo1.info/12/12696/bbuyd.jpg",
+                    "https://i.bumcheo1.info/12/12696/421.jpg",
+                    "https://i.bumcheo1.info/12/12696/824.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-43.jpg",
+                    "https://i.bumcheo1.info/12/12696/006.jpg",
+                    "https://i.bumcheo1.info/12/12696/23.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eab",
+                "_id": "66f18ac5ab25c97ba8d69ecf",
+                "title": "chapter - 4: The Hero's Triumph",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/656.jpg",
+                    "https://i.bumcheo1.info/12/12696/825.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/008-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/242.jpg",
+                    "https://i.bumcheo1.info/12/12696/514.jpg",
+                    "https://i.bumcheo1.info/12/12696/30.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eac",
+                "_id": "66f18ac5ab25c97ba8d69ed0",
+                "title": "chapter - 4: The New World",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/783.jpg",
+                    "https://i.bumcheo1.info/12/12696/49.jpg",
+                    "https://i.bumcheo1.info/12/12696/682.jpg",
+                    "https://i.bumcheo1.info/12/12696/682.jpg",
+                    "https://i.bumcheo1.info/12/12696/fmg7n.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-9.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744ead",
+                "_id": "66f18ac5ab25c97ba8d69ed1",
+                "title": "chapter - 4: The Hidden Village",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/35-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/928.jpg",
+                    "https://i.bumcheo1.info/12/12696/496.jpg",
+                    "https://i.bumcheo1.info/12/12696/bbuyd.jpg",
+                    "https://i.bumcheo1.info/12/12696/868.jpg",
+                    "https://i.bumcheo1.info/12/12696/886.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-25.jpg",
+                    "https://i.bumcheo1.info/12/12696/jghv1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eae",
+                "_id": "66f18ac5ab25c97ba8d69ed2",
+                "title": "chapter - 4: The Hero's Resolve",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/017.jpg",
+                    "https://i.bumcheo1.info/12/12696/009-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/870.jpg",
+                    "https://i.bumcheo1.info/12/12696/015-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/004.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-27.jpg",
+                    "https://i.bumcheo1.info/12/12696/629.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eaf",
+                "_id": "66f18ac5ab25c97ba8d69ed3",
+                "title": "chapter - 4: The Dark Power",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/1-23.jpg",
+                    "https://i.bumcheo1.info/12/12696/003-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-12.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-30.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-48.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744eb0",
+                "_id": "66f18ac5ab25c97ba8d69ed4",
+                "title": "chapter - 4: The Final Showdown",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/qel5b.jpg",
+                    "https://i.bumcheo1.info/12/12696/518.jpg",
+                    "https://i.bumcheo1.info/12/12696/1.jpg",
+                    "https://i.bumcheo1.info/12/12696/518.jpg",
+                    "https://i.bumcheo1.info/12/12696/794.jpg",
+                    "https://i.bumcheo1.info/12/12696/638.jpg"
+                ]
+            },
+            {
+                "idManga": "66f1812835029f5058744e97",
+                "_id": "66f18ac5ab25c97ba8d69ed5",
+                "title": "chapter - 5: The Hero's Victory",
+                "isDeleted": false,
+                "imageLink": [
+                    "https://i.bumcheo1.info/12/12696/019.jpg",
+                    "https://i.bumcheo1.info/12/12696/23.jpg",
+                    "https://i.bumcheo1.info/12/12696/656.jpg",
+                    "https://i.bumcheo1.info/12/12696/002-1.jpg",
+                    "https://i.bumcheo1.info/12/12696/1-35.jpg",
+                    "https://i.bumcheo1.info/12/12696/302.jpg",
+                    "https://i.bumcheo1.info/12/12696/645.jpg",
+                    "https://i.bumcheo1.info/12/12696/24.jpg"
+                ]
+            }
+        ],
+        "tb_Notification": [
+            {
+                "_id": "66f18ac5ab25c97ba8d69ed6",
+                "content": "Một nội dung khác.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ed7",
+                "content": "Nội dung này rất hay.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ed8",
+                "content": "Nội dung này rất hay.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ed9",
+                "content": "Nội dung thú vị.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eda",
+                "content": "Nội dung thứ hai.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69edb",
+                "content": "Nội dung thứ hai.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69edc",
+                "content": "Một nội dung khác.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69edd",
+                "content": "Nội dung này rất hay.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ede",
+                "content": "Một nội dung khác.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69edf",
+                "content": "Nội dung đầu tiên.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee0",
+                "content": "Nội dung đầu tiên.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee1",
+                "content": "Nội dung thú vị.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee2",
+                "content": "Nội dung thú vị.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee3",
+                "content": "Một nội dung khác.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee4",
+                "content": "Nội dung này rất hay.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f00",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee5",
+                "content": "Nội dung đầu tiên.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee6",
+                "content": "Nội dung đầu tiên.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f05",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee7",
+                "content": "Nội dung thứ hai.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee8",
+                "content": "Nội dung thứ hai.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ee9",
+                "content": "Nội dung này rất hay.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eea",
+                "content": "Nội dung này rất hay.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eeb",
+                "content": "Nội dung thú vị.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f09",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eec",
+                "content": "Một nội dung khác.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eed",
+                "content": "Một nội dung khác.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eee",
+                "content": "Nội dung thú vị.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eef",
+                "content": "Một nội dung khác.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef0",
+                "content": "Nội dung đầu tiên.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f07",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef1",
+                "content": "Nội dung này rất hay.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef2",
+                "content": "Nội dung này rất hay.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef3",
+                "content": "Một nội dung khác.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef4",
+                "content": "Nội dung thú vị.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef5",
+                "content": "Một nội dung khác.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef6",
+                "content": "Nội dung thứ hai.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef7",
+                "content": "Nội dung đầu tiên.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f04",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef8",
+                "content": "Nội dung thứ hai.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f06",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69ef9",
+                "content": "Nội dung đầu tiên.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69efa",
+                "content": "Nội dung này rất hay.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f01",
+                "isViewed": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69efb",
+                "content": "Nội dung đầu tiên.",
+                "isRead": true,
+                "idUser": "66f18ac5ab25c97ba8d69f03",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69efc",
+                "content": "Một nội dung khác.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f08",
+                "isViewed": true
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69efd",
+                "content": "Nội dung đầu tiên.",
+                "isRead": false,
+                "idUser": "66f18ac5ab25c97ba8d69f02",
+                "isViewed": true
+            }
+        ],
+        "tb_Role": [
+            {
+                "_id": "66f18ac5ab25c97ba8d69efe",
+                "name": "đọc giả"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69eff",
+                "name": "quản trị viên"
+            }
+        ],
+        "tb_User": [
+            {
+                "_id": "66f18ac5ab25c97ba8d69f00",
+                "email": "docgia0@tienlen.com",
+                "userName": "0_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "google",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ec5",
+                    "66f18ac5ab25c97ba8d69ecc",
+                    "66f18ac5ab25c97ba8d69ed2",
+                    "66f18ac5ab25c97ba8d69ec8"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f01",
+                "email": "docgia1@tienlen.com",
+                "userName": "1_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "basic",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ed0"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f02",
+                "email": "docgia2@tienlen.com",
+                "userName": "2_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "google",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ed3"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f03",
+                "email": "docgia3@tienlen.com",
+                "userName": "3_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "basic",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ec0",
+                    "66f18ac5ab25c97ba8d69ed3",
+                    "66f18ac5ab25c97ba8d69ec5",
+                    "66f18ac5ab25c97ba8d69ec0",
+                    "66f18ac5ab25c97ba8d69ed4"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f04",
+                "email": "docgia4@tienlen.com",
+                "userName": "4_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "basic",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ec3"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f05",
+                "email": "docgia5@tienlen.com",
+                "userName": "5_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "basic",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ebe",
+                    "66f18ac5ab25c97ba8d69ebd",
+                    "66f18ac5ab25c97ba8d69ec9",
+                    "66f18ac5ab25c97ba8d69ecb"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f06",
+                "email": "docgia6@tienlen.com",
+                "userName": "6_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "google",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ec7"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f07",
+                "email": "docgia7@tienlen.com",
+                "userName": "7_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "basic",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ece",
+                    "66f18ac5ab25c97ba8d69ec9",
+                    "66f18ac5ab25c97ba8d69ec8"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f08",
+                "email": "docgia8@tienlen.com",
+                "userName": "8_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "google",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ece",
+                    "66f18ac5ab25c97ba8d69ed1",
+                    "66f18ac5ab25c97ba8d69ed4",
+                    "66f18ac5ab25c97ba8d69eca",
+                    "66f18ac5ab25c97ba8d69ec0"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f09",
+                "email": "docgia9@tienlen.com",
+                "userName": "9_tien_len",
+                "password": "12345678aA@",
+                "isDeleted": false,
+                "account_type": "basic",
+                "reading_history": [
+                    "66f18ac5ab25c97ba8d69ebc"
+                ],
+                "idRole": "66f18ac5ab25c97ba8d69efe"
+            }
+        ],
+        "tb_Author": [
+            {
+                "_id": "66f18ac5ab25c97ba8d69f0a",
+                "name": "vô danh",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f0b",
+                "name": "びーびーびーといっと!  天神学園浪漫あるばむ",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f0c",
+                "name": "Boom工作室",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f0d",
+                "name": "Tomo Takenagi",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f0e",
+                "name": "Lee Hyeon Seok",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f0f",
+                "name": "Maelaengcho (매랭초)",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f10",
+                "name": "Ootani Eichi",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f11",
+                "name": "愛のチカラで恋をするのだ",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f12",
+                "name": "Yuki Suenaga",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f13",
+                "name": "Hot Six",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f14",
+                "name": "Choi Seo-Wan",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f15",
+                "name": "Poem",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f16",
+                "name": "Andrew Rowe",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f17",
+                "name": "Hakumai Ryou",
+                "isDeleted": false
+            },
+            {
+                "_id": "66f18ac5ab25c97ba8d69f18",
+                "name": "Kyo Zip",
+                "isDeleted": false
+            }
+        ],
+        "tb_Publisher": [
+            {
+                "_id": "66f1812835029f5058744e9c",
+                "name": "kim đồng",
+                "isDeleted": false
+            }
+        ]
+    }
+}
