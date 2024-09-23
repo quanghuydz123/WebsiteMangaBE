@@ -1,17 +1,16 @@
 const { default: mongoose } = require("mongoose");
 
 const ChapterSchema = new mongoose.Schema({
-    idManga:{
+    manga:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'manga',
+        ref: 'mangas',
         required:true
     },
     title:{type:String,required:true,unique:true},
     isDeleted:{type:Boolean,default:false}, 
     imageLinks:[{
-        imageLink:{type:String},
-        index:{type:Number}
-    }]
+        type: String,
+    }],
 },
 {
     timestamps: true

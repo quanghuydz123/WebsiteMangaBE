@@ -4,11 +4,11 @@ const MangaSchema = new mongoose.Schema({
     name:{type:String,required:true,unique:true},
     summary:{type:String},
     imageUrl:{type:String},
-    idAuthor:[{
+    author:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'authors',
     }],
-    idPublisher:{
+    publisher:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'publishers',
     },
@@ -28,5 +28,5 @@ const MangaSchema = new mongoose.Schema({
 }
 )
 
-const MangaModel = mongoose.model('manga',MangaSchema)
+const MangaModel = mongoose.model('mangas',MangaSchema)
 module.exports = MangaModel

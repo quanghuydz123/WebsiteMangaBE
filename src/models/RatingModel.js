@@ -2,12 +2,12 @@ const { default: mongoose } = require("mongoose");
 
 const RatingSchema = new mongoose.Schema({
     star:{type:Number,required:true,min:0,max:5},
-    idUser:{
+    user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
         required:true
     },
-    idManga:{
+    manga:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'manga',
         required:true

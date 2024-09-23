@@ -4,7 +4,7 @@ const NotificationSchema = new mongoose.Schema({
     content:{type:String,required:true},
     isRead:{type:Boolean,default:false},
     isViewed:{type:Boolean,default:false},
-    idUser:{
+    user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
         required:true
