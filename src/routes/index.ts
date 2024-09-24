@@ -10,8 +10,10 @@ import followingRoute from './followingRoute';
 import commentRoute from './commentRoute';
 import ratingRoute from './ratingRoute';
 import notificationRoute from './notificationRoute';
+import helloRouter from './helloRoute';
 
 const routes = (app: Express) => {
+    app.use('/hello', helloRouter);
     app.use('/users', userRouter);
     app.use('/roles', roleRouter);
     app.use('/publishers', publisherRoute);
