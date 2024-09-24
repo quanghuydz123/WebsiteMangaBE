@@ -8,7 +8,7 @@ export interface User extends Document {
     isDeleted: boolean; 
     account_type: string; 
     reading_history: mongoose.Types.ObjectId[]; 
-    idRole: mongoose.Types.ObjectId; 
+    role: mongoose.Types.ObjectId; 
     createdAt: Date; 
     updatedAt: Date; 
 }
@@ -24,7 +24,7 @@ const UserSchema: Schema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'chapters' 
         }],
-        idRole: {
+        role: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'roles', 
             required: true

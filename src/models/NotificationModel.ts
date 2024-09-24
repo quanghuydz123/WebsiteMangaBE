@@ -5,7 +5,7 @@ export interface Notification extends Document {
     content: string; 
     isRead: boolean; 
     isViewed: boolean; 
-    idUser: mongoose.Types.ObjectId; 
+    user: mongoose.Types.ObjectId; 
     createdAt: Date; 
     updatedAt: Date; 
 }
@@ -15,7 +15,7 @@ const NotificationSchema: Schema = new mongoose.Schema(
         content: { type: String, required: true }, 
         isRead: { type: Boolean, default: false }, 
         isViewed: { type: Boolean, default: false }, 
-        idUser: {
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users', 
             required: true

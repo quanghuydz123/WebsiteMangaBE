@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface Chapter extends Document {
-    idManga: mongoose.Types.ObjectId; 
+    manga: mongoose.Types.ObjectId; 
     _id: mongoose.Types.ObjectId; 
     title: string;
     isDeleted: boolean;
@@ -12,7 +12,7 @@ export interface Chapter extends Document {
 
 const ChapterSchema: Schema = new Schema(
     {
-        idManga: { type: mongoose.Schema.Types.ObjectId, ref: 'manga', required: true }, 
+        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true }, 
         _id: { type: mongoose.Schema.Types.ObjectId, required: true }, 
         title: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
