@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 routes(app);
 
-const options = {
+const options:any = {
     definition: {
         openapi: "3.0.0",
         info: {
@@ -39,14 +39,14 @@ const options = {
             },
         ],
     },
-    apis: ["./src/routes/*.js"],
+    apis: ["./src/routes/*.ts"],
 };
-// const specs = swaggerJsdoc(options);
-// app.use(
-//     "/api-docs",//tên miền website hiện thị api
-//     swaggerUi.serve,
-//     swaggerUi.setup(specs)
-// );
+const specs = swaggerJsdoc(options);
+app.use(
+    "/api-docs",//tên miền website hiện thị api
+    swaggerUi.serve,
+    swaggerUi.setup(specs)
+);
 
 app.use(errorMiddleHandle);
 

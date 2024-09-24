@@ -2,8 +2,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface Following extends Document {
     _id: mongoose.Types.ObjectId; 
-    idUser: mongoose.Types.ObjectId; 
-    idManga: mongoose.Types.ObjectId; 
+    user: mongoose.Types.ObjectId; 
+    manga: mongoose.Types.ObjectId; 
     createdAt: Date; 
     updatedAt: Date; 
 }
@@ -11,14 +11,14 @@ export interface Following extends Document {
 const FollowingSchema: Schema = new mongoose.Schema(
     {
         _id: { type: mongoose.Schema.Types.ObjectId }, 
-        idUser: {
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users', 
             required: true
         },
-        idManga: {
+        manga: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'manga', 
+            ref: 'mangas', 
             required: true
         }
     },

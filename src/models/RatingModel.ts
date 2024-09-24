@@ -3,8 +3,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface Rating extends Document {
     _id: mongoose.Types.ObjectId; 
     star: number; 
-    idUser: mongoose.Types.ObjectId; 
-    idManga: mongoose.Types.ObjectId; 
+    user: mongoose.Types.ObjectId; 
+    manga: mongoose.Types.ObjectId; 
     createdAt: Date; 
     updatedAt: Date; 
 }
@@ -12,14 +12,14 @@ export interface Rating extends Document {
 const RatingSchema: Schema = new mongoose.Schema(
     {
         star: { type: Number, required: true, min: 0, max: 5 }, 
-        idUser: {
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users', 
             required: true
         },
-        idManga: {
+        manga: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'manga', 
+            ref: 'mangas', 
             required: true
         }
     },
