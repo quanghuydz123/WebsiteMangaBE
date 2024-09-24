@@ -23,4 +23,5 @@ const ChapterSchema: Schema = new Schema(
     }
 );
 
-export const ChapterModel = mongoose.model<Chapter>('chapters', ChapterSchema);
+const ChapterModel = mongoose.model<Chapter>('chapters', ChapterSchema);
+export default ChapterModel;
