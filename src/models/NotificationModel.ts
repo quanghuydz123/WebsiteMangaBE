@@ -1,5 +1,39 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Notification:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the notification
+ *         content:
+ *           type: string
+ *           description: The content of the notification
+ *         isRead:
+ *           type: boolean
+ *           description: Indicates whether the notification has been read
+ *         isViewed:
+ *           type: boolean
+ *           description: Indicates whether the notification has been viewed
+ *         user:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the user associated with the notification
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the notification was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the notification was last updated
+ */
+
 export interface Notification extends Document {
     _id: mongoose.Types.ObjectId; 
     content: string; 

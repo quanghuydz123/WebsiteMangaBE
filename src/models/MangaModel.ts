@@ -1,5 +1,63 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Manga:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the manga
+ *         name:
+ *           type: string
+ *           description: The name of the manga
+ *         status:
+ *           type: integer
+ *           description: The publication status of the manga
+ *         imageUrl:
+ *           type: string
+ *           description: The URL of the manga's cover image
+ *         summary:
+ *           type: string
+ *           description: A brief summary of the manga's story
+ *         author:
+ *           type: array
+ *           items:
+ *             type: string
+ *             format: uuid
+ *           description: An array of unique identifiers for the authors of the manga
+ *         isDeleted:
+ *           type: boolean
+ *           description: Indicates whether the manga is deleted
+ *         publisher:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the publisher of the manga
+ *         views:
+ *           type: integer
+ *           description: The total number of views the manga has received
+ *         publish_date:
+ *           type: integer
+ *           description: The publication date of the manga in timestamp format
+ *         genres:
+ *           type: array
+ *           items:
+ *             type: string
+ *             format: uuid
+ *           description: An array of unique identifiers for the genres associated with the manga
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the manga was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the manga was last updated
+ */
+
 export interface Manga extends Document {
     _id: mongoose.Types.ObjectId; 
     name: string; 

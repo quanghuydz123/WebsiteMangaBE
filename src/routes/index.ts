@@ -25,6 +25,7 @@ const routes = (app: Express) => {
     app.use('/ratings', ratingRoute);
     app.use('/comments', commentRoute);
     app.use('/notifications', notificationRoute);
+    
 };
 
 export default routes;
