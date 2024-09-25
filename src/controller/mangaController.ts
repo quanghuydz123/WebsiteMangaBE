@@ -31,30 +31,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
-const getPaginatedManga = async (req: Request, res: Response) => {
-    const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
-    const limit: number = 10; // Items per page
-    const skip: number = (page - 1) * limit; // Calculate how many items to skip
-
-    try {
-        const totalManga = await MangaModel.countDocuments(); // Get the total number of manga
-        const mangaList = await MangaModel.find()
-            .skip(skip)
-            .limit(limit); // Get the paginated results
-
-        res.status(200).json({
-            page,
-            totalManga,
-            totalPages: Math.ceil(totalManga / limit),
-            manga: mangaList,
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'Error retrieving manga', error });
-    }
-};
-
 export default {
     createManyManga,
-    getAll,
-    getPaginatedManga
+    getAll
 };
