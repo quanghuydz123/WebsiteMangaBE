@@ -33,5 +33,5 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
 
 export default {
     createManyManga,
-    getAll,
+    getAll
 };

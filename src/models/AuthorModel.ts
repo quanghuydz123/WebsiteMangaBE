@@ -28,21 +28,23 @@ import mongoose, { Schema, Document } from 'mongoose';
  */
 
 export interface Author extends Document {
-    _id: mongoose.Types.ObjectId; 
+    _id: mongoose.Types.ObjectId;
     name: string;
     isDeleted: boolean;
-    createAt: Date; 
+    createAt: Date;
     updatedAt: Date;
 }
 
 const AuthorSchema: Schema = new Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true },
         name: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
     },
     {
         timestamps: true,
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
     }
 );
 
