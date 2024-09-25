@@ -26,7 +26,7 @@ import mongoose, { Schema, Document } from 'mongoose';
  *           description: Indicates whether the user's account is deleted
  *         account_type:
  *           type: string
- *           description: The type of account (e.g., admin, user)
+ *           description: The type of account (e.g., basic, google)
  *         reading_history:
  *           type: array
  *           items:
