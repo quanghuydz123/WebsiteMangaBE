@@ -1,5 +1,32 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Publisher:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the publisher
+ *         name:
+ *           type: string
+ *           description: The name of the publisher
+ *         isDeleted:
+ *           type: boolean
+ *           description: Indicates whether the publisher is deleted
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the publisher was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the publisher was last updated
+ */
+
 export interface Publisher extends Document {
     _id: mongoose.Types.ObjectId; 
     name: string; 

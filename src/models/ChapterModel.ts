@@ -1,5 +1,41 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Chapter:
+ *       type: object
+ *       properties:
+ *         manga:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the associated manga
+ *         _id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the chapter
+ *         title:
+ *           type: string
+ *           description: The title of the chapter
+ *         isDeleted:
+ *           type: boolean
+ *           description: Indicates whether the chapter is deleted
+ *         createAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the chapter was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date when the chapter was last updated
+ *         imageLink:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: An array of image links for the chapter
+ */
+
 export interface Chapter extends Document {
     manga: mongoose.Types.ObjectId; 
     _id: mongoose.Types.ObjectId; 
