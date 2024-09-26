@@ -48,14 +48,16 @@ export interface Chapter extends Document {
 
 const ChapterSchema: Schema = new Schema(
     {
-        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true }, 
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true }, 
+        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true },
         title: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
         imageLink: { type: [String], required: true },
     },
     {
         timestamps: true, 
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
     }
 );
 

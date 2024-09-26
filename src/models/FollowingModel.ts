@@ -30,29 +30,31 @@ import mongoose, { Schema, Document } from 'mongoose';
  */
 
 export interface Following extends Document {
-    _id: mongoose.Types.ObjectId; 
-    user: mongoose.Types.ObjectId; 
-    manga: mongoose.Types.ObjectId; 
-    createdAt: Date; 
-    updatedAt: Date; 
+    _id: mongoose.Types.ObjectId;
+    user: mongoose.Types.ObjectId;
+    manga: mongoose.Types.ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const FollowingSchema: Schema = new mongoose.Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId }, 
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'users', 
+            ref: 'users',
             required: true
         },
         manga: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'mangas', 
+            ref: 'mangas',
             required: true
         }
     },
     {
-        timestamps: true 
+        timestamps: true,
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
     }
 );
 

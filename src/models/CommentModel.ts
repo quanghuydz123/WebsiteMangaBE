@@ -47,7 +47,6 @@ export interface Comment extends Document {
 
 const CommentSchema: Schema = new Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true }, 
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true }, 
         text: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
@@ -55,6 +54,9 @@ const CommentSchema: Schema = new Schema(
     },
     {
         timestamps: true, 
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
     }
 );
 

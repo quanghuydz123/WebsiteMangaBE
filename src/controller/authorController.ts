@@ -25,7 +25,7 @@ const createManyAuthor = asyncHandler(async (req: Request, res: Response, next: 
 
 const getPaginatedAuthor = async (req: Request, res: Response) => {
     const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
-    const limit: number = 10; // Items per page
+    const limit: number = parseInt(req.query.limit as string) || 10; // Default to page 1
     const skip: number = (page - 1) * limit; // Calculate how many items to skip
 
     try {
@@ -89,12 +89,12 @@ const createAuthor = async (req: Request, res: Response) => {
         return res.status(400).json({ success: false, message: "Name is required." });
     }
 
-    const author = new AuthorModel({ name});
+    const author = new AuthorModel({ name });
 
     try {
         const newAuthor: Author = await author.save();
         console.log(newAuthor);
-        
+
         // Set responseData based on isReturnNewData
         const responseData = isReturnNewData ? author : null; // Return author if requested, otherwise null
 
@@ -103,8 +103,33 @@ const createAuthor = async (req: Request, res: Response) => {
             message: "Author created successfully.",
             data: responseData // data will be null if isReturnNewData is false
         });
-    } catch (error:any) {
+    } catch (error: any) {
         res.status(500).json({ success: false, message: "Server error." + error.message });
+    }
+};
+
+const updateAuthor = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name, isDeleted, isReturnNewData } = req.body;
+
+    try {
+        const updatedAuthor = await AuthorModel.findByIdAndUpdate(
+            id,
+            { ...(name && { name }), ...(isDeleted !== undefined && { isDeleted }) },
+            { new: isReturnNewData } // Return updated document if requested
+        );
+
+        if (!updatedAuthor) {
+            return res.status(404).json({ success: false, message: "Author not found." });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Author updated successfully.",
+            data: isReturnNewData ? updatedAuthor : null
+        });
+    } catch (error: any) {
+        res.status(500).json({ success: false, message: "Server error.", error: error.message });
     }
 };
 
@@ -112,5 +137,6 @@ export default {
     createManyAuthor,
     getPaginatedAuthor,
     getAdvancedPaginatedAuthor,
-    createAuthor
+    createAuthor,
+    updateAuthor
 };
