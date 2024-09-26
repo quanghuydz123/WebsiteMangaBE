@@ -51,7 +51,7 @@ const ChapterSchema: Schema = new Schema(
         manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true },
         title: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
-        imageLink: { type: [String], required: true },
+        imageLinks: { type: [String], required: true },
     },
     {
         timestamps: true, 
