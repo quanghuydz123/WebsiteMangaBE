@@ -167,7 +167,7 @@ const getUserLibrary = async (req: Request, res: Response) => {
 
     try {
         const totalFollowings = await FollowingModel.countDocuments({ user: userId });
-        const followingList: any[] = await FollowingModel.aggregate([
+        const followingList: MangaFollowed[] = await FollowingModel.aggregate([
             { $match: { user: userId } }, // Filter for the user
             { $skip: skip }, // Skip for pagination
             { $limit: limit }, // Limit for pagination
