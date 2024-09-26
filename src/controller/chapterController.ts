@@ -22,6 +22,16 @@ const createManyChapter = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
+const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const chapters = await ChapterModel.find();
+    res.status(200).json({
+        status: 200,
+        message: "Thành công",
+        chapters,
+    });
+});
+
 export default {
     createManyChapter,
+    getAll
 };
