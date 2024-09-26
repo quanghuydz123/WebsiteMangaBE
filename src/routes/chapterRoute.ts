@@ -286,4 +286,6 @@ chapterRoute.post('/create', chapterController.createChapter);
  */
 chapterRoute.put('/update', chapterController.updateChapter);
 
+
+
 export default chapterRoute;

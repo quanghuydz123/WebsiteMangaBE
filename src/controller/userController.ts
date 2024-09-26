@@ -6,10 +6,13 @@ import { Request, Response } from 'express';
 
 dotenv.config();
 
+
 const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const users = await UserModel.find();
     res.status(200).json({
         status: 200,
         message: "Thành công",
+        users
     });
 });
 
