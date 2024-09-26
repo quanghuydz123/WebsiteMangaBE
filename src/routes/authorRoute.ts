@@ -225,6 +225,81 @@ authorRoute.get('/get-page', authorController.getPaginatedAuthor);
  *                   type: string
  *                   example: "Server error."
  */
-authorRoute.post('/create',authorController.createAuthor);
+authorRoute.post('/create', authorController.createAuthor);
 
+/**
+ * @swagger
+ * /authors/{id}:
+ *   put:
+ *     summary: Update an existing author
+ *     tags: [Author]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The author ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Updated Name"
+ *               isDeleted:
+ *                 type: boolean
+ *                 example: false
+ *               isReturnNewData:
+ *                 type: boolean
+ *                 example: true
+ *     responses:
+ *       200:
+ *         description: Author updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Author updated successfully."
+ *                 data:
+ *                   oneOf:
+ *                     - $ref: '#/components/schemas/Author'
+ *                     - type: "null"
+ *       404:
+ *         description: Author not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Author not found."
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Server error."
+ */
+authorRoute.put('/:id', authorController.updateAuthor);
 export default authorRoute;
