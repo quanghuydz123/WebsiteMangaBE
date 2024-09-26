@@ -167,7 +167,7 @@ const getUserLibrary = async (req: Request, res: Response) => {
 
     try {
         const totalFollowings = await FollowingModel.countDocuments({ user: userId });
-        const followingList: MangaFollowed[] = await FollowingModel.aggregate([
+        const followingList: any[] = await FollowingModel.aggregate([
             { $match: { user: userId } }, // Filter for the user
             { $skip: skip }, // Skip for pagination
             { $limit: limit }, // Limit for pagination
@@ -189,7 +189,7 @@ const getUserLibrary = async (req: Request, res: Response) => {
                     foreignField: 'manga', // Field in the Chapter collection that references Manga
                     as: 'latestChapter', // Output array field
                     pipeline: [
-                        { $sort: { title: -1, createdAt: -1 } }, // Sort by title in descending order
+                        { $sort: { title: -1 } }, // Sort by title in descending order
                         { $limit: 1 } // Limit to the latest chapter
                     ]
                 }

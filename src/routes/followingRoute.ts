@@ -233,12 +233,11 @@ followingRoute.delete('/delete/:id', followingController.deleteFollowing);
  *     summary: Get paginated followed mangas with latest chapters
  *     tags: [Followings]
  *     parameters:
- *       - name: userId
+ *       - name: id
  *         in: query
  *         required: true
  *         schema:
  *           type: string
- *           format: uuid
  *           description: The ID of the user
  *       - name: page
  *         in: query
