@@ -15,7 +15,6 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
             _id: new mongoose.Types.ObjectId(role._id),
             name: role.name
         });
-
         if (roleNew) {
             roleNews.push(roleNew);
         }
