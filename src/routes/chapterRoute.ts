@@ -286,9 +286,6 @@ chapterRoute.post('/create', chapterController.createChapter);
  */
 chapterRoute.put('/update', chapterController.updateChapter);
 
-chapterRoute.get('/get-all', (req: Request, res: Response,next: NextFunction) => {
-    chapterController.getAll(req, res,next);
-});
 
 
 export default chapterRoute;
