@@ -127,6 +127,13 @@ authorRoute.get('/get-advanced-page', authorController.getAdvancedPaginatedAutho
  *         schema:
  *           type: integer
  *           default: 1
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         description: The number of authors to retrieve per page (default is 10)
+ *         schema:
+ *           type: integer
+ *           default: 10
  *     responses:
  *       200:
  *         description: A paginated list of authors

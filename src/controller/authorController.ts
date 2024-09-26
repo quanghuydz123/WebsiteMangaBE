@@ -25,7 +25,7 @@ const createManyAuthor = asyncHandler(async (req: Request, res: Response, next: 
 
 const getPaginatedAuthor = async (req: Request, res: Response) => {
     const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
-    const limit: number = 10; // Items per page
+    const limit: number = parseInt(req.query.limit as string) || 10; // Default to page 1
     const skip: number = (page - 1) * limit; // Calculate how many items to skip
 
     try {
