@@ -27,6 +27,15 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
+const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const role = await RoleModel.find()
+    res.status(200).json({
+        status: 200,
+        message: "Thành công",
+        role
+    });
+});
 export default {
     createManyRole,
+    getAll
 };

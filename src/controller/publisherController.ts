@@ -22,6 +22,16 @@ const createManyPublisher = asyncHandler(async (req: Request, res: Response) => 
     });
 });
 
+
+const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const publishers = await PublisherModel.find()
+    res.status(200).json({
+        status: 200,
+        message: "Thành công",
+        publishers
+    });
+});
 export default {
     createManyPublisher,
+    getAll
 };
