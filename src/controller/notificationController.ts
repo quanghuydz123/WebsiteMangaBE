@@ -22,6 +22,18 @@ const createManyNotification = asyncHandler(async (req: Request, res: Response) 
     });
 });
 
+const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const notifications = await NotificationModel.find().populate('user')
+
+    res.status(200).json({
+        status: 200,
+        message: "Thành công",
+        notifications
+    });
+});
+
+
 export default {
     createManyNotification,
+    getAll
 };

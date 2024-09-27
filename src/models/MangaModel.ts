@@ -76,7 +76,6 @@ export interface Manga extends Document {
 
 const MangaSchema: Schema = new mongoose.Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true }, 
         name: { type: String, required: true }, 
         status: { type: Number, required: true }, 
         imageUrl: { type: String, required: true }, 
@@ -93,7 +92,7 @@ const MangaSchema: Schema = new mongoose.Schema(
             required: true 
         },
         views: { type: Number, default: 0 }, 
-        publish_date: { type: Number, required: true }, 
+        publish_date: { type: Date, required: true }, 
         genres: { 
             type: [mongoose.Schema.Types.ObjectId], 
             ref: 'genres', 

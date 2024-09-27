@@ -39,9 +39,6 @@ userRouter.get('/get-user-byid', (req: Request, res: Response,next :NextFunction
 
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: The users managing API
  * /users/get-user-byid?id='':
  *   get:
  *     summary: get user by id
@@ -77,9 +74,6 @@ userRouter.post('/login', (req: Request, res: Response,next :NextFunction) => {
 
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: login user
  * /users/login:
  *   post:
  *     summary: login user
@@ -124,9 +118,6 @@ userRouter.post('/login-google', (req: Request, res: Response,next :NextFunction
 });
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: login google user
  * /users/login-google:
  *   post:
  *     summary: login google user
@@ -169,9 +160,6 @@ userRouter.post('/register', (req: Request, res: Response,next :NextFunction) =>
 
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: register user
  * /users/register:
  *   post:
  *     summary: register user
@@ -222,9 +210,6 @@ userRouter.put('/change-password', (req: Request, res: Response,next :NextFuncti
 });
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: change password user
  * /users/change-password:
  *   put:
  *     summary: change password user
