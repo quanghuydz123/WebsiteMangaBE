@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import dotenv from 'dotenv';
+import dotenv, { populate } from 'dotenv';
 import mongoose from 'mongoose';
 import MangaModel from '../models/MangaModel';
 import { Request, Response } from 'express';
@@ -27,7 +27,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
         sortType?:'ascName' | 'descName' | 'latest-story' | 'most-viewed' ,page?:number,limit?:number,
         fillterAuthor?:string,fillterPublisher?:string,status?:number
     } = req.query
-    const skip: number = (page - 1) * limit; // Calculate how many items to skip
+    // const skip: number = (page - 1) * limit; // Calculate how many items to skip
     const filter:any = {}
     const sort:any = {}
     if(searchValue){
@@ -54,14 +54,19 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
         }else if (sortType==='ascName'){
             sort.name = 1
         }else if(sortType==='latest-story'){
-            sort.createdAt = 1
+            sort.createdAt = -1
         }else{
             sort.views = -1
         }
     }
-    console.log("sortType",sort)
-
-    const manga = await MangaModel.find(filter).populate('author publisher genres').skip(skip).limit(limit).sort(sort);
+    const options = {
+        page: page,
+        limit: limit,
+        sort:sort,
+        populate:"author publisher genres"
+    }
+    // const manga = await MangaModel.find(filter).populate('author publisher genres').skip(skip).limit(limit).sort(sort);
+    const manga = await MangaModel.paginate(filter,options)
     res.status(200).json({
         status: 200,
         message: "Thành công",
@@ -113,10 +118,32 @@ const createManga = asyncHandler(async (req: Request, res: Response) => {
         manga
     });
 });
+
+const increaseView = asyncHandler(async (req: Request, res: Response) => {
+    const {_id} = req.body
+    let manga = await MangaModel.findById(_id)
+    if(manga){
+        const view = manga.views + 1
+        if(view){
+            const mangaUpdate = await MangaModel.findByIdAndUpdate(_id,{views:view})
+            if(mangaUpdate){
+                res.status(200).json({
+                    status: 200,
+                    message: "Thành công",
+                    manga:mangaUpdate
+                });
+            }
+        }
+    }else{
+        res.status(402)
+        throw new Error('manga không tồn tại')
+    }
+});
 export default {
     createManyManga,
     getAll,
     getMangaById,
     updateMangaById,
-    createManga
+    createManga,
+    increaseView
 };

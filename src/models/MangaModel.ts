@@ -1,4 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
 /**
  * @swagger
@@ -104,6 +105,8 @@ const MangaSchema: Schema = new mongoose.Schema(
     }
 );
 
+MangaSchema.plugin(paginate);
+// const MangaModel = mongoose.model<Manga>('mangas', MangaSchema);
+const MangaModel: PaginateModel<Manga> = mongoose.model<Manga, PaginateModel<Manga>>('mangas', MangaSchema);
 
-const MangaModel = mongoose.model<Manga>('mangas', MangaSchema);
 export default MangaModel;
