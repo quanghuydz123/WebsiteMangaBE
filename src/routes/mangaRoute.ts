@@ -42,7 +42,7 @@ mangaRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) => 
  *       - in: query
  *         name: sortType
  *         required: false
- *         description: sắp xếp truyện từ a-z(descName), z-a (ascName), truyện mới nhất (latest-story),xem nhiều nhất (most-viewed)
+ *         description: sắp xếp truyện từ a-z(ascName), z-a (descName), truyện mới nhất (latest-story),xem nhiều nhất (most-viewed)
  *         schema:
  *           type: string
  *       - in: query
@@ -222,6 +222,44 @@ mangaRoute.post('/create-manga', (req: Request, res: Response, next: NextFunctio
  *     responses:
  *       200:   
  *         description: update manga by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 manga:
+ *                   $ref: '#/components/schemas/Manga' 
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+
+mangaRoute.put('/increase-view', (req: Request, res: Response, next: NextFunction) => {
+    mangaController.increaseView(req, res,next);
+});
+
+/**
+ * @swagger
+ * /manga/increase-view:
+ *   put:
+ *     summary: increase view manga by id
+ *     tags: [Manga]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: "string"
+ *     responses:
+ *       200:   
+ *         description: increase view success
  *         content:
  *           application/json:
  *             schema:
