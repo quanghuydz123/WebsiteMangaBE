@@ -22,6 +22,17 @@ const createManyRating = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
+const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const ratings = await RatingModel.find().populate('user manga')
+
+    res.status(200).json({
+        status: 200,
+        message: "Thành công",
+        ratings
+    });
+});
+
 export default {
     createManyRating,
+    getAll
 };

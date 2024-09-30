@@ -15,7 +15,6 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
             _id: new mongoose.Types.ObjectId(role._id),
             name: role.name
         });
-
         if (roleNew) {
             roleNews.push(roleNew);
         }
@@ -28,6 +27,15 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
+const getAll = asyncHandler(async (req: Request, res: Response) => {
+    const role = await RoleModel.find()
+    res.status(200).json({
+        status: 200,
+        message: "Thành công",
+        role
+    });
+});
 export default {
     createManyRole,
+    getAll
 };

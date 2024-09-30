@@ -1,4 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
 /**
  * @swagger
@@ -76,7 +77,6 @@ export interface Manga extends Document {
 
 const MangaSchema: Schema = new mongoose.Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true }, 
         name: { type: String, required: true }, 
         status: { type: Number, required: true }, 
         imageUrl: { type: String, required: true }, 
@@ -93,7 +93,7 @@ const MangaSchema: Schema = new mongoose.Schema(
             required: true 
         },
         views: { type: Number, default: 0 }, 
-        publish_date: { type: Number, required: true }, 
+        publish_date: { type: Date, required: true }, 
         genres: { 
             type: [mongoose.Schema.Types.ObjectId], 
             ref: 'genres', 
@@ -105,6 +105,8 @@ const MangaSchema: Schema = new mongoose.Schema(
     }
 );
 
+MangaSchema.plugin(paginate);
+// const MangaModel = mongoose.model<Manga>('mangas', MangaSchema);
+const MangaModel: PaginateModel<Manga> = mongoose.model<Manga, PaginateModel<Manga>>('mangas', MangaSchema);
 
-const MangaModel = mongoose.model<Manga>('mangas', MangaSchema);
 export default MangaModel;
