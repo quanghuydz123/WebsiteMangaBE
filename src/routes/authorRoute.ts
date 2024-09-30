@@ -309,4 +309,103 @@ authorRoute.post('/create', authorController.createAuthor);
  *                   example: "Server error."
  */
 authorRoute.put('/update', authorController.updateAuthor);
+
+/**
+ * @swagger
+ * /authors/complex-get:
+ *   post:
+ *     summary: Retrieve a paginated list of authors with filters and pagination options (Lấy danh sách tác giả phân trang với bộ lọc và tùy chọn phân trang)
+ *     tags:
+ *       - Author
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               page:
+ *                 type: integer
+ *                 description: The page number to retrieve. (Số trang cần lấy.)
+ *                 example: 1
+ *               limit:
+ *                 type: integer
+ *                 description: The number of results per page. (Số lượng kết quả trên mỗi trang.)
+ *                 example: 10
+ *               filter:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: Filter authors by name (case-insensitive). (Lọc tác giả theo tên, không phân biệt chữ hoa chữ thường.)
+ *                     example: John
+ *                   isDeleted:
+ *                     type: boolean
+ *                     description: Filter authors by deletion status. (Lọc tác giả theo trạng thái đã bị xóa.)
+ *                     example: false
+ *               options:
+ *                 type: object
+ *                 properties:
+ *                   sort:
+ *                     type: object
+ *                     description: Sort order for the results. (Thứ tự sắp xếp cho kết quả.)
+ *                     example: { "createAt": -1 }
+ *                   select:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Fields to include in the result set. (Các trường cần bao gồm trong tập kết quả.)
+ *                     example: ["name", "createAt", "updatedAt"]
+ *                   lean:
+ *                     type: boolean
+ *                     description: Return plain JavaScript objects instead of Mongoose documents. (Trả về các đối tượng JavaScript thuần thay vì các tài liệu Mongoose.)
+ *                     example: true
+ *                   leanWithId:
+ *                     type: boolean
+ *                     description: Include `_id` field in plain JS objects. (Bao gồm trường `_id` trong các đối tượng JavaScript thuần.)
+ *                     example: false
+ *     responses:
+ *       200:
+ *         description: A paginated list of authors based on the provided filters and options. (Danh sách tác giả phân trang dựa trên các bộ lọc và tùy chọn đã cung cấp.)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Author'
+ *                   description: Array of author documents. (Mảng các tài liệu tác giả.)
+ *                 totalDocs:
+ *                   type: integer
+ *                   description: The total number of authors. (Tổng số tác giả.)
+ *                 limit:
+ *                   type: integer
+ *                   description: The number of authors per page. (Số tác giả trên mỗi trang.)
+ *                 page:
+ *                   type: integer
+ *                   description: The current page number. (Số trang hiện tại.)
+ *                 totalPages:
+ *                   type: integer
+ *                   description: The total number of pages. (Tổng số trang.)
+ *                 hasNextPage:
+ *                   type: boolean
+ *                   description: If there is a next page. (Có trang tiếp theo hay không.)
+ *                 hasPrevPage:
+ *                   type: boolean
+ *                   description: If there is a previous page. (Có trang trước hay không.)
+ *                 nextPage:
+ *                   type: integer
+ *                   description: The next page number (if it exists). (Số trang tiếp theo nếu có.)
+ *                   example: 2
+ *                 prevPage:
+ *                   type: integer
+ *                   description: The previous page number (if it exists). (Số trang trước nếu có.)
+ *                   example: null
+ *       500:
+ *         description: Internal Server Error (Lỗi máy chủ nội bộ)
+ */
+
+authorRoute.post('/complex-get',authorController.selfQueryAuthor);
 export default authorRoute;

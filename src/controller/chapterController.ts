@@ -102,8 +102,8 @@ const appendChapter = async (req: Request, res: Response) => {
     const lastTitle = await getLastTitle(manga);
 
     const match = lastTitle.match(/chapter\s-\s([\d.]+)/i) ?? "0";
-    const number = Math.floor(Number(match[1]) )+ 1;
-    console.log(lastTitle, "-",match[1],"-",number);
+    const number = Math.floor(Number(match[1])) + 1;
+    console.log(lastTitle, "-", match[1], "-", number);
     try {
         const chapter = new ChapterModel({ manga: manga, title: "chapter - " + number + ": " + title, imageLink: imageLink });
         const newChapter: Chapter = await chapter.save();
@@ -119,7 +119,7 @@ const appendChapter = async (req: Request, res: Response) => {
 };
 
 const updateChapter = async (req: Request, res: Response) => {
-    const id = new mongoose.Types.ObjectId ( req.query.id as string);
+    const id = new mongoose.Types.ObjectId(req.query.id as string);
     const { title, isDeleted, imageLink, isReturnNewData } = req.body;
 
     try {
@@ -156,11 +156,44 @@ async function getLastTitle(manga: unknown): Promise<string> {
     return lastChapter ? lastChapter.title : Date.now().toString(); // Return epoch time if null
 }
 
+const selfQueryChapter = async (req: Request, res: Response) => {
+    try {
+        const { page = 1, limit = 10, filter = {}, options = {} } = req.body;
+
+        // Construct pagination options
+        const paginationOptions = {
+            page: Number(page),
+            limit: Number(limit),
+            select: options.select ? options.select.join(' ') : 'title createAt updatedAt',  // Join if it's an array
+            sort: options.sort || { createAt: -1 },  // Sort by `createAt` descending by default
+            lean: options.lean || true,             // Whether to return plain JS objects
+            leanWithId: options.leanWithId || false, // Include `_id` as string if lean
+            populate: options.populate || [{ path: 'manga', select: 'title' }], // Populate the `manga` field
+        };
+
+        // Filter can contain various criteria, e.g., `title` and `isDeleted`
+        const queryFilter = {
+            ...(filter.title ? { title: { $regex: filter.title, $options: 'i' } } : {}),
+            ...(filter.isDeleted !== undefined ? { isDeleted: filter.isDeleted } : {}),
+            ...(filter._id ? { _id: filter._id } : {}), // Fixed _id filter
+            ...(filter.manga ? { manga: filter.manga } : {}), // Fixed manga filter
+        };
+
+        // Paginate the query with filters and options
+        const result = await ChapterModel.paginate(queryFilter, paginationOptions);
+
+        // Send the paginated results back to the client
+        return res.status(200).json(result);
+    } catch (error) {
+        return res.status(500).json({ message: error });
+    }
+};
+
 export default {
     createManyChapter,
     getPaginatedChapters,
     getAdvancedPaginatedChapter,
     appendChapter,
     updateChapter,
-
+    selfQueryChapter
 };
