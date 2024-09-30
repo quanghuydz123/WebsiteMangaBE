@@ -19,7 +19,6 @@ chapterRoute.post('/create-many-chapter', (req: Request, res: Response, next: Ne
  *         required: true
  *         schema:
  *           type: string
- *           format: uuid
  *           description: The ID of the manga
  *       - name: page
  *         in: query
@@ -153,7 +152,7 @@ chapterRoute.get('/get-page', chapterController.getPaginatedChapters);
 chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedChapter);
 /**
  * @swagger
- * /chapters/create:
+ * /chapters/append:
  *   post:
  *     summary: Create a new chapter
  *     tags: [Chapters]
@@ -211,20 +210,19 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/create', chapterController.createChapter);
+chapterRoute.post('/append', chapterController.appendChapter);
 /**
  * @swagger
- * /chapters/update/{id}:
+ * /chapters/update:
  *   put:
  *     summary: Update an existing chapter
  *     tags: [Chapters]
  *     parameters:
  *       - name: id
- *         in: path
+ *         in: query
  *         required: true
  *         schema:
  *           type: string
- *           format: uuid
  *           description: The ID of the chapter to update
  *     requestBody:
  *       required: true
@@ -286,6 +284,122 @@ chapterRoute.post('/create', chapterController.createChapter);
  */
 chapterRoute.put('/update', chapterController.updateChapter);
 
+/**
+ * @swagger
+  * /chapters/complex-get:
+ *   post:
+ *     summary: Retrieve a paginated list of chapters with filters and pagination options (Lấy danh sách chương phân trang với bộ lọc và tùy chọn phân trang)
+ *     tags:
+ *       - Chapters
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               page:
+ *                 type: integer
+ *                 description: The page number to retrieve. (Số trang cần lấy.)
+ *                 example: 1
+ *               limit:
+ *                 type: integer
+ *                 description: The number of results per page. (Số lượng kết quả trên mỗi trang.)
+ *                 example: 10
+ *               filter:
+ *                 type: object
+ *                 properties:
+ *                   title:
+ *                     type: string
+ *                     description: Filter chapters by title (case-insensitive). (Lọc chương theo tiêu đề, không phân biệt chữ hoa chữ thường.)
+ *                     example: "The Dark Secret"
+ *                   isDeleted:
+ *                     type: boolean
+ *                     description: Filter chapters by deletion status. (Lọc chương theo trạng thái đã bị xóa.)
+ *                     example: false
+ *                   manga:
+ *                     type: string
+ *                     description: Filter chapters by manga ID. (Lọc chương theo ID manga.)
+ *                     example: "60c72b2f9b1e8c001c8e4a20"  # Example Manga ID
+ *               options:
+ *                 type: object
+ *                 properties:
+ *                   sort:
+ *                     type: object
+ *                     description: Sort order for the results. (Thứ tự sắp xếp cho kết quả.)
+ *                     example: { "createAt": -1 }
+ *                   select:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: Fields to include in the result set. (Các trường cần bao gồm trong tập kết quả.)
+ *                     example: ["title", "createAt", "updatedAt"]
+ *                   lean:
+ *                     type: boolean
+ *                     description: Return plain JavaScript objects instead of Mongoose documents. (Trả về các đối tượng JavaScript thuần thay vì các tài liệu Mongoose.)
+ *                     example: true
+ *                   leanWithId:
+ *                     type: boolean
+ *                     description: Include `_id` field in plain JS objects. (Bao gồm trường `_id` trong các đối tượng JavaScript thuần.)
+ *                     example: false
+ *                   populate:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         path:
+ *                           type: string
+ *                           description: The field to populate. (Trường cần được populate.)
+ *                           example: "manga"
+ *                         select:
+ *                           type: string
+ *                           description: Fields to include from the populated document. (Các trường cần bao gồm từ tài liệu đã được populate.)
+ *                           example: "title"
+ *     responses:
+ *       200:
+ *         description: A paginated list of chapters based on the provided filters and options. (Danh sách chương phân trang dựa trên các bộ lọc và tùy chọn đã cung cấp.)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 docs:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Chapter'
+ *                   description: Array of chapter documents. (Mảng các tài liệu chương.)
+ *                 totalDocs:
+ *                   type: integer
+ *                   description: The total number of chapters. (Tổng số chương.)
+ *                 limit:
+ *                   type: integer
+ *                   description: The number of chapters per page. (Số chương trên mỗi trang.)
+ *                 page:
+ *                   type: integer
+ *                   description: The current page number. (Số trang hiện tại.)
+ *                 totalPages:
+ *                   type: integer
+ *                   description: The total number of pages. (Tổng số trang.)
+ *                 hasNextPage:
+ *                   type: boolean
+ *                   description: If there is a next page. (Có trang tiếp theo hay không.)
+ *                 hasPrevPage:
+ *                   type: boolean
+ *                   description: If there is a previous page. (Có trang trước hay không.)
+ *                 nextPage:
+ *                   type: integer
+ *                   description: The next page number (if it exists). (Số trang tiếp theo nếu có.)
+ *                   example: 2
+ *                 prevPage:
+ *                   type: integer
+ *                   description: The previous page number (if it exists). (Số trang trước nếu có.)
+ *                   example: null
+ *       500:
+ *         description: Internal Server Error (Lỗi máy chủ nội bộ)
+ */
 
+
+
+chapterRoute.post('/complex-get',chapterController.selfQueryChapter);
 
 export default chapterRoute;

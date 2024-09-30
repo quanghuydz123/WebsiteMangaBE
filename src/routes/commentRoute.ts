@@ -149,12 +149,12 @@ commentRoute.get('/get-advanced-page',commentController.getAdvancedPaginatedComm
 commentRoute.post('/create',commentController.createComment);
 /**
  * @swagger
- * /comments/update/{id}:
+ * /comments/update:
  *   put:
  *     summary: Update an existing comment
  *     tags: [Comments]
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
  *         schema:
  *           type: string
@@ -198,7 +198,7 @@ commentRoute.post('/create',commentController.createComment);
  *         description: Server error
  */
 
-commentRoute.put('/update/:id',commentController.updateComment);
+commentRoute.put('/update',commentController.updateComment);
 
 /**
  * @swagger

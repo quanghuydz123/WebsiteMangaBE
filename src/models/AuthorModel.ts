@@ -1,5 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
+import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
+import mongoosePaginate   from 'mongoose-paginate-v2';
 /**
  * @swagger
  * components:
@@ -48,6 +48,6 @@ const AuthorSchema: Schema = new Schema(
     }
 );
 
-
-const AuthorModel = mongoose.model<Author>('authors', AuthorSchema);
+AuthorSchema.plugin(mongoosePaginate);
+const AuthorModel = mongoose.model<Author,PaginateModel<Author>>('authors', AuthorSchema);
 export default AuthorModel;

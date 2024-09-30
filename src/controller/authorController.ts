@@ -45,6 +45,36 @@ const getPaginatedAuthor = async (req: Request, res: Response) => {
     }
 };
 
+const selfQueryAuthor = async (req: Request, res: Response) => {
+    try {
+        const { page = 1, limit = 10, filter = {}, options = {} } = req.body;
+
+        // Construct pagination options
+        const paginationOptions = {
+            page: Number(page),
+            limit: Number(limit),
+            select: options.select ? options.select.join(' ') : 'name createAt updatedAt',  // Join if it's an array
+            sort: options.sort || { createAt: -1 },  // Sort by `createAt` descending by default
+            lean: options.lean || false,             // Whether to return plain JS objects
+            leanWithId: options.leanWithId || true   // Include `_id` as string if lean
+        };
+
+        // Filter can contain various criteria, e.g., `name` and `isDeleted`
+        const queryFilter = {
+            ...(filter.name ? { name: { $regex: filter.name, $options: 'i' } } : {}),
+            ...(filter.isDeleted !== undefined ? { isDeleted: filter.isDeleted } : {})
+        };
+
+        // Paginate the query with filters and options
+        const result = await AuthorModel.paginate(queryFilter, paginationOptions);
+
+        // Send the paginated results back to the client
+        return res.status(200).json(result);
+    } catch (error) {
+        return res.status(500).json({ message: error });
+    }
+};
+
 const getAdvancedPaginatedAuthor = async (req: Request, res: Response) => {
     const { page, limit, filter } = req.query;
 
@@ -109,8 +139,8 @@ const createAuthor = async (req: Request, res: Response) => {
 };
 
 const updateAuthor = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { name, isDeleted, isReturnNewData } = req.body;
+
+    const { id, name, isDeleted, isReturnNewData } = req.body;
 
     try {
         const updatedAuthor = await AuthorModel.findByIdAndUpdate(
@@ -138,5 +168,6 @@ export default {
     getPaginatedAuthor,
     getAdvancedPaginatedAuthor,
     createAuthor,
-    updateAuthor
+    updateAuthor,
+    selfQueryAuthor
 };

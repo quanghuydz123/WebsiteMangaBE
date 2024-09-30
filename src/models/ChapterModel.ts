@@ -1,5 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
+import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 /**
  * @swagger
  * components:
@@ -37,11 +37,11 @@ import mongoose, { Schema, Document } from 'mongoose';
  */
 
 export interface Chapter extends Document {
-    manga: mongoose.Types.ObjectId; 
-    _id: mongoose.Types.ObjectId; 
+    manga: mongoose.Types.ObjectId;
+    _id: mongoose.Types.ObjectId;
     title: string;
     isDeleted: boolean;
-    createAt: Date; 
+    createAt: Date;
     updatedAt: Date;
     imageLink: string[];
 }
@@ -54,12 +54,12 @@ const ChapterSchema: Schema = new Schema(
         imageLinks: { type: [String], required: true },
     },
     {
-        timestamps: true, 
+        timestamps: true,
         toJSON: { virtuals: true, versionKey: false }, // Remove __v
         toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
         id: false // Disable the virtual id field
     }
 );
-
-const ChapterModel = mongoose.model<Chapter>('chapters', ChapterSchema);
+ChapterSchema.plugin(mongoosePaginate);
+const ChapterModel = mongoose.model<Chapter, PaginateModel<Chapter>>('chapters', ChapterSchema);
 export default ChapterModel;

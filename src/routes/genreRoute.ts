@@ -128,12 +128,12 @@ genreRoute.get('/get-advanced-page', genreController.getAdvancedPaginatedGenres)
 genreRoute.post('/create', genreController.createGenre);
 /**
  * @swagger
- * /genres/update/{id}:
+ * /genres/update:
  *   put:
  *     summary: Update a genre
  *     tags: [Genres]
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
  *         required: true
  *         description: Genre ID
@@ -166,6 +166,6 @@ genreRoute.post('/create', genreController.createGenre);
  *       500:
  *         description: Server error
  */
-genreRoute.put('/update/:id', genreController.updateGenre);
+genreRoute.put('/update', genreController.updateGenre);
 
 export default genreRoute;

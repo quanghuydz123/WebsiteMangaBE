@@ -114,8 +114,8 @@ const createFollowing = async (req: Request, res: Response) => {
 
 // Update a following
 const updateFollowing = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { user, manga, isReturnNewData } = req.body;
+    
+    const { id, user, manga, isReturnNewData } = req.body;
 
     try {
         const updatedFollowing = await FollowingModel.findByIdAndUpdate(id, { user, manga }, { new: true });
@@ -189,7 +189,7 @@ const getUserLibrary = async (req: Request, res: Response) => {
                     foreignField: 'manga', // Field in the Chapter collection that references Manga
                     as: 'latestChapter', // Output array field
                     pipeline: [
-                        { $sort: { title: -1, createdAt: -1 } }, // Sort by title in descending order
+                        { $sort: { title: -1 } }, // Sort by title in descending order
                         { $limit: 1 } // Limit to the latest chapter
                     ]
                 }
