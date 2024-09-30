@@ -150,7 +150,7 @@ followingRoute.post('create', followingController.createFollowing);
  *     summary: Update a following
  *     tags: [Followings]
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
  *         required: true
  *         description: The following ID
@@ -193,16 +193,16 @@ followingRoute.post('create', followingController.createFollowing);
  */
 
 
-followingRoute.put('/update/:id', followingController.updateFollowing);
+followingRoute.put('/update', followingController.updateFollowing);
 
 /**
  * @swagger
- * /followings/delete/{id}:
+ * /followings/delete:
  *   delete:
  *     summary: Delete a following
  *     tags: [Followings]
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
  *         required: true
  *         description: The ID of the following to delete
@@ -225,7 +225,7 @@ followingRoute.put('/update/:id', followingController.updateFollowing);
  *       500:
  *         description: Internal server error
  */
-followingRoute.delete('/delete/:id', followingController.deleteFollowing);
+followingRoute.delete('/delete', followingController.deleteFollowing);
 /**
  * @swagger
  * /followings/get-library:

@@ -105,8 +105,8 @@ const createComment = async (req: Request, res: Response) => {
 };
 
 const updateComment = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { text, isDeleted, isReturnNewData } = req.body;
+    
+    const { id, text, isDeleted, isReturnNewData } = req.body;
 
     try {
         const updatedComment = await CommentModel.findByIdAndUpdate(

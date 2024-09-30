@@ -97,8 +97,8 @@ const createGenre = async (req: Request, res: Response) => {
 };
 
 const updateGenre = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { name, slug, isDeleted, isReturnNewData } = req.body;
+    
+    const { id, name, slug, isDeleted, isReturnNewData } = req.body;
 
     try {
         const updatedGenre = await GenreModel.findByIdAndUpdate(

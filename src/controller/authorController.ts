@@ -109,8 +109,8 @@ const createAuthor = async (req: Request, res: Response) => {
 };
 
 const updateAuthor = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { name, isDeleted, isReturnNewData } = req.body;
+   
+    const { id, name, isDeleted, isReturnNewData } = req.body;
 
     try {
         const updatedAuthor = await AuthorModel.findByIdAndUpdate(

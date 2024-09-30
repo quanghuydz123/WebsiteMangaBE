@@ -114,8 +114,8 @@ const createFollowing = async (req: Request, res: Response) => {
 
 // Update a following
 const updateFollowing = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { user, manga, isReturnNewData } = req.body;
+    
+    const { id, user, manga, isReturnNewData } = req.body;
 
     try {
         const updatedFollowing = await FollowingModel.findByIdAndUpdate(id, { user, manga }, { new: true });

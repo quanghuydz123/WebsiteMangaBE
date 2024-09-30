@@ -19,7 +19,6 @@ chapterRoute.post('/create-many-chapter', (req: Request, res: Response, next: Ne
  *         required: true
  *         schema:
  *           type: string
- *           format: uuid
  *           description: The ID of the manga
  *       - name: page
  *         in: query
@@ -153,7 +152,7 @@ chapterRoute.get('/get-page', chapterController.getPaginatedChapters);
 chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedChapter);
 /**
  * @swagger
- * /chapters/create:
+ * /chapters/append:
  *   post:
  *     summary: Create a new chapter
  *     tags: [Chapters]
@@ -211,20 +210,19 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/create', chapterController.createChapter);
+chapterRoute.post('/append', chapterController.appendChapter);
 /**
  * @swagger
- * /chapters/update/{id}:
+ * /chapters/update:
  *   put:
  *     summary: Update an existing chapter
  *     tags: [Chapters]
  *     parameters:
  *       - name: id
- *         in: path
+ *         in: query
  *         required: true
  *         schema:
  *           type: string
- *           format: uuid
  *           description: The ID of the chapter to update
  *     requestBody:
  *       required: true

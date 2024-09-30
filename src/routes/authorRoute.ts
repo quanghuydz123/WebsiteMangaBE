@@ -236,12 +236,12 @@ authorRoute.post('/create', authorController.createAuthor);
 
 /**
  * @swagger
- * /authors/{id}:
+ * /authors/update:
  *   put:
  *     summary: Update an existing author
  *     tags: [Author]
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
  *         schema:
  *           type: string
@@ -308,5 +308,5 @@ authorRoute.post('/create', authorController.createAuthor);
  *                   type: string
  *                   example: "Server error."
  */
-authorRoute.put('/:id', authorController.updateAuthor);
+authorRoute.put('/update', authorController.updateAuthor);
 export default authorRoute;
