@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const errorMiddleHandle = (err, _req, res, next) => {
+    const statusCode = res.statusCode ? res.statusCode : 500;
+    res.status(statusCode).json({
+        message: err.message,
+        statusCode,
+    });
+};
+exports.default = errorMiddleHandle;
