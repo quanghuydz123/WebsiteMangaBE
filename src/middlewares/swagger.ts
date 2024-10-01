@@ -12,11 +12,11 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3001', // Change this based on your environment
+        url: process.env.SERVER_API_URL || 'http://localhost:3001', // Change this based on your environment
       },
     ],
   },
-  apis: ['./src/routes/*.ts',"./src/models/*.ts"], // This will point to the routes for swagger annotations
+  apis: ['./src/routes/*.ts', './src/routes/*.js', './src/models/*.ts', './src/models/*.js'], // This will point to the routes for swagger annotations
 };
 
 const swaggerSpec = swaggerJsdoc(options);
