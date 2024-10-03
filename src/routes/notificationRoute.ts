@@ -27,8 +27,49 @@ notificationRoute.get('/get-all', (req: Request, res: Response, next: NextFuncti
  *           application/json:
  *             schema:
  *               type: array
- *               items:
+ *               notifications:
  *                 $ref: '#/components/schemas/Notification'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+
+notificationRoute.post('/create-notification', (req: Request, res: Response, next: NextFunction) => {
+    notificationController.createNotification(req, res,next);
+});
+
+/**
+ * @swagger
+ * /notifications/create-notification:
+ *   post:
+ *     summary: create notification
+ *     tags: [Notification]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               content:
+ *                 type: string
+ *                 example: "string"
+ *               idUser:
+ *                 type: string
+ *                 example: "string"
+ *     responses:
+ *       200:   
+ *         description: create notification
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 notifications:
+ *                   $ref: '#/components/schemas/Notification' 
  *       500:
  *         description: Internal server error
  * 

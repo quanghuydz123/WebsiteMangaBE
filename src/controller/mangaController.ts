@@ -24,7 +24,7 @@ const createManyManga = asyncHandler(async (req: Request, res: Response) => {
 
 const getAll = asyncHandler(async (req: Request, res: Response) => {
     const {searchValue,fillterGenre,fillterAuthor,fillterPublisher,sortType,page=1,limit=20,status}:{searchValue?:string,fillterGenre?:string,
-        sortType?:'ascName' | 'descName' | 'latest-story' | 'most-viewed' ,page?:number,limit?:number,
+        sortType?:'ascName' | 'descName' | 'latest-story' | 'most-viewed'| 'follow' | 'star' ,page?:number,limit?:number,
         fillterAuthor?:string,fillterPublisher?:string,status?:number
     } = req.query
     // const skip: number = (page - 1) * limit; // Calculate how many items to skip
@@ -55,6 +55,10 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
             sort.name = 1
         }else if(sortType==='latest-story'){
             sort.createdAt = -1
+        }else if(sortType==='follow'){
+            sort.followersCount = -1
+        }else if(sortType==='star'){
+            sort.rating = -1
         }else{
             sort.views = -1
         }
@@ -92,6 +96,7 @@ const getMangaById = asyncHandler(async (req: Request, res: Response) => {
         throw new Error('id không có')
         
     }
+    
 });
 
 
@@ -107,6 +112,7 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response) => {
         message: "Thành công",
         manga:updateManga
     });
+    
 });
 
 const createManga = asyncHandler(async (req: Request, res: Response) => {

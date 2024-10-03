@@ -35,4 +35,47 @@ ratingRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) =>
  * 
  * */
 
+ratingRoute.post('/toggle-rating', (req: Request, res: Response, next: NextFunction) => {
+    ratingController.toggleRating(req, res,next);
+});
+
+/**
+ * @swagger
+ * /ratings/toggle-rating:
+ *   post:
+ *     summary: toogle Rating
+ *     tags: [Rating]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user:
+ *                 type: string
+ *                 example: "string"
+ *               manga:
+ *                 type: string
+ *                 example: "string"
+ *               star:
+ *                 type: number
+ *                 example: "1"
+ *     responses:
+ *       200:   
+ *         description: toogle Rating
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 rating:
+ *                   $ref: '#/components/schemas/Rating' 
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
 export default ratingRoute;
