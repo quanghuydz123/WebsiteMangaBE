@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import NotificationModel from '../models/NotificationModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
+import UserModel from '../models/UserModel';
 
 dotenv.config();
 
@@ -32,8 +33,28 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
+const createNotification = asyncHandler(async (req: Request, res: Response) => {
+    const {content,idUser} = req.body
+    const user = await UserModel.findById(idUser)
+    if(user){
+        const notifications = await NotificationModel.create({
+            content,
+            user:idUser
+        })
+        res.status(200).json({
+            status: 200,
+            message: "Thành công",
+            notifications
+        });
+    } else{
+        res.status(402)
+        throw new Error('Người dùng không tồn tại')
+    }
+    
+});
 
 export default {
     createManyNotification,
-    getAll
+    getAll,
+    createNotification
 };

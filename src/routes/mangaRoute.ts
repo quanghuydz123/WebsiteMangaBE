@@ -42,7 +42,7 @@ mangaRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) => 
  *       - in: query
  *         name: sortType
  *         required: false
- *         description: sắp xếp truyện từ a-z(ascName), z-a (descName), truyện mới nhất (latest-story),xem nhiều nhất (most-viewed)
+ *         description: sắp xếp truyện từ a-z(ascName), z-a (descName), truyện mới nhất (latest-story),xem nhiều nhất (most-viewed),theo dõi giảm dần (follow),đánh giá giảm dần (star)
  *         schema:
  *           type: string
  *       - in: query
