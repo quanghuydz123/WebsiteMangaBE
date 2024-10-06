@@ -94,9 +94,11 @@ const MangaSchema: Schema = new mongoose.Schema(
         },
         views: { type: Number, default: 0 }, 
         publish_date: { type: Date, required: true }, 
+        followersCount: { type: Number, default: 0 },
+        rating: { type: Number},
         genres: { 
             type: [mongoose.Schema.Types.ObjectId], 
-            ref: 'genres', 
+            ref: 'genres',
             required: true 
         }
     },

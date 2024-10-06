@@ -31,7 +31,25 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
         publishers
     });
 });
+
+const createPublisher = asyncHandler(async (req: Request, res: Response) => {
+    const {name} = req.body
+    const publisher = await PublisherModel.findOne({name: { $regex: new RegExp(name, 'i') }})
+    if(publisher){
+        res.status(402)
+        throw new Error('Đã có tên nhà xuát bản này trong hệ thống')
+    }else{
+        const publisherNew = await PublisherModel.create({name})
+        res.status(200).json({
+            status: 200,
+            message: "Thành công",
+            publisher:publisherNew
+        });
+    
+    }
+});
 export default {
     createManyPublisher,
-    getAll
+    getAll,
+    createPublisher
 };
