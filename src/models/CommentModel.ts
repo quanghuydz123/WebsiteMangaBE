@@ -1,5 +1,33 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+
+
+export interface Comment extends Document {
+    _id: mongoose.Types.ObjectId; 
+    user: mongoose.Types.ObjectId; 
+    text: string;
+    isDeleted: boolean;
+    createAt: Date; 
+    updatedAt: Date; 
+    manga: mongoose.Types.ObjectId; 
+}
+
+const CommentSchema: Schema = new Schema(
+    {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true }, 
+        text: { type: String, required: true },
+        isDeleted: { type: Boolean, default: false },
+        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true } 
+    },
+    {
+        timestamps: true, 
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
+    }
+);
+
+
 /**
  * @swagger
  * components:
@@ -34,31 +62,5 @@ import mongoose, { Schema, Document } from 'mongoose';
  *           format: uuid
  *           description: The unique identifier for the associated manga
  */
-
-export interface Comment extends Document {
-    _id: mongoose.Types.ObjectId; 
-    user: mongoose.Types.ObjectId; 
-    text: string;
-    isDeleted: boolean;
-    createAt: Date; 
-    updatedAt: Date; 
-    manga: mongoose.Types.ObjectId; 
-}
-
-const CommentSchema: Schema = new Schema(
-    {
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true }, 
-        text: { type: String, required: true },
-        isDeleted: { type: Boolean, default: false },
-        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true } 
-    },
-    {
-        timestamps: true, 
-        toJSON: { virtuals: true, versionKey: false }, // Remove __v
-        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
-        id: false // Disable the virtual id field
-    }
-);
-
 const CommentModel = mongoose.model<Comment>('comments', CommentSchema);
 export default CommentModel;

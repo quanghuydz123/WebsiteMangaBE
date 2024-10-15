@@ -1,5 +1,36 @@
 import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
+
+
+export interface IFileModel extends Document {
+  _id: mongoose.Types.ObjectId;
+  name: string;        // Image or Folder name
+  type: 'folder' | 'image'; // Type: folder or image
+  parentId: string;    // Parent folder ID (null if root)
+  path: string;        // Path or breadcrumb for folder/image
+  data?: string;       // Base64-encoded image data (only for images)
+  createdAt: Date;     // Creation date
+  isDeleted: boolean;  // Soft delete flag
+}
+
+const FileSchema: Schema = new Schema(
+  {
+    name: { type: String, required: true },
+    type: { type: String, enum: ['folder', 'image'], required: true },
+    parentId: { type: Schema.Types.ObjectId, ref: 'File', default: null }, // Reference to parent folder
+    path: { type: String, required: true },
+    data: { type: String },  // Only for images
+    isDeleted: { type: Boolean, default: false },
+
+  },
+  {
+    timestamps: true,
+    toJSON: { virtuals: true, versionKey: false }, // Remove __v
+    toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+    id: false // Disable the virtual id field
+  }
+);
+
 /**
  * @swagger
  * components:
@@ -38,36 +69,6 @@ import mongoosePaginate from 'mongoose-paginate-v2';
  *           type: string
  *           description: type of image png or jpg or webp
  */
-
-export interface IFileModel extends Document {
-  _id: mongoose.Types.ObjectId;
-  name: string;        // Image or Folder name
-  type: 'folder' | 'image'; // Type: folder or image
-  parentId: string;    // Parent folder ID (null if root)
-  path: string;        // Path or breadcrumb for folder/image
-  data?: string;       // Base64-encoded image data (only for images)
-  createdAt: Date;     // Creation date
-  isDeleted: boolean;  // Soft delete flag
-}
-
-const FileSchema: Schema = new Schema(
-  {
-    name: { type: String, required: true },
-    type: { type: String, enum: ['folder', 'image'], required: true },
-    parentId: { type: Schema.Types.ObjectId, ref: 'File', default: null }, // Reference to parent folder
-    path: { type: String, required: true },
-    data: { type: String },  // Only for images
-    isDeleted: { type: Boolean, default: false },
-
-  },
-  {
-    timestamps: true,
-    toJSON: { virtuals: true, versionKey: false }, // Remove __v
-    toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
-    id: false // Disable the virtual id field
-  }
-);
-
 
 FileSchema.plugin(mongoosePaginate);
 const FileModel = mongoose.model<IFileModel, PaginateModel<IFileModel>>('files', FileSchema);

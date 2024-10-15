@@ -1,5 +1,32 @@
 import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
+
+
+export interface Chapter extends Document {
+    manga: mongoose.Types.ObjectId;
+    _id: mongoose.Types.ObjectId;
+    title: string;
+    isDeleted: boolean;
+    createAt: Date;
+    updatedAt: Date;
+    imageLink: string[];
+}
+
+const ChapterSchema: Schema = new Schema(
+    {
+        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true },
+        title: { type: String, required: true },
+        isDeleted: { type: Boolean, default: false },
+        imageLinks: { type: [String], required: true },
+    },
+    {
+        timestamps: true,
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
+    }
+);
+
 /**
  * @swagger
  * components:
@@ -35,31 +62,6 @@ import mongoosePaginate from 'mongoose-paginate-v2';
  *             type: string
  *           description: An array of image links for the chapter
  */
-
-export interface Chapter extends Document {
-    manga: mongoose.Types.ObjectId;
-    _id: mongoose.Types.ObjectId;
-    title: string;
-    isDeleted: boolean;
-    createAt: Date;
-    updatedAt: Date;
-    imageLink: string[];
-}
-
-const ChapterSchema: Schema = new Schema(
-    {
-        manga: { type: mongoose.Schema.Types.ObjectId, ref: 'mangas', required: true },
-        title: { type: String, required: true },
-        isDeleted: { type: Boolean, default: false },
-        imageLinks: { type: [String], required: true },
-    },
-    {
-        timestamps: true,
-        toJSON: { virtuals: true, versionKey: false }, // Remove __v
-        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
-        id: false // Disable the virtual id field
-    }
-);
 ChapterSchema.plugin(mongoosePaginate);
 const ChapterModel = mongoose.model<Chapter, PaginateModel<Chapter>>('chapters', ChapterSchema);
 export default ChapterModel;

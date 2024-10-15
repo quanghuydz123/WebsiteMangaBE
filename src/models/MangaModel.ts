@@ -1,6 +1,55 @@
 import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
 import paginate from 'mongoose-paginate-v2';
 
+
+
+export interface Manga extends Document {
+    _id: mongoose.Types.ObjectId; 
+    name: string; 
+    status: number; 
+    imageUrl: string; 
+    summary: string; 
+    author: mongoose.Types.ObjectId[]; 
+    isDeleted: boolean; 
+    publisher: mongoose.Types.ObjectId; 
+    views: number; 
+    publish_date: number; 
+    genres: mongoose.Types.ObjectId[]; 
+    createdAt: Date; 
+    updatedAt: Date; 
+}
+
+const MangaSchema: Schema = new mongoose.Schema(
+    {
+        name: { type: String, required: true }, 
+        status: { type: Number, required: true }, 
+        imageUrl: { type: String, required: true }, 
+        summary: { type: String, required: true }, 
+        author: { 
+            type: [mongoose.Schema.Types.ObjectId], 
+            ref: 'authors', 
+            required: true 
+        },
+        isDeleted: { type: Boolean, default: false }, 
+        publisher: { 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'publishers', 
+            required: true 
+        },
+        views: { type: Number, default: 0 }, 
+        publish_date: { type: Date, required: true }, 
+        followersCount: { type: Number, default: 0 },
+        rating: { type: Number},
+        genres: { 
+            type: [mongoose.Schema.Types.ObjectId], 
+            ref: 'genres',
+            required: true 
+        }
+    },
+    {
+        timestamps: true, 
+    }
+);
 /**
  * @swagger
  * components:
@@ -58,55 +107,6 @@ import paginate from 'mongoose-paginate-v2';
  *           format: date-time
  *           description: The date when the manga was last updated
  */
-
-export interface Manga extends Document {
-    _id: mongoose.Types.ObjectId; 
-    name: string; 
-    status: number; 
-    imageUrl: string; 
-    summary: string; 
-    author: mongoose.Types.ObjectId[]; 
-    isDeleted: boolean; 
-    publisher: mongoose.Types.ObjectId; 
-    views: number; 
-    publish_date: number; 
-    genres: mongoose.Types.ObjectId[]; 
-    createdAt: Date; 
-    updatedAt: Date; 
-}
-
-const MangaSchema: Schema = new mongoose.Schema(
-    {
-        name: { type: String, required: true }, 
-        status: { type: Number, required: true }, 
-        imageUrl: { type: String, required: true }, 
-        summary: { type: String, required: true }, 
-        author: { 
-            type: [mongoose.Schema.Types.ObjectId], 
-            ref: 'authors', 
-            required: true 
-        },
-        isDeleted: { type: Boolean, default: false }, 
-        publisher: { 
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'publishers', 
-            required: true 
-        },
-        views: { type: Number, default: 0 }, 
-        publish_date: { type: Date, required: true }, 
-        followersCount: { type: Number, default: 0 },
-        rating: { type: Number},
-        genres: { 
-            type: [mongoose.Schema.Types.ObjectId], 
-            ref: 'genres',
-            required: true 
-        }
-    },
-    {
-        timestamps: true, 
-    }
-);
-
 MangaSchema.plugin(paginate);
 // const MangaModel = mongoose.model<Manga>('mangas', MangaSchema);
 const MangaModel: PaginateModel<Manga> = mongoose.model<Manga, PaginateModel<Manga>>('mangas', MangaSchema);
