@@ -1,13 +1,7 @@
 
 import fileController from '../controller/fileController';
 import express from 'express';
-import multer from 'multer';
-const upload = multer({
-    dest: 'uploads/',
-    limits: {
-        fileSize: 10 * 1024 * 1024, // Set limit to 10 MB (adjust as necessary)
-    },
-});
+
 const fileRouter = express.Router();
 
 /**
@@ -38,7 +32,7 @@ const fileRouter = express.Router();
  *       500:
  *         description: Error creating file
  */
-fileRouter.post('/create', upload.single('data'), fileController.createFile);
+fileRouter.post('/create', fileController.createFile);
 
 /**
  * @swagger
