@@ -1,0 +1,13 @@
+.folder-card {
+    transition: all 0.3s ease; /* Smooth transition */
+    cursor:pointer; ;
+}
+
+.folder-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* shadow-lg */
+    margin-left: 1rem; /* p-3 */
+    margin-right: 1rem;
+    background-color: var(--bs-body); /* bg-body */
+    border-radius: 0.25rem; /* rounded */
+    margin-bottom: 1.25rem; /* mb-5 */
+}

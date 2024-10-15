@@ -1,0 +1,17 @@
+ <!-- Add Image Dialog -->
+ <dialog id="addImageDialog">
+    <form method="dialog" onsubmit="submitAddImage(event)">
+        <div class="modal-header">
+            <h5 class="modal-title">Add Image</h5>
+            <button type="button" class="btn-close" onclick="document.getElementById('addImageDialog').close();"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="imageInput" class="form-label">Choose Image</label>
+                <input type="file" class="form-control" id="imageInput" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Image</button>
+        </div>
+    </form>
+</dialog>

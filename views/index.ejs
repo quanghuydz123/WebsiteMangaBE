@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/style.css">
+
+    <title>Truyện</title>
+    <style>
+        div[aria-active="1"] {
+            outline-style: dashed;
+            outline-color: greenyellow;
+        }
+
+        #bread-crumb a:hover {
+            background-color: pink;
+            /* Background color on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="p-5 container-md ">
+        <section class=" card">
+            <div class="card-body">
+                <section id="bread-crumb">
+                    <a onclick="redirectBreadCrumb(event)" id="home_id" href="#">Nhà</a>
+                </section>
+                <%- include('toolbar') %>
+
+                    <div id="folder-list" class=" d-flex flex-wrap justify-content-start">
+                        <!-- ============================================================ -->
+                        <!-- ============================================================ -->
+                    </div>
+
+
+            </div>
+            <%- include('page_navigation') %>
+        </section>
+
+        <%- include('add_folder_dialog') %>
+            <%- include('add_image_dialog') %>
+                <%- include('add_image_from_link_dialog') %>
+
+    </main>
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('openAddFolderDialog').addEventListener('click', function () {
+            document.getElementById('addFolderDialog').showModal();
+        });
+
+        document.getElementById('openAddImageDialog').addEventListener('click', function () {
+            document.getElementById('addImageDialog').showModal();
+        });
+
+        document.getElementById('openAddImageLinkDialog').addEventListener('click', function () {
+            document.getElementById('addImageLinkDialog').showModal();
+        });
+        const folderList = document.getElementById("folder-list");
+        const breadCrumb = document.getElementById("bread-crumb");
+    </script>
+    <script>
+        let arrayOfFile = [];
+        let currentDirectoryID = [''];
+        let activeElement = null;
+        let searchInput = document.getElementById('search-input');
+    </script>
+
+    <script>
+
+        // Submit function for adding a folder
+        async function submitAddFolder(event) {
+            event.preventDefault();
+            event.target.disabled = true;
+            const name = document.getElementById('folderName').value;
+
+            const response = await fetch('/files/create-folder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add any additional headers if needed (like Authorization)
+                },
+                body: JSON.stringify({
+                    name,
+                    parentId: currentDirectoryID.at(-1) ?? '',
+                }),
+            });
+
+            if (response.ok) {
+                alert('Folder added successfully');
+                document.getElementById('addFolderDialog').close();
+                getFiles(currentDirectoryID.at(-1), 1, 30);
+            } else {
+                alert('Error adding folder');
+                console.error((await response.json()).error);
+
+            }
+            event.target.disabled = false;
+        }
+
+        // Submit function for adding an image
+        async function submitAddImage(event) {
+            event.preventDefault();
+            event.target.disabled = true;
+            const imageFile = document.getElementById('imageInput').files[0];
+
+            const reader = new FileReader();
+            reader.onload = async function () {
+                const data = reader.result;
+
+                const response = await fetch('/files/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add any additional headers if needed (like Authorization)
+                    },
+                    body: JSON.stringify({
+                        name: imageFile.name,
+                        type: 'image',
+                        parentId: currentDirectoryID.at(-1) ?? '',
+                        data,
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alert('image add successfully:' + JSON.stringify(data));
+                    document.getElementById('addImageDialog').close();
+                    getFiles(currentDirectoryID.at(-1), 1, 30);
+                } else {
+                    alert('Error uploading image');
+                    console.error((await response.json()).error);
+                }
+            };
+
+            reader.readAsDataURL(imageFile);  // Convert image to base64
+            event.target.disabled = false;
+        }
+
+        // Submit function for adding an image from a link
+        async function submitAddImageLink(event) {
+            event.preventDefault();
+            event.target.disabled = true;
+            const link = document.getElementById('imageLink').value;
+            const name = document.getElementById('imageName').value;
+
+            const response = await fetch('/files/create-image-from-link', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add any additional headers if needed (like Authorization)
+                },
+                body: JSON.stringify({
+                    link,
+                    name,
+                    parentId: currentDirectoryID.at(-1) ?? '',
+                }),
+            });
+
+            if (response.ok) {
+                alert('Image added successfully');
+                document.getElementById('addImageLinkDialog').close();
+
+                getFiles(currentDirectoryID.at(-1), 1, 30);
+            } else {
+                alert('Error adding image');
+                console.error((await response.json()).error);
+
+            }
+            event.target.disabled = false;
+        }
+        function highLightThisCard(event) {
+            if (activeElement !== null) {
+                activeElement.setAttribute('aria-active', '0');
+            }
+            activeElement = event.currentTarget;
+            activeElement.setAttribute('aria-active', '1');
+        }
+
+        function createFileCard(i) {
+            let imgSrc = "https://icons.iconarchive.com/icons/graphicloads/polygon/48/cross-3-icon.png";
+            if (arrayOfFile[i].isDeleted === false) {
+                imgSrc = arrayOfFile[i].type === 'image' ?
+                    "https://icons.iconarchive.com/icons/gakuseisean/aire/48/Images-icon.png" // image
+                    : "https://cdn-icons-png.flaticon.com/512/10771/10771418.png"; // folder
+
+            }
+            const lineThrough = arrayOfFile[i].isDeleted ? 'class="text-decoration-line-through"' : '';
+            folderList.innerHTML +=
+                `
+                   <div id="${arrayOfFile[i]._id}" class="folder-card text-center my-4 p-4 mx-4 align-self-stretch" aria-active="0" style="width: 200px;" onclick="highLightThisCard(event)" ondblclick="openFile(${i})">
+                        <img loading class="img-thumbnail" alt="Folder Icon" style="width: 50px; aspect-ratio: 1/1;"
+                            src="${imgSrc}">
+                        <p ${lineThrough} style="margin: 0; max-width: 100%; text-wrap: balance;">
+                            ${arrayOfFile[i].name}
+                        </p>
+                    </div>
+                    `
+        }
+        function openFile(i) {
+            if (arrayOfFile[i].type === 'image') {
+                const url = `/files/image?id=${arrayOfFile[i]._id}`;
+                window.open(url, '_blank');
+                return;
+            }
+
+            // Append breadcrumb
+            breadCrumb.innerHTML += `<a style="hover:width: background-color:pink;" onclick="redirectBreadCrumb(event)" id="${arrayOfFile[i]._id}" href="#"> /  ${arrayOfFile[i].name}</a>`;
+
+            // Get files for the current file
+            getFiles(arrayOfFile[i]._id);
+        }
+
+        function redirectBreadCrumb(event) {
+            const spanToDeleteFrom = document.getElementById(event.target.id);
+            if (!spanToDeleteFrom) {
+                return;
+            }
+            // Remove all following siblings and update currentDirectoryID
+            let nextSibling = spanToDeleteFrom.nextElementSibling;
+
+            while (nextSibling) {
+                nextSibling.remove(); // Remove the next sibling
+                currentDirectoryID.pop(); // Ensure this corresponds to your logic
+                nextSibling = spanToDeleteFrom.nextElementSibling; // Update to the next sibling
+            }
+
+            getFiles(currentDirectoryID.at(-1));
+
+        }
+
+        function getFiles(folderId, page = 1, limit = 30) {
+            if (folderId && currentDirectoryID.indexOf(folderId) === -1) {
+                currentDirectoryID.push(folderId);
+            }
+            const url = `/files?page=${page}&limit=${limit}` + (folderId ? `&parentId=${folderId}` : '');
+            folderList.innerHTML = "";
+            fetch(url).then(response => response.json()).then(data => {
+                arrayOfFile = data.docs;
+                for (let i = 0; i < arrayOfFile.length; ++i) {
+                    createFileCard(i);
+                }
+            })
+        }
+        async function deleteFile(event) {
+            if (activeElement === null) {
+                return;
+            }
+            event.target.disabled = true;
+            try {
+                const response = await fetch(`/files/delete?id=${activeElement.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add any additional headers if needed (like Authorization)
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alert('File deleted successfully:' + JSON.stringify(data));
+                } else {
+                    const errorData = await response.json();
+                    console.error('Error deleting file:', errorData);
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+            }
+            getFiles(currentDirectoryID.at(-1));
+            activeElement = null;
+            event.target.disabled = false;
+        }
+
+        async function restoreFile(event) {
+            if (activeElement === null) {
+                return;
+            }
+            event.target.disabled = true;
+            try {
+                const response = await fetch(`/files/restore?id=${activeElement.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add any additional headers if needed (like Authorization)
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alert('File restored successfully:' + JSON.stringify(data));
+                } else {
+                    const errorData = await response.json();
+                    console.error('Error restore file:', errorData);
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+            }
+            getFiles(currentDirectoryID.at(-1));
+            activeElement = null;
+            event.target.disabled = false;
+        }
+
+        function searchByName(event) {
+            event.target.disabled = true;
+            const searchWord = searchInput.value.trim();
+            if (!searchWord) {
+                getFiles(currentDirectoryID.at(-1))
+                event.target.disabled = false;
+                return;
+
+            }
+            fetch(`/files/find?name=${searchWord}&parentId=${currentDirectoryID.at(-1)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    arrayOfFile = data.docs;
+                    folderList.innerHTML = "";
+                    for (let i = 0; i < arrayOfFile.length; ++i) {
+                        createFileCard(i);
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                })
+                .finally(() => {
+                    event.target.disabled = false; // Re-enable the button whether success or failure
+                });
+        }
+
+
+    </script>
+
+    <script data-section="main">
+
+        getFiles()
+    </script>
+</body>
+
+</html>

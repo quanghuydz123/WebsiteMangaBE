@@ -11,7 +11,7 @@ import commentRoute from './commentRoute';
 import ratingRoute from './ratingRoute';
 import notificationRoute from './notificationRoute';
 import helloRouter from './helloRoute';
-
+import imageRouter from './fileRoute';
 const routes = (app: Express) => {
     app.use('/hello', helloRouter);
     app.use('/users', userRouter);
@@ -25,7 +25,7 @@ const routes = (app: Express) => {
     app.use('/ratings', ratingRoute);
     app.use('/comments', commentRoute);
     app.use('/notifications', notificationRoute);
-    
+    app.use('/files',imageRouter);
 };
 
 export default routes;
