@@ -14,9 +14,6 @@ ratingRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) =>
 });
 /**
  * @swagger
- * tags:
- *   name: ratings
- *   description: The Rating  API
  * /ratings/get-all:
  *   get:
  *     summary: Lists all the ratings

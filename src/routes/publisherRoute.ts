@@ -15,9 +15,6 @@ publisherRoute.get('/get-all', (req: Request, res: Response, next: NextFunction)
 
 /**
  * @swagger
- * tags:
- *   name: publishers
- *   description: The Publisher  API
  * /publishers/get-all:
  *   get:
  *     summary: Lists all the publishers

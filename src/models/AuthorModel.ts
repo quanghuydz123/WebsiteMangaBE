@@ -1,5 +1,31 @@
 import mongoose, { Schema, Document, PaginateModel } from 'mongoose';
 import mongoosePaginate   from 'mongoose-paginate-v2';
+
+
+export interface Author extends Document {
+    _id: mongoose.Types.ObjectId;
+    name: string;
+    isDeleted: boolean;
+    createAt: Date;
+    updatedAt: Date;
+}
+
+
+
+const AuthorSchema: Schema = new Schema(
+    {
+        name: { type: String, required: true },
+        isDeleted: { type: Boolean, default: false },
+    },
+    {
+        timestamps: true,
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
+    }
+);
+
+
 /**
  * @swagger
  * components:
@@ -26,27 +52,6 @@ import mongoosePaginate   from 'mongoose-paginate-v2';
  *           format: date-time
  *           description: The date when the author was last updated
  */
-
-export interface Author extends Document {
-    _id: mongoose.Types.ObjectId;
-    name: string;
-    isDeleted: boolean;
-    createAt: Date;
-    updatedAt: Date;
-}
-
-const AuthorSchema: Schema = new Schema(
-    {
-        name: { type: String, required: true },
-        isDeleted: { type: Boolean, default: false },
-    },
-    {
-        timestamps: true,
-        toJSON: { virtuals: true, versionKey: false }, // Remove __v
-        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
-        id: false // Disable the virtual id field
-    }
-);
 
 AuthorSchema.plugin(mongoosePaginate);
 const AuthorModel = mongoose.model<Author,PaginateModel<Author>>('authors', AuthorSchema);

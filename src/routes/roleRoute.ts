@@ -13,9 +13,6 @@ roleRouter.get('/get-all', (req: Request, res: Response, next: NextFunction) => 
 });
 /**
  * @swagger
- * tags:
- *   name: Roles
- *   description: The Role  API
  * /roles/get-all:
  *   get:
  *     summary: Lists all the Roles

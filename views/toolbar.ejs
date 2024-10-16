@@ -1,0 +1,24 @@
+<div class="btn-toolbar justify-content-between  bg-info p-2" role="toolbar" aria-label="Toolbar with button groups">
+
+    <span>
+        <button id="openAddFolderDialog" class="btn btn-primary">thêm thư mục</button>
+        <button id="openAddImageDialog" class="btn btn-primary">thêm ảnh</button>
+        <button id="openAddImageLinkDialog" class="btn btn-primary">thêm ảnh từ Link</button>
+        <button id="deleteFileBtn" class="btn btn-danger" onclick="deleteFile(event)">Xóa</button>
+        <button id="deleteFileBtn" class="btn btn-success" onclick="restoreFile(event)">Khôi phục</button>
+        <button id="editFileBtn" class="btn btn-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 1em; height: 1em;">
+                <path
+                    d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+            </svg>
+            Sửa</button>
+    </span>
+
+    <div class="input-group" style="width: 300px;">
+        <input id="search-input" type="text" class="form-control" placeholder="tên tệp" aria-label="tên tệp nơi hiện tại"
+            aria-describedby="basic-addon2">
+        <button type="button" class="input-group-text btn btn-primary" id="basic-addon2" onclick="searchByName(event)">
+            Tìm kiếm</button>
+
+    </div>
+</div>

@@ -13,9 +13,6 @@ notificationRoute.get('/get-all', (req: Request, res: Response, next: NextFuncti
 });
 /**
  * @swagger
- * tags:
- *   name: notifications
- *   description: The Notification  API
  * /notifications/get-all:
  *   get:
  *     summary: Lists all the notifications

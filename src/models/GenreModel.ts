@@ -1,5 +1,29 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+
+
+export interface Genre extends Document {
+    _id: mongoose.Types.ObjectId;
+    name: string;
+    slug: string;
+    isDeleted: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+const GenreSchema: Schema = new mongoose.Schema(
+    {
+        name: { type: String, required: true, unique: true },
+        slug: { type: String, required: true, unique: true },
+        isDeleted: { type: Boolean, default: false }
+    },
+    {
+        timestamps: true,
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field
+    }
+);
 /**
  * @swagger
  * components:
@@ -29,29 +53,5 @@ import mongoose, { Schema, Document } from 'mongoose';
  *           format: date-time
  *           description: The date when the genre was last updated
  */
-
-export interface Genre extends Document {
-    _id: mongoose.Types.ObjectId;
-    name: string;
-    slug: string;
-    isDeleted: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-const GenreSchema: Schema = new mongoose.Schema(
-    {
-        name: { type: String, required: true, unique: true },
-        slug: { type: String, required: true, unique: true },
-        isDeleted: { type: Boolean, default: false }
-    },
-    {
-        timestamps: true,
-        toJSON: { virtuals: true, versionKey: false }, // Remove __v
-        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
-        id: false // Disable the virtual id field
-    }
-);
-
 const GenreModel = mongoose.model<Genre>('genres', GenreSchema);
 export default GenreModel;
