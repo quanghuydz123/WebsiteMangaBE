@@ -30,7 +30,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        ratings
+        data:ratings
     });
 });
 
@@ -66,7 +66,7 @@ const toggleRating = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             status: 200,
             message: "Thành công",
-            updateRating,
+            data:updateRating,
 
         });
     }else{
@@ -91,7 +91,7 @@ const toggleRating = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             status: 200,
             message: "Thành công",
-            rating:createRating
+            data:createRating
         });
     }
 });

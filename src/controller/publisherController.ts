@@ -28,7 +28,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        publishers
+        data:publishers
     });
 });
 
@@ -43,7 +43,7 @@ const createPublisher = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             status: 200,
             message: "Thành công",
-            publisher:publisherNew
+            data:publisherNew
         });
     
     }

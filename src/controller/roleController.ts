@@ -24,7 +24,7 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        roleNews
+        data:roleNews
     });
 });
 
@@ -52,7 +52,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        role
+        data:role
     });
 });
 export default {

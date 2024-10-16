@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
+import MangaModel from '../models/MangaModel';
 import FollowingModel from '../models/FollowingModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
@@ -99,9 +100,16 @@ const createFollowing = async (req: Request, res: Response) => {
 
     try {
         const newFollowing = await following.save();
-
+        if(newFollowing){
+            await MangaModel.findByIdAndUpdate(newFollowing.manga,{$inc:{followersCount:1}},{new:true})
+        }else{
+            return res.status(404).json({
+                success: false,
+                message: 'Manga not found.',
+            });
+        }
         const responseData = isReturnNewData ? newFollowing : null;
-
+        console.log("newFollowing",newFollowing)
         res.status(201).json({
             success: true,
             message: "Following created successfully.",
@@ -135,11 +143,18 @@ const updateFollowing = async (req: Request, res: Response) => {
 };
 
 const deleteFollowing = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { id } = req.query;
 
     try {
         const deletedFollowing = await FollowingModel.findByIdAndDelete(id);
-
+        if(deletedFollowing){
+            await MangaModel.findByIdAndUpdate(deletedFollowing.manga,{$inc:{followersCount:-1}},{new:true})
+        }else{
+            return res.status(404).json({
+                success: false,
+                message: 'Manga not found.',
+            });
+        }
         if (!deletedFollowing) {
             return res.status(404).json({
                 success: false,

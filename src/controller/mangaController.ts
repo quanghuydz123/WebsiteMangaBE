@@ -74,7 +74,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        manga,
+        data:manga,
     });
 });
 
@@ -89,7 +89,7 @@ const getMangaById = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             status: 200,
             message: "Thành công",
-            manga
+            data:manga
         });
     }else{
         res.status(402)
@@ -110,7 +110,7 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        manga:updateManga
+        data:updateManga
     });
     
 });
@@ -121,7 +121,7 @@ const createManga = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        manga
+        data:manga
     });
 });
 
@@ -129,16 +129,13 @@ const increaseView = asyncHandler(async (req: Request, res: Response) => {
     const {_id} = req.body
     let manga = await MangaModel.findById(_id)
     if(manga){
-        const view = manga.views + 1
-        if(view){
-            const mangaUpdate = await MangaModel.findByIdAndUpdate(_id,{views:view})
-            if(mangaUpdate){
-                res.status(200).json({
-                    status: 200,
-                    message: "Thành công",
-                    manga:mangaUpdate
-                });
-            }
+        const mangaUpdate = await MangaModel.findByIdAndUpdate(_id,{$inc:{views:1}},{new:true})
+        if(mangaUpdate){
+            res.status(200).json({
+                status: 200,
+                message: "Thành công",
+                data:mangaUpdate
+            });
         }
     }else{
         res.status(402)
