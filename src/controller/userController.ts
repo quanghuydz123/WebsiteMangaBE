@@ -21,7 +21,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        users
+        data:users
     });
 });
 
@@ -44,7 +44,7 @@ const createManyUser = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        userNews
+        data:userNews
     });
 });
 
@@ -60,7 +60,7 @@ const getUserById = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             status: 200,
             message: "Thành công",
-            user
+            data:user
         });
     }else{
         res.status(402)
@@ -86,7 +86,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         message:"Đăng nhập thành công",
         status:200,
-        user:{
+        data:{
             existingUser,
         },
         accesstoken: await getJsonWebToken(existingUser.email,existingUser.id,existingUser.role),    
@@ -118,7 +118,7 @@ const register = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         message: "Đăng ký thành công",
         status:200,
-        user:{
+        data:{
             newUser
         }
     })
@@ -154,7 +154,7 @@ const loginGoogle = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             message:"Đăng nhập thành công",
             status:200,
-            user:{
+            data:{
                 existingUser,
             },
             accesstoken: await getJsonWebToken(existingUser.email,existingUser.id,existingUser.role),    
@@ -172,7 +172,7 @@ const loginGoogle = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             message:"Đăng nhập thành công",
             status:200,
-            user:{
+            data:{
                 newUser,
             },
             accesstoken: await getJsonWebToken(newUser.email,newUser.id,newUser.role),    
@@ -183,7 +183,7 @@ const loginGoogle = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         message:"Đăng nhập thành công",
         status:200,
-        user:{
+        data:{
             existingUser
     }
     })

@@ -142,7 +142,7 @@ followingRoute.get('/get-advanced-page', followingController.getAdvancedPaginate
  *       500:
  *         description: Internal server error
  */
-followingRoute.post('create', followingController.createFollowing);
+followingRoute.post('/create', followingController.createFollowing);
 /**
  * @swagger
  * /followings/update/{id}:

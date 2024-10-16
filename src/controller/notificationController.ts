@@ -29,7 +29,7 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        notifications
+        data:notifications
     });
 });
 
@@ -44,7 +44,7 @@ const createNotification = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({
             status: 200,
             message: "Thành công",
-            notifications
+            data:notifications
         });
     } else{
         res.status(402)
