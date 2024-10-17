@@ -303,5 +303,109 @@ followingRoute.delete('/delete', followingController.deleteFollowing);
  *       500:
  *         description: Server error
  */
-followingRoute.get('/get-library',followingController.getUserLibrary);
+followingRoute.get('/get-library', followingController.getUserLibrary);
+
+/**
+ * @swagger
+ * /followings/unfollow:
+ *   delete:
+ *     summary: Delete a following between a user and a manga.
+ *     description: Removes a following relationship between a user and a manga, and decreases the followers count for the manga.
+ *     tags: [Following]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user:
+ *                 type: string
+ *                 description: The ID of the user who is unfollowing the manga.
+ *                 example: "64cfc9e3e6f5632a14b1d567"
+ *               manga:
+ *                 type: string
+ *                 description: The ID of the manga being unfollowed.
+ *                 example: "64cfc9e3e6f5632a14b1d123"
+ *               isReturnDeletedData:
+ *                 type: boolean
+ *                 description: Whether to return the deleted following data.
+ *                 example: true
+ *     responses:
+ *       200:
+ *         description: Following deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Following deleted successfully."
+ *                 data:
+ *                   type: object
+ *                   nullable: true
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "64cfc9e3e6f5632a14b1d567"
+ *                     user:
+ *                       type: string
+ *                       example: "64cfc9e3e6f5632a14b1d567"
+ *                     manga:
+ *                       type: string
+ *                       example: "64cfc9e3e6f5632a14b1d123"
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2024-10-17T12:34:56.789Z"
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2024-10-17T12:34:56.789Z"
+ *       400:
+ *         description: Bad request, missing required fields.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "User and manga are required."
+ *       404:
+ *         description: Following not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Following does not exist."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Server error: detailed error message."
+ */
+
+followingRoute.delete('/unfollow', followingController.unFollowing);
 export default followingRoute;

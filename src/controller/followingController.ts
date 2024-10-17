@@ -95,21 +95,24 @@ const createFollowing = async (req: Request, res: Response) => {
     if (!user || !manga) {
         return res.status(400).json({ success: false, message: "User and manga are required." });
     }
-
+    const existFollow = await FollowingModel.findOne({ user: user, manga: manga });
+    if (existFollow) {
+        return res.status(400).json({ success: false, message: "User and manga are already exsisted." });
+    }
     const following = new FollowingModel({ user, manga });
 
     try {
         const newFollowing = await following.save();
-        if(newFollowing){
-            await MangaModel.findByIdAndUpdate(newFollowing.manga,{$inc:{followersCount:1}},{new:true})
-        }else{
+        if (newFollowing) {
+            await MangaModel.findByIdAndUpdate(newFollowing.manga, { $inc: { followersCount: 1 } }, { new: true })
+        } else {
             return res.status(404).json({
                 success: false,
                 message: 'Manga not found.',
             });
         }
         const responseData = isReturnNewData ? newFollowing : null;
-        console.log("newFollowing",newFollowing)
+        console.log("newFollowing", newFollowing)
         res.status(201).json({
             success: true,
             message: "Following created successfully.",
@@ -122,7 +125,7 @@ const createFollowing = async (req: Request, res: Response) => {
 
 // Update a following
 const updateFollowing = async (req: Request, res: Response) => {
-    
+
     const { id, user, manga, isReturnNewData } = req.body;
 
     try {
@@ -147,9 +150,9 @@ const deleteFollowing = async (req: Request, res: Response) => {
 
     try {
         const deletedFollowing = await FollowingModel.findByIdAndDelete(id);
-        if(deletedFollowing){
-            await MangaModel.findByIdAndUpdate(deletedFollowing.manga,{$inc:{followersCount:-1}},{new:true})
-        }else{
+        if (deletedFollowing) {
+            await MangaModel.findByIdAndUpdate(deletedFollowing.manga, { $inc: { followersCount: -1 } }, { new: true })
+        } else {
             return res.status(404).json({
                 success: false,
                 message: 'Manga not found.',
@@ -238,6 +241,41 @@ const getUserLibrary = async (req: Request, res: Response) => {
     }
 };
 
+const unFollowing = async (req: Request, res: Response) => {
+    const { user, manga, isReturnDeletedData } = req.body;
+
+    if (!user || !manga) {
+        return res.status(400).json({ success: false, message: "User and manga are required." });
+    }
+
+    const existFollow = await FollowingModel.findOne({ user: user, manga: manga });
+    if (!existFollow) {
+        return res.status(404).json({ success: false, message: "Following does not exist." });
+    }
+
+    try {
+        const deletedFollowing = await FollowingModel.findByIdAndDelete(existFollow._id);
+        if (deletedFollowing) {
+            await MangaModel.findByIdAndUpdate(deletedFollowing.manga, { $inc: { followersCount: -1 } }, { new: true });
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: 'Following not found.',
+            });
+        }
+
+        const responseData = isReturnDeletedData ? deletedFollowing : null;
+        res.status(200).json({
+            success: true,
+            message: "Following deleted successfully.",
+            data: responseData
+        });
+    } catch (error: any) {
+        res.status(500).json({ success: false, message: "Server error: " + error.message });
+    }
+};
+
+
 const deleteFollowingsByMangaId = async (req: Request, res: Response) => {
     const { idManga } = req.params; // Assuming idManga is passed as a route parameter
 
@@ -257,6 +295,7 @@ const deleteFollowingsByMangaId = async (req: Request, res: Response) => {
     }
 };
 
+
 export default {
     createManyFollowing,
     getPaginatedFollowing,
@@ -265,5 +304,6 @@ export default {
     updateFollowing,
     deleteFollowing,
     getUserLibrary,
-    deleteFollowingsByMangaId
+    deleteFollowingsByMangaId,
+    unFollowing
 };
