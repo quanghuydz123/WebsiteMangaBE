@@ -25,7 +25,7 @@ const createManyRating = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getAll = asyncHandler(async (req: Request, res: Response) => {
-    const ratings = await RatingModel.find().populate('user manga')
+    const ratings = await RatingModel.find()
 
     res.status(200).json({
         status: 200,

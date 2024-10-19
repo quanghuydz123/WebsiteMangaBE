@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
 import UserModel, { User } from '../models/UserModel';
+import ChapterModel from '../models/ChapterModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken'
@@ -17,7 +18,15 @@ const getJsonWebToken = async (email:string,id:string,role:any) => {
 }
 
 const getAll = asyncHandler(async (req: Request, res: Response) => {
-    const users = await UserModel.find().populate('role reading_history');
+    const users = await UserModel.find().populate('role')
+    .populate({
+        path:'reading_history',
+        select:'_id title manga',
+        populate:[
+            { path: 'manga', select:'_id name imageUrl'},
+        ]
+    });
+
     res.status(200).json({
         status: 200,
         message: "Thành công",
@@ -52,7 +61,14 @@ const createManyUser = asyncHandler(async (req: Request, res: Response) => {
 const getUserById = asyncHandler(async (req: Request, res: Response) => {
     const {id} = req.query
     if(id){
-        const user = await UserModel.findById(id).populate('role reading_history')
+        const user = await UserModel.findById(id).populate('role')
+        .populate({
+            path:'reading_history',
+            select:'_id title manga',
+            populate:[
+                { path: 'manga', select:'_id name imageUrl'},
+            ]
+        });
         if(!user){   
             res.status(402)
             throw new Error('user không tồn tại')
@@ -189,6 +205,39 @@ const loginGoogle = asyncHandler(async (req: Request, res: Response) => {
     })
 });
 
+
+const addReadingHistory = asyncHandler(async (req: Request, res: Response) => {
+    const {idUser,idChapter} = req.body
+    const user = await UserModel.findById(idUser)
+    const chapter = await ChapterModel.findById(idChapter)
+    if(user && chapter){
+        const readingHistoryNew = [...user.reading_history]
+        const index = readingHistoryNew.findIndex((item)=> item.toString() === idChapter)
+        if(index !== -1){
+            readingHistoryNew.splice(index,1)
+            readingHistoryNew.unshift(idChapter)
+            const updateUser = await UserModel.findByIdAndUpdate(idUser,{reading_history:readingHistoryNew},{new:true})
+            res.status(200).json({
+                message: "Thành công",
+                status:200,
+                data:updateUser
+            })
+        }else{
+            readingHistoryNew.unshift(idChapter)
+            const updateUser = await UserModel.findByIdAndUpdate(idUser,{reading_history:readingHistoryNew},{new:true})
+            res.status(200).json({
+                message: "Thành công",
+                status:200,
+                data:updateUser
+            })
+        }
+    }else{
+        res.status(402)
+        throw new Error('user hoặc chapter không tồn tại')
+    }
+    
+});
+
 export default {
     getAll,
     createManyUser,
@@ -196,5 +245,6 @@ export default {
     login,
     register,
     changePassword,
-    loginGoogle
+    loginGoogle,
+    addReadingHistory
 };
