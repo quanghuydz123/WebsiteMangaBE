@@ -254,6 +254,45 @@ userRouter.put('/change-password', (req: Request, res: Response,next :NextFuncti
  * 
  * */
 
+//reading_history
+userRouter.post('/add-reading-history', (req: Request, res: Response,next :NextFunction) => {
+    userController.addReadingHistory(req, res,next);
+});
+/**
+ * @swagger
+ * /users/add-reading-history:
+ *   post:
+ *     summary: add reading history user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idUser:
+ *                 type: string
+ *                 example: "idUser"
+ *               idChapter:
+ *                 type: string
+ *                 example: "idChapter"
+ *     responses:
+ *       200:   
+ *         description: The list of the users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                  
+ * 
+ * */
 
 userRouter.post('/create-many-user', (req: Request, res: Response,next :NextFunction) => {
     userController.createManyUser(req, res,next);
