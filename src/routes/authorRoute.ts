@@ -63,108 +63,156 @@ authorRoute.post('/create-many-author', (req: Request, res: Response, next: Next
  * @swagger
  * /authors/get-advanced-page:
  *   get:
- *     summary: Retrieve a paginated list of authors using advance filter
  *     tags: [Author]
+ *     summary: Retrieve a paginated list of authors with advanced filtering options
+ *     description: Returns a paginated list of authors with specific fields based on filtering.
  *     parameters:
  *       - in: query
  *         name: page
  *         required: false
- *         description: The page number to retrieve (default is 1)
+ *         description: The page number to retrieve (default is 1).
  *         schema:
  *           type: integer
- *           default: 1
+ *           example: 1
  *       - in: query
  *         name: limit
  *         required: false
- *         description: The number of authors to retrieve per page (default is 10)
+ *         description: The number of authors per page (default is 10).
  *         schema:
  *           type: integer
- *           default: 10
+ *           example: 10
  *       - in: query
  *         name: filter
  *         required: false
- *         description: Comma-separated list of attributes to include in the response.
+ *         description: Comma-separated fields to include in the response.
  *         schema:
  *           type: string
- *           default: "_id,name,createAt"
+ *           example: "name,createdAt,updatedAt"
  *     responses:
  *       200:
- *         description: A paginated list of authors
+ *         description: A successful response containing the filtered and paginated list of authors.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 page:
- *                   type: integer
- *                   description: The current page number
- *                 totalAuthors:
- *                   type: integer
- *                   description: The total number of author entries
- *                 totalPages:
- *                   type: integer
- *                   description: The total number of pages
- *                 authors:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Author'
+ *                 message:
+ *                   type: string
+ *                   example: Authors retrieved successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     page:
+ *                       type: integer
+ *                       example: 1
+ *                     totalAuthors:
+ *                       type: integer
+ *                       example: 50
+ *                     totalPages:
+ *                       type: integer
+ *                       example: 5
+ *                     authors:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: string
+ *                             example: "60b8d95f1f10f14d4f0c9ae2"
+ *                           name:
+ *                             type: string
+ *                             example: "John Doe"
+ *                           createdAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-10-21T00:00:00Z"
+ *                           updatedAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-10-21T00:00:00Z"
  *       500:
- *         description: Internal server error
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error retrieving authors
+ *                 data:
+ *                   type: null
  */
 authorRoute.get('/get-advanced-page', authorController.getAdvancedPaginatedAuthor);
 
 /**
  * @swagger
- * /authors/get-page:
+ * /authors:
  *   get:
- *     summary: Retrieve paginated list of authors
-*     tags: [Author]
+ *     tags: [Author]
+ *     summary: Retrieve a paginated list of authors
+ *     description: Returns a list of authors with pagination support.
  *     parameters:
  *       - in: query
  *         name: page
  *         required: false
- *         description: The page number to retrieve (default is 1)
+ *         description: The page number to retrieve (default is 1).
  *         schema:
  *           type: integer
- *           default: 1
+ *           example: 1
  *       - in: query
  *         name: limit
  *         required: false
- *         description: The number of authors to retrieve per page (default is 10)
+ *         description: The number of authors per page (default is 10).
  *         schema:
  *           type: integer
- *           default: 10
+ *           example: 10
  *     responses:
  *       200:
- *         description: A paginated list of authors
+ *         description: A successful response containing the paginated list of authors.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 page:
- *                   type: integer
- *                   description: The current page number
- *                 totalAuthors:
- *                   type: integer
- *                   description: The total number of author entries
- *                 totalPages:
- *                   type: integer
- *                   description: The total number of pages
- *                 authors:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Author'
- *               example:
- *                 page: 1
- *                 totalAuthors: 100
- *                 totalPages: 10
- *                 authors:
- *                   - _id: "66f1812835029f5058744e97"
- *                     name: "Author Name"
- *                     isDeleted: false
- *                     createAt: "2023-09-25T16:08:13.011Z"
- *                     updatedAt: "2023-09-25T16:08:13.011Z"
+ *                 message:
+ *                   type: string
+ *                   example: Authors retrieved successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     page:
+ *                       type: integer
+ *                       example: 1
+ *                     totalAuthor:
+ *                       type: integer
+ *                       example: 50
+ *                     totalPages:
+ *                       type: integer
+ *                       example: 5
+ *                     authors:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: string
+ *                             example: "60b8d95f1f10f14d4f0c9ae2"
+ *                           name:
+ *                             type: string
+ *                             example: "John Doe"
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error retrieving authors
+ *                 data:
+ *                   type: null
  */
 authorRoute.get('/get-page', authorController.getPaginatedAuthor);
 
@@ -172,8 +220,9 @@ authorRoute.get('/get-page', authorController.getPaginatedAuthor);
  * @swagger
  * /authors/create:
  *   post:
- *     summary: Create a new author
  *     tags: [Author]
+ *     summary: Create a new author
+ *     description: Creates a new author and optionally returns the created author data.
  *     requestBody:
  *       required: true
  *       content:
@@ -184,53 +233,55 @@ authorRoute.get('/get-page', authorController.getPaginatedAuthor);
  *               name:
  *                 type: string
  *                 example: "John Doe"
+ *                 description: The name of the author (required).
  *               isReturnNewData:
  *                 type: boolean
  *                 example: true
+ *                 description: Flag indicating whether to return the created author data.
  *     responses:
  *       201:
- *         description: Author created successfully
+ *         description: Author created successfully.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Author created successfully."
+ *                   example: Author created successfully.
  *                 data:
- *                   oneOf:
- *                     - $ref: '#/components/schemas/Author'
- *                     - type: "null"
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       example: "60b8d95f1f10f14d4f0c9ae2"
+ *                     name:
+ *                       type: string
+ *                       example: "John Doe"
  *       400:
- *         description: Invalid input
+ *         description: Bad Request (missing required field).
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
  *                 message:
  *                   type: string
- *                   example: "Name is required."
+ *                   example: Name is required.
+ *                 data:
+ *                   type: null
  *       500:
- *         description: Server error
+ *         description: Internal Server Error
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
  *                 message:
  *                   type: string
- *                   example: "Server error."
+ *                   example: Server error: <error message>
+ *                 data:
+ *                   type: null
  */
 authorRoute.post('/create', authorController.createAuthor);
 
@@ -314,9 +365,9 @@ authorRoute.put('/update', authorController.updateAuthor);
  * @swagger
  * /authors/complex-get:
  *   post:
- *     summary: Retrieve a paginated list of authors with filters and pagination options (Lấy danh sách tác giả phân trang với bộ lọc và tùy chọn phân trang)
- *     tags:
- *       - Author
+ *     tags: [Author]
+ *     summary: Retrieve authors based on complex queries with pagination
+ *     description: Returns a paginated list of authors based on various filter criteria and options.
  *     requestBody:
  *       required: true
  *       content:
@@ -326,86 +377,101 @@ authorRoute.put('/update', authorController.updateAuthor);
  *             properties:
  *               page:
  *                 type: integer
- *                 description: The page number to retrieve. (Số trang cần lấy.)
  *                 example: 1
+ *                 description: The page number to retrieve (default is 1).
  *               limit:
  *                 type: integer
- *                 description: The number of results per page. (Số lượng kết quả trên mỗi trang.)
  *                 example: 10
+ *                 description: The number of authors per page (default is 10).
  *               filter:
  *                 type: object
  *                 properties:
  *                   name:
  *                     type: string
- *                     description: Filter authors by name (case-insensitive). (Lọc tác giả theo tên, không phân biệt chữ hoa chữ thường.)
- *                     example: John
+ *                     example: "John"
+ *                     description: Filter authors by name (supports regex).
  *                   isDeleted:
  *                     type: boolean
- *                     description: Filter authors by deletion status. (Lọc tác giả theo trạng thái đã bị xóa.)
  *                     example: false
+ *                     description: Filter by deletion status.
  *               options:
  *                 type: object
  *                 properties:
- *                   sort:
- *                     type: object
- *                     description: Sort order for the results. (Thứ tự sắp xếp cho kết quả.)
- *                     example: { "createAt": -1 }
  *                   select:
  *                     type: array
  *                     items:
  *                       type: string
- *                     description: Fields to include in the result set. (Các trường cần bao gồm trong tập kết quả.)
- *                     example: ["name", "createAt", "updatedAt"]
+ *                     example: ["name", "createdAt", "updatedAt"]
+ *                     description: Fields to include in the response.
+ *                   sort:
+ *                     type: object
+ *                     example: {"createdAt": -1}
+ *                     description: Sort criteria.
  *                   lean:
  *                     type: boolean
- *                     description: Return plain JavaScript objects instead of Mongoose documents. (Trả về các đối tượng JavaScript thuần thay vì các tài liệu Mongoose.)
  *                     example: true
+ *                     description: Return plain JavaScript objects.
  *                   leanWithId:
  *                     type: boolean
- *                     description: Include `_id` field in plain JS objects. (Bao gồm trường `_id` trong các đối tượng JavaScript thuần.)
- *                     example: false
+ *                     example: true
+ *                     description: Include `_id` as string if lean.
  *     responses:
  *       200:
- *         description: A paginated list of authors based on the provided filters and options. (Danh sách tác giả phân trang dựa trên các bộ lọc và tùy chọn đã cung cấp.)
+ *         description: A successful response containing the filtered and paginated list of authors.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 docs:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Author'
- *                   description: Array of author documents. (Mảng các tài liệu tác giả.)
- *                 totalDocs:
- *                   type: integer
- *                   description: The total number of authors. (Tổng số tác giả.)
- *                 limit:
- *                   type: integer
- *                   description: The number of authors per page. (Số tác giả trên mỗi trang.)
- *                 page:
- *                   type: integer
- *                   description: The current page number. (Số trang hiện tại.)
- *                 totalPages:
- *                   type: integer
- *                   description: The total number of pages. (Tổng số trang.)
- *                 hasNextPage:
- *                   type: boolean
- *                   description: If there is a next page. (Có trang tiếp theo hay không.)
- *                 hasPrevPage:
- *                   type: boolean
- *                   description: If there is a previous page. (Có trang trước hay không.)
- *                 nextPage:
- *                   type: integer
- *                   description: The next page number (if it exists). (Số trang tiếp theo nếu có.)
- *                   example: 2
- *                 prevPage:
- *                   type: integer
- *                   description: The previous page number (if it exists). (Số trang trước nếu có.)
- *                   example: null
+ *                 message:
+ *                   type: string
+ *                   example: Authors retrieved successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     docs:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: string
+ *                             example: "60b8d95f1f10f14d4f0c9ae2"
+ *                           name:
+ *                             type: string
+ *                             example: "John Doe"
+ *                           createdAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-10-21T00:00:00Z"
+ *                           updatedAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-10-21T00:00:00Z"
+ *                     totalDocs:
+ *                       type: integer
+ *                       example: 50
+ *                     limit:
+ *                       type: integer
+ *                       example: 10
+ *                     totalPages:
+ *                       type: integer
+ *                       example: 5
+ *                     page:
+ *                       type: integer
+ *                       example: 1
  *       500:
- *         description: Internal Server Error (Lỗi máy chủ nội bộ)
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error retrieving authors
+ *                 data:
+ *                   type: null
  */
-
 authorRoute.post('/complex-get',authorController.selfQueryAuthor);
 export default authorRoute;

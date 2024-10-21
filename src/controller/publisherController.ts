@@ -1,8 +1,9 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import PublisherModel from '../models/PublisherModel';
+import PublisherModel, { Publisher } from '../models/PublisherModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -23,31 +24,61 @@ const createManyPublisher = asyncHandler(async (req: Request, res: Response) => 
 });
 
 
-const getAll = asyncHandler(async (req: Request, res: Response) => {
-    const publishers = await PublisherModel.find()
-    res.status(200).json({
-        status: 200,
-        message: "Thành công",
-        data:publishers
-    });
-});
+const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<Publisher[] | null>>): Promise<void> => {
+    try {
+        const publishers = await PublisherModel.find();
 
-const createPublisher = asyncHandler(async (req: Request, res: Response) => {
-    const {name} = req.body
-    const publisher = await PublisherModel.findOne({name: { $regex: new RegExp(name, 'i') }})
-    if(publisher){
-        res.status(402)
-        throw new Error('Đã có tên nhà xuát bản này trong hệ thống')
-    }else{
-        const publisherNew = await PublisherModel.create({name})
+        // Check if any publishers are found
+        if (!publishers || publishers.length === 0) {
+            res.status(404).json({
+                message: "No publishers found",
+                data: null,
+            });
+            return; // Early return to indicate completion
+        }
+
         res.status(200).json({
-            status: 200,
             message: "Thành công",
-            data:publisherNew
+            data: publishers,
         });
-    
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({
+            message: "Internal server error",
+            data: null,
+        });
     }
 });
+
+const createPublisher = asyncHandler(async (req: Request, res: Response<GenericResponse<Publisher | null>>): Promise<void> => {
+    const { name } = req.body;
+
+    try {
+        const publisher = await PublisherModel.findOne({ name: { $regex: new RegExp(name, 'i') } });
+
+        if (publisher) {
+            res.status(409).json({  // 409 Conflict for existing resource
+                message: 'Đã có tên nhà xuất bản này trong hệ thống',
+                data: null,
+            });
+            return; // Early return to indicate completion
+        }
+
+        const publisherNew = await PublisherModel.create({ name });
+
+        res.status(201).json({  // 201 Created for new resource
+            message: "Thành công",
+            data: publisherNew,
+        });
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({
+            message: "Internal server error",
+            data: null,
+        });
+    }
+});
+
 export default {
     createManyPublisher,
     getAll,

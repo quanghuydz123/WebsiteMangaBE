@@ -1,8 +1,9 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import GenreModel from '../models/GenreModel';
+import GenreModel, { Genre } from '../models/GenreModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -31,14 +32,27 @@ const getPaginatedGenres = async (req: Request, res: Response) => {
         const totalGenres = await GenreModel.countDocuments();
         const genresList = await GenreModel.find().skip(skip).limit(limit);
 
-        res.status(200).json({
-            page,
-            totalGenres,
-            totalPages: Math.ceil(totalGenres / limit),
-            genres: genresList,
-        });
+        const response: GenericResponse<{
+            page: number;
+            totalGenres: number;
+            totalPages: number;
+            genres: Genre[] // Adjust the type based on your Genre model
+        }> = {
+            message: "Genres retrieved successfully",
+            data: {
+                page,
+                totalGenres,
+                totalPages: Math.ceil(totalGenres / limit),
+                genres: genresList,
+            },
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving genres', error });
+        res.status(500).json({
+            message: 'Error retrieving genres',
+            data: null,
+        });
     }
 };
 
@@ -61,14 +75,27 @@ const getAdvancedPaginatedGenres = async (req: Request, res: Response) => {
 
         const genresList = await GenreModel.find().select(projection).skip(skip).limit(limitNumber);
 
-        res.status(200).json({
-            page: pageNumber,
-            totalGenres,
-            totalPages: Math.ceil(totalGenres / limitNumber),
-            genres: genresList,
-        });
+        const response: GenericResponse<{
+            page: number;
+            totalGenres: number;
+            totalPages: number;
+            genres: Genre[]; // Adjust the type based on your Genre model
+        }> = {
+            message: "Genres retrieved successfully",
+            data: {
+                page: pageNumber,
+                totalGenres,
+                totalPages: Math.ceil(totalGenres / limitNumber),
+                genres: genresList,
+            },
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving genres', error });
+        res.status(500).json({
+            message: 'Error retrieving genres',
+            data: null,
+        });
     }
 };
 
@@ -76,7 +103,12 @@ const createGenre = async (req: Request, res: Response) => {
     const { name, slug, isReturnNewData } = req.body;
 
     if (!name || !slug) {
-        return res.status(400).json({ success: false, message: 'Name and slug are required.' });
+        // Create a consistent error response object
+        const errorResponse: GenericResponse<null> = {
+            message: 'Name and slug are required.',
+            data: null,
+        };
+        return res.status(400).json(errorResponse);
     }
 
     const genre = new GenreModel({ name, slug });
@@ -86,40 +118,56 @@ const createGenre = async (req: Request, res: Response) => {
 
         const responseData = isReturnNewData ? newGenre : null;
 
-        res.status(201).json({
-            success: true,
+        const response: GenericResponse<Genre | null> = {
             message: 'Genre created successfully.',
             data: responseData,
-        });
+        };
+
+        res.status(201).json(response);
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error: ', error: error });
+        // Create a consistent error response object
+        const errorResponse: GenericResponse<null> = {
+            message: 'Server error: ' + JSON.stringify(error), // Include the error message for more context
+            data: null,
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
 const updateGenre = async (req: Request, res: Response) => {
-    
     const { id, name, slug, isDeleted, isReturnNewData } = req.body;
 
     try {
-        const updatedGenre = await GenreModel.findByIdAndUpdate(
+        const updatedGenre: Genre | null = await GenreModel.findByIdAndUpdate(
             id,
             { name, slug, isDeleted },
             { new: true }
         );
 
         if (!updatedGenre) {
-            return res.status(404).json({ success: false, message: 'Genre not found.' });
+            const notFoundResponse: GenericResponse<null> = {
+                message: 'Genre not found.',
+                data: null,
+            };
+            return res.status(404).json(notFoundResponse);
         }
 
-        res.status(200).json({
-            success: true,
+        const response: GenericResponse<Genre | null> = {
             message: 'Genre updated successfully.',
             data: isReturnNewData ? updatedGenre : null,
-        });
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error: ', error: error });
+        const errorResponse: GenericResponse<null> = {
+            message: 'Server error: ' + JSON.stringify(error),
+            data: null,
+        };
+        res.status(500).json(errorResponse);
     }
 };
+
+
 export default {
     createManyGenre,
     getPaginatedGenres,

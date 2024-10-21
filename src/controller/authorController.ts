@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import AuthorModel, { Author } from '../models/AuthorModel';
 import mongoose from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -25,23 +26,37 @@ const createManyAuthor = asyncHandler(async (req: Request, res: Response, next: 
 
 const getPaginatedAuthor = async (req: Request, res: Response) => {
     const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
-    const limit: number = parseInt(req.query.limit as string) || 10; // Default to page 1
+    const limit: number = parseInt(req.query.limit as string) || 10; // Default to 10
     const skip: number = (page - 1) * limit; // Calculate how many items to skip
 
     try {
-        const totalAuthor = await AuthorModel.countDocuments(); // Get the total number of Author
+        const totalAuthor = await AuthorModel.countDocuments(); // Get the total number of authors
         const authorList = await AuthorModel.find()
             .skip(skip)
             .limit(limit); // Get the paginated results
 
-        res.status(200).json({
-            page,
-            totalAuthor,
-            totalPages: Math.ceil(totalAuthor / limit),
-            Author: authorList,
-        });
+        const response: GenericResponse<{
+            page: number;
+            totalAuthor: number;
+            totalPages: number;
+            authors: typeof authorList;
+        }> = {
+            message: 'Authors retrieved successfully',
+            data: {
+                page,
+                totalAuthor,
+                totalPages: Math.ceil(totalAuthor / limit),
+                authors: authorList,
+            }
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving Author', error });
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving authors',
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
@@ -68,10 +83,21 @@ const selfQueryAuthor = async (req: Request, res: Response) => {
         // Paginate the query with filters and options
         const result = await AuthorModel.paginate(queryFilter, paginationOptions);
 
+        // Use GenericResponse for success
+        const response: GenericResponse<typeof result> = {
+            message: 'Authors retrieved successfully',
+            data: result
+        };
+
         // Send the paginated results back to the client
-        return res.status(200).json(result);
+        return res.status(200).json(response);
     } catch (error) {
-        return res.status(500).json({ message: error });
+        // Use GenericResponse for error
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving authors',
+            data: null
+        };
+        return res.status(500).json(errorResponse);
     }
 };
 
@@ -101,14 +127,30 @@ const getAdvancedPaginatedAuthor = async (req: Request, res: Response) => {
             .skip(skip)
             .limit(limitNumber);
 
-        res.status(200).json({
-            page: pageNumber,
-            totalAuthors,
-            totalPages: Math.ceil(totalAuthors / limitNumber),
-            authors: authorList,
-        });
+        // Use GenericResponse for success
+        const response: GenericResponse<{
+            page: number;
+            totalAuthors: number;
+            totalPages: number;
+            authors: typeof authorList;
+        }> = {
+            message: 'Authors retrieved successfully',
+            data: {
+                page: pageNumber,
+                totalAuthors,
+                totalPages: Math.ceil(totalAuthors / limitNumber),
+                authors: authorList,
+            }
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving authors', error });
+        // Use GenericResponse for error
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving authors',
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
@@ -116,30 +158,38 @@ const createAuthor = async (req: Request, res: Response) => {
     const { name, isReturnNewData } = req.body;
 
     if (!name) {
-        return res.status(400).json({ success: false, message: "Name is required." });
+        const errorResponse: GenericResponse<null> = {
+            message: "Name is required.",
+            data: null
+        };
+        return res.status(400).json(errorResponse);
     }
 
     const author = new AuthorModel({ name });
 
     try {
-        const newAuthor: Author = await author.save();
+        const newAuthor = await author.save();
         console.log(newAuthor);
 
         // Set responseData based on isReturnNewData
-        const responseData = isReturnNewData ? author : null; // Return author if requested, otherwise null
+        const responseData = isReturnNewData ? newAuthor : null; // Return author if requested, otherwise null
 
-        res.status(201).json({
-            success: true,
+        const response: GenericResponse<typeof responseData> = {
             message: "Author created successfully.",
             data: responseData // data will be null if isReturnNewData is false
-        });
+        };
+
+        res.status(201).json(response);
     } catch (error: any) {
-        res.status(500).json({ success: false, message: "Server error." + error.message });
+        const errorResponse: GenericResponse<null> = {
+            message: "Server error: " + error.message,
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
 const updateAuthor = async (req: Request, res: Response) => {
-
     const { id, name, isDeleted, isReturnNewData } = req.body;
 
     try {
@@ -150,16 +200,27 @@ const updateAuthor = async (req: Request, res: Response) => {
         );
 
         if (!updatedAuthor) {
-            return res.status(404).json({ success: false, message: "Author not found." });
+            const errorResponse: GenericResponse<null> = {
+                message: "Author not found.",
+                data: null
+            };
+            return res.status(404).json(errorResponse);
         }
 
-        res.status(200).json({
-            success: true,
+        const responseData = isReturnNewData ? updatedAuthor : null;
+
+        const response: GenericResponse<typeof responseData> = {
             message: "Author updated successfully.",
-            data: isReturnNewData ? updatedAuthor : null
-        });
+            data: responseData // data will be null if isReturnNewData is false
+        };
+
+        res.status(200).json(response);
     } catch (error: any) {
-        res.status(500).json({ success: false, message: "Server error.", error: error.message });
+        const errorResponse: GenericResponse<null> = {
+            message: "Server error: " + error.message,
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
