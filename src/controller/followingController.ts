@@ -1,10 +1,11 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
 import MangaModel from '../models/MangaModel';
-import FollowingModel from '../models/FollowingModel';
+import FollowingModel, { Following } from '../models/FollowingModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { title } from 'process';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -47,18 +48,29 @@ const getPaginatedFollowing = async (req: Request, res: Response) => {
         const followingList = await FollowingModel.find().skip(skip).limit(limit); // Paginated results
 
         res.status(200).json({
-            page,
-            totalFollowings,
-            totalPages: Math.ceil(totalFollowings / limit),
-            followings: followingList,
+            message: 'Successfully retrieved followings',
+            data: {
+                page,
+                totalFollowings,
+                totalPages: Math.ceil(totalFollowings / limit),
+                followings: followingList,
+            },
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving followings', error: error });
+        res.status(500).json({
+            message: 'Error retrieving followings',
+            data: null // You can modify this according to your error handling preference
+        });
     }
 };
 
 // Get advanced paginated followings with filtering
-const getAdvancedPaginatedFollowing = async (req: Request, res: Response) => {
+const getAdvancedPaginatedFollowing = async (req: Request, res: Response<GenericResponse<{
+    page: number;
+    totalFollowings: number;
+    totalPages: number;
+    followings: any[]; // Adjust 'any' to the actual type if you have a defined model
+} | null>>) => {
     const { page, limit, filter } = req.query;
     const pageNumber: number = parseInt(page as string, 10) || 1;
     const limitNumber: number = parseInt(limit as string, 10) || 10;
@@ -67,114 +79,136 @@ const getAdvancedPaginatedFollowing = async (req: Request, res: Response) => {
     try {
         const totalFollowings = await FollowingModel.countDocuments();
 
-        const projection: any = {};
+        const projection: Record<string, number> = {};
         if (filter) {
             const filterArray = (filter as string).split(',');
             filterArray.forEach(attr => {
-                projection[attr] = 1;
+                projection[attr] = 1; // Include the attribute in the projection
             });
         }
 
         const followingList = await FollowingModel.find().select(projection).skip(skip).limit(limitNumber);
 
         res.status(200).json({
-            page: pageNumber,
-            totalFollowings,
-            totalPages: Math.ceil(totalFollowings / limitNumber),
-            followings: followingList,
+            message: 'Successfully retrieved followings',
+            data: {
+                page: pageNumber,
+                totalFollowings,
+                totalPages: Math.ceil(totalFollowings / limitNumber),
+                followings: followingList,
+            },
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving followings', error: error });
+        res.status(500).json({
+            message: 'Error retrieving followings',
+            data: null, // You can modify this according to your error handling preference
+        });
     }
 };
 
 // Create a following
-const createFollowing = async (req: Request, res: Response) => {
+const createFollowing = async (req: Request, res: Response<GenericResponse<Following | null>>) => {
     const { user, manga, isReturnNewData } = req.body;
 
     if (!user || !manga) {
-        return res.status(400).json({ success: false, message: "User and manga are required." });
+        return res.status(400).json({
+            message: "User and manga are required.",
+            data: null
+        });
+    }
+
+    const existFollow = await FollowingModel.findOne({ user: user, manga: manga });
+    if (existFollow) {
+        return res.status(400).json({
+            message: "User and manga already exist.",
+            data: null
+        });
     }
 
     const following = new FollowingModel({ user, manga });
 
     try {
         const newFollowing = await following.save();
-        if(newFollowing){
-            await MangaModel.findByIdAndUpdate(newFollowing.manga,{$inc:{followersCount:1}},{new:true})
-        }else{
+
+        if (newFollowing) {
+            await MangaModel.findByIdAndUpdate(newFollowing.manga, { $inc: { followersCount: 1 } }, { new: true });
+        } else {
             return res.status(404).json({
-                success: false,
                 message: 'Manga not found.',
+                data: null
             });
         }
+
         const responseData = isReturnNewData ? newFollowing : null;
-        console.log("newFollowing",newFollowing)
+
         res.status(201).json({
-            success: true,
             message: "Following created successfully.",
             data: responseData
         });
     } catch (error: any) {
-        res.status(500).json({ success: false, message: "Server error: " + error.message });
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            data: null // Set data to null on error
+        });
     }
 };
 
 // Update a following
-const updateFollowing = async (req: Request, res: Response) => {
-    
+const updateFollowing = async (req: Request, res: Response<GenericResponse<Following | null>>) => {
     const { id, user, manga, isReturnNewData } = req.body;
 
     try {
         const updatedFollowing = await FollowingModel.findByIdAndUpdate(id, { user, manga }, { new: true });
 
         if (!updatedFollowing) {
-            return res.status(404).json({ success: false, message: 'Following not found.' });
+            return res.status(404).json({
+                message: 'Following not found.',
+                data: null // Set data to null if not found
+            });
         }
 
         res.status(200).json({
-            success: true,
             message: 'Following updated successfully.',
-            data: isReturnNewData ? updatedFollowing : null,
+            data: isReturnNewData ? updatedFollowing : null, // Return updated following or null based on flag
         });
     } catch (error: any) {
-        res.status(500).json({ success: false, message: 'Server error.', error: error.message });
+        res.status(500).json({
+            message: 'Server error.',
+            data: null,
+
+        });
     }
 };
 
-const deleteFollowing = async (req: Request, res: Response) => {
+const deleteFollowing = async (req: Request, res: Response<GenericResponse<null>>) => {
     const { id } = req.query;
 
     try {
         const deletedFollowing = await FollowingModel.findByIdAndDelete(id);
-        if(deletedFollowing){
-            await MangaModel.findByIdAndUpdate(deletedFollowing.manga,{$inc:{followersCount:-1}},{new:true})
-        }else{
-            return res.status(404).json({
-                success: false,
-                message: 'Manga not found.',
-            });
-        }
+
         if (!deletedFollowing) {
             return res.status(404).json({
-                success: false,
                 message: 'Following not found.',
+                data: null, // Set data to null if not found
             });
         }
 
+        // Update the followers count in the associated manga
+        await MangaModel.findByIdAndUpdate(deletedFollowing.manga, { $inc: { followersCount: -1 } }, { new: true });
+
         res.status(200).json({
-            success: true,
             message: 'Following deleted successfully.',
+            data: null, // No specific data to return on delete
         });
     } catch (error: any) {
         res.status(500).json({
-            success: false,
             message: 'Server error: ' + error.message,
+            data: null, // Set data to null on error
         });
     }
 };
 
-const getUserLibrary = async (req: Request, res: Response) => {
+const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaFollowed[] | null>>) => {
     const userId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.query.id as string);
     const page: number = parseInt(req.query.page as string, 10) || 1;
     const limit: number = parseInt(req.query.limit as string, 10) || 10;
@@ -182,6 +216,7 @@ const getUserLibrary = async (req: Request, res: Response) => {
 
     try {
         const totalFollowings = await FollowingModel.countDocuments({ user: userId });
+
         const followingList: MangaFollowed[] = await FollowingModel.aggregate([
             { $match: { user: userId } }, // Filter for the user
             { $skip: skip }, // Skip for pagination
@@ -217,9 +252,10 @@ const getUserLibrary = async (req: Request, res: Response) => {
             },
             {
                 $project: { // Specify the fields to return
+                    _id: '$mangaDetails._id',
                     idManga: '$mangaDetails._id',
                     mangaName: '$mangaDetails.name', // The name from Manga
-                    mangaImageUrl: '$mangaDetails.imageUrl', // The url from Manga
+                    mangaImageUrl: '$mangaDetails.imageUrl', // The URL from Manga
                     latestChapterId: '$latestChapter._id', // Latest chapter ID
                     latestChapterTitle: '$latestChapter.title', // Latest chapter title
                     latestChapterCreatedAt: '$latestChapter.createdAt' // Latest chapter created date
@@ -227,35 +263,89 @@ const getUserLibrary = async (req: Request, res: Response) => {
             }
         ]);
 
+        // Prepare response data
+        const responseData: MangaFollowed[] = followingList;
+
         res.status(200).json({
-            page,
-            totalFollowings,
-            totalPages: Math.ceil(totalFollowings / limit),
-            followings: followingList,
+            message: 'User library retrieved successfully.',
+            data: responseData,
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving followings', error: error });
+        res.status(500).json({
+            message: 'Error retrieving followings: ' + JSON.stringify(error),
+            data: null, // Return null on error
+        });
     }
 };
 
-const deleteFollowingsByMangaId = async (req: Request, res: Response) => {
+const unFollowing = async (req: Request, res: Response<GenericResponse<Following | null>>) => {
+    const { user, manga, isReturnDeletedData } = req.body;
+
+    if (!user || !manga) {
+        return res.status(400).json({
+            message: "User and manga are required.",
+            data: null,
+        });
+    }
+
+    const existFollow = await FollowingModel.findOne({ user, manga });
+    if (!existFollow) {
+        return res.status(404).json({
+            message: "Following does not exist.",
+            data: null,
+        });
+    }
+
+    try {
+        const deletedFollowing = await FollowingModel.findByIdAndDelete(existFollow._id);
+        if (deletedFollowing) {
+            await MangaModel.findByIdAndUpdate(deletedFollowing.manga, { $inc: { followersCount: -1 } }, { new: true });
+        } else {
+            return res.status(404).json({
+                message: 'Following not found.',
+                data: null,
+            });
+        }
+
+        const responseData = isReturnDeletedData ? deletedFollowing : null;
+        res.status(200).json({
+            message: "Following deleted successfully.",
+            data: responseData,
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            data: null, // Ensure data is null in case of an error
+        });
+    }
+};
+
+
+const deleteFollowingsByMangaId = async (req: Request, res: Response<GenericResponse<null>>) => {
     const { idManga } = req.params; // Assuming idManga is passed as a route parameter
 
     if (!idManga) {
-        return res.status(400).json({ success: false, message: "Manga ID is required." });
+        return res.status(400).json({
+            message: "Manga ID is required.",
+            data: null,
+        });
     }
 
     try {
         const result = await FollowingModel.deleteMany({ manga: idManga });
 
         res.status(200).json({
-            success: true,
             message: `${result.deletedCount} followings deleted successfully.`,
+            data: null, // No specific data to return, so it's set to null
         });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Server error: ", error: error });
+    } catch (error: any) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            data: null, // Ensure data is null in case of an error
+        });
     }
 };
+
 
 export default {
     createManyFollowing,
@@ -265,5 +355,6 @@ export default {
     updateFollowing,
     deleteFollowing,
     getUserLibrary,
-    deleteFollowingsByMangaId
+    deleteFollowingsByMangaId,
+    unFollowing
 };

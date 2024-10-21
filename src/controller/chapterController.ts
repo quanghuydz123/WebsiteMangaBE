@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import ChapterModel, { Chapter } from '../models/ChapterModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -27,26 +28,42 @@ const getPaginatedChapters = async (req: Request, res: Response) => {
     const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
     const limit: number = parseInt(req.query.limit as string) || 10; // Default to limit 10
     const skip: number = (page - 1) * limit; // Calculate how many items to skip
-    const orderType = (req.query.page as string);
-    let manga = {};
+    const orderType = (req.query.orderType as string) || 'DESC'; // Set orderType for sorting, default to DESC
+    let mangaFilter = {};
+
     if (mangaId) {
-        manga = { manga: mangaId }
+        mangaFilter = { manga: mangaId };
     }
+
     try {
-        const totalChapters = await ChapterModel.countDocuments(manga); // Get the total number of chapters
-        const chapterList = await ChapterModel.find(manga)
-            .sort({ updatedAt: (orderType === 'ASC') ? 1 : -1 })
+        const totalChapters = await ChapterModel.countDocuments(mangaFilter); // Get the total number of chapters
+        const chapterList = await ChapterModel.find(mangaFilter)
+            .sort({ updatedAt: (orderType === 'ASC') ? 1 : -1 }) // Sort by update date based on orderType
             .skip(skip)
             .limit(limit); // Get the paginated results
 
-        res.status(200).json({
-            page,
-            totalChapters,
-            totalPages: Math.ceil(totalChapters / limit),
-            chapters: chapterList,
-        });
+        const response: GenericResponse<{
+            page: number;
+            totalChapters: number;
+            totalPages: number;
+            chapters: typeof chapterList;
+        }> = {
+            message: 'Chapters retrieved successfully',
+            data: {
+                page,
+                totalChapters,
+                totalPages: Math.ceil(totalChapters / limit),
+                chapters: chapterList,
+            }
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving chapters', error });
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving chapters',
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
@@ -56,37 +73,55 @@ const getAdvancedPaginatedChapter = async (req: Request, res: Response) => {
     const pageNumber: number = parseInt(req.query.page as string, 10) || 1; // Default to page 1
     const limitNumber: number = parseInt(req.query.limit as string, 10) || 10; // Default to limit 10
     const skip: number = (pageNumber - 1) * limitNumber; // Calculate how many items to skip
-    let manga = {};
+    let mangaFilter = {};
+
     if (mangaId) {
-        manga = { manga: mangaId }
+        mangaFilter = { manga: mangaId };
     }
+
     try {
-        const totalChapters = await ChapterModel.countDocuments(manga); // Get the total number of chapters
+        const totalChapters = await ChapterModel.countDocuments(mangaFilter); // Get the total number of chapters
 
         // Build the projection object
         const projection: any = {};
         if (filter) {
             // Split the filter string and include only those fields
-            const filterArray = (filter as string).split(',');
+            const filterArray = filter.split(',');
             filterArray.forEach(attr => {
                 projection[attr] = 1; // Include the field in the response
             });
         }
 
         // Get the paginated results
-        const chapterList = await ChapterModel.find({ manga: mangaId })
+        const chapterList = await ChapterModel.find(mangaFilter)
             .select(projection)
             .skip(skip)
             .limit(limitNumber);
 
-        res.status(200).json({
-            page: pageNumber,
-            totalChapters,
-            totalPages: Math.ceil(totalChapters / limitNumber),
-            chapters: chapterList,
-        });
+        // Use GenericResponse for success
+        const response: GenericResponse<{
+            page: number;
+            totalChapters: number;
+            totalPages: number;
+            chapters: typeof chapterList;
+        }> = {
+            message: 'Chapters retrieved successfully',
+            data: {
+                page: pageNumber,
+                totalChapters,
+                totalPages: Math.ceil(totalChapters / limitNumber),
+                chapters: chapterList,
+            }
+        };
+
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving chapters', error });
+        // Use GenericResponse for error
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving chapters',
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
@@ -95,26 +130,35 @@ const appendChapter = async (req: Request, res: Response) => {
     const { manga, title, imageLink, isReturnNewData } = req.body;
 
     if (!manga || !title) {
-        return res.status(400).json({ success: false, message: "Manga and title are required." });
+        const errorResponse: GenericResponse<null> = {
+            message: "Manga and title are required.",
+            data: null
+        };
+        return res.status(400).json(errorResponse);
     }
 
-
-    const lastTitle = await getLastTitle(manga);
-
-    const match = lastTitle.match(/chapter\s-\s([\d.]+)/i) ?? "0";
-    const number = Math.floor(Number(match[1])) + 1;
-    console.log(lastTitle, "-", match[1], "-", number);
     try {
+        const lastTitle = await getLastTitle(manga);
+
+        const match = lastTitle.match(/chapter\s-\s([\d.]+)/i) ?? "0";
+        const number = Math.floor(Number(match[1])) + 1;
+        console.log(lastTitle, "-", match[1], "-", number);
+
         const chapter = new ChapterModel({ manga: manga, title: "chapter - " + number + ": " + title, imageLink: imageLink });
         const newChapter: Chapter = await chapter.save();
 
-        res.status(201).json({
-            success: true,
+        const response: GenericResponse<typeof newChapter | null> = {
             message: "Chapter created successfully.",
             data: isReturnNewData ? newChapter : null
-        });
+        };
+
+        res.status(201).json(response);
     } catch (error: any) {
-        res.status(500).json({ success: false, message: "Server error." + error.message });
+        const errorResponse: GenericResponse<null> = {
+            message: "Server error: " + error.message,
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
@@ -134,16 +178,25 @@ const updateChapter = async (req: Request, res: Response) => {
         );
 
         if (!updatedChapter) {
-            return res.status(404).json({ success: false, message: "Chapter not found." });
+            const errorResponse: GenericResponse<null> = {
+                message: "Chapter not found.",
+                data: null
+            };
+            return res.status(404).json(errorResponse);
         }
 
-        res.status(200).json({
-            success: true,
+        const response: GenericResponse<typeof updatedChapter | null> = {
             message: "Chapter updated successfully.",
             data: isReturnNewData ? updatedChapter : null // Return updated data if requested
-        });
+        };
+
+        res.status(200).json(response);
     } catch (error: any) {
-        res.status(500).json({ success: false, message: "Server error.", error: error.message });
+        const errorResponse: GenericResponse<null> = {
+            message: "Server error: " + error.message,
+            data: null
+        };
+        res.status(500).json(errorResponse);
     }
 };
 
@@ -182,13 +235,22 @@ const selfQueryChapter = async (req: Request, res: Response) => {
         // Paginate the query with filters and options
         const result = await ChapterModel.paginate(queryFilter, paginationOptions);
 
-        // Send the paginated results back to the client
-        return res.status(200).json(result);
-    } catch (error) {
-        return res.status(500).json({ message: error });
+        // Use GenericResponse for success
+        const response: GenericResponse<typeof result> = {
+            message: 'Chapters retrieved successfully',
+            data: result
+        };
+
+        return res.status(200).json(response);
+    } catch (error: any) {
+        // Use GenericResponse for error
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving chapters: ' + error.message,
+            data: null
+        };
+        return res.status(500).json(errorResponse);
     }
 };
-
 export default {
     createManyChapter,
     getPaginatedChapters,

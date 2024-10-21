@@ -1,9 +1,10 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import RoleModel from '../models/RoleModel';
+import RoleModel, { Role } from '../models/RoleModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import FollowingModel from '../models/FollowingModel';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -24,11 +25,11 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({
         status: 200,
         message: "Thành công",
-        data:roleNews
+        data: roleNews
     });
 });
 
-const getAll = asyncHandler(async (req: Request, res: Response) => {
+const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<Role[] | null>>): Promise<void> => {
     // const role = await FollowingModel.aggregate(
     //     [
     //         {
@@ -48,12 +49,29 @@ const getAll = asyncHandler(async (req: Request, res: Response) => {
     //         //   },
     //     ]
     // )
-    const role = await RoleModel.find()
-    res.status(200).json({
-        status: 200,
-        message: "Thành công",
-        data:role
-    });
+    try {
+        const roles = await RoleModel.find();
+
+        // Check if any roles are found
+        if (!roles || roles.length === 0) {
+            res.status(404).json({
+                message: "No roles found",
+                data: null,
+            });
+            return; // Early return to indicate completion
+        }
+
+        res.status(200).json({
+            message: "Thành công",
+            data: roles,
+        });
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({
+            message: "Internal server error",
+            data: null,
+        });
+    }
 });
 export default {
     createManyRole,

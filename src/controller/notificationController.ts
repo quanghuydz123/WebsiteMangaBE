@@ -1,9 +1,10 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import NotificationModel from '../models/NotificationModel';
+import NotificationModel, { Notification } from '../models/NotificationModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import UserModel from '../models/UserModel';
+import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
@@ -24,33 +25,60 @@ const createManyNotification = asyncHandler(async (req: Request, res: Response) 
 });
 
 const getAll = asyncHandler(async (req: Request, res: Response) => {
-    const notifications = await NotificationModel.find().populate('user')
+    try {
+        const notifications = await NotificationModel.find().populate('user');
 
-    res.status(200).json({
-        status: 200,
-        message: "Thành công",
-        data:notifications
-    });
+        // Check if notifications were found
+        if (!notifications || notifications.length === 0) {
+            res.status(404).json({
+                message: "No notifications found",
+                data: null,
+            });
+            return;
+        }
+
+        res.status(200).json({
+            message: "Thành công",
+            data: notifications,
+        });
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({
+            message: "Internal server error",
+            data: null,
+        });
+    }
 });
 
-const createNotification = asyncHandler(async (req: Request, res: Response) => {
-    const {content,idUser} = req.body
-    const user = await UserModel.findById(idUser)
-    if(user){
-        const notifications = await NotificationModel.create({
+const createNotification = asyncHandler(async (req: Request, res: Response<GenericResponse<Notification | null>>): Promise<void> => {
+    const { content, idUser } = req.body;
+
+    try {
+        const user = await UserModel.findById(idUser);
+        if (!user) {
+            res.status(404).json({
+                message: 'Người dùng không tồn tại',
+                data: null,
+            });
+            return; // Early return to indicate completion
+        }
+
+        const notification = await NotificationModel.create({
             content,
-            user:idUser
-        })
-        res.status(200).json({
-            status: 200,
-            message: "Thành công",
-            data:notifications
+            user: idUser,
         });
-    } else{
-        res.status(402)
-        throw new Error('Người dùng không tồn tại')
+
+        res.status(201).json({
+            message: "Thành công",
+            data: notification,
+        });
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({
+            message: "Internal server error",
+            data: null,
+        });
     }
-    
 });
 
 export default {
