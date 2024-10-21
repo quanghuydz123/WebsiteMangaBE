@@ -279,7 +279,7 @@ authorRoute.get('/get-page', authorController.getPaginatedAuthor);
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Server error: <error message>
+ *                   example: Server error
  *                 data:
  *                   type: null
  */
@@ -289,15 +289,9 @@ authorRoute.post('/create', authorController.createAuthor);
  * @swagger
  * /authors/update:
  *   put:
- *     summary: Update an existing author
  *     tags: [Author]
- *     parameters:
- *       - in: query
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The author ID
+ *     summary: Update an existing author
+ *     description: Updates the author details based on the provided ID and optionally returns the updated author data.
  *     requestBody:
  *       required: true
  *       content:
@@ -305,59 +299,69 @@ authorRoute.post('/create', authorController.createAuthor);
  *           schema:
  *             type: object
  *             properties:
+ *               id:
+ *                 type: string
+ *                 example: "60b8d95f1f10f14d4f0c9ae2"
+ *                 description: The ID of the author to update (required).
  *               name:
  *                 type: string
- *                 example: "Updated Name"
+ *                 example: "Jane Doe"
+ *                 description: The new name of the author.
  *               isDeleted:
  *                 type: boolean
  *                 example: false
+ *                 description: Flag indicating whether the author is deleted.
  *               isReturnNewData:
  *                 type: boolean
  *                 example: true
+ *                 description: Flag indicating whether to return the updated author data.
  *     responses:
  *       200:
- *         description: Author updated successfully
+ *         description: Author updated successfully.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Author updated successfully."
+ *                   example: Author updated successfully.
  *                 data:
- *                   oneOf:
- *                     - $ref: '#/components/schemas/Author'
- *                     - type: "null"
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       example: "60b8d95f1f10f14d4f0c9ae2"
+ *                     name:
+ *                       type: string
+ *                       example: "Jane Doe"
+ *                     isDeleted:
+ *                       type: boolean
+ *                       example: false
  *       404:
- *         description: Author not found
+ *         description: Author not found.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
  *                 message:
  *                   type: string
- *                   example: "Author not found."
+ *                   example: Author not found.
+ *                 data:
+ *                   type: null
  *       500:
- *         description: Server error
+ *         description: Internal Server Error
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
  *                 message:
  *                   type: string
- *                   example: "Server error."
+ *                   example: Server error
+ *                 data:
+ *                   type: null
  */
 authorRoute.put('/update', authorController.updateAuthor);
 
