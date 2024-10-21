@@ -29,3 +29,17 @@ const routes = (app: Express) => {
 };
 
 export default routes;
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     GenericResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           description: A message describing the result
+ *         data:
+ *           type: object
+ *           description: The returned data, specific to each endpoint
+ */

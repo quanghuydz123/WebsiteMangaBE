@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import CommentModel, { Comment } from '../models/CommentModel';
+import CommentModel, { Comment, TOEXICWORDS } from '../models/CommentModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
@@ -115,7 +115,7 @@ const getAdvancedPaginatedComment = async (req: Request, res: Response) => {
 };
 
 const createComment = async (req: Request, res: Response) => {
-    const { user, text, manga, isReturnNewData } = req.body;
+    let { user, text = "", manga, isReturnNewData } = req.body;
 
     // Check for required fields
     if (!user || !text || !manga) {
@@ -125,7 +125,13 @@ const createComment = async (req: Request, res: Response) => {
         };
         return res.status(400).json(errorResponse);
     }
-
+    if (containsToxicWords(text as string)) {
+        const errorResponse: GenericResponse<null> = {
+            message: "vi phạm tiêu chuẩn cộng đồng",
+            data: null
+        };
+        return res.status(403).json(errorResponse);
+    }
     const comment = new CommentModel({ user, text, manga });
 
     try {
@@ -152,8 +158,14 @@ const createComment = async (req: Request, res: Response) => {
 };
 
 const updateComment = async (req: Request, res: Response) => {
-    const { id, text, isDeleted, isReturnNewData } = req.body;
-
+    const { id, text = "", isDeleted, isReturnNewData } = req.body;
+    if (text && containsToxicWords(text as string)) {
+        const errorResponse: GenericResponse<null> = {
+            message: "vi phạm tiêu chuẩn cộng đồng",
+            data: null
+        };
+        return res.status(403).json(errorResponse);
+    }
     try {
         const updatedComment = await CommentModel.findByIdAndUpdate(
             id,
@@ -170,7 +182,7 @@ const updateComment = async (req: Request, res: Response) => {
         }
 
         // Use GenericResponse for success
-        const response: GenericResponse<typeof updatedComment|null> = {
+        const response: GenericResponse<typeof updatedComment | null> = {
             message: 'Comment updated successfully.',
             data: isReturnNewData ? updatedComment : null,
         };
@@ -232,11 +244,11 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
         ]);
 
         // Create a response object using GenericResponse
-        const response: GenericResponse<{ 
-            page: number; 
-            totalComment: number; 
-            totalPages: number; 
-            comments: typeof commentList 
+        const response: GenericResponse<{
+            page: number;
+            totalComment: number;
+            totalPages: number;
+            comments: typeof commentList
         }> = {
             message: 'Comments retrieved successfully.',
             data: {
@@ -256,6 +268,11 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
         res.status(500).json(errorResponse);
     }
 };
+
+function containsToxicWords(comment: string): boolean {
+    const normalizedComment = comment.toLowerCase();
+    return Array.from(TOEXICWORDS).some(toxicWord => normalizedComment.includes(toxicWord));
+}
 
 
 

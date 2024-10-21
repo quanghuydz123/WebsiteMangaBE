@@ -311,7 +311,7 @@ followingRoute.get('/get-library', followingController.getUserLibrary);
  *   delete:
  *     summary: Delete a following between a user and a manga.
  *     description: Removes a following relationship between a user and a manga, and decreases the followers count for the manga.
- *     tags: [Following]
+ *     tags: [Followings]
  *     requestBody:
  *       required: true
  *       content:

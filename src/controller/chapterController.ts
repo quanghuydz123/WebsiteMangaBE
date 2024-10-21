@@ -251,11 +251,119 @@ const selfQueryChapter = async (req: Request, res: Response) => {
         return res.status(500).json(errorResponse);
     }
 };
+
+const insertImageLink = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { chapterId, imageLink, pos } = req.body;
+        const result = await ChapterModel.updateOne(
+            { _id: chapterId },
+            { $splice: { imageLinks: { $position: pos, $each: [imageLink] } } } // Insert at position
+        );
+
+        if (result.modifiedCount === 0) {
+            res.status(404).json({ message: 'Chapter not found or no changes made' });
+            return;
+        }
+
+        const updatedChapter = await ChapterModel.findById(chapterId);
+        res.status(200).json({ message: 'Image link inserted successfully', data: updatedChapter });
+    } catch (error) {
+        res.status(500).json({ message: JSON.stringify(error), data: null });
+    }
+};
+
+const removeImageLink = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { chapterId, pos } = req.body;
+
+        const result = await ChapterModel.updateOne(
+            { _id: chapterId },
+            { $pull: { imageLinks: { $slice: [pos, 1] } } } // Remove image link at position
+        );
+
+        if (result.modifiedCount === 0) {
+            res.status(404).json({ message: 'Chapter not found or no changes made' });
+            return;
+        }
+
+        const updatedChapter = await ChapterModel.findById(chapterId);
+        res.status(200).json({ message: 'Image link removed successfully', data: updatedChapter });
+    } catch (error) {
+        res.status(500).json({ message: JSON.stringify(error), data: null });
+    }
+};
+
+const readImageLink = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { chapterId, pos } = req.body;
+        const chapter = await ChapterModel.findOne(
+            { _id: chapterId },
+            { imageLinks: { $slice: [pos, 1] } } // Read image link at position
+        );
+
+        if (!chapter || chapter.imageLink.length === 0) {
+            res.status(404).json({ message: 'Chapter not found or no image link at this position' });
+            return;
+        }
+
+        res.status(200).json({ message: 'Image link retrieved successfully', data: chapter.imageLink[0] });
+    } catch (error) {
+        res.status(500).json({ message: JSON.stringify(error), data: null });
+    }
+};
+
+const appendImageLink = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { chapterId, imageLink } = req.body;
+
+        const result = await ChapterModel.updateOne(
+            { _id: chapterId },
+            { $push: { imageLinks: imageLink } } // Append image link
+        );
+
+        if (result.modifiedCount === 0) {
+            res.status(404).json({ message: 'Chapter not found or no changes made' });
+            return;
+        }
+
+        const updatedChapter = await ChapterModel.findById(chapterId);
+        res.status(200).json({ message: 'Image link appended successfully', data: updatedChapter });
+    } catch (error) {
+        res.status(500).json({ message: JSON.stringify(error), data: null });
+    }
+};
+
+const updateImageLink = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { chapterId, pos, newImageLink } = req.body;
+
+        const result = await ChapterModel.updateOne(
+            { _id: chapterId },
+            { $set: { [`imageLinks.${pos}`]: newImageLink } } // Update image link at position
+        );
+
+        if (result.modifiedCount === 0) {
+            res.status(404).json({ message: 'Chapter not found or no changes made' });
+            return;
+        }
+
+        const updatedChapter = await ChapterModel.findById(chapterId);
+        res.status(200).json({ message: 'Image link updated successfully', data: updatedChapter });
+    } catch (error) {
+        res.status(500).json({ message: JSON.stringify(error), data: null });
+    }
+};
+
 export default {
     createManyChapter,
     getPaginatedChapters,
     getAdvancedPaginatedChapter,
     appendChapter,
     updateChapter,
-    selfQueryChapter
+    selfQueryChapter,
+    appendImageLink,
+    updateImageLink,
+    readImageLink,
+    removeImageLink,
+    insertImageLink
 };
