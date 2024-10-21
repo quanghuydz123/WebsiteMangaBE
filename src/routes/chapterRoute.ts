@@ -455,5 +455,177 @@ chapterRoute.put('/update', chapterController.updateChapter);
 
 
 chapterRoute.post('/complex-get',chapterController.selfQueryChapter);
+/**
+ * @swagger
+ * /chapters/updateImageLink:
+ *   post:
+ *     summary: Update an image link at a specific position
+ *     tags: [Chapter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterId:
+ *                 type: string
+ *                 description: The ID of the chapter
+ *               pos:
+ *                 type: integer
+ *                 description: The position of the image link to update
+ *               newImageLink:
+ *                 type: string
+ *                 description: The new image link
+ *     responses:
+ *       200:
+ *         description: Image link updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GenericResponse'
+ *       404:
+ *         description: Chapter not found or invalid position
+ *       500:
+ *         description: Server error
+ */
+chapterRoute.post('/updateImageLink',chapterController.updateImageLink);
+/**
+ * @swagger
+ * /chapters/appendImageLink:
+ *   post:
+ *     summary: Append an image link to the list
+ *     tags: [Chapter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterId:
+ *                 type: string
+ *                 description: The ID of the chapter
+ *               imageLink:
+ *                 type: string
+ *                 description: The image link to append
+ *     responses:
+ *       200:
+ *         description: Image link appended successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GenericResponse'
+ *       404:
+ *         description: Chapter not found
+ *       500:
+ *         description: Server error
+ */
+chapterRoute.post('/appendImageLink',chapterController.appendImageLink);
 
+/**
+ * @swagger
+ * /chapters/readImageLink:
+ *   post:
+ *     summary: Read an image link at a specific position
+ *     tags: [Chapter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterId:
+ *                 type: string
+ *                 description: The ID of the chapter
+ *               pos:
+ *                 type: integer
+ *                 description: The position of the image link to read
+ *     responses:
+ *       200:
+ *         description: Image link retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: string
+ *                   description: The image link
+ *       404:
+ *         description: Chapter not found or invalid position
+ *       500:
+ *         description: Server error
+ */
+chapterRoute.post('/readImageLink',chapterController.readImageLink);
+/**
+ * @swagger
+ * /chapters/removeImageLink:
+ *   post:
+ *     summary: Remove an image link at a specific position
+ *     tags: [Chapter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterId:
+ *                 type: string
+ *                 description: The ID of the chapter
+ *               pos:
+ *                 type: integer
+ *                 description: The position of the image link to remove
+ *     responses:
+ *       200:
+ *         description: Image link removed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GenericResponse'
+ *       404:
+ *         description: Chapter not found or invalid position
+ *       500:
+ *         description: Server error
+ */
+chapterRoute.post('/removeImageLink',chapterController.removeImageLink);
+/**
+ * @swagger
+ * /chapters/insertImageLink:
+ *   post:
+ *     summary: Insert an image link at a specific position
+ *     tags: [Chapter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterId:
+ *                 type: string
+ *                 description: The ID of the chapter
+ *               imageLink:
+ *                 type: string
+ *                 description: The image link to insert
+ *               pos:
+ *                 type: integer
+ *                 description: The position to insert the image link
+ *     responses:
+ *       200:
+ *         description: Image link inserted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GenericResponse'
+ *       404:
+ *         description: Chapter not found
+ *       500:
+ *         description: Server error
+ */
+chapterRoute.post('/insertImageLink',chapterController.insertImageLink);
 export default chapterRoute;
