@@ -341,7 +341,32 @@ const addReadingHistory = asyncHandler(async (req: Request, res: Response<Generi
         });
     }
 });
+const blockUser = asyncHandler(async (req: Request, res: Response<GenericResponse<User | null>>): Promise<void> => {
+    const { idUser} = req.body;
 
+    try {
+        const user = await UserModel.findById(idUser);
+
+        if (!user ) {
+            res.status(400).json({
+                message: 'User không tồn tại',
+                data: null,
+            });
+            return; // Early return to indicate completion
+        }
+        const updateUser = await UserModel.findByIdAndUpdate(idUser,{isDeleted:!user.isDeleted},{new:true})
+        res.status(200).json({
+            message: "Thành công",
+            data: updateUser,
+        });
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({
+            message: "Internal server error",
+            data: null,
+        });
+    }
+});
 export default {
     getAll,
     createManyUser,
@@ -350,5 +375,6 @@ export default {
     register,
     changePassword,
     loginGoogle,
-    addReadingHistory
+    addReadingHistory,
+    blockUser
 };

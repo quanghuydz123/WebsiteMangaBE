@@ -290,6 +290,44 @@ userRouter.post('/add-reading-history', (req: Request, res: Response,next :NextF
  *                   description: The status code (e.g., 200 for success)
  *                 user:
  *                   $ref: '#/components/schemas/User'
+ *       402:
+ *         description: User không tồn tại
+ * 
+ * */
+
+
+userRouter.put('/block-user', (req: Request, res: Response,next :NextFunction) => {
+    userController.blockUser(req, res,next);
+});
+/**
+ * @swagger
+ * /users/block-user:
+ *   put:
+ *     summary: block user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idUser:
+ *                 type: string
+ *                 example: "idUser"
+ *     responses:
+ *       200:   
+ *         description: The list of the users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
  *                  
  * 
  * */

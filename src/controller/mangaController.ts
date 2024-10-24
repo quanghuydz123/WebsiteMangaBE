@@ -63,7 +63,6 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
     if (fillterPublisher) {
         filter.publisher = fillterPublisher;
     }
-
     if (sortType) {
         switch (sortType) {
             case 'descName':
@@ -90,7 +89,20 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
         page,
         limit,
         sort,
-        populate: "author publisher genres"
+        populate: [
+            {
+                path: 'author',
+                select: '_id name isDeleted' 
+            },
+            {
+                path: 'publisher',
+                select: '_id name isDeleted' 
+            },
+            {
+                path: 'genres',
+                select: '_id name slug isDeleted' 
+            }
+        ]
     };
 
     const manga = await MangaModel.paginate(filter, options);
@@ -107,7 +119,11 @@ const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResp
     const { id } = req.query;
 
     if (id) {
-        const manga = await MangaModel.findById(id).populate('author publisher genres');
+        const manga = await MangaModel.findById(id)
+        .populate('author', '_id name isDeleted')
+        .populate('publisher', '_id name isDeleted')
+        .populate('genres', '_id name slug isDeleted')
+
 
         if (!manga) {
             res.status(404); // Updated to use the standard "Not Found" status
@@ -129,7 +145,7 @@ const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResp
 
 const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
     const { _id } = req.body;
-
+    console.log("req.body",req.body)
     // Ensure _id is provided
     if (!_id) {
         res.status(400); // Bad Request
@@ -208,11 +224,14 @@ const increaseView = asyncHandler(async (req: Request, res: Response<GenericResp
         throw new Error('Manga không tồn tại');
     }
 });
+
+
 export default {
     createManyManga,
     getAll,
     getMangaById,
     updateMangaById,
     createManga,
-    increaseView
+    increaseView,
+    
 };
