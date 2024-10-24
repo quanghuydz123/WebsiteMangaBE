@@ -125,6 +125,43 @@ const getAdvancedPaginatedChapter = async (req: Request, res: Response) => {
     }
 };
 
+const getChapterListByMangaId = async (req: Request, res: Response) => {
+    try {
+        const { mangaId } = req.query;
+        const { page = 1, limit = 10 } = req.query; // Default to page 1, limit 10
+
+        if (!mangaId) {
+            return res.status(400).json({ message: 'mangaId is required' });
+        }
+
+        // Paginate query
+        const options = {
+            page: Number(page),
+            limit: Number(limit),
+            sort: { createdAt: -1 }, // Sort by createdAt in descending order
+            select: 'title updatedAt _id' // Select only the fields you need
+        };
+
+        // Fetching chapters with pagination
+        const chapters = await ChapterModel.paginate(
+            { manga: mangaId, isDeleted: false },
+            options
+        );
+
+        // Sort titles naturally after fetching
+        chapters.docs.sort((a: any, b: any) => a.title.localeCompare(b.title, undefined, { numeric: true }));
+
+        const response: GenericResponse<typeof chapters> = {
+            message: 'Chapters retrieved successfully',
+            data: chapters
+        };
+
+        return res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({ message: 'Error fetching chapters', error });
+    }
+};
+
 
 const appendChapter = async (req: Request, res: Response) => {
     const { manga, title, imageLink, isReturnNewData } = req.body;
@@ -203,7 +240,7 @@ const updateChapter = async (req: Request, res: Response) => {
 
 async function getLastTitle(manga: unknown): Promise<string> {
     const lastChapter = await ChapterModel.findOne({ manga: manga })
-        .sort({ updatedAt: -1 })
+        .sort({ createdAt: -1 })
         .select('title');
 
     return lastChapter ? lastChapter.title : Date.now().toString(); // Return epoch time if null
@@ -365,5 +402,6 @@ export default {
     updateImageLink,
     readImageLink,
     removeImageLink,
-    insertImageLink
+    insertImageLink,
+    getChapterListByMangaId,
 };

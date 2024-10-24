@@ -628,4 +628,107 @@ chapterRoute.post('/removeImageLink',chapterController.removeImageLink);
  *         description: Server error
  */
 chapterRoute.post('/insertImageLink',chapterController.insertImageLink);
+/**
+ * @swagger
+ * /chapters/get-list:
+ *   get:
+ *     summary: Get chapters by mangaId with pagination
+ *     description: Retrieve a list of chapters for a given mangaId, with optional pagination. The chapters are sorted by title and createdAt in descending order.
+ *     tags:
+ *       - Chapter
+ *     parameters:
+ *       - in: query
+ *         name: mangaId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the manga
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number for pagination (default is 1)
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Limit of chapters per page (default is 10)
+ *     responses:
+ *       200:
+ *         description: A successful response with a list of chapters
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Chapters retrieved successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     docs:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           title:
+ *                             type: string
+ *                             example: "Chapter Title"
+ *                           updatedAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-01-01T00:00:00Z"
+ *                           _id:
+ *                             type: string
+ *                             example: "6123456789abcdef12345678"
+ *                     totalDocs:
+ *                       type: integer
+ *                       example: 100
+ *                     limit:
+ *                       type: integer
+ *                       example: 10
+ *                     totalPages:
+ *                       type: integer
+ *                       example: 10
+ *                     page:
+ *                       type: integer
+ *                       example: 1
+ *                     pagingCounter:
+ *                       type: integer
+ *                       example: 1
+ *                     hasPrevPage:
+ *                       type: boolean
+ *                       example: false
+ *                     hasNextPage:
+ *                       type: boolean
+ *                       example: true
+ *       400:
+ *         description: Bad request, missing or invalid mangaId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: mangaId is required
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error fetching chapters
+ *                 error:
+ *                   type: string
+ */
+chapterRoute.get('/get-list',chapterController.getChapterListByMangaId);
 export default chapterRoute;
