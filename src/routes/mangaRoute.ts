@@ -274,4 +274,7 @@ mangaRoute.put('/increase-view', (req: Request, res: Response, next: NextFunctio
  *         description: Internal server error
  * 
  * */
+
+
+
 export default mangaRoute;
