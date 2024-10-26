@@ -252,7 +252,7 @@
             const url = `/files?page=${page}&limit=${limit}` + (folderId ? `&parentId=${folderId}` : '');
             folderList.innerHTML = "";
             fetch(url).then(response => response.json()).then(data => {
-                arrayOfFile = data.docs;
+                arrayOfFile = data.data.docs;
                 for (let i = 0; i < arrayOfFile.length; ++i) {
                     createFileCard(i);
                 }
@@ -333,7 +333,7 @@
                     return response.json();
                 })
                 .then(data => {
-                    arrayOfFile = data.docs;
+                    arrayOfFile = data.data.docs;
                     folderList.innerHTML = "";
                     for (let i = 0; i < arrayOfFile.length; ++i) {
                         createFileCard(i);
