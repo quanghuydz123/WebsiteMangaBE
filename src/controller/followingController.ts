@@ -346,6 +346,15 @@ const deleteFollowingsByMangaId = async (req: Request, res: Response<GenericResp
     }
 };
 
+const getUserListByMangaId = async (mangaId: mongoose.Types.ObjectId): Promise<string[]> => {
+    try {
+        const result = await FollowingModel.find({ manga: mangaId }, { _id: 0, user: 1 });
+        const userIds = result.map(doc => doc.user.toString());
+        return userIds;
+    } catch (error: any) {
+        return [];
+    }
+}
 
 export default {
     createManyFollowing,
@@ -356,5 +365,6 @@ export default {
     deleteFollowing,
     getUserLibrary,
     deleteFollowingsByMangaId,
-    unFollowing
+    unFollowing,
+    getUserListByMangaId
 };

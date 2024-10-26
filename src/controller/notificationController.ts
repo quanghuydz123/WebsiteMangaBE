@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import UserModel from '../models/UserModel';
 import { GenericResponse } from '../models/GenericResponse';
+import followingController from './followingController';
+import { log } from 'console';
 
 dotenv.config();
 
@@ -81,8 +83,21 @@ const createNotification = asyncHandler(async (req: Request, res: Response<Gener
     }
 });
 
+const broadcastNewChapter = async (message: string, mangaId: mongoose.Types.ObjectId): Promise<boolean> => {
+    const usersList = await followingController.getUserListByMangaId(mangaId);
+    
+    usersList.forEach((userId) => {
+        NotificationModel.create({
+            content: message,
+            user: userId,
+        });
+    })
+    return true;
+}
+
 export default {
     createManyNotification,
     getAll,
-    createNotification
+    createNotification,
+    broadcastNewChapter
 };

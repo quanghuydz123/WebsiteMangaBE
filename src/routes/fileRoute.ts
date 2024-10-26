@@ -354,5 +354,87 @@ fileRouter.get('/image', fileController.getImageForHTMLImgTag);
  */
 fileRouter.get('/images', fileController.getImagesFromFolderPaginate);
 
+/**
+ * @swagger
+ * /files/convert-computer-images-to-link:
+ *   post:
+ *     summary: Converts local computer images to links in the specified manga and chapter.
+ *     tags: [File]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterTitle:
+ *                 type: string
+ *                 description: The title of the chapter.
+ *                 example: "Chapter 1: The Beginning"
+ *               mangaName:
+ *                 type: string
+ *                 description: The name of the manga.
+ *                 example: "My Manga"
+ *               arrayOfImage:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   description: The filenames or paths of the images to be converted.
+ *                   example: ["image1.jpg", "image2.png"]
+ *     responses:
+ *       201:
+ *         description: Successfully created files, returns an array of file IDs.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Confirmation message about file creation.
+ *                   example: "Files created successfully."
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     fileIds:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                         description: The IDs of the created files.
+ *                         example: ["/files/image?fileId=60f7f0e4b4b7d401c0e55c16", "/files/image?fileId=60f7f0e4b4b7d401c0e55c17"]
+ *                     invalidFiles:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                         description: The filenames that were not processed due to invalid extensions.
+ *                         example: ["invalidFile.txt"]
+ *       400:
+ *         description: Bad request when required fields are missing.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating what was wrong with the request.
+ *                   example: "Manga name, chapter title, and images are required."
+ *                 data:
+ *                   type: null
+ *       500:
+ *         description: Internal server error when file creation fails.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating failure.
+ *                   example: "Unable to create files."
+ *                 data:
+ *                   type: null
+ */
 
+fileRouter.post('/convert-computer-images-to-link',fileController.convertComputerImagesToLink)
 export default fileRouter;

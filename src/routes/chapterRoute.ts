@@ -3,7 +3,54 @@ import { Request, Response } from 'express';
 import chapterController from '../controller/chapterController';
 
 const chapterRoute = express.Router();
-
+/**
+ * @swagger
+ * /chapters/create-many-chapter:
+ *   post:
+ *     summary: Create multiple chapters
+ *     description: Deletes all existing chapters and creates new ones based on the provided list.
+ *     tags:
+ *       - Chapter
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               tb_Chapter:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       description: Chapter ID (optional). If provided, must be a valid MongoDB ObjectId as a string.
+ *                     title:
+ *                       type: string
+ *                       description: Title of the chapter.
+ *                     content:
+ *                       type: string
+ *                       description: Content of the chapter.
+ *     responses:
+ *       200:
+ *         description: Success - chapters created.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "Thành công"
+ *       400:
+ *         description: Bad request - invalid input data.
+ *       500:
+ *         description: Internal server error.
+ */
 chapterRoute.post('/create-many-chapter', (req: Request, res: Response, next: NextFunction) => {
     chapterController.createManyChapter(req, res, next);
 });
@@ -187,9 +234,10 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  * @swagger
  * /chapters/append:
  *   post:
- *     tags: [Chapter]
  *     summary: Append a new chapter to a manga
- *     description: Creates a new chapter for a specified manga, incrementing the chapter number automatically.
+ *     description: Creates a new chapter for a specified manga, assigning it the next chapter number based on the latest existing chapter. Optionally returns the newly created chapter data.
+ *     tags:
+ *       - Chapter
  *     requestBody:
  *       required: true
  *       content:
@@ -199,23 +247,25 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *             properties:
  *               manga:
  *                 type: string
- *                 description: The ID of the manga to append the chapter to.
- *                 example: "60b8d95f1f10f14d4f0c9ae2"
+ *                 description: ID of the manga to which the chapter will be added
+ *                 example: "60c72b1f4f1a256a5c9e9b01"
  *               title:
  *                 type: string
- *                 description: The title of the chapter.
- *                 example: "The Beginning of Adventure"
- *               imageLink:
- *                 type: string
- *                 description: The URL link to the chapter's cover image.
- *                 example: "http://example.com/image.jpg"
+ *                 description: Title of the new chapter
+ *                 example: "The Journey Begins"
+ *               imageLinks:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: List of image URLs for the chapter pages
+ *                 example: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]
  *               isReturnNewData:
  *                 type: boolean
- *                 description: Whether to return the newly created chapter in the response.
+ *                 description: If true, the response includes the newly created chapter's details
  *                 example: true
  *     responses:
  *       201:
- *         description: Chapter created successfully.
+ *         description: Chapter created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -226,21 +276,33 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *                   example: Chapter created successfully.
  *                 data:
  *                   type: object
+ *                   description: Newly created chapter data (if isReturnNewData is true)
  *                   properties:
  *                     _id:
  *                       type: string
- *                       example: "60b8d95f1f10f14d4f0c9ae3"
- *                     title:
- *                       type: string
- *                       example: "chapter - 2: The Beginning of Adventure"
+ *                       example: "60c72b1f4f1a256a5c9e9b02"
  *                     manga:
  *                       type: string
- *                       example: "60b8d95f1f10f14d4f0c9ae2"
- *                     imageLink:
+ *                       example: "60c72b1f4f1a256a5c9e9b01"
+ *                     title:
  *                       type: string
- *                       example: "http://example.com/image.jpg"
+ *                       example: "Chapter - 1: The Journey Begins"
+ *                     imageLinks:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       example: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]
+ *                     chapterNum:
+ *                       type: integer
+ *                       example: 1
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *       400:
- *         description: Manga and title are required.
+ *         description: Bad Request - Manga and title are required
  *         content:
  *           application/json:
  *             schema:
@@ -251,8 +313,9 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *                   example: Manga and title are required.
  *                 data:
  *                   type: null
+ *                   example: null
  *       500:
- *         description: Internal Server Error
+ *         description: Server Error
  *         content:
  *           application/json:
  *             schema:
@@ -260,9 +323,10 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Server error
+ *                   example: Server error Unable to create chapter.
  *                 data:
  *                   type: null
+ *                   example: null
  */
 chapterRoute.post('/append', chapterController.appendChapter);
 /**
@@ -270,14 +334,17 @@ chapterRoute.post('/append', chapterController.appendChapter);
  * /chapters/update:
  *   put:
  *     summary: Update an existing chapter
- *     tags: [Chapter]
+ *     description: Updates the details of a chapter based on its ID. Checks for unique chapterNum within the same manga before updating.
+ *     tags:
+ *       - Chapter
  *     parameters:
- *       - name: id
- *         in: query
- *         required: true
+ *       - in: query
+ *         name: id
  *         schema:
  *           type: string
- *           description: The ID of the chapter to update
+ *         required: true
+ *         description: The ID of the chapter to update
+ *         example: "60c72b1f4f1a256a5c9e9b02"
  *     requestBody:
  *       required: true
  *       content:
@@ -287,18 +354,26 @@ chapterRoute.post('/append', chapterController.appendChapter);
  *             properties:
  *               title:
  *                 type: string
- *                 description: Title of the chapter
+ *                 description: New title of the chapter
+ *                 example: "Updated Chapter Title"
  *               isDeleted:
  *                 type: boolean
- *                 description: Indicates if the chapter is deleted
- *               imageLink:
+ *                 description: Flag to mark the chapter as deleted
+ *                 example: false
+ *               imageLinks:
  *                 type: array
  *                 items:
  *                   type: string
- *                 description: Array of image URLs for the chapter
+ *                 description: Updated list of image URLs for the chapter pages
+ *                 example: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]
+ *               chapterNum:
+ *                 type: integer
+ *                 description: New chapter number
+ *                 example: 5
  *               isReturnNewData:
  *                 type: boolean
- *                 description: If true, returns the updated chapter; if false, returns null
+ *                 description: If true, the response includes the updated chapter's details
+ *                 example: true
  *     responses:
  *       200:
  *         description: Chapter updated successfully
@@ -307,35 +382,77 @@ chapterRoute.post('/append', chapterController.appendChapter);
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
  *                 message:
  *                   type: string
+ *                   example: Chapter updated successfully.
  *                 data:
  *                   type: object
+ *                   description: Updated chapter data (if isReturnNewData is true)
  *                   properties:
  *                     _id:
  *                       type: string
- *                       format: uuid
+ *                       example: "60c72b1f4f1a256a5c9e9b02"
  *                     title:
  *                       type: string
+ *                       example: "Updated Chapter Title"
+ *                     imageLinks:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       example: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]
+ *                     chapterNum:
+ *                       type: integer
+ *                       example: 5
  *                     isDeleted:
  *                       type: boolean
- *                     createAt:
+ *                       example: false
+ *                     createdAt:
  *                       type: string
  *                       format: date-time
  *                     updatedAt:
  *                       type: string
  *                       format: date-time
- *                     imageLink:
- *                       type: array
- *                       items:
- *                         type: string
+ *       400:
+ *         description: Bad Request - chapterNum conflict or missing required fields
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Chapter number 5 already exists.
+ *                 data:
+ *                   type: null
+ *                   example: null
  *       404:
  *         description: Chapter not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Chapter not found.
+ *                 data:
+ *                   type: null
+ *                   example: null
  *       500:
- *         description: Server error
+ *         description: Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Server error Unable to update chapter.
+ *                 data:
+ *                   type: null
+ *                   example: null
  */
+
 chapterRoute.put('/update', chapterController.updateChapter);
 
 /**
@@ -454,7 +571,7 @@ chapterRoute.put('/update', chapterController.updateChapter);
 
 
 
-chapterRoute.post('/complex-get',chapterController.selfQueryChapter);
+chapterRoute.post('/complex-get', chapterController.selfQueryChapter);
 /**
  * @swagger
  * /chapters/updateImageLink:
@@ -489,7 +606,7 @@ chapterRoute.post('/complex-get',chapterController.selfQueryChapter);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/updateImageLink',chapterController.updateImageLink);
+chapterRoute.post('/updateImageLink', chapterController.updateImageLink);
 /**
  * @swagger
  * /chapters/appendImageLink:
@@ -506,7 +623,7 @@ chapterRoute.post('/updateImageLink',chapterController.updateImageLink);
  *               chapterId:
  *                 type: string
  *                 description: The ID of the chapter
- *               imageLink:
+ *               imageLinks:
  *                 type: string
  *                 description: The image link to append
  *     responses:
@@ -521,7 +638,7 @@ chapterRoute.post('/updateImageLink',chapterController.updateImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/appendImageLink',chapterController.appendImageLink);
+chapterRoute.post('/appendImageLink', chapterController.appendImageLink);
 
 /**
  * @swagger
@@ -560,7 +677,7 @@ chapterRoute.post('/appendImageLink',chapterController.appendImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/readImageLink',chapterController.readImageLink);
+chapterRoute.post('/readImageLink', chapterController.readImageLink);
 /**
  * @swagger
  * /chapters/removeImageLink:
@@ -592,7 +709,7 @@ chapterRoute.post('/readImageLink',chapterController.readImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/removeImageLink',chapterController.removeImageLink);
+chapterRoute.post('/removeImageLink', chapterController.removeImageLink);
 /**
  * @swagger
  * /chapters/insertImageLink:
@@ -609,7 +726,7 @@ chapterRoute.post('/removeImageLink',chapterController.removeImageLink);
  *               chapterId:
  *                 type: string
  *                 description: The ID of the chapter
- *               imageLink:
+ *               imageLinks:
  *                 type: string
  *                 description: The image link to insert
  *               pos:
@@ -627,7 +744,7 @@ chapterRoute.post('/removeImageLink',chapterController.removeImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/insertImageLink',chapterController.insertImageLink);
+chapterRoute.post('/insertImageLink', chapterController.insertImageLink);
 /**
  * @swagger
  * /chapters/get-list:
@@ -657,6 +774,13 @@ chapterRoute.post('/insertImageLink',chapterController.insertImageLink);
  *           type: integer
  *           default: 10
  *         description: Limit of chapters per page (default is 10)
+ *       - in: query
+ *         name: orderType
+ *         required: false
+ *         schema:
+ *           type: string
+ *           default: 'DESC'
+ *         description: order chapters by DESC or ASC
  *     responses:
  *       200:
  *         description: A successful response with a list of chapters
@@ -727,8 +851,200 @@ chapterRoute.post('/insertImageLink',chapterController.insertImageLink);
  *                 message:
  *                   type: string
  *                   example: Error fetching chapters
- *                 error:
- *                   type: string
+ *                 data:
+ *                   type: null
+ *                   example: null
  */
-chapterRoute.get('/get-list',chapterController.getChapterListByMangaId);
+
+chapterRoute.get('/get-list', chapterController.getChapterListByMangaId);
+
+/**
+ * @swagger
+ * /chapters/next:
+ *   get:
+ *     summary: Retrieve the next chapter of a manga
+ *     description: Fetches the next chapter of a specified manga based on the provided chapter number. Returns the next chapter with a higher chapter number if it exists.
+ *     tags:
+ *       - Chapter
+ *     parameters:
+ *       - in: query
+ *         name: mangaId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the manga
+ *         example: "60c72b1f4f1a256a5c9e9b01"
+ *       - in: query
+ *         name: chapterNum
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The current chapter number to find the next chapter for
+ *         example: 3
+ *     responses:
+ *       200:
+ *         description: Next chapter retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Next chapter retrieved successfully.
+ *                 data:
+ *                   type: object
+ *                   description: Details of the next chapter
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "60c72b1f4f1a256a5c9e9b02"
+ *                     chapterNum:
+ *                       type: integer
+ *                       example: 4
+ *                     title:
+ *                       type: string
+ *                       example: "Chapter - 4: The Adventure Continues"
+ *                     imageLinks:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       example: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]
+ *       400:
+ *         description: Bad Request - mangaId and chapterNum are required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: mangaId and chapterNum are required.
+ *                 data:
+ *                   type: null
+ *                   example: null
+ *       404:
+ *         description: Next chapter not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Next chapter not found.
+ *                 data:
+ *                   type: null
+ *                   example: null
+ *       500:
+ *         description: Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error fetching next chapter.
+ *                 data:
+ *                   type: null
+ *                   example: null
+ */
+
+chapterRoute.get('/next', chapterController.getNextChapter);
+/**
+ * @swagger
+ * /chapters/previous:
+ *   get:
+ *     summary: Retrieve the previous chapter of a manga
+ *     description: Fetches the previous chapter of a specified manga based on the provided chapter number. Returns the previous chapter with a lower chapter number if it exists.
+ *     tags:
+ *       - Chapter
+ *     parameters:
+ *       - in: query
+ *         name: mangaId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the manga
+ *         example: "60c72b1f4f1a256a5c9e9b01"
+ *       - in: query
+ *         name: chapterNum
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The current chapter number to find the previous chapter for
+ *         example: 4
+ *     responses:
+ *       200:
+ *         description: Previous chapter retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Previous chapter retrieved successfully.
+ *                 data:
+ *                   type: object
+ *                   description: Details of the previous chapter
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "60c72b1f4f1a256a5c9e9b02"
+ *                     chapterNum:
+ *                       type: integer
+ *                       example: 3
+ *                     title:
+ *                       type: string
+ *                       example: "Chapter - 3: The Journey Begins"
+ *                     imageLinks:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       example: ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]
+ *       400:
+ *         description: Bad Request - mangaId and chapterNum are required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: mangaId and chapterNum are required.
+ *                 data:
+ *                   type: null
+ *                   example: null
+ *       404:
+ *         description: Previous chapter not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Previous chapter not found.
+ *                 data:
+ *                   type: null
+ *                   example: null
+ *       500:
+ *         description: Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error fetching previous chapter.
+ *                 data:
+ *                   type: null
+ *                   example: null
+ */
+
+
+chapterRoute.get('/previous', chapterController.getPreviousChapter);
 export default chapterRoute;
