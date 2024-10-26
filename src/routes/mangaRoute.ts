@@ -5,11 +5,11 @@ import mangaController from '../controller/mangaController';
 const mangaRoute = express.Router();
 
 mangaRoute.post('/create-many-manga', (req: Request, res: Response, next: NextFunction) => {
-    mangaController.createManyManga(req, res,next);
+    mangaController.createManyManga(req, res, next);
 });
 
 mangaRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) => {
-    mangaController.getAll(req, res,next);
+    mangaController.getAll(req, res, next);
 });
 /**
  * @swagger
@@ -84,7 +84,7 @@ mangaRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) => 
  * */
 
 mangaRoute.get('/get-manga-byid', (req: Request, res: Response, next: NextFunction) => {
-    mangaController.getMangaById(req, res,next);
+    mangaController.getMangaById(req, res, next);
 });
 
 /**
@@ -120,7 +120,7 @@ mangaRoute.get('/get-manga-byid', (req: Request, res: Response, next: NextFuncti
 
 
 mangaRoute.put('/update-manga-byid', (req: Request, res: Response, next: NextFunction) => {
-    mangaController.updateMangaById(req, res,next);
+    mangaController.updateMangaById(req, res, next);
 });
 /**
  * @swagger
@@ -180,7 +180,7 @@ mangaRoute.put('/update-manga-byid', (req: Request, res: Response, next: NextFun
  * 
  * */
 mangaRoute.post('/create-manga', (req: Request, res: Response, next: NextFunction) => {
-    mangaController.createManga(req, res,next);
+    mangaController.createManga(req, res, next);
 });
 /**
  * @swagger
@@ -238,7 +238,7 @@ mangaRoute.post('/create-manga', (req: Request, res: Response, next: NextFunctio
  * */
 
 mangaRoute.put('/increase-view', (req: Request, res: Response, next: NextFunction) => {
-    mangaController.increaseView(req, res,next);
+    mangaController.increaseView(req, res, next);
 });
 
 /**
@@ -275,6 +275,129 @@ mangaRoute.put('/increase-view', (req: Request, res: Response, next: NextFunctio
  * 
  * */
 
-
+/**
+ * @swagger
+ * /manga/get-posters:
+ *   get:
+ *     summary: Retrieve manga posters with filters and pagination
+ *     description: Fetches manga posters based on optional filters such as genre, author, publisher, and sorting options. Supports pagination.
+ *     tags: [Manga]
+ *     parameters:
+ *       - in: query
+ *         name: searchValue
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Search term for filtering manga by name
+ *       - in: query
+ *         name: fillterGenre
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Genre to filter manga
+ *       - in: query
+ *         name: fillterAuthor
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Author to filter manga
+ *       - in: query
+ *         name: fillterPublisher
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Publisher to filter manga
+ *       - in: query
+ *         name: sortType
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [ascName, descName, latest-story, most-viewed, follow, star]
+ *         description: Sort order for the manga list
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number for pagination (default is 1)
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         description: Number of posters per page (default is 20)
+ *       - in: query
+ *         name: status
+ *         required: false
+ *         schema:
+ *           type: integer
+ *         description: Status filter for manga
+ *     responses:
+ *       200:
+ *         description: Successful response with a list of manga posters
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Thành công
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     docs:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           imageUrl:
+ *                             type: string
+ *                             example: "https://example.com/image.jpg"
+ *                           status:
+ *                             type: number
+ *                             example: 1
+ *                           name:
+ *                             type: string
+ *                             example: "Manga Title"
+ *                     totalDocs:
+ *                       type: integer
+ *                       example: 100
+ *                     limit:
+ *                       type: integer
+ *                       example: 20
+ *                     totalPages:
+ *                       type: integer
+ *                       example: 5
+ *                     page:
+ *                       type: integer
+ *                       example: 1
+ *       400:
+ *         description: Bad request due to invalid query parameters
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Invalid query parameters
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error fetching posters
+ *                 data:
+ *                   type: null
+ *                   example: null
+ */
+mangaRoute.get('/get-posters', mangaController.getPosters);
 
 export default mangaRoute;

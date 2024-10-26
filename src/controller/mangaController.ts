@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import MangaModel from '../models/MangaModel';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
-
+import fileController from '../controller/fileController';
 dotenv.config();
 
 const createManyManga = asyncHandler(async (req: Request, res: Response) => {
@@ -92,15 +92,15 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
         populate: [
             {
                 path: 'author',
-                select: '_id name isDeleted' 
+                select: '_id name isDeleted'
             },
             {
                 path: 'publisher',
-                select: '_id name isDeleted' 
+                select: '_id name isDeleted'
             },
             {
                 path: 'genres',
-                select: '_id name slug isDeleted' 
+                select: '_id name slug isDeleted'
             }
         ]
     };
@@ -120,9 +120,9 @@ const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResp
 
     if (id) {
         const manga = await MangaModel.findById(id)
-        .populate('author', '_id name isDeleted')
-        .populate('publisher', '_id name isDeleted')
-        .populate('genres', '_id name slug isDeleted')
+            .populate('author', '_id name isDeleted')
+            .populate('publisher', '_id name isDeleted')
+            .populate('genres', '_id name slug isDeleted')
 
 
         if (!manga) {
@@ -145,7 +145,7 @@ const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResp
 
 const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
     const { _id } = req.body;
-    console.log("req.body",req.body)
+    console.log("req.body", req.body)
     // Ensure _id is provided
     if (!_id) {
         res.status(400); // Bad Request
@@ -169,7 +169,9 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericR
         message: "Thành công",
         data: updateManga,
     };
-
+    if (data.name && data.name !== updateManga.name) {
+        fileController.changeFolderName(data.name, updateManga.name);
+    }
     res.status(200).json(response);
 });
 
@@ -225,6 +227,90 @@ const increaseView = asyncHandler(async (req: Request, res: Response<GenericResp
     }
 });
 
+const getPosters = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const {
+        searchValue,
+        fillterGenre,
+        fillterAuthor,
+        fillterPublisher,
+        sortType,
+        page = 1,
+        limit = 20,
+        status
+    }: {
+        searchValue?: string;
+        fillterGenre?: string;
+        sortType?: 'ascName' | 'descName' | 'latest-story' | 'most-viewed' | 'follow' | 'star';
+        page?: number;
+        limit?: number;
+        fillterAuthor?: string;
+        fillterPublisher?: string;
+        status?: number;
+    } = req.query;
+
+    const filter: any = {};
+    const sort: any = {};
+
+    if (searchValue) {
+        const regex = new RegExp(searchValue, 'i');
+        filter.name = { '$regex': regex };
+    }
+    if (fillterGenre) {
+        filter.genres = fillterGenre;
+    }
+    if (fillterAuthor) {
+        filter.author = fillterAuthor;
+    }
+    if (status) {
+        filter.status = status;
+    }
+    if (fillterPublisher) {
+        filter.publisher = fillterPublisher;
+    }
+    if (sortType) {
+        switch (sortType) {
+            case 'descName':
+                sort.name = -1;
+                break;
+            case 'ascName':
+                sort.name = 1;
+                break;
+            case 'latest-story':
+                sort.createdAt = -1;
+                break;
+            case 'follow':
+                sort.followersCount = -1;
+                break;
+            case 'star':
+                sort.rating = -1;
+                break;
+            default:
+                sort.views = -1;
+        }
+    }
+
+    const options = {
+        page,
+        limit,
+        sort,
+        select: "imageUrl status name",
+        populate: [
+            {
+                path: 'author',
+                select: 'name -_id'
+            }
+        ]
+    };
+
+    const manga = await MangaModel.paginate(filter, options);
+
+    const response: GenericResponse<typeof manga> = {
+        message: "Thành công",
+        data: manga,
+    };
+
+    res.status(200).json(response);
+});
 
 export default {
     createManyManga,
@@ -233,5 +319,5 @@ export default {
     updateMangaById,
     createManga,
     increaseView,
-    
+    getPosters,
 };

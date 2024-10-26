@@ -9,7 +9,8 @@ export interface Chapter extends Document {
     isDeleted: boolean;
     createAt: Date;
     updatedAt: Date;
-    imageLink: string[];
+    imageLinks: string[];
+    chapterNum: number;
 }
 
 const ChapterSchema: Schema = new Schema(
@@ -18,6 +19,7 @@ const ChapterSchema: Schema = new Schema(
         title: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
         imageLinks: { type: [String], required: true },
+        chapterNum: {type: Number,required: true, default:1}
     },
     {
         timestamps: true,

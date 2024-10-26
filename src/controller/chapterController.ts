@@ -4,18 +4,19 @@ import ChapterModel, { Chapter } from '../models/ChapterModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
+import fileController from './fileController';
+import notificationController from './notificationController';
+import MangaModel, { Manga } from '../models/MangaModel';
 
 dotenv.config();
 
 const createManyChapter = asyncHandler(async (req: Request, res: Response) => {
     const { tb_Chapter } = req.body;
 
-    await Promise.all(tb_Chapter.map(async (chapter: { _id: string }) => {
-        await ChapterModel.create({
-            ...chapter,
-            _id: new mongoose.Types.ObjectId(chapter._id),
-        });
-    }));
+    // Delete all existing chapters
+    await ChapterModel.deleteMany({});
+    // Insert the new chapters
+    await ChapterModel.insertMany(tb_Chapter);
 
     res.status(200).json({
         status: 200,
@@ -127,19 +128,25 @@ const getAdvancedPaginatedChapter = async (req: Request, res: Response) => {
 
 const getChapterListByMangaId = async (req: Request, res: Response) => {
     try {
-        const { mangaId } = req.query;
-        const { page = 1, limit = 10 } = req.query; // Default to page 1, limit 10
+        const { mangaId, orderType = 'DESC', page = 1, limit = 10 } = req.query;
 
         if (!mangaId) {
-            return res.status(400).json({ message: 'mangaId is required' });
+            const errorResponse: GenericResponse<null> = {
+                message: 'mangaId is required',
+                data: null
+            };
+            return res.status(400).json(errorResponse);
         }
 
-        // Paginate query
+        // Determine sort order based on orderType
+        const sortOrder = orderType === 'ASC' ? 1 : -1;
+
+        // Paginate options with sort and field selection
         const options = {
             page: Number(page),
             limit: Number(limit),
-            sort: { createdAt: -1 }, // Sort by createdAt in descending order
-            select: 'title updatedAt _id' // Select only the fields you need
+            sort: { chapterNum: sortOrder }, // Sort by chapterNum based on orderType
+            select: 'chapterNum title updatedAt _id' // Only select necessary fields
         };
 
         // Fetching chapters with pagination
@@ -148,9 +155,6 @@ const getChapterListByMangaId = async (req: Request, res: Response) => {
             options
         );
 
-        // Sort titles naturally after fetching
-        chapters.docs.sort((a: any, b: any) => a.title.localeCompare(b.title, undefined, { numeric: true }));
-
         const response: GenericResponse<typeof chapters> = {
             message: 'Chapters retrieved successfully',
             data: chapters
@@ -158,13 +162,18 @@ const getChapterListByMangaId = async (req: Request, res: Response) => {
 
         return res.status(200).json(response);
     } catch (error) {
-        return res.status(500).json({ message: 'Error fetching chapters', error });
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error fetching chapters:' + error,
+            data: null,
+        };
+        return res.status(500).json(errorResponse);
     }
 };
 
 
+
 const appendChapter = async (req: Request, res: Response) => {
-    const { manga, title, imageLink, isReturnNewData } = req.body;
+    const { manga = "", title = "", imageLinks = [], isReturnNewData = false } = req.body;
 
     if (!manga || !title) {
         const errorResponse: GenericResponse<null> = {
@@ -173,22 +182,32 @@ const appendChapter = async (req: Request, res: Response) => {
         };
         return res.status(400).json(errorResponse);
     }
-
     try {
-        const lastTitle = await getLastTitle(manga);
+        // Find the last chapter of the manga based on chapterNum
+        const lastChapter = await ChapterModel
+            .findOne({ manga: manga })
+            .sort({ chapterNum: -1 })
+            .select('chapterNum')
+            .exec();
 
-        const match = lastTitle.match(/chapter\s-\s([\d.]+)/i) ?? "0";
-        const number = Math.floor(Number(match[1])) + 1;
-        console.log(lastTitle, "-", match[1], "-", number);
+        // Ensure chapterNum is cast to an integer, then increment
+        const lastChapterNum = lastChapter ? Math.floor(lastChapter.chapterNum) : 0;
+        const newChapterNum = lastChapterNum + 1;
 
-        const chapter = new ChapterModel({ manga: manga, title: "chapter - " + number + ": " + title, imageLink: imageLink });
+        const chapter = new ChapterModel({
+            manga: manga,
+            title: `Chapter - ${newChapterNum}: ${title}`,
+            imageLinks: imageLinks,
+            chapterNum: newChapterNum
+        });
+
         const newChapter: Chapter = await chapter.save();
 
         const response: GenericResponse<typeof newChapter | null> = {
             message: "Chapter created successfully.",
             data: isReturnNewData ? newChapter : null
         };
-
+        broadcastToUser(newChapter.manga, newChapter.title);
         res.status(201).json(response);
     } catch (error: any) {
         const errorResponse: GenericResponse<null> = {
@@ -199,17 +218,38 @@ const appendChapter = async (req: Request, res: Response) => {
     }
 };
 
+
 const updateChapter = async (req: Request, res: Response) => {
     const id = new mongoose.Types.ObjectId(req.query.id as string);
-    const { title, isDeleted, imageLink, isReturnNewData } = req.body;
+    const { title, isDeleted, imageLinks, chapterNum, isReturnNewData } = req.body;
 
     try {
+        // Check if a chapter with the same chapterNum already exists (excluding the current chapter)
+        if (chapterNum) {
+            const existingChapter = await ChapterModel.findOne({
+                _id: { $ne: id },
+                manga: req.body.manga, // Ensure we check within the same manga
+                chapterNum: chapterNum,
+                isDeleted: false
+            });
+
+            if (existingChapter) {
+                const errorResponse: GenericResponse<null> = {
+                    message: `Chapter number ${chapterNum} already exists.`,
+                    data: null
+                };
+                return res.status(400).json(errorResponse);
+            }
+        }
+
+        // Proceed with the update if chapterNum is unique or not provided
         const updatedChapter = await ChapterModel.findByIdAndUpdate(
             id,
             {
                 ...(title && { title }),
                 ...(isDeleted !== undefined && { isDeleted }),
-                ...(imageLink && { imageLink }) // Include imageLink update
+                ...(imageLinks && { imageLinks }), // Include imageLinks update
+                ...(chapterNum && { chapterNum }) // Include chapterNum update
             },
             { new: true } // Return updated document if requested
         );
@@ -226,7 +266,9 @@ const updateChapter = async (req: Request, res: Response) => {
             message: "Chapter updated successfully.",
             data: isReturnNewData ? updatedChapter : null // Return updated data if requested
         };
-
+        if (title && title !== updatedChapter.title) {
+            fileController.changeFolderName(title, updatedChapter.title);
+        }
         res.status(200).json(response);
     } catch (error: any) {
         const errorResponse: GenericResponse<null> = {
@@ -237,14 +279,6 @@ const updateChapter = async (req: Request, res: Response) => {
     }
 };
 
-
-async function getLastTitle(manga: unknown): Promise<string> {
-    const lastChapter = await ChapterModel.findOne({ manga: manga })
-        .sort({ createdAt: -1 })
-        .select('title');
-
-    return lastChapter ? lastChapter.title : Date.now().toString(); // Return epoch time if null
-}
 
 const selfQueryChapter = async (req: Request, res: Response) => {
     try {
@@ -289,12 +323,99 @@ const selfQueryChapter = async (req: Request, res: Response) => {
     }
 };
 
+const getNextChapter = async (req: Request, res: Response) => {
+    const { mangaId, chapterNum } = req.query;
+
+    if (!mangaId || !chapterNum) {
+        const response: GenericResponse<null> = {
+            message: "mangaId and chapterNum are required.",
+            data: null
+        }
+        return res.status(400).json(response);
+    }
+
+    try {
+        // Find the next chapter with a higher chapterNum in the same manga
+        const nextChapter = await ChapterModel.findOne({
+            manga: mangaId,
+            chapterNum: { $gt: Number(chapterNum) },
+            isDeleted: false
+        })
+            .sort({ chapterNum: 1 }) // Sort to get the immediate next chapter
+            .select('chapterNum title _id imageLinks'); // Include imageLinks
+
+        if (!nextChapter) {
+            const response: GenericResponse<null> = {
+                message: "Next chapter not found.",
+                data: null
+            }
+            return res.status(404).json(response);
+        }
+
+        const response: GenericResponse<typeof nextChapter> = {
+            message: "Next chapter retrieved successfully.",
+            data: nextChapter
+        };
+        res.status(200).json(response);
+    } catch (error) {
+        const response: GenericResponse<null> = {
+            message: "Error fetching next chapter:" + error,
+            data: null
+        };
+        return res.status(500).json(response);
+    }
+};
+
+const getPreviousChapter = async (req: Request, res: Response) => {
+    const { mangaId, chapterNum } = req.query;
+
+    if (!mangaId || !chapterNum) {
+        const response: GenericResponse<null> = {
+            message: "mangaId and chapterNum are required.",
+            data: null
+        }
+        return res.status(400).json(response);
+    }
+
+    try {
+        // Find the previous chapter with a lower chapterNum in the same manga
+        const previousChapter = await ChapterModel.findOne({
+            manga: mangaId,
+            chapterNum: { $lt: Number(chapterNum) },
+            isDeleted: false
+        })
+            .sort({ chapterNum: -1 }) // Sort to get the immediate previous chapter
+            .select('chapterNum title _id imageLinks'); // Include imageLinks
+
+        if (!previousChapter) {
+            const response: GenericResponse<null> = {
+                message: "Previous chapter not found.",
+                data: null
+            }
+            return res.status(404).json(response);
+        }
+
+        const response: GenericResponse<typeof previousChapter> = {
+            message: "Previous chapter retrieved successfully.",
+            data: previousChapter
+        };
+        res.status(200).json(response);
+    } catch (error) {
+        const response: GenericResponse<null> = {
+            message: "Error fetching previous chapter:" + error,
+            data: null
+        };
+        return res.status(500).json(response);
+    }
+};
+
+
 const insertImageLink = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { chapterId, imageLink, pos } = req.body;
+        const { chapterId, imageLinks, pos } = req.body;
         const result = await ChapterModel.updateOne(
             { _id: chapterId },
-            { $splice: { imageLinks: { $position: pos, $each: [imageLink] } } } // Insert at position
+            { $splice: { imageLinks: { $position: pos, $each: [imageLinks] } } } // Insert at position
         );
 
         if (result.modifiedCount === 0) {
@@ -338,12 +459,12 @@ const readImageLink = async (req: Request, res: Response): Promise<void> => {
             { imageLinks: { $slice: [pos, 1] } } // Read image link at position
         );
 
-        if (!chapter || chapter.imageLink.length === 0) {
+        if (!chapter || chapter.imageLinks.length === 0) {
             res.status(404).json({ message: 'Chapter not found or no image link at this position' });
             return;
         }
 
-        res.status(200).json({ message: 'Image link retrieved successfully', data: chapter.imageLink[0] });
+        res.status(200).json({ message: 'Image link retrieved successfully', data: chapter.imageLinks[0] });
     } catch (error) {
         res.status(500).json({ message: JSON.stringify(error), data: null });
     }
@@ -351,22 +472,22 @@ const readImageLink = async (req: Request, res: Response): Promise<void> => {
 
 const appendImageLink = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { chapterId, imageLink } = req.body;
+        const { chapterId, imageLinks } = req.body;
 
         const result = await ChapterModel.updateOne(
             { _id: chapterId },
-            { $push: { imageLinks: imageLink } } // Append image link
+            { $push: { imageLinks: imageLinks } } // Append image link
         );
 
         if (result.modifiedCount === 0) {
-            res.status(404).json({ message: 'Chapter not found or no changes made' });
+            res.status(404).json({ message: 'Chapter not found or no changes made', data: null } as GenericResponse<null>);
             return;
         }
 
         const updatedChapter = await ChapterModel.findById(chapterId);
-        res.status(200).json({ message: 'Image link appended successfully', data: updatedChapter });
+        res.status(200).json({ message: 'Image link appended successfully', data: updatedChapter } as GenericResponse<Chapter>);
     } catch (error) {
-        res.status(500).json({ message: JSON.stringify(error), data: null });
+        res.status(500).json({ message: JSON.stringify(error), data: null } as GenericResponse<null>);
     }
 };
 
@@ -380,16 +501,24 @@ const updateImageLink = async (req: Request, res: Response): Promise<void> => {
         );
 
         if (result.modifiedCount === 0) {
-            res.status(404).json({ message: 'Chapter not found or no changes made' });
+            res.status(404).json({ message: 'Chapter not found or no changes made', data: null } as GenericResponse<null>);
             return;
         }
 
         const updatedChapter = await ChapterModel.findById(chapterId);
-        res.status(200).json({ message: 'Image link updated successfully', data: updatedChapter });
+        res.status(200).json({ message: 'Image link updated successfully', data: updatedChapter } as GenericResponse<Chapter>);
     } catch (error) {
-        res.status(500).json({ message: JSON.stringify(error), data: null });
+        res.status(500).json({ message: JSON.stringify(error), data: null } as GenericResponse<null>);
     }
 };
+
+async function broadcastToUser(mangaId: mongoose.Types.ObjectId, newChapterTitle: string) {
+    const manga: Manga | null = await MangaModel.findById(mangaId, { _id: 0, name: 1, imageUrl: 1 });
+    if (!manga) {
+        return;
+    }
+    notificationController.broadcastNewChapter(`${manga.imageUrl}||Truyện bạn theo dõi ${manga.name} đã có chapter mới: ${newChapterTitle}`, mangaId)
+}
 
 export default {
     createManyChapter,
@@ -404,4 +533,6 @@ export default {
     removeImageLink,
     insertImageLink,
     getChapterListByMangaId,
+    getNextChapter,
+    getPreviousChapter
 };
