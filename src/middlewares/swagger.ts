@@ -15,6 +15,20 @@ const options = {
         url: process.env.SERVER_API_URL || 'http://localhost:3001', // Change this based on your environment
       },
     ],
+    components: {
+      securitySchemes: {
+        Bearer: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT', // Optional, specify the format if necessary
+        },
+      },
+    },
+    security: [
+      {
+        Bearer: [], // Apply Bearer security globally
+      },
+    ],
   },
   apis: ['./src/routes/*.ts', './src/routes/*.js', './src/models/*.ts', './src/models/*.js'], // This will point to the routes for swagger annotations
 };

@@ -14,7 +14,10 @@ const RoleSchema: Schema = new mongoose.Schema(
         name: { type: String, required: true } 
     },
     {
-        timestamps: true 
+        timestamps: true,
+        toJSON: { virtuals: true, versionKey: false }, // Remove __v
+        toObject: { virtuals: true, versionKey: false }, // Also applies to plain objects
+        id: false // Disable the virtual id field 
     }
 );
 /**

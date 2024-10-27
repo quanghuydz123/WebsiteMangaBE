@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import AuthorModel, { Author } from '../models/AuthorModel';
+import AuthorModel from '../models/AuthorModel';
 import mongoose from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';

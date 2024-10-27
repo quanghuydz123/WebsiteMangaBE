@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import UserModel, { User } from '../models/UserModel';
+import UserModel, { IUser } from '../models/UserModel';
 import ChapterModel from '../models/ChapterModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
@@ -53,7 +53,7 @@ const getAll = asyncHandler(async (req: Request, res: Response<any>): Promise<vo
 
 const createManyUser = asyncHandler(async (req: Request, res: Response) => {
     const { tb_User } = req.body;
-    const userNews: User[] = [];
+    const userNews: IUser[] = [];
 
     await Promise.all(tb_User.map(async (user: { _id: string }) => {
         console.log(user);
@@ -159,7 +159,7 @@ const login = asyncHandler(async (req: Request, res: Response<GenericResponse<{ 
 });
 
 
-const register = asyncHandler(async (req: Request, res: Response<GenericResponse<{ newUser: User } | null>>): Promise<void> => {
+const register = asyncHandler(async (req: Request, res: Response<GenericResponse<{ newUser: IUser } | null>>): Promise<void> => {
     const { email, password, confirmPassword, userName } = req.body; // Corrected spelling from comfirmPassword to confirmPassword
 
     try {
@@ -208,7 +208,7 @@ const register = asyncHandler(async (req: Request, res: Response<GenericResponse
     }
 });
 
-const changePassword = asyncHandler(async (req: Request, res: Response<GenericResponse<{ code: User | null } | null>>): Promise<void> => {
+const changePassword = asyncHandler(async (req: Request, res: Response<GenericResponse<{ code: IUser | null } | null>>): Promise<void> => {
     const { email, password, confirmPassword } = req.body; // Corrected spelling from comfirmPassword to confirmPassword
 
     try {
@@ -257,7 +257,7 @@ const changePassword = asyncHandler(async (req: Request, res: Response<GenericRe
     }
 });
 
-const loginGoogle = asyncHandler(async (req: Request, res: Response<GenericResponse<{ user: User; accessToken: string } | null>>): Promise<void> => {
+const loginGoogle = asyncHandler(async (req: Request, res: Response<GenericResponse<{ user: IUser; accessToken: string } | null>>): Promise<void> => {
     const { email, name, photo }: { email: string; name: string; photo: string } = req.body;
 
     try {
@@ -303,7 +303,7 @@ const loginGoogle = asyncHandler(async (req: Request, res: Response<GenericRespo
 });
 
 
-const addReadingHistory = asyncHandler(async (req: Request, res: Response<GenericResponse<User | null>>): Promise<void> => {
+const addReadingHistory = asyncHandler(async (req: Request, res: Response<GenericResponse<IUser | null>>): Promise<void> => {
     const { idUser, idChapter } = req.body;
 
     try {
@@ -341,7 +341,7 @@ const addReadingHistory = asyncHandler(async (req: Request, res: Response<Generi
         });
     }
 });
-const blockUser = asyncHandler(async (req: Request, res: Response<GenericResponse<User | null>>): Promise<void> => {
+const blockUser = asyncHandler(async (req: Request, res: Response<GenericResponse<IUser | null>>): Promise<void> => {
     const { idUser} = req.body;
 
     try {
