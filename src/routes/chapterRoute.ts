@@ -1047,4 +1047,78 @@ chapterRoute.get('/next', chapterController.getNextChapter);
 
 
 chapterRoute.get('/previous', chapterController.getPreviousChapter);
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Chapter
+ *     description: Operations related to chapters
+ * 
+ * /chapters/read:
+ *   get:
+ *     summary: Retrieve all image links for a specific chapter
+ *     tags: [Chapter]
+ *     parameters:
+ *       - name: chapterId
+ *         in: query
+ *         required: true
+ *         description: The ID of the chapter to retrieve image links for.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Image links retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "image links retrieved successfully."
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     imageLinks:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *       400:
+ *         description: chapterId is required.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "chapterId is required."
+ *                 data:
+ *                   type: null
+ *       404:
+ *         description: Image links not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "image links not found."
+ *                 data:
+ *                   type: null
+ *       500:
+ *         description: Error fetching image links.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error fetching image links: <error_message>"
+ *                 data:
+ *                   type: null
+ */
+chapterRoute.get('/read',chapterController.getAllImageLinksByChapterId);
 export default chapterRoute;
