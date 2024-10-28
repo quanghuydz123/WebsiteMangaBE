@@ -15,7 +15,8 @@ dotenv.config(); // Load environment variables at the start
 
 const app = express();
 const port = process.env.PORT || 3001;
-const allowedOrigins = ['http://localhost:3000']; // Specify allowed origins
+const SERVER_URL = process.env.SERVER_API_URL || 'http://localhost:3001';
+const allowedOrigins = ['http://localhost:3000', SERVER_URL]; // Specify allowed origins
 
 // Middleware Setup
 app.use(cors({
