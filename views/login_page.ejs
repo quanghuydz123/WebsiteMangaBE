@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <% if (user) { %>
+            <h1>Chào mừng, <%= user.name %>!</h1> <!-- Display user name -->
+            <p>Dạn đang đăng nhập với vai trò:<strong>
+                    <%= user.email %>
+                </strong>.</p> <!-- Display user email -->
+            <hr>
+            <%- JSON.stringify(user).replaceAll(',','<br>') %>
+                <hr>
+                <div class="api-docs">
+                    <h2>qua trang swagger</h2>
+                    <button>
+                        <a href="/api-docs" class="btn">Nhấn vào đây</a> <!-- Link to Swagger UI -->
+                    </button>
+                </div>
+
+                <div class="logout">
+                    <form action="/auth/logout" method="POST"> <!-- Adjust the action to your logout route -->
+                        <button type="submit">Thoát</button>
+                    </form>
+                </div>
+                <% } else { %>
+                    <h1>Phải đăng nhập</h1>
+                    <p>phải có đăng nhập mới dùng được api.</p>
+
+                    <div class="google-login">
+                        <h2>Dùng tài khoản Google</h2>
+                        <button>
+                            <a href="/auth/swagger/google" class="btn">Google</a>
+                        </button>
+                    </div>
+                    <% } %>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>
