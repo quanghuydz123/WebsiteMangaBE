@@ -279,6 +279,45 @@ const updateChapter = async (req: Request, res: Response) => {
     }
 };
 
+const getAllImageLinksByChapterId = async(req: Request, res: Response) => {
+    const { chapterId="" } = req.query;
+
+    if (!chapterId) {
+        const response: GenericResponse<null> = {
+            message: "chapterId is required.",
+            data: null
+        }
+        return res.status(400).json(response);
+    }
+
+    try {
+        // Find the image links 
+        const imageLinks = await ChapterModel.findOne({
+            _id: chapterId
+        })
+            .select('imageLinks');
+
+        if (!imageLinks) {
+            const response: GenericResponse<null> = {
+                message: "image links not found.",
+                data: null
+            }
+            return res.status(404).json(response);
+        }
+
+        const response: GenericResponse<typeof imageLinks> = {
+            message: "image links retrieved successfully.",
+            data: imageLinks
+        };
+        res.status(200).json(response);
+    } catch (error) {
+        const response: GenericResponse<null> = {
+            message: "Error fetching image links:" + error,
+            data: null
+        };
+        return res.status(500).json(response);
+    }
+};
 
 const selfQueryChapter = async (req: Request, res: Response) => {
     try {
@@ -534,5 +573,6 @@ export default {
     insertImageLink,
     getChapterListByMangaId,
     getNextChapter,
-    getPreviousChapter
+    getPreviousChapter,
+    getAllImageLinksByChapterId
 };
