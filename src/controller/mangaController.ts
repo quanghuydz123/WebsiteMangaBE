@@ -312,6 +312,51 @@ const getPosters = asyncHandler(async (req: Request, res: Response<GenericRespon
     res.status(200).json(response);
 });
 
+
+const StatisticsByView  = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const {page=1,limit=10} = req.query
+    const options:any = {
+        page,
+        limit,
+        sort:{views:-1},
+        select: "_id name views",
+    };
+    const manga = await MangaModel.paginate({}, options);
+    res.status(200).json({
+        message:'Thành công',
+        data:manga
+    });
+});
+
+const StatisticsByFollow = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const {page=1,limit=10} = req.query
+    const options:any = {
+        page,
+        limit,
+        sort:{followersCount:-1},
+        select: "_id name followersCount",
+    };
+    const manga = await MangaModel.paginate({}, options);
+    res.status(200).json({
+        message:'Thành công',
+        data:manga
+    });
+});
+
+const StatisticsByRating = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const {page=1,limit=10} = req.query
+    const options:any = {
+        page,
+        limit,
+        sort:{rating:-1},
+        select: "_id name rating",
+    };
+    const manga = await MangaModel.paginate({}, options);
+    res.status(200).json({
+        message:'Thành công',
+        data:manga
+    });
+});
 export default {
     createManyManga,
     getAll,
@@ -320,4 +365,7 @@ export default {
     createManga,
     increaseView,
     getPosters,
+    StatisticsByView,
+    StatisticsByFollow,
+    StatisticsByRating
 };
