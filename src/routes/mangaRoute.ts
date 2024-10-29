@@ -400,4 +400,117 @@ mangaRoute.put('/increase-view', (req: Request, res: Response, next: NextFunctio
  */
 mangaRoute.get('/get-posters', mangaController.getPosters);
 
+
+mangaRoute.get('/statistics-view', mangaController.StatisticsByView);
+/**
+ * @swagger
+ * /manga/statistics-view:
+ *   get:
+ *     summary: statistics manga by view
+ *     tags: [Manga]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         description: page (mặc dịnh là 1)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         description: limit (mặc định là 10)
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:   
+ *         description: manga by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 manga:
+ *                   $ref: '#/components/schemas/Manga'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+
+mangaRoute.get('/statistics-follow', mangaController.StatisticsByFollow);
+/**
+ * @swagger
+ * /manga/statistics-follow:
+ *   get:
+ *     summary: statistics manga by follow
+ *     tags: [Manga]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         description: page (mặc dịnh là 1)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         description: limit (mặc định là 10)
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:   
+ *         description: manga by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 manga:
+ *                   $ref: '#/components/schemas/Manga'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+mangaRoute.get('/statistics-rating', mangaController.StatisticsByRating);
+/**
+ * @swagger
+ * /manga/statistics-rating:
+ *   get:
+ *     summary: statistics manga by rating
+ *     tags: [Manga]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         description: page (mặc dịnh là 1)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         description: limit (mặc định là 10)
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:   
+ *         description: manga by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 manga:
+ *                   $ref: '#/components/schemas/Manga'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
 export default mangaRoute;
