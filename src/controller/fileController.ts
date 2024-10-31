@@ -537,14 +537,19 @@ const getImageForHTMLImgTag = async (req: Request, res: Response) => {
         const base64Data = image.data.split(',')[1]; // Split to get only the base64 part
         const imgBuffer = Buffer.from(base64Data, 'base64');
 
-        // Set the content type and send the image buffer
+        // Set the content type and caching headers for 1 hour
         res.set('Content-Type', contentType);
+        res.set('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+        res.set('Expires', new Date(Date.now() + 3600 * 1000).toUTCString()); // Set expiration date to 1 hour later
+
+        // Send the image buffer
         res.send(imgBuffer);
     } catch (error) {
         console.error('Error retrieving image:', error); // Log the error for debugging
         res.status(500).json({ message: 'Unable to retrieve image', data: null });
     }
 };
+
 
 const getImagesFromFolderPaginate = async (req: Request, res: Response) => {
     try {
