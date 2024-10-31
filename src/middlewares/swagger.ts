@@ -7,7 +7,14 @@ const options = {
     openapi: '3.0.0',
     info: {
       title: 'CNPMM Database API',
-      version: (new Date()).toDateString(),
+      version: new Date().toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false // Use true for 12-hour format
+      }),
       description: 'API documentation for CMPMM MongoDB integration',
     },
     servers: [
