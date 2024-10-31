@@ -16,30 +16,33 @@ dotenv.config(); // Load environment variables at the start
 const app = express();
 const port = process.env.PORT || 3001;
 const SERVER_URL = process.env.SERVER_API || 'http://localhost:3001';
-const allowedOrigins = ['http://localhost:3000', SERVER_URL]; // Specify allowed origins
+const FRONTEND_URL = 'http://localhost:3000';
+const allowedOrigins = [FRONTEND_URL, SERVER_URL];// Specify allowed origins
 
 // Middleware Setup
 app.use(cors({
     origin: (origin, callback) => {
-        if (allowedOrigins.indexOf(origin!) !== -1 || !origin) {
-            callback(null, origin);
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true, // This allows the server to accept credentials (cookies)
+    credentials: true, // Allows server to accept cookies and credentials from allowed origins
 }));
 app.use(express.json({ limit: '10mb' }));
-app.use(cookieParser()); // Place cookieParser before session
+app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // Set secure: true in production with HTTPS
+    cookie: {
+        secure: true,
+        sameSite: 'none', // Required for cross-site cookies
+    },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 // Connect to the database
 connectDb(app);
 

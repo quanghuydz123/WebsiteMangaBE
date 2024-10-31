@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const generateJWT = async (req: Request, res: Response) => {
+
     try {
         // Ensure user exists before accessing properties
         if (!req.user) {
@@ -12,14 +13,20 @@ const generateJWT = async (req: Request, res: Response) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ id: req.user._id, roleId: req.user.role }, process.env.JWT_SECRET!, {
-            expiresIn: '1h',
+        const token = jwt.sign(
+            { id: req.user._id, roleId: req.user.role },
+            process.env.JWT_SECRET!,
+            { expiresIn: '1h' }
+        );
+
+        // Set the token as a cookie with cross-domain options
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none', // Required for cross-domain cookie
+            maxAge: 3600000,
         });
-
-        //  set the token as a cookie
-        res.cookie('jwt', token, { httpOnly: true });
-
-        res.redirect(`http://localhost:3000?user=${encodeURIComponent(JSON.stringify(req.user))}`);
+        res.redirect(`http://localhost:3000?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
 
         // Redirect to the frontend with user info
     } catch (error) {
