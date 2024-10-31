@@ -145,7 +145,6 @@ const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResp
 
 const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
     const { _id } = req.body;
-    console.log("req.body", req.body)
     // Ensure _id is provided
     if (!_id) {
         res.status(400); // Bad Request
@@ -158,7 +157,10 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericR
 
     delete data._id; // Remove _id from data to avoid conflicts
 
-    const updateManga = await MangaModel.findByIdAndUpdate(_id, data, { new: true });
+    const updateManga = await MangaModel.findByIdAndUpdate(_id, data, { new: true })
+    .populate('author', '_id name isDeleted')
+    .populate('publisher', '_id name isDeleted')
+    .populate('genres', '_id name slug isDeleted');
 
     if (!updateManga) {
         res.status(404); // Not Found
@@ -180,10 +182,13 @@ const createManga = asyncHandler(async (req: Request, res: Response<GenericRespo
 
     try {
         const manga = await MangaModel.create(data);
-
-        const response: GenericResponse<typeof manga> = {
+        const populatedManga = await MangaModel.findById(manga._id)
+        .populate('author', '_id name isDeleted')
+        .populate('publisher', '_id name isDeleted')
+        .populate('genres', '_id name slug isDeleted');;
+        const response: GenericResponse<typeof populatedManga> = {
             message: "Thành công",
-            data: manga,
+            data: populatedManga,
         };
 
         res.status(201).json(response); // Updated to 201 for Created
@@ -357,6 +362,25 @@ const StatisticsByRating = asyncHandler(async (req: Request, res: Response<Gener
         data:manga
     });
 });
+
+const deleteManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const {idManga} = req.body
+    if(!idManga){
+        res.status(400); 
+        throw new Error('idManga không có');
+    }
+    const manga = await MangaModel.findById(idManga)
+   if(manga){
+        const mangaUpdate = await MangaModel.findByIdAndUpdate(idManga,{isDeleted:!manga.isDeleted},{new:true});
+        res.status(200).json({
+            message:'Thành công',
+            data:mangaUpdate
+        });
+   }else{   
+        res.status(400); 
+        throw new Error('manga không tồn tại');
+   }
+});
 export default {
     createManyManga,
     getAll,
@@ -367,5 +391,6 @@ export default {
     getPosters,
     StatisticsByView,
     StatisticsByFollow,
-    StatisticsByRating
+    StatisticsByRating,
+    deleteManga
 };
