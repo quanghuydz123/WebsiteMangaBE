@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from '../configs/passport-setup';
-import swaggerMode from '../configs/passport-swagger';
+// import swaggerMode from '../configs/passport-swagger';
 import authController from '../controller/authController';
 import { authenticateJWT, authorizeRoles } from '../middlewares/authMiddleware';
 
@@ -25,9 +25,9 @@ authRouter.get('/google', passport.authenticate('google', {
 }));
 
 // Swagger Google Authentication
-authRouter.get('/swagger/google', swaggerMode.passport.authenticate('google', {
-    scope: ['profile', 'email']
-}));
+// authRouter.get('/swagger/google', swaggerMode.passport.authenticate('google', {
+//     scope: ['profile', 'email']
+// }));
 
 // Standard Google Callback
 authRouter.get('/google/callback', 
@@ -36,10 +36,10 @@ authRouter.get('/google/callback',
 );
 
 // Swagger Callback
-authRouter.get('/swagger/google/callback', 
-    swaggerMode.passport.authenticate('google', { failureRedirect: '/' }), 
-    authController.generateSwaggerJWT
-);
+// authRouter.get('/swagger/google/callback', 
+//     swaggerMode.passport.authenticate('google', { failureRedirect: '/' }), 
+//     authController.generateSwaggerJWT
+// );
 
 /**
  * @swagger
