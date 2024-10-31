@@ -513,4 +513,42 @@ mangaRoute.get('/statistics-rating', mangaController.StatisticsByRating);
  *         description: Internal server error
  * 
  * */
+
+mangaRoute.put('/delete-manga', (req: Request, res: Response, next: NextFunction) => {
+    mangaController.deleteManga(req, res, next);
+});
+
+/**
+ * @swagger
+ * /manga/delete-manga:
+ *   put:
+ *     summary: delete manga manga by id
+ *     tags: [Manga]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idManga:
+ *                 type: string
+ *                 example: "string"
+ *     responses:
+ *       200:   
+ *         description: increase view success
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 manga:
+ *                   $ref: '#/components/schemas/Manga' 
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
 export default mangaRoute;
