@@ -408,4 +408,48 @@ followingRoute.get('/get-library', followingController.getUserLibrary);
  */
 
 followingRoute.delete('/unfollow', followingController.unFollowing);
+
+followingRoute.get('/check-isFollow', followingController.checkIsFollow);
+/**
+ * @swagger
+ * tags:
+ *   name: Manga
+ *   description: check is follow API
+ * /followings/check-isFollow:
+ *   get:
+ *     summary: check is follow api
+ *     tags: [Followings]
+ *     parameters:
+ *       - in: query
+ *         name: idManga
+ *         required: true
+ *         description: truyền id manga vô
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: idUser
+ *         required: true
+ *         description: truyền id user vô
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:   
+ *         description: trả về data true hoặc false
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: 'thành công'
+ *                 data:
+ *                   type: boolean
+ *                   description: 'thành công'
+ *                      
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+
 export default followingRoute;

@@ -236,6 +236,7 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
             {
                 $project: {
                     _idComment: '$_id', // The _id from Comment
+                    _idUser: '$UserDetails._id', // The name from User
                     userName: '$UserDetails.userName', // The name from User
                     text: '$text', // The content from Comment
                     updatedAt: '$updatedAt'
@@ -275,12 +276,45 @@ function containsToxicWords(comment: string): boolean {
 }
 
 
-
+const deleteComment = async (req: Request, res: Response) => {
+    try {
+        const {idComment} = req.body
+        if(!idComment){
+            const errorResponse: GenericResponse<null> = {
+                message: 'Hãy truyền idComment vô',
+                data: null
+            };
+            res.status(500).json(errorResponse);
+        }
+        const comment = await CommentModel.findById(idComment)
+        if(comment){
+            await CommentModel.findByIdAndDelete(comment._id)
+            res.status(200).json({
+                message:'Xóa comment thành công',
+                data:null
+            });
+        }else{
+            const errorResponse: GenericResponse<null> = {
+                message: 'Comment không tồn tại',
+                data: null
+            };
+            res.status(500).json(errorResponse);
+        }
+        
+    } catch (error) {
+        const errorResponse: GenericResponse<null> = {
+            message: 'Error retrieving comments',
+            data: null
+        };
+        res.status(500).json(errorResponse);
+    }
+};
 export default {
     createManyComment,
     getPaginatedComment,
     getAdvancedPaginatedComment,
     createComment,
     updateComment,
-    getPaginatedCommentForManga
+    getPaginatedCommentForManga,
+    deleteComment
 };
