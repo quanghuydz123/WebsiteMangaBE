@@ -289,4 +289,38 @@ commentRoute.put('/update',commentController.updateComment);
  *                   description: Detailed error information.
  */
 commentRoute.get('/get-comment-section-for-manga',commentController.getPaginatedCommentForManga);
+
+/**
+ * @swagger
+ * /comments/delete-commentById:
+ *   delete:
+ *     summary: delete comment by id
+ *     tags: [Comments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idComment:
+ *                 type: string
+ *                 example: "string"
+ *     responses:
+ *       200:   
+ *         description: delete success
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: 'Xóa thành công'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+commentRoute.delete('/delete-commentById',commentController.deleteComment);
+
 export default commentRoute;

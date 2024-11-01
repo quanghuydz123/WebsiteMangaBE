@@ -356,6 +356,38 @@ const getUserListByMangaId = async (mangaId: mongoose.Types.ObjectId): Promise<s
     }
 }
 
+const checkIsFollow = async (req: Request, res: Response<GenericResponse<boolean | null>>) => {
+    const { idManga,idUser } = req.query; // Assuming idManga is passed as a route parameter
+
+    if (!idManga || !idUser) {
+        return res.status(400).json({
+            message: "Manga and idUser ID is required.",
+            data: null as null,
+        });
+    }
+
+    try {
+        const follow = await FollowingModel.findOne({manga:idManga,user:idUser})
+        if(follow){
+            res.status(200).json({
+                message: 'Người dùng có theo dõi truyện này',
+                data: true as boolean
+            });
+        }else{
+            res.status(200).json({
+                message: 'Người dùng không có theo dõi truyện này',
+                data: false as boolean
+            });
+        }
+        
+    } catch (error: any) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            data: null, // Ensure data is null in case of an error
+        });
+    }
+};
+
 export default {
     createManyFollowing,
     getPaginatedFollowing,
@@ -366,5 +398,6 @@ export default {
     getUserLibrary,
     deleteFollowingsByMangaId,
     unFollowing,
-    getUserListByMangaId
+    getUserListByMangaId,
+    checkIsFollow
 };
