@@ -551,4 +551,214 @@ mangaRoute.put('/delete-manga', (req: Request, res: Response, next: NextFunction
  *         description: Internal server error
  * 
  * */
+
+mangaRoute.get('/get-all-admin', mangaController.getAllAdminManga);
+/**
+ * @swagger
+ * /manga/get-all-admin:
+ *   get:
+ *     summary: Retrieve a paginated list of mangas
+ *     description: Get all manga entries with pagination, including author names and genre names. 
+ *                  Returns a response wrapped in a `GenericResponse<MangaResponse[]>`.
+ *     tags:
+ *       - Manga
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: The page number for pagination.
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: The number of items per page.
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved paginated list of mangas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Mangas retrieved successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _d:
+ *                         type: string
+ *                         example: "734895u345893759"
+ *                       name:
+ *                         type: string
+ *                         example: "My Manga Title"
+ *                       summary:
+ *                         type: string
+ *                         example: "A captivating summary of the manga story."
+ *                       imageUrl:
+ *                         type: string
+ *                         example: "http://example.com/image.jpg"
+ *                       authorName:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                         example: ["Author Name 1", "Author Name 2"]
+ *                       genreName:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                         example: ["Genre 1", "Genre 2"]
+ *                       isDeleted:
+ *                         type: boolean
+ *                         example: false
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2023-01-01T00:00:00Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2023-01-02T00:00:00Z"
+ *       500:
+ *         description: Error retrieving mangas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error retrieving mangas
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ */
+
+
+
+mangaRoute.put('/update-by-id', mangaController.updateAdminManga)
+/**
+ * @swagger
+ * /manga/update-by-id:
+ *   put:
+ *     summary: Update a manga entry by its ID
+ *     description: Updates a manga entry in the database using the provided `_id` and `updatedData` in the request body. 
+ *                  Returns the updated manga data in a `GenericResponse<MangaResponse>`.
+ *     tags:
+ *       - Manga
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 description: The unique identifier of the manga to update.
+ *                 example: "60c72b2f9e1b2c6d88e2f5e8"
+ *               updatedData:
+ *                 type: object
+ *                 description: The data to update in the manga entry.
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     example: "New Manga Title"
+ *                   summary:
+ *                     type: string
+ *                     example: "Updated summary of the manga."
+ *                   imageUrl:
+ *                     type: string
+ *                     example: "http://example.com/new-image.jpg"
+ *                   isDeleted:
+ *                     type: boolean
+ *                     example: false
+ *     responses:
+ *       200:
+ *         description: Successfully updated the manga entry.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Manga updated successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       example: "New Manga Title"
+ *                     summary:
+ *                       type: string
+ *                       example: "Updated summary of the manga."
+ *                     imageUrl:
+ *                       type: string
+ *                       example: "http://example.com/new-image.jpg"
+ *                     authorName:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       example: ["Author Name 1"]
+ *                     genreName:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       example: ["Genre 1", "Genre 2"]
+ *                     isDeleted:
+ *                       type: boolean
+ *                       example: false
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2023-01-01T00:00:00Z"
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2023-01-02T00:00:00Z"
+ *       400:
+ *         description: Missing `_id` or `updatedData` in the request body.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "_id and updatedData are required"
+ *                 data:
+ *                   type: null
+ *       404:
+ *         description: Manga not found with the provided ID.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Manga not found"
+ *                 data:
+ *                   type: null
+ *       500:
+ *         description: Error updating the manga entry.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error updating manga"
+ *                 data:
+ *                   type: string
+ *                   example: "{}"
+ */
 export default mangaRoute;

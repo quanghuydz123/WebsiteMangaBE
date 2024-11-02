@@ -7,6 +7,19 @@ import { GenericResponse } from '../models/GenericResponse';
 import fileController from '../controller/fileController';
 dotenv.config();
 
+
+interface MangaResponse {
+    _id: mongoose.Types.ObjectId;
+    name: string;
+    summary: string;
+    imageUrl: string;
+    authorName: string[];
+    genreName: string[];
+    isDeleted: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 const createManyManga = asyncHandler(async (req: Request, res: Response) => {
     const { tb_Manga } = req.body;
 
@@ -158,9 +171,9 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericR
     delete data._id; // Remove _id from data to avoid conflicts
 
     const updateManga = await MangaModel.findByIdAndUpdate(_id, data, { new: true })
-    .populate('author', '_id name isDeleted')
-    .populate('publisher', '_id name isDeleted')
-    .populate('genres', '_id name slug isDeleted');
+        .populate('author', '_id name isDeleted')
+        .populate('publisher', '_id name isDeleted')
+        .populate('genres', '_id name slug isDeleted');
 
     if (!updateManga) {
         res.status(404); // Not Found
@@ -183,9 +196,9 @@ const createManga = asyncHandler(async (req: Request, res: Response<GenericRespo
     try {
         const manga = await MangaModel.create(data);
         const populatedManga = await MangaModel.findById(manga._id)
-        .populate('author', '_id name isDeleted')
-        .populate('publisher', '_id name isDeleted')
-        .populate('genres', '_id name slug isDeleted');;
+            .populate('author', '_id name isDeleted')
+            .populate('publisher', '_id name isDeleted')
+            .populate('genres', '_id name slug isDeleted');;
         const response: GenericResponse<typeof populatedManga> = {
             message: "Thành công",
             data: populatedManga,
@@ -318,70 +331,184 @@ const getPosters = asyncHandler(async (req: Request, res: Response<GenericRespon
 });
 
 
-const StatisticsByView  = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
-    const {page=1,limit=10} = req.query
-    const options:any = {
+const StatisticsByView = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const { page = 1, limit = 10 } = req.query
+    const options: any = {
         page,
         limit,
-        sort:{views:-1},
+        sort: { views: -1 },
         select: "_id name views",
     };
     const manga = await MangaModel.paginate({}, options);
     res.status(200).json({
-        message:'Thành công',
-        data:manga
+        message: 'Thành công',
+        data: manga
     });
 });
 
 const StatisticsByFollow = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
-    const {page=1,limit=10} = req.query
-    const options:any = {
+    const { page = 1, limit = 10 } = req.query
+    const options: any = {
         page,
         limit,
-        sort:{followersCount:-1},
+        sort: { followersCount: -1 },
         select: "_id name followersCount",
     };
     const manga = await MangaModel.paginate({}, options);
     res.status(200).json({
-        message:'Thành công',
-        data:manga
+        message: 'Thành công',
+        data: manga
     });
 });
 
 const StatisticsByRating = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
-    const {page=1,limit=10} = req.query
-    const options:any = {
+    const { page = 1, limit = 10 } = req.query
+    const options: any = {
         page,
         limit,
-        sort:{rating:-1},
+        sort: { rating: -1 },
         select: "_id name rating",
     };
     const manga = await MangaModel.paginate({}, options);
     res.status(200).json({
-        message:'Thành công',
-        data:manga
+        message: 'Thành công',
+        data: manga
     });
 });
 
 const deleteManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
-    const {idManga} = req.body
-    if(!idManga){
-        res.status(400); 
+    const { idManga } = req.body
+    if (!idManga) {
+        res.status(400);
         throw new Error('idManga không có');
     }
     const manga = await MangaModel.findById(idManga)
-   if(manga){
-        const mangaUpdate = await MangaModel.findByIdAndUpdate(idManga,{isDeleted:!manga.isDeleted},{new:true});
+    if (manga) {
+        const mangaUpdate = await MangaModel.findByIdAndUpdate(idManga, { isDeleted: !manga.isDeleted }, { new: true });
         res.status(200).json({
-            message:'Thành công',
-            data:mangaUpdate
+            message: 'Thành công',
+            data: mangaUpdate
         });
-   }else{   
-        res.status(400); 
+    } else {
+        res.status(400);
         throw new Error('manga không tồn tại');
-   }
+    }
 });
+
+
+const getAllAdminManga = async (req: Request, res: Response) => {
+    try {
+        const { page = 1, limit = 10 } = req.query;
+
+        const options = {
+            page: Number(page),
+            limit: Number(limit),
+            populate: [
+                { path: 'author', select: 'name' },
+                { path: 'genres', select: 'name' }
+            ]
+        };
+
+        const paginatedManga = await MangaModel.paginate({ isDeleted: false }, options);
+
+        const mangaResponse: MangaResponse[] = paginatedManga.docs.map((manga) => ({
+            _id: manga._id,
+            name: manga.name,
+            summary: manga.summary,
+            imageUrl: manga.imageUrl,
+            authorName: manga.author.map((author: any) => author.name),
+            genreName: manga.genres.map((genre: any) => genre.name),
+            isDeleted: manga.isDeleted,
+            createdAt: manga.createdAt,
+            updatedAt: manga.updatedAt,
+        }));
+
+        const response: GenericResponse<any> = {
+            message: 'Fetched manga successfully',
+            data: {
+                docs: mangaResponse,
+                totalDocs: paginatedManga.totalDocs,
+                limit: paginatedManga.limit,
+                totalPages: paginatedManga.totalPages,
+                page: paginatedManga.page,
+                pagingCounter: paginatedManga.pagingCounter,
+                hasPrevPage: paginatedManga.hasPrevPage,
+                hasNextPage: paginatedManga.hasNextPage,
+                prevPage: paginatedManga.prevPage,
+                nextPage: paginatedManga.nextPage
+            },
+        };
+
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error fetching manga',
+            data: JSON.stringify(error)
+        });
+    }
+};
+export const updateAdminManga = async (req: Request, res: Response) => {
+    try {
+        const { _id, updatedData } = req.body;
+
+        // Check if _id and updatedData are provided
+        if (!_id || !updatedData) {
+            return res.status(400).json({
+                message: '_id and updatedData are required',
+                data: null
+            });
+        }
+
+        // Find manga by ID and update with the provided data
+        const manga = await MangaModel.findByIdAndUpdate(_id, updatedData, {
+            new: true, // Returns the updated document
+            runValidators: true // Ensures validation rules apply to the updated data
+        }).populate([
+            { path: 'author', select: 'name' },
+            { path: 'genres', select: 'name' }
+        ]);
+
+        // Check if the manga was found and updated
+        if (!manga) {
+            return res.status(404).json({
+                message: 'Manga not found',
+                data: null
+            });
+        }
+
+        // Format the response data as MangaResponse
+        const mangaResponse: MangaResponse = {
+            _id: manga._id,
+            name: manga.name,
+            summary: manga.summary,
+            imageUrl: manga.imageUrl,
+            authorName: manga.author.map((author: any) => author.name),
+            genreName: manga.genres.map((genre: any) => genre.name),
+            isDeleted: manga.isDeleted,
+            createdAt: manga.createdAt,
+            updatedAt: manga.updatedAt,
+        };
+
+        // Return the success response with the updated manga data
+        const response: GenericResponse<MangaResponse> = {
+            message: 'Manga updated successfully',
+            data: mangaResponse
+        };
+
+        res.status(200).json(response);
+    } catch (error) {
+        // Return an error response in case of failure
+        res.status(500).json({
+            message: 'Error updating manga',
+            data: JSON.stringify(error)
+        });
+    }
+};
+
+
 export default {
+    getAllAdminManga,
+    updateAdminManga,
     createManyManga,
     getAll,
     getMangaById,
