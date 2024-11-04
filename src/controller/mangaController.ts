@@ -409,7 +409,7 @@ const getAllAdminManga = async (req: Request, res: Response) => {
             ]
         };
 
-        const paginatedManga = await MangaModel.paginate({ isDeleted: false }, options);
+        const paginatedManga = await MangaModel.paginate({}, options);
 
         const mangaResponse: MangaResponse[] = paginatedManga.docs.map((manga) => ({
             _id: manga._id,
