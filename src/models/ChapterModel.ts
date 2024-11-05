@@ -47,6 +47,9 @@ const ChapterSchema: Schema = new Schema(
  *         title:
  *           type: string
  *           description: The title of the chapter
+ *         chapterNum:
+ *           type: integer
+ *           description: The number of the chapter
  *         isDeleted:
  *           type: boolean
  *           description: Indicates whether the chapter is deleted

@@ -1,6 +1,7 @@
 
 import fileController from '../controller/fileController';
 import express from 'express';
+import upload from '../middlewares/upload';
 
 const fileRouter = express.Router();
 
@@ -354,36 +355,42 @@ fileRouter.get('/image', fileController.getImageForHTMLImgTag);
  */
 fileRouter.get('/images', fileController.getImagesFromFolderPaginate);
 
+
 /**
  * @swagger
  * /files/convert-computer-images-to-link:
  *   post:
- *     summary: Converts local computer images to links in the specified manga and chapter.
+ *     summary: Upload multiple images for a specific manga chapter and save them as links.
  *     tags: [File]
+ *     parameters:
+ *       - in: query
+ *         name: mangaName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The name of the manga.
+ *       - in: query
+ *         name: chapterTitle
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The title of the manga chapter.
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               chapterTitle:
- *                 type: string
- *                 description: The title of the chapter.
- *                 example: "Chapter 1: The Beginning"
- *               mangaName:
- *                 type: string
- *                 description: The name of the manga.
- *                 example: "My Manga"
- *               arrayOfImage:
+ *               images:
  *                 type: array
  *                 items:
  *                   type: string
- *                   description: The filenames or paths of the images to be converted.
- *                   example: ["image1.jpg", "image2.png"]
+ *                   format: binary
+ *                 description: An array of image files to upload.
  *     responses:
  *       201:
- *         description: Successfully created files, returns an array of file IDs.
+ *         description: Images uploaded and links generated successfully.
  *         content:
  *           application/json:
  *             schema:
@@ -391,8 +398,7 @@ fileRouter.get('/images', fileController.getImagesFromFolderPaginate);
  *               properties:
  *                 message:
  *                   type: string
- *                   description: Confirmation message about file creation.
- *                   example: "Files created successfully."
+ *                   example: Files created successfully.
  *                 data:
  *                   type: object
  *                   properties:
@@ -400,16 +406,14 @@ fileRouter.get('/images', fileController.getImagesFromFolderPaginate);
  *                       type: array
  *                       items:
  *                         type: string
- *                         description: The IDs of the created files.
- *                         example: ["/files/image?fileId=60f7f0e4b4b7d401c0e55c16", "/files/image?fileId=60f7f0e4b4b7d401c0e55c17"]
+ *                       description: An array of URLs for the uploaded images.
  *                     invalidFiles:
  *                       type: array
  *                       items:
  *                         type: string
- *                         description: The filenames that were not processed due to invalid extensions.
- *                         example: ["invalidFile.txt"]
+ *                       description: An array of invalid file names (if any).
  *       400:
- *         description: Bad request when required fields are missing.
+ *         description: Missing required parameters (mangaName, chapterTitle, or images).
  *         content:
  *           application/json:
  *             schema:
@@ -417,12 +421,12 @@ fileRouter.get('/images', fileController.getImagesFromFolderPaginate);
  *               properties:
  *                 message:
  *                   type: string
- *                   description: Error message indicating what was wrong with the request.
- *                   example: "Manga name, chapter title, and images are required."
+ *                   example: Manga name, chapter title, and images are required.
  *                 data:
- *                   type: null
+ *                   type: object
+ *                   nullable: true
  *       500:
- *         description: Internal server error when file creation fails.
+ *         description: Server error while uploading images.
  *         content:
  *           application/json:
  *             schema:
@@ -430,11 +434,12 @@ fileRouter.get('/images', fileController.getImagesFromFolderPaginate);
  *               properties:
  *                 message:
  *                   type: string
- *                   description: Error message indicating failure.
- *                   example: "Unable to create files."
+ *                   example: Unable to create files.
  *                 data:
- *                   type: null
+ *                   type: object
+ *                   nullable: true
  */
 
-fileRouter.post('/convert-computer-images-to-link',fileController.convertComputerImagesToLink)
+
+fileRouter.post('/convert-computer-images-to-link', upload.array('images'), fileController.convertComputerImagesToLink)
 export default fileRouter;
