@@ -95,9 +95,62 @@ const broadcastNewChapter = async (message: string, mangaId: mongoose.Types.Obje
     return true;
 }
 
+const getNotificationByIdUser = asyncHandler( async (req: Request, res: Response) => {
+    const {idUser} = req.query
+    if(!idUser){
+        res.status(500).json({
+            message: "Hãy truyền idUser vô",
+            data: null,
+        });
+    }
+    const user = await UserModel.findById(idUser)
+    if(user){
+        const notifications = await NotificationModel.find({user:user._id}).sort({createdAt:-1})
+    
+        res.status(200).json({
+            message: "Thành công",
+            data: notifications,
+        });
+    }else{
+        res.status(500).json({
+            message: "user không tồn tại",
+            data: null,
+        });
+    }
+    
+})
+
+const updateViewedByIdUser = asyncHandler( async (req: Request, res: Response) => {
+    const {idUser} = req.body
+    if(!idUser){
+        res.status(500).json({
+            message: "Hãy truyền idUser vô",
+            data: null,
+        });
+    }
+    const user = await UserModel.findById(idUser)
+    if(user){
+        await NotificationModel.updateMany({user:user._id},{isViewed:true},{new:true})
+        const notifications = await NotificationModel.find({user:user._id}).sort({createdAt:-1})
+
+        res.status(200).json({
+            message: "Thành công",
+            data: notifications,
+        });
+    }else{
+        res.status(500).json({
+            message: "user không tồn tại",
+            data: null,
+        });
+    }
+    
+})
+
 export default {
     createManyNotification,
     getAll,
     createNotification,
-    broadcastNewChapter
+    broadcastNewChapter,
+    getNotificationByIdUser,
+    updateViewedByIdUser
 };

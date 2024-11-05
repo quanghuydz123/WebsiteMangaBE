@@ -71,4 +71,81 @@ notificationRoute.post('/create-notification', (req: Request, res: Response, nex
  *         description: Internal server error
  * 
  * */
+
+
+notificationRoute.get('/get-notificationByIdUser', (req: Request, res: Response, next: NextFunction) => {
+    notificationController.getNotificationByIdUser(req, res,next);
+});
+
+/**
+ * @swagger
+ * tags:
+ *   name: Notification   
+ *   description: get notification by idUser
+ * /notifications/get-notificationByIdUser:
+ *   get:
+ *     summary: get notification by idUser
+ *     tags: [Notification]
+ *     parameters:
+ *       - in: query
+ *         name: idUser
+ *         required: true
+ *         description: truyền id user vô
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:   
+ *         description: create notification
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 notifications:
+ *                   $ref: '#/components/schemas/Notification' 
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+
+
+notificationRoute.put('/update-viewed-byIdUser', (req: Request, res: Response, next: NextFunction) => {
+    notificationController.updateViewedByIdUser(req, res,next);
+});
+/**
+ * @swagger
+ * /notifications/update-viewed-byIdUser:
+ *   put:
+ *     summary: update view notification is true
+ *     tags: [Notification]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idUser:
+ *                 type: string
+ *                 example: "idUser"
+ *     responses:
+ *       200:   
+ *         description: update view notification is true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   description: The status code (e.g., 200 for success)
+ *                 notifications:
+ *                   $ref: '#/components/schemas/Notification' 
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
 export default notificationRoute;
