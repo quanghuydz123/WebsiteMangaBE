@@ -413,7 +413,7 @@ followingRoute.get('/check-isFollow', followingController.checkIsFollow);
 /**
  * @swagger
  * tags:
- *   name: Manga
+ *   name: Followings   
  *   description: check is follow API
  * /followings/check-isFollow:
  *   get:
