@@ -559,6 +559,10 @@ async function broadcastToUser(mangaId: mongoose.Types.ObjectId, newChapterTitle
     notificationController.broadcastNewChapter(`${manga.imageUrl}||Truyện bạn theo dõi ${manga.name} đã có chapter mới: ${newChapterTitle}`, mangaId)
 }
 
+async function getNextChapterById() {
+    
+}
+
 export default {
     createManyChapter,
     getPaginatedChapters,

@@ -100,17 +100,14 @@ const isValidImageExtension = (filename: string): boolean => {
 
 const convertComputerImagesToLink = async (req: Request, res: Response) => {
     try {
-        const { chapterTitle, mangaName, arrayOfImage } = req.body;
+        const { mangaName, chapterTitle } = req.query as { mangaName: string; chapterTitle: string };
 
-        // Check if chapterTitle, mangaName, and images are provided
-        if (!chapterTitle || !mangaName || !Array.isArray(arrayOfImage)) {
-            return res.status(400).json({ message: 'Manga name, chapter title, and images are required.', data: null } as GenericResponse<null>);
+        if (!chapterTitle || !mangaName || !req.files) {
+            return res.status(400).json({ message: 'Manga name, chapter title, and images are required.', data: null });
         }
 
-        // Check if manga folder exists
         let mangaFolder = await FileModel.findOne({ name: mangaName, type: 'folder', parentId: null });
         if (!mangaFolder) {
-            // Create manga folder if it doesn't exist
             mangaFolder = new FileModel({
                 name: mangaName,
                 type: 'folder',
@@ -120,10 +117,8 @@ const convertComputerImagesToLink = async (req: Request, res: Response) => {
             await mangaFolder.save();
         }
 
-        // Check if chapter folder exists within the manga folder
         let chapterFolder = await FileModel.findOne({ name: chapterTitle, type: 'folder', parentId: mangaFolder._id });
         if (!chapterFolder) {
-            // Create chapter folder if it doesn't exist
             chapterFolder = new FileModel({
                 name: chapterTitle,
                 type: 'folder',
@@ -134,29 +129,31 @@ const convertComputerImagesToLink = async (req: Request, res: Response) => {
         }
 
         const fileIds: string[] = [];
-        const invalidFiles: string[] = []; // Array to hold invalid file names
+        const invalidFiles: string[] = [];
+        const images = req.files as Express.Multer.File[];
 
-        // Create files for each image
-        for (const image of arrayOfImage) {
-            if (!isValidImageExtension(image)) {
-                invalidFiles.push(image); // Collect invalid files
-                continue; // Skip this iteration
+        for (const image of images) {
+            if (!isValidImageExtension(image.originalname)) {
+                invalidFiles.push(image.originalname);
+                continue;
             }
 
+            // Convert image buffer to base64
+            const base64Data = `data:${image.mimetype};base64,${image.buffer.toString('base64')}`;
+
             const newFile = new FileModel({
-                name: image,  // Assuming the name is the image file name
+                name: image.originalname,
                 type: 'image',
-                parentId: chapterFolder._id, // Set parentId to the chapter folder
-                path: `${chapterFolder.path}/${image}`, // Create the full path
-                data: image, // Assuming this is the data you want to store (adjust as needed)
+                parentId: chapterFolder._id,
+                path: `${chapterFolder.path}/${image.originalname}`,
+                data: base64Data,  // Save the base64 string in the database
             });
 
-            await newFile.save(); // Save the new file
-            fileIds.push('/files/image?fileId='+newFile._id.toString()); // Add the newly created file ID to the array
+            await newFile.save();
+            fileIds.push(`${process.env.SERVER_API}/files/image?id=${newFile._id}`);
         }
 
-        // Prepare the response based on the existence of invalid files
-        const response: GenericResponse<{ fileIds: string[]; invalidFiles?: string[] }> = {
+        const response = {
             message: invalidFiles.length > 0
                 ? 'Files created successfully, but some files have invalid extensions.'
                 : 'Files created successfully.',
@@ -166,9 +163,10 @@ const convertComputerImagesToLink = async (req: Request, res: Response) => {
         res.status(201).json(response);
     } catch (error) {
         console.error('Error creating files:', error);
-        res.status(500).json({ message: 'Unable to create files.', data: null } as GenericResponse<null>);
+        res.status(500).json({ message: 'Unable to create files.' + error, data: null });
     }
 };
+
 
 const getFiles = async (req: Request, res: Response) => {
     try {
