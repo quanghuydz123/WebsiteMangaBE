@@ -168,4 +168,25 @@ genreRoute.post('/create', genreController.createGenre);
  */
 genreRoute.put('/update', genreController.updateGenre);
 
+
+genreRoute.get('/total-genre', genreController.totalGenre);
+/**
+ * @swagger
+ * /genres/total-genre:
+ *   get:
+ *     summary: Get paginated list of genres ( admin -> all , user -> only when isDeleted=false)
+ *     tags: [Genres]
+ *     responses:
+ *       200:
+ *         description: A paginated list of genres
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: integer
+ *       500:
+ *         description: Server error
+ */
 export default genreRoute;

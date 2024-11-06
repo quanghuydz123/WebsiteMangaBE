@@ -381,6 +381,14 @@ const deleteManga = asyncHandler(async (req: Request, res: Response<GenericRespo
         throw new Error('manga không tồn tại');
    }
 });
+
+const totalManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const totalManga = await MangaModel.find().countDocuments()
+    res.status(200).json({
+        message:'Thành công',
+        data:totalManga
+    });
+});
 export default {
     createManyManga,
     getAll,
@@ -392,5 +400,6 @@ export default {
     StatisticsByView,
     StatisticsByFollow,
     StatisticsByRating,
-    deleteManga
+    deleteManga,
+    totalManga
 };
