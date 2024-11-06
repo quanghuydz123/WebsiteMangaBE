@@ -19,7 +19,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.SERVER_API_URL || 'http://localhost:3001', // Change this based on your environment
+        url: process.env.SERVER_API || 'http://localhost:3001', // Change this based on your environment
       },
     ],
     components: {
