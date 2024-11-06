@@ -59,7 +59,7 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
 
     const filter: any = {};
     const sort: any = {};
-
+    filter.isDeleted = false
     if (searchValue) {
         const regex = new RegExp(searchValue, 'i');
         filter.name = { '$regex': regex };
