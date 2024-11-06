@@ -39,7 +39,7 @@ const getPaginatedChapters = async (req: Request, res: Response) => {
     try {
         const totalChapters = await ChapterModel.countDocuments(mangaFilter); // Get the total number of chapters
         const chapterList = await ChapterModel.find(mangaFilter)
-            .sort({ updatedAt: (orderType === 'ASC') ? 1 : -1 }) // Sort by update date based on orderType
+            .sort({ chapterNum: (orderType === 'ASC') ? 1 : -1 }) // Sort by update date based on orderType
             .skip(skip)
             .limit(limit); // Get the paginated results
 

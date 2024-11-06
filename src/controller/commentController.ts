@@ -158,14 +158,25 @@ const createComment = async (req: Request, res: Response) => {
 };
 
 const updateComment = async (req: Request, res: Response) => {
-    const { id, text = "", isDeleted, isReturnNewData } = req.body;
-    if (text && containsToxicWords(text as string)) {
+    const { id } = req.query;  // Get ID from the query
+    const { text = "", isDeleted, isReturnNewData } = req.body;
+
+    if (typeof id !== 'string') {
+        return res.status(400).json({
+            message: "Invalid or missing 'id' in query",
+            data: null
+        });
+    }
+
+    // Check for toxic words in the comment text
+    if (text && containsToxicWords(text)) {
         const errorResponse: GenericResponse<null> = {
             message: "vi phạm tiêu chuẩn cộng đồng",
             data: null
         };
         return res.status(403).json(errorResponse);
     }
+
     try {
         const updatedComment = await CommentModel.findByIdAndUpdate(
             id,
@@ -197,6 +208,7 @@ const updateComment = async (req: Request, res: Response) => {
         res.status(500).json(errorResponse);
     }
 };
+
 
 const getPaginatedCommentForManga = async (req: Request, res: Response) => {
     const mangaId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.query.id as string);

@@ -20,7 +20,7 @@ passport.use(
                 // If not, create a new user
                 const newUser = await new UserModel({
                     googleId: profile.id,
-                    username: profile.displayName,
+                    userName: profile.displayName,
                     thumbnail: profile._json.picture,
                     role: process.env.READER_ROLE_ID,
                     email: profile.emails && profile.emails[0].value
