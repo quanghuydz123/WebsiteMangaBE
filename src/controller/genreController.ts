@@ -167,11 +167,18 @@ const updateGenre = async (req: Request, res: Response) => {
     }
 };
 
-
+const totalGenre = asyncHandler(async (req: Request, res: Response<GenericResponse<number | null>>): Promise<void> => {
+    const totalGenre = await GenreModel.find().countDocuments()
+    res.status(200).json({
+        message: "Thành công",
+        data: totalGenre,
+    });
+});
 export default {
     createManyGenre,
     getPaginatedGenres,
     getAdvancedPaginatedGenres,
     createGenre,
-    updateGenre
+    updateGenre,
+    totalGenre
 };

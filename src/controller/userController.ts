@@ -367,6 +367,14 @@ const blockUser = asyncHandler(async (req: Request, res: Response<GenericRespons
         });
     }
 });
+
+const totalUser = asyncHandler(async (req: Request, res: Response<GenericResponse<number | null>>): Promise<void> => {
+    const totalUser = await UserModel.find().countDocuments()
+    res.status(200).json({
+        message: "Thành công",
+        data: totalUser,
+    });
+});
 export default {
     getAll,
     createManyUser,
@@ -376,5 +384,6 @@ export default {
     changePassword,
     loginGoogle,
     addReadingHistory,
-    blockUser
+    blockUser,
+    totalUser
 };

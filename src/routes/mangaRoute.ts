@@ -761,4 +761,30 @@ mangaRoute.put('/update-by-id', mangaController.updateAdminManga)
  *                   type: string
  *                   example: "{}"
  */
+
+mangaRoute.get('/total-manga', (req: Request, res: Response, next: NextFunction) => {
+    mangaController.totalManga(req, res, next);
+});
+/**
+ * @swagger
+ * tags:
+ *   name: Manga
+ *   description: get total manga
+ * /manga/total-manga:
+ *   get:
+ *     summary: get total manga
+ *     tags: [Manga]
+ *     responses:
+ *       200:   
+ *         description: get total manga
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Manga'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
 export default mangaRoute;

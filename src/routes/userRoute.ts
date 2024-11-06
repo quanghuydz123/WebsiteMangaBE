@@ -336,4 +336,30 @@ userRouter.post('/create-many-user', (req: Request, res: Response,next :NextFunc
     userController.createManyUser(req, res,next);
 });
 
+userRouter.get('/total-user', (req: Request, res: Response,next :NextFunction) => {
+    userController.totalUser(req, res,next);
+});
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: The users managing API
+ * /users/total-user:
+ *   get:
+ *     summary: get total user
+ *     tags: [Users]
+ *     responses:
+ *       200:   
+ *         description:  get total user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ *       500:
+ *         description: Internal server error
+ * 
+ * */
+
 export default userRouter;

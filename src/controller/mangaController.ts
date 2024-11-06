@@ -506,6 +506,14 @@ export const updateAdminManga = async (req: Request, res: Response) => {
 };
 
 
+
+const totalManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+    const totalManga = await MangaModel.find().countDocuments()
+    res.status(200).json({
+        message:'Thành công',
+        data:totalManga
+    });
+});
 export default {
     getAllAdminManga,
     updateAdminManga,
@@ -519,5 +527,6 @@ export default {
     StatisticsByView,
     StatisticsByFollow,
     StatisticsByRating,
-    deleteManga
+    deleteManga,
+    totalManga
 };
