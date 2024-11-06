@@ -8,18 +8,20 @@ const options = {
     info: {
       title: 'CNPMM Database API',
       version: new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Bangkok', // Set timezone to GMT+7
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        hour12: false // Use true for 12-hour format
+        second: 'numeric',
+        hour12: false // Set to true for 12-hour format if preferred
       }),
       description: 'API documentation for CMPMM MongoDB integration',
     },
     servers: [
       {
-        url: process.env.SERVER_API_URL || 'http://localhost:3001', // Change this based on your environment
+        url: process.env.SERVER_API || 'http://localhost:3001', // Change this based on your environment
       },
     ],
     components: {

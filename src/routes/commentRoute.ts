@@ -151,15 +151,18 @@ commentRoute.post('/create',commentController.createComment);
  * @swagger
  * /comments/update:
  *   put:
- *     summary: Update an existing comment
- *     tags: [Comments]
+ *     summary: Update a comment's text or status.
+ *     description: Updates a comment's text and deletion status. Validates text content to prevent toxic language. Returns the updated comment if requested.
+ *     tags:
+ *       - Comments
  *     parameters:
  *       - in: query
  *         name: id
+ *         required: true
  *         schema:
  *           type: string
- *         required: true
- *         description: Comment ID
+ *           description: The ID of the comment to be updated.
+ *           example: "64f5c1c7e4b0c2345b9e8a9d"
  *     requestBody:
  *       required: true
  *       content:
@@ -169,34 +172,69 @@ commentRoute.post('/create',commentController.createComment);
  *             properties:
  *               text:
  *                 type: string
+ *                 description: Updated text for the comment. Will be checked for inappropriate language.
  *                 example: "Updated comment text"
  *               isDeleted:
  *                 type: boolean
+ *                 description: Indicates if the comment should be marked as deleted.
  *                 example: false
  *               isReturnNewData:
  *                 type: boolean
+ *                 description: Specifies if the updated comment data should be returned in the response.
  *                 example: true
  *     responses:
  *       200:
- *         description: Comment updated successfully
+ *         description: Comment updated successfully.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Comment updated successfully."
  *                 data:
- *                   $ref: '#/components/schemas/Comment'
+ *                   type: object
+ *                   description: Updated comment data, if isReturnNewData is true.
+ *                   example: { "_id": "64f5c1c7e4b0c2345b9e8a9d", "text": "Updated comment text", "isDeleted": false }
+ *       403:
+ *         description: Text violates community standards.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "vi phạm tiêu chuẩn cộng đồng"
+ *                 data:
+ *                   type: null
  *       404:
- *         description: Comment not found
+ *         description: Comment not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Comment not found."
+ *                 data:
+ *                   type: null
  *       500:
- *         description: Server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Server error: <error message>"
+ *                 data:
+ *                   type: null
  */
+
 
 commentRoute.put('/update',commentController.updateComment);
 

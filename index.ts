@@ -25,10 +25,11 @@ app.use(cors({
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
+            console.error(`CORS error: Origin ${origin} not allowed`); // Log the origin for debugging
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true, // Allows server to accept cookies and credentials from allowed origins
+    credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());

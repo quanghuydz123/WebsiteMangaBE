@@ -108,7 +108,6 @@ const MangaSchema: Schema = new mongoose.Schema(
  *           description: The date when the manga was last updated
  */
 MangaSchema.plugin(paginate);
-// const MangaModel = mongoose.model<Manga>('mangas', MangaSchema);
 const MangaModel: PaginateModel<Manga> = mongoose.model<Manga, PaginateModel<Manga>>('mangas', MangaSchema);
 
 export default MangaModel;
