@@ -279,8 +279,8 @@ const updateChapter = async (req: Request, res: Response) => {
     }
 };
 
-const getAllImageLinksByChapterId = async(req: Request, res: Response) => {
-    const { chapterId="" } = req.query;
+const getAllImageLinksByChapterId = async (req: Request, res: Response) => {
+    const { chapterId = "" } = req.query;
 
     if (!chapterId) {
         const response: GenericResponse<null> = {
@@ -473,22 +473,35 @@ const removeImageLink = async (req: Request, res: Response): Promise<void> => {
     try {
         const { chapterId, pos } = req.body;
 
-        const result = await ChapterModel.updateOne(
+        // Step 1: Unset the item at the specified position
+        const unsetResult = await ChapterModel.updateOne(
             { _id: chapterId },
-            { $pull: { imageLinks: { $slice: [pos, 1] } } } // Remove image link at position
+            { [`imageLinks.${pos}`]: null } // Unset the item at the given position
         );
 
-        if (result.modifiedCount === 0) {
+        if (unsetResult.modifiedCount === 0) {
             res.status(404).json({ message: 'Chapter not found or no changes made' });
+            return;
+        }
+
+        // Step 2: Pull all null values from the array
+        const pullResult = await ChapterModel.updateOne(
+            { _id: chapterId },
+            { $pull: { imageLinks: null } } // Remove all null entries
+        );
+
+        if (pullResult.modifiedCount === 0) {
+            res.status(404).json({ message: 'No null entries found to remove' });
             return;
         }
 
         const updatedChapter = await ChapterModel.findById(chapterId);
         res.status(200).json({ message: 'Image link removed successfully', data: updatedChapter });
     } catch (error) {
-        res.status(500).json({ message: JSON.stringify(error), data: null });
+        res.status(500).json({ message: error, data: null });
     }
 };
+
 
 const readImageLink = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -560,7 +573,7 @@ async function broadcastToUser(mangaId: mongoose.Types.ObjectId, newChapterTitle
 }
 
 async function getNextChapterById() {
-    
+
 }
 
 export default {
