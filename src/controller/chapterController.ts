@@ -454,7 +454,11 @@ const insertImageLink = async (req: Request, res: Response): Promise<void> => {
         const { chapterId, imageLinks, pos } = req.body;
         const result = await ChapterModel.updateOne(
             { _id: chapterId },
-            { $splice: { imageLinks: { $position: pos, $each: [imageLinks] } } } // Insert at position
+            { 
+                $push: { 
+                    imageLinks: { $each: [imageLinks], $position: pos } // Insert at position
+                } 
+            }
         );
 
         if (result.modifiedCount === 0) {
@@ -468,6 +472,7 @@ const insertImageLink = async (req: Request, res: Response): Promise<void> => {
         res.status(500).json({ message: JSON.stringify(error), data: null });
     }
 };
+
 
 const removeImageLink = async (req: Request, res: Response): Promise<void> => {
     try {
