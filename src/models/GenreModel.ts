@@ -13,8 +13,8 @@ export interface Genre extends Document {
 
 const GenreSchema: Schema = new mongoose.Schema(
     {
-        name: { type: String, required: true, unique: true },
-        slug: { type: String, required: true, unique: true },
+        name: { type: String, required: true },
+        slug: { type: String, required: true },
         isDeleted: { type: Boolean, default: false }
     },
     {
