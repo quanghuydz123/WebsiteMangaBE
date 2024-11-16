@@ -16,7 +16,7 @@ const generateJWT = async (req: Request, res: Response) => {
         const token = jwt.sign(
             { id: req.user._id, roleId: req.user.role },
             process.env.JWT_SECRET!,
-            { expiresIn: '1h' }
+            { expiresIn: '7d' }
         );
 
         // Set the token as a cookie with cross-domain options
@@ -24,7 +24,7 @@ const generateJWT = async (req: Request, res: Response) => {
             httpOnly: true,
             secure: true,
             sameSite: 'none', // Required for cross-domain cookie
-            maxAge: 3600000,
+            maxAge: 604800000,
         });
         res.redirect(`http://localhost:3000?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
 
