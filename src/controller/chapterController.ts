@@ -33,7 +33,7 @@ const getPaginatedChapters = async (req: Request, res: Response) => {
     let mangaFilter = {};
 
     if (mangaId) {
-        mangaFilter = { manga: mangaId };
+        mangaFilter = { manga: mangaId, isDeleted: false  };
     }
 
     try {

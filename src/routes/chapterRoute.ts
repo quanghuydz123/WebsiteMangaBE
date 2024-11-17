@@ -1,6 +1,8 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import chapterController from '../controller/chapterController';
+import { authenticateJWT, authorizeRoles } from '../middlewares/authMiddleware';
+import authorRoute from './authorRoute';
 
 const chapterRoute = express.Router();
 /**
@@ -229,7 +231,7 @@ chapterRoute.get('/get-page', chapterController.getPaginatedChapters);
  *                 data:
  *                   type: null
  */
-chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedChapter);
+chapterRoute.get('/get-advanced-page', authenticateJWT,authorizeRoles([process.env.ADMIN_ROLE_ID!]),chapterController.getAdvancedPaginatedChapter);
 /**
  * @swagger
  * /chapters/append:
@@ -328,7 +330,7 @@ chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedCha
  *                   type: null
  *                   example: null
  */
-chapterRoute.post('/append', chapterController.appendChapter);
+chapterRoute.post('/append', authenticateJWT,authorizeRoles([process.env.ADMIN_ROLE_ID!]), chapterController.appendChapter);
 /**
  * @swagger
  * /chapters/update:
