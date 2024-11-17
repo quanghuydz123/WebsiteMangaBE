@@ -1,7 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import userController from '../controller/userController';
-
+import { authenticateJWT, authUserMiddleWare } from '../middlewares/authMiddleware';
 const userRouter = express.Router();
 
 
@@ -33,7 +33,7 @@ userRouter.get('/get-all', (req: Request, res: Response,next :NextFunction) => {
  * */
 
 
-userRouter.get('/get-user-byid', (req: Request, res: Response,next :NextFunction) => {
+userRouter.get('/get-user-byid',authUserMiddleWare, (req: Request, res: Response,next :NextFunction) => {
     userController.getUserById(req, res,next);
 });
 
@@ -255,7 +255,7 @@ userRouter.put('/change-password', (req: Request, res: Response,next :NextFuncti
  * */
 
 //reading_history
-userRouter.post('/add-reading-history', (req: Request, res: Response,next :NextFunction) => {
+userRouter.post('/add-reading-history',authUserMiddleWare, (req: Request, res: Response,next :NextFunction) => {
     userController.addReadingHistory(req, res,next);
 });
 /**
@@ -296,7 +296,7 @@ userRouter.post('/add-reading-history', (req: Request, res: Response,next :NextF
  * */
 
 
-userRouter.put('/block-user', (req: Request, res: Response,next :NextFunction) => {
+userRouter.put('/block-user',authenticateJWT, (req: Request, res: Response,next :NextFunction) => {
     userController.blockUser(req, res,next);
 });
 /**
@@ -362,7 +362,7 @@ userRouter.get('/total-user', (req: Request, res: Response,next :NextFunction) =
  * 
  * */
 
-userRouter.put("/change-role",userController.changeRole);
+userRouter.put("/change-role",authenticateJWT,userController.changeRole);
 /**
  * @swagger
  * /users/change-role:

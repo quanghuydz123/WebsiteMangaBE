@@ -1,7 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import mangaController from '../controller/mangaController';
-
+import { authenticateJWT } from '../middlewares/authMiddleware';
 const mangaRoute = express.Router();
 
 mangaRoute.post('/create-many-manga', (req: Request, res: Response, next: NextFunction) => {
@@ -119,7 +119,7 @@ mangaRoute.get('/get-manga-byid', (req: Request, res: Response, next: NextFuncti
  * */
 
 
-mangaRoute.put('/update-manga-byid', (req: Request, res: Response, next: NextFunction) => {
+mangaRoute.put('/update-manga-byid',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     mangaController.updateMangaById(req, res, next);
 });
 /**
@@ -179,7 +179,7 @@ mangaRoute.put('/update-manga-byid', (req: Request, res: Response, next: NextFun
  *         description: Internal server error
  * 
  * */
-mangaRoute.post('/create-manga', (req: Request, res: Response, next: NextFunction) => {
+mangaRoute.post('/create-manga',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     mangaController.createManga(req, res, next);
 });
 /**
@@ -514,7 +514,7 @@ mangaRoute.get('/statistics-rating', mangaController.StatisticsByRating);
  * 
  * */
 
-mangaRoute.put('/delete-manga', (req: Request, res: Response, next: NextFunction) => {
+mangaRoute.put('/delete-manga',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     mangaController.deleteManga(req, res, next);
 });
 
@@ -552,7 +552,7 @@ mangaRoute.put('/delete-manga', (req: Request, res: Response, next: NextFunction
  * 
  * */
 
-mangaRoute.get('/get-all-admin', mangaController.getAllAdminManga);
+mangaRoute.get('/get-all-admin',authenticateJWT, mangaController.getAllAdminManga);
 /**
  * @swagger
  * /manga/get-all-admin:
@@ -642,7 +642,7 @@ mangaRoute.get('/get-all-admin', mangaController.getAllAdminManga);
 
 
 
-mangaRoute.put('/update-by-id', mangaController.updateAdminManga)
+mangaRoute.put('/update-by-id',authenticateJWT, mangaController.updateAdminManga)
 /**
  * @swagger
  * /manga/update-by-id:

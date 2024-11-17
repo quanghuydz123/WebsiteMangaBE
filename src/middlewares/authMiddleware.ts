@@ -25,7 +25,6 @@ export const authorizeRoles = (allowedRoles: string[]) => {
 
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.jwt; // Get token from cookies
-
     if (!token) {
         return res.status(403).json({ error: 'Access denied: No token provided.' }); // Improved error message
     }
@@ -35,8 +34,39 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
             console.error('JWT verification error:', err); // Log the error for server-side tracking
             return res.status(403).json({ error: 'Access denied: Invalid token.' }); // Improved error message
         }
-
-        req.user = user; // Attach the user information to the request
-        next(); // Proceed to the next middleware or route handler
+        if(user.roleId ===  process.env.IDROLEADMIN){
+            req.user = user; // Attach the user information to the request
+            next()
+        }else{
+            res.status(400); // Not Found
+            throw new Error('Bạn có không quyền thực hiện thao tác này');
+        }
+       
     });
+
+};
+
+export const authUserMiddleWare = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies.jwt; // Get token from cookies
+    const {id,idUser} = req.query
+    const idUserBody = req.body?.idUser
+    const idUserBody1 = req.body?.user
+    if (!token) {
+        return res.status(403).json({ error: 'Access denied: No token provided.' }); // Improved error message
+    }
+    jwt.verify(token, process.env.JWT_SECRET!, (err: any, user: any) => {
+        if (err) {
+            console.error('JWT verification error:', err); // Log the error for server-side tracking
+            return res.status(403).json({ error: 'Access denied: Invalid token.' }); // Improved error message
+        }
+        if(user.roleId ===  process.env.IDROLEADMIN || user.id  === id ||  user.id === idUser || user.id === idUserBody || user.id === idUserBody1){
+            req.user = user; // Attach the user information to the request
+            next()
+        }else{
+            res.status(400); // Not Found
+            throw new Error('Bạn có không quyền thực hiện thao tác này');
+        }
+       
+    });
+
 };

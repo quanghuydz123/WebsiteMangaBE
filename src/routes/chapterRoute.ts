@@ -1,8 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import chapterController from '../controller/chapterController';
-import { authenticateJWT, authorizeRoles } from '../middlewares/authMiddleware';
-import authorRoute from './authorRoute';
+import { authenticateJWT } from '../middlewares/authMiddleware';
 
 const chapterRoute = express.Router();
 /**
@@ -53,7 +52,7 @@ const chapterRoute = express.Router();
  *       500:
  *         description: Internal server error.
  */
-chapterRoute.post('/create-many-chapter', (req: Request, res: Response, next: NextFunction) => {
+chapterRoute.post('/create-many-chapter',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     chapterController.createManyChapter(req, res, next);
 });
 /**
@@ -231,7 +230,7 @@ chapterRoute.get('/get-page', chapterController.getPaginatedChapters);
  *                 data:
  *                   type: null
  */
-chapterRoute.get('/get-advanced-page', authenticateJWT,authorizeRoles([process.env.ADMIN_ROLE_ID!]),chapterController.getAdvancedPaginatedChapter);
+chapterRoute.get('/get-advanced-page', chapterController.getAdvancedPaginatedChapter);
 /**
  * @swagger
  * /chapters/append:
@@ -330,7 +329,7 @@ chapterRoute.get('/get-advanced-page', authenticateJWT,authorizeRoles([process.e
  *                   type: null
  *                   example: null
  */
-chapterRoute.post('/append', authenticateJWT,authorizeRoles([process.env.ADMIN_ROLE_ID!]), chapterController.appendChapter);
+chapterRoute.post('/append',authenticateJWT, chapterController.appendChapter);
 /**
  * @swagger
  * /chapters/update:
@@ -455,7 +454,7 @@ chapterRoute.post('/append', authenticateJWT,authorizeRoles([process.env.ADMIN_R
  *                   example: null
  */
 
-chapterRoute.put('/update', chapterController.updateChapter);
+chapterRoute.put('/update',authenticateJWT, chapterController.updateChapter);
 
 /**
  * @swagger
@@ -608,7 +607,7 @@ chapterRoute.post('/complex-get', chapterController.selfQueryChapter);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/updateImageLink', chapterController.updateImageLink);
+chapterRoute.post('/updateImageLink',authenticateJWT, chapterController.updateImageLink);
 /**
  * @swagger
  * /chapters/appendImageLink:
@@ -640,7 +639,7 @@ chapterRoute.post('/updateImageLink', chapterController.updateImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/appendImageLink', chapterController.appendImageLink);
+chapterRoute.post('/appendImageLink',authenticateJWT, chapterController.appendImageLink);
 
 /**
  * @swagger
@@ -711,7 +710,7 @@ chapterRoute.post('/readImageLink', chapterController.readImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/removeImageLink', chapterController.removeImageLink);
+chapterRoute.post('/removeImageLink',authenticateJWT, chapterController.removeImageLink);
 /**
  * @swagger
  * /chapters/insertImageLink:
@@ -746,7 +745,7 @@ chapterRoute.post('/removeImageLink', chapterController.removeImageLink);
  *       500:
  *         description: Server error
  */
-chapterRoute.post('/insertImageLink', chapterController.insertImageLink);
+chapterRoute.post('/insertImageLink',authenticateJWT, chapterController.insertImageLink);
 /**
  * @swagger
  * /chapters/get-list:
