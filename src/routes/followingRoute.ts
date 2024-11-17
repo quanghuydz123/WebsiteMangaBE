@@ -1,10 +1,11 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import followingController from '../controller/followingController';
+import { authenticateJWT, authUserMiddleWare } from '../middlewares/authMiddleware';
 
 const followingRoute = express.Router();
 
-followingRoute.post('/create-many-following', (req: Request, res: Response, next: NextFunction) => {
+followingRoute.post('/create-many-following', authenticateJWT,(req: Request, res: Response, next: NextFunction) => {
     followingController.createManyFollowing(req, res, next);
 });
 
@@ -142,7 +143,7 @@ followingRoute.get('/get-advanced-page', followingController.getAdvancedPaginate
  *       500:
  *         description: Internal server error
  */
-followingRoute.post('/create', followingController.createFollowing);
+followingRoute.post('/create',authUserMiddleWare, followingController.createFollowing);
 /**
  * @swagger
  * /followings/update/{id}:
@@ -193,7 +194,7 @@ followingRoute.post('/create', followingController.createFollowing);
  */
 
 
-followingRoute.put('/update', followingController.updateFollowing);
+followingRoute.put('/update',authUserMiddleWare, followingController.updateFollowing);
 
 /**
  * @swagger
@@ -303,7 +304,7 @@ followingRoute.delete('/delete', followingController.deleteFollowing);
  *       500:
  *         description: Server error
  */
-followingRoute.get('/get-library', followingController.getUserLibrary);
+followingRoute.get('/get-library',authUserMiddleWare, followingController.getUserLibrary);
 
 /**
  * @swagger
@@ -407,9 +408,9 @@ followingRoute.get('/get-library', followingController.getUserLibrary);
  *                   example: "Server error: detailed error message."
  */
 
-followingRoute.delete('/unfollow', followingController.unFollowing);
+followingRoute.delete('/unfollow',authUserMiddleWare, followingController.unFollowing);
 
-followingRoute.get('/check-isFollow', followingController.checkIsFollow);
+followingRoute.get('/check-isFollow',authUserMiddleWare, followingController.checkIsFollow);
 /**
  * @swagger
  * tags:

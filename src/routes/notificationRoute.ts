@@ -1,6 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import notificationController from '../controller/notificationController';
+import { authenticateJWT, authUserMiddleWare } from '../middlewares/authMiddleware';
 
 const notificationRoute = express.Router();
 
@@ -31,7 +32,7 @@ notificationRoute.get('/get-all', (req: Request, res: Response, next: NextFuncti
  * 
  * */
 
-notificationRoute.post('/create-notification', (req: Request, res: Response, next: NextFunction) => {
+notificationRoute.post('/create-notification',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     notificationController.createNotification(req, res,next);
 });
 
@@ -73,7 +74,7 @@ notificationRoute.post('/create-notification', (req: Request, res: Response, nex
  * */
 
 
-notificationRoute.get('/get-notificationByIdUser', (req: Request, res: Response, next: NextFunction) => {
+notificationRoute.get('/get-notificationByIdUser',authUserMiddleWare, (req: Request, res: Response, next: NextFunction) => {
     notificationController.getNotificationByIdUser(req, res,next);
 });
 
@@ -112,7 +113,7 @@ notificationRoute.get('/get-notificationByIdUser', (req: Request, res: Response,
  * */
 
 
-notificationRoute.put('/update-viewed-byIdUser', (req: Request, res: Response, next: NextFunction) => {
+notificationRoute.put('/update-viewed-byIdUser',authUserMiddleWare, (req: Request, res: Response, next: NextFunction) => {
     notificationController.updateViewedByIdUser(req, res,next);
 });
 /**

@@ -1,10 +1,11 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import genreController from '../controller/genreController';
+import { authenticateJWT } from '../middlewares/authMiddleware';
 
 const genreRoute = express.Router();
 
-genreRoute.post('/create-many-genre', (req: Request, res: Response, next: NextFunction) => {
+genreRoute.post('/create-many-genre',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     genreController.createManyGenre(req, res, next);
 });
 /**
@@ -125,7 +126,7 @@ genreRoute.get('/get-advanced-page', genreController.getAdvancedPaginatedGenres)
  *       500:
  *         description: Server error
  */
-genreRoute.post('/create', genreController.createGenre);
+genreRoute.post('/create',authenticateJWT, genreController.createGenre);
 /**
  * @swagger
  * /genres/update:
@@ -166,7 +167,7 @@ genreRoute.post('/create', genreController.createGenre);
  *       500:
  *         description: Server error
  */
-genreRoute.put('/update', genreController.updateGenre);
+genreRoute.put('/update',authenticateJWT, genreController.updateGenre);
 
 
 genreRoute.get('/total-genre', genreController.totalGenre);

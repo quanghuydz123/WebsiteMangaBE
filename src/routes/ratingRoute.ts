@@ -1,6 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import ratingController from '../controller/ratingController';
+import { authUserMiddleWare } from '../middlewares/authMiddleware';
 
 const ratingRoute = express.Router();
 
@@ -32,7 +33,7 @@ ratingRoute.get('/get-all', (req: Request, res: Response, next: NextFunction) =>
  * 
  * */
 
-ratingRoute.post('/toggle-rating', (req: Request, res: Response, next: NextFunction) => {
+ratingRoute.post('/toggle-rating',authUserMiddleWare, (req: Request, res: Response, next: NextFunction) => {
     ratingController.toggleRating(req, res,next);
 });
 
@@ -77,7 +78,7 @@ ratingRoute.post('/toggle-rating', (req: Request, res: Response, next: NextFunct
  * */
 
 
-ratingRoute.get('/get-ratingByIdUserAndManga', (req: Request, res: Response, next: NextFunction) => {
+ratingRoute.get('/get-ratingByIdUserAndManga',authUserMiddleWare, (req: Request, res: Response, next: NextFunction) => {
     ratingController.getRatingByIdUserAndManga(req, res,next);
 });
 

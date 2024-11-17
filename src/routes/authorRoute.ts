@@ -1,6 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import authorController from '../controller/authorController';
+import { authenticateJWT } from '../middlewares/authMiddleware';
 
 const authorRoute = express.Router();
 
@@ -55,7 +56,7 @@ const authorRoute = express.Router();
  *       500:
  *         description: Server error
  */
-authorRoute.post('/create-many-author', (req: Request, res: Response, next: NextFunction) => {
+authorRoute.post('/create-many-author',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     authorController.createManyAuthor(req, res, next);
 });
 
@@ -283,7 +284,7 @@ authorRoute.get('/get-page', authorController.getPaginatedAuthor);
  *                 data:
  *                   type: null
  */
-authorRoute.post('/create', authorController.createAuthor);
+authorRoute.post('/create',authenticateJWT, authorController.createAuthor);
 
 /**
  * @swagger
@@ -363,7 +364,7 @@ authorRoute.post('/create', authorController.createAuthor);
  *                 data:
  *                   type: null
  */
-authorRoute.put('/update', authorController.updateAuthor);
+authorRoute.put('/update',authenticateJWT, authorController.updateAuthor);
 
 /**
  * @swagger

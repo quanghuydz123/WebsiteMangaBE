@@ -1,7 +1,7 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import publisherController from '../controller/publisherController';
-
+import { authenticateJWT } from '../middlewares/authMiddleware';
 const publisherRoute = express.Router();
 
 publisherRoute.post('/create-many-publisher', (req: Request, res: Response, next: NextFunction) => {
@@ -33,7 +33,7 @@ publisherRoute.get('/get-all', (req: Request, res: Response, next: NextFunction)
  * 
  * */
 
-publisherRoute.post('/create-publisher', (req: Request, res: Response, next: NextFunction) => {
+publisherRoute.post('/create-publisher',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     publisherController.createPublisher(req, res,next);
 });
 

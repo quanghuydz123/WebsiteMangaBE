@@ -1,10 +1,11 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import commentController from '../controller/commentController';
+import { authenticateJWT, authUserMiddleWare } from '../middlewares/authMiddleware';
 
 const commentRoute = express.Router();
 
-commentRoute.post('/create-many-comment', (req: Request, res: Response, next: NextFunction) => {
+commentRoute.post('/create-many-comment',authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
     commentController.createManyComment(req, res,next);
 });
 
@@ -146,7 +147,7 @@ commentRoute.get('/get-advanced-page',commentController.getAdvancedPaginatedComm
  *         description: Server error
  */
 
-commentRoute.post('/create',commentController.createComment);
+commentRoute.post('/create', authUserMiddleWare, commentController.createComment);
 /**
  * @swagger
  * /comments/update:
