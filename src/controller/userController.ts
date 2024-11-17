@@ -84,6 +84,7 @@ const getUserById = asyncHandler(async (req: Request, res: Response<GenericRespo
                 .populate({
                     path: 'reading_history',
                     select: '_id title manga',
+                    match: { isDeleted: false },
                     populate: [
                         { path: 'manga', select: '_id name imageUrl' },
                     ]
