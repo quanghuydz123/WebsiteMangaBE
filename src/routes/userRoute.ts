@@ -362,4 +362,77 @@ userRouter.get('/total-user', (req: Request, res: Response,next :NextFunction) =
  * 
  * */
 
+userRouter.put("/change-role",userController.changeRole);
+/**
+ * @swagger
+ * /users/change-role:
+ *   put:
+ *     summary: Change the role of a user
+ *     description: Updates the role of a user in the system
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 description: The ID of the user whose role is being updated
+ *                 example: "66f18ac5ab25c97ba8d69efc"
+ *               newRoleId:
+ *                 type: string
+ *                 description: The ID of the new role for the user
+ *                 example: "66f18ac5ab25c97ba8d69eff"
+ *     responses:
+ *       200:
+ *         description: Role updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Role updated successfully."
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Invalid input data (userId or newRoleId)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid userId or newRoleId."
+ *                 data:
+ *                   type: null
+ *       404:
+ *         description: User not found or is deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User not found or is deleted."
+ *                 data:
+ *                   type: null
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error."
+ *                 data:
+ *                   type: null
+ */
 export default userRouter;

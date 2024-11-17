@@ -342,19 +342,19 @@ const addReadingHistory = asyncHandler(async (req: Request, res: Response<Generi
     }
 });
 const blockUser = asyncHandler(async (req: Request, res: Response<GenericResponse<IUser | null>>): Promise<void> => {
-    const { idUser} = req.body;
+    const { idUser } = req.body;
 
     try {
         const user = await UserModel.findById(idUser);
 
-        if (!user ) {
+        if (!user) {
             res.status(400).json({
                 message: 'User không tồn tại',
                 data: null,
             });
             return; // Early return to indicate completion
         }
-        const updateUser = await UserModel.findByIdAndUpdate(idUser,{isDeleted:!user.isDeleted},{new:true})
+        const updateUser = await UserModel.findByIdAndUpdate(idUser, { isDeleted: !user.isDeleted }, { new: true })
         res.status(200).json({
             message: "Thành công",
             data: updateUser,
@@ -375,6 +375,48 @@ const totalUser = asyncHandler(async (req: Request, res: Response<GenericRespons
         data: totalUser,
     });
 });
+
+const changeRole = async (req: Request, res: Response) => {
+    const { userId, newRoleId } = req.body;
+
+    // Validate input
+    if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(newRoleId)) {
+        const errorResponse: GenericResponse<null> = {
+            message: 'Invalid userId or newRoleId.',
+            data: null
+        };
+        return res.status(400).json(errorResponse);
+    }
+
+    try {
+        // Check if user exists
+        const user = await UserModel.findById(userId);
+        if (!user || user.isDeleted) {
+            const errorResponse: GenericResponse<null> = {
+                message: 'User not found or is deleted.',
+                data: null
+            };
+            return res.status(404).json(errorResponse);
+        }
+
+        // Update user's role
+        user.role = new mongoose.Types.ObjectId(newRoleId);
+        await user.save();
+
+        const successResponse: GenericResponse<IUser> = {
+            message: 'Role updated successfully.',
+            data: user
+        };
+        res.status(200).json(successResponse);
+    } catch (error) {
+        console.error('Error changing role:', error);
+        const errorResponse: GenericResponse<null> = {
+            message: 'Internal server error.',
+            data: null
+        };
+        res.status(500).json(errorResponse);
+    }
+};
 export default {
     getAll,
     createManyUser,
@@ -385,5 +427,6 @@ export default {
     loginGoogle,
     addReadingHistory,
     blockUser,
-    totalUser
+    totalUser,
+    changeRole,
 };

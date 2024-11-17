@@ -11,7 +11,10 @@ const generateJWT = async (req: Request, res: Response) => {
         if (!req.user) {
             return res.status(401).send('User not authenticated');
         }
-
+        if(req.user.isDeleted){
+            res.status(403).json({ message: "User is blocked", data: null });
+            return;
+        }
         // Generate a JWT token
         const token = jwt.sign(
             { id: req.user._id, roleId: req.user.role },
