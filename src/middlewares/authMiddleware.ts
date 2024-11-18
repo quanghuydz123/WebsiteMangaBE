@@ -34,7 +34,7 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
             console.error('JWT verification error:', err); // Log the error for server-side tracking
             return res.status(403).json({ error: 'Access denied: Invalid token.' }); // Improved error message
         }
-        if(user.roleId ===  process.env.IDROLEADMIN){
+        if(user.roleId ===  process.env.ADMIN_ROLE_ID){
             req.user = user; // Attach the user information to the request
             next()
         }else{
@@ -59,7 +59,7 @@ export const authUserMiddleWare = (req: Request, res: Response, next: NextFuncti
             console.error('JWT verification error:', err); // Log the error for server-side tracking
             return res.status(403).json({ error: 'Access denied: Invalid token.' }); // Improved error message
         }
-        if(user.roleId ===  process.env.IDROLEADMIN || user.id  === id ||  user.id === idUser || user.id === idUserBody || user.id === idUserBody1){
+        if(user.roleId ===  process.env.ADMIN_ROLE_ID || user.id  === id ||  user.id === idUser || user.id === idUserBody || user.id === idUserBody1){
             req.user = user; // Attach the user information to the request
             next()
         }else{
