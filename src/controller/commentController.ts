@@ -4,6 +4,7 @@ import CommentModel, { Comment, TOEXICWORDS } from '../models/CommentModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
+import crypto from 'crypto';
 
 dotenv.config();
 
@@ -256,12 +257,25 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
             }
         ]);
 
-        // Create a response object using GenericResponse
+        // Generate a hash for the comment data
+        const dataHash = crypto
+            .createHash('md5')
+            .update(JSON.stringify({ mangaId, page, limit, totalComment, comments: commentList }))
+            .digest('hex');
+        
+        const clientETag = req.headers['if-none-match'];
+
+        // If the ETag matches, return 304 Not Modified
+        if (clientETag === dataHash) {
+            return res.status(304).end(); // Not Modified
+        }
+
+        // Create the response object using GenericResponse
         const response: GenericResponse<{
             page: number;
             totalComment: number;
             totalPages: number;
-            comments: typeof commentList
+            comments: typeof commentList;
         }> = {
             message: 'Comments retrieved successfully.',
             data: {
@@ -272,6 +286,8 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
             },
         };
 
+        // Set the ETag header for caching
+        res.setHeader('ETag', dataHash);
         res.status(200).json(response);
     } catch (error) {
         const errorResponse: GenericResponse<null> = {

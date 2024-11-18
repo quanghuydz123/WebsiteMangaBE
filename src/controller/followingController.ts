@@ -215,7 +215,7 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
     const skip: number = (page - 1) * limit;
 
     try {
-        const totalFollowings = await FollowingModel.countDocuments({ user: userId });
+        
 
         const followingList: MangaFollowed[] = await FollowingModel.aggregate([
             { $match: { user: userId } }, // Filter for the user
@@ -240,7 +240,7 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
                     as: 'latestChapter', // Output array field
                     pipeline: [
                         { $match: { isDeleted: false } }, // Filter chapters where isDeleted is false
-                        { $sort: { chapNum: -1 } }, // Sort by chapNum in descending order
+                        { $sort: { chapNum: 1 } }, // Sort by chapNum in descending order
                         { $limit: 1 } // Limit to the latest chapter
                     ]
                 }

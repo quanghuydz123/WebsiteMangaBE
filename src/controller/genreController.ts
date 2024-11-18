@@ -4,6 +4,7 @@ import GenreModel, { Genre } from '../models/GenreModel';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
+import crypto from 'crypto';
 
 dotenv.config();
 
@@ -32,11 +33,24 @@ const getPaginatedGenres = async (req: Request, res: Response) => {
         const totalGenres = await GenreModel.countDocuments();
         const genresList = await GenreModel.find().skip(skip).limit(limit);
 
+        // Create a unique ETag based on the data
+        const dataHash = crypto
+            .createHash('md5')
+            .update(JSON.stringify({ page, totalGenres, genres: genresList }))
+            .digest('hex');
+        const clientETag = req.headers['if-none-match'];
+
+        // Compare ETag from client
+        if (clientETag === dataHash) {
+            return res.status(304).end(); // Not Modified
+        }
+
+        // Build the response
         const response: GenericResponse<{
             page: number;
             totalGenres: number;
             totalPages: number;
-            genres: Genre[] // Adjust the type based on your Genre model
+            genres: Genre[]; // Adjust the type based on your Genre model
         }> = {
             message: "Genres retrieved successfully",
             data: {
@@ -47,6 +61,8 @@ const getPaginatedGenres = async (req: Request, res: Response) => {
             },
         };
 
+        // Set the ETag header
+        res.setHeader('ETag', dataHash);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({
