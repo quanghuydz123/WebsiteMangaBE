@@ -240,7 +240,7 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
                     as: 'latestChapter', // Output array field
                     pipeline: [
                         { $match: { isDeleted: false } }, // Filter chapters where isDeleted is false
-                        { $sort: { chapNum: 1 } }, // Sort by chapNum in descending order
+                        { $sort: { chapterNum: -1 } }, // Sort by chapNum in descending order
                         { $limit: 1 } // Limit to the latest chapter
                     ]
                 }
@@ -266,7 +266,7 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
 
         // Prepare response data
         const responseData: MangaFollowed[] = followingList;
-
+        console.log(followingList[0].latestChapterTitle)
         res.status(200).json({
             message: 'User library retrieved successfully.',
             data: responseData,
