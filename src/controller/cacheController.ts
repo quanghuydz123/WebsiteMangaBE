@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import APIParamsModel, { IAPIParams } from '../models/APIPramsModel';
 import ModelModified from "../models/ModelModified";
-
+import crypto from "crypto"
 // Main function to handle ETag generation and validation
 async function getEtag(
     req: Request,
@@ -9,11 +9,11 @@ async function getEtag(
     currentModelName: string
 ): Promise<string | null> {
     try {
-        
+
         // Perform both queries in parallel
         const [cachedAPIParams, modelModified] = await Promise.all([
             // Query APIParamsModel to check if the parameters exist
-            APIParamsModel.findOne(apiParam),
+            APIParamsModel.findOne({ ...apiParam }),
             // Query ModelModified to get the last update timestamp for the model
             ModelModified.findOne({ modelName: currentModelName })
         ]);
@@ -21,24 +21,29 @@ async function getEtag(
         if (cachedAPIParams && modelModified) {
             const lastUpdatedAt = modelModified.updatedAt;
             const requestHash = generateETag(cachedAPIParams.params, lastUpdatedAt);
-            
+
             // If the ETag matches the client header, return `null` (indicates 304)
             if (req.headers["if-none-match"] === requestHash) {
                 return null; // Data hasn't changed
             }
         }
 
-
-        // Cache the request parameters if not already cached
-        await upsertAPIParamsModel(apiParam); // dont need await because if it fail it not break the system
+        if (!cachedAPIParams) {
+            // Cache the request parameters if not already cached
+            await upsertAPIParamsModel(apiParam);
+        }
 
         // Generate a new ETag based on the latest data
-        const newETag = generateETag(apiParam.params, new Date());
+        if (!modelModified) {
+            const newTime = new Date();
+            // Update the modification timestamp for the model
+            upsertModelModified(currentModelName, newTime);  // dont need await because if it fail it not break the system
+            return generateETag(apiParam.params, newTime);
+        }
 
-        // Update the modification timestamp for the model
-        upsertModelModified(currentModelName);  // dont need await because if it fail it not break the system
 
-        return newETag; // Return the new ETag
+
+        return generateETag(apiParam.params, modelModified.updatedAt);// Return the new ETag
     } catch (error) {
         console.error("Error in getEtag:", error);
         return null;
@@ -47,11 +52,11 @@ async function getEtag(
 }
 
 // Helper function to create or update the ModelModified record
-async function upsertModelModified(newModelName: string) {
+async function upsertModelModified(newModelName: string, timeUpdate?: Date) {
     try {
         await ModelModified.updateOne(
             { modelName: newModelName },
-            { updatedAt: new Date() },
+            { updatedAt: timeUpdate ?? new Date() },
             { upsert: true } // Insert if it doesn't exist
         );
 
@@ -62,9 +67,10 @@ async function upsertModelModified(newModelName: string) {
 
 // Helper function to generate an ETag using hashing
 function generateETag(params: string, lastUpdatedAt: Date): string {
-    const crypto = require("crypto");
     const rawString = `${params}_${lastUpdatedAt.getTime()}`;
-    return crypto.createHash("md5").update(rawString).digest("hex");
+    const cryptoString = crypto.createHash("md5").update(rawString).digest("hex");
+
+    return cryptoString;
 }
 
 // Helper function to upsert APIParamsModel
@@ -81,7 +87,7 @@ async function upsertAPIParamsModel(apiParam: IAPIParams) {
     }
 }
 
-function controllCacheHeader(res: Response,etag:string,seconds:number=20) {
+function controllCacheHeader(res: Response, etag: string, seconds: number = 20) {
     res.setHeader('ETag', etag);
     res.setHeader("Cache-Control", `public, max-age=${seconds}, must-revalidate`); // Cache for 5 second
 }
