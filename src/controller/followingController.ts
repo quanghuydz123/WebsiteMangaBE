@@ -266,7 +266,6 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
 
         // Prepare response data
         const responseData: MangaFollowed[] = followingList;
-        console.log(followingList[0].latestChapterTitle)
         res.status(200).json({
             message: 'User library retrieved successfully.',
             data: responseData,
