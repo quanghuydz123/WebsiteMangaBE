@@ -5,8 +5,10 @@ import MangaModel from '../models/MangaModel';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
 import fileController from '../controller/fileController';
+import cacheController from './cacheController';
+import { IAPIParams } from '../models/APIPramsModel';
 dotenv.config();
-
+const CURRENT_MODEL_NAME = "manga" as const;
 
 interface MangaResponse {
     _id: mongoose.Types.ObjectId;
@@ -56,6 +58,20 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
         fillterPublisher?: string;
         status?: number;
     } = req.query;
+
+    const apiParam: IAPIParams = {
+        apiRoute: "/manga/get-all",
+        params: `${searchValue}-${fillterGenre}-${sortType}-${page}-${limit}`
+    }
+
+    const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
+
+    if (etag === null) {
+        res.status(304).send();
+        return;
+    }
+
+
 
     const filter: any = {};
     const sort: any = {};
@@ -124,7 +140,8 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
         message: "Thành công",
         data: manga,
     };
-
+    // Set the ETag header
+    cacheController.controllCacheHeader(res, etag);
     res.status(200).json(response);
 });
 
@@ -187,6 +204,7 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericR
     if (data.name && data.name !== updateManga.name) {
         fileController.changeFolderName(data.name, updateManga.name);
     }
+    cacheController.upsertModelModified(CURRENT_MODEL_NAME);
     res.status(200).json(response);
 });
 
@@ -203,7 +221,7 @@ const createManga = asyncHandler(async (req: Request, res: Response<GenericRespo
             message: "Thành công",
             data: populatedManga,
         };
-
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME);
         res.status(201).json(response); // Updated to 201 for Created
     } catch (error) {
         res.status(400).json({
@@ -232,6 +250,7 @@ const increaseView = asyncHandler(async (req: Request, res: Response<GenericResp
                 message: "Thành công",
                 data: mangaUpdate,
             };
+            cacheController.upsertModelModified(CURRENT_MODEL_NAME);
             res.status(200).json(response);
         } else {
             res.status(400).json({ // Handle potential error in update
@@ -385,6 +404,7 @@ const deleteManga = asyncHandler(async (req: Request, res: Response<GenericRespo
     const manga = await MangaModel.findById(idManga)
     if (manga) {
         const mangaUpdate = await MangaModel.findByIdAndUpdate(idManga, { isDeleted: !manga.isDeleted }, { new: true });
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME);
         res.status(200).json({
             message: 'Thành công',
             data: mangaUpdate
@@ -399,7 +419,16 @@ const deleteManga = asyncHandler(async (req: Request, res: Response<GenericRespo
 const getAllAdminManga = async (req: Request, res: Response) => {
     try {
         const { page = 1, limit = 10 } = req.query;
+        const apiParam: IAPIParams = {
+            apiRoute: "/genres/get-page",
+            params: `${page}-${limit}`
+        }
+        const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
 
+        if (etag === null) {
+            res.status(304).send();
+            return;
+        }
         const options = {
             page: Number(page),
             limit: Number(limit),
@@ -438,7 +467,8 @@ const getAllAdminManga = async (req: Request, res: Response) => {
                 nextPage: paginatedManga.nextPage
             },
         };
-
+        // Set the ETag header
+        cacheController.controllCacheHeader(res, etag);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({
@@ -494,7 +524,7 @@ export const updateAdminManga = async (req: Request, res: Response) => {
             message: 'Manga updated successfully',
             data: mangaResponse
         };
-
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME);
         res.status(200).json(response);
     } catch (error) {
         // Return an error response in case of failure
@@ -510,8 +540,8 @@ export const updateAdminManga = async (req: Request, res: Response) => {
 const totalManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
     const totalManga = await MangaModel.find().countDocuments()
     res.status(200).json({
-        message:'Thành công',
-        data:totalManga
+        message: 'Thành công',
+        data: totalManga
     });
 });
 export default {
