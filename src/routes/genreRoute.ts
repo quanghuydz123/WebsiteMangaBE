@@ -133,13 +133,6 @@ genreRoute.post('/create',authenticateJWT, genreController.createGenre);
  *   put:
  *     summary: Update a genre
  *     tags: [Genres]
- *     parameters:
- *       - in: query
- *         name: id
- *         required: true
- *         description: Genre ID
- *         schema:
- *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -147,6 +140,8 @@ genreRoute.post('/create',authenticateJWT, genreController.createGenre);
  *           schema:
  *             type: object
  *             properties:
+ *               id:
+ *                 type: string
  *               name:
  *                 type: string
  *               slug:

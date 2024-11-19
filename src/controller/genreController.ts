@@ -1,11 +1,15 @@
-import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import GenreModel, { Genre } from '../models/GenreModel';
-import mongoose from 'mongoose';
 import { Request, Response } from 'express';
+import asyncHandler from 'express-async-handler';
+import mongoose from 'mongoose';
+import { IAPIParams } from '../models/APIPramsModel';
 import { GenericResponse } from '../models/GenericResponse';
+import GenreModel, { Genre } from '../models/GenreModel';
+import cacheController from './cacheController';
 
 dotenv.config();
+
+const CURRENT_MODEL_NAME = "genres" as const;
 
 const createManyGenre = asyncHandler(async (req: Request, res: Response) => {
     const { tb_Genre } = req.body;
@@ -23,20 +27,35 @@ const createManyGenre = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
-const getPaginatedGenres = async (req: Request, res: Response) => {
+const getPaginatedGenres = async (req: Request, res: Response): Promise<void> => {
     const page: number = parseInt(req.query.page as string, 10) || 1;
     const limit: number = parseInt(req.query.limit as string, 10) || 10;
     const skip: number = (page - 1) * limit;
 
+    const apiParam: IAPIParams = {
+        apiRoute: "/genres/get-page",
+        params: `${page}-${limit}`
+    }
+
     try {
+        const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
+        
+        if (etag === null) {
+            console.log("send 304");
+            
+            res.status(304).send();
+            return;
+        }
+
         const totalGenres = await GenreModel.countDocuments();
         const genresList = await GenreModel.find().skip(skip).limit(limit);
 
+        // Build the response
         const response: GenericResponse<{
             page: number;
             totalGenres: number;
             totalPages: number;
-            genres: Genre[] // Adjust the type based on your Genre model
+            genres: Genre[]; // Adjust the type based on your Genre model
         }> = {
             message: "Genres retrieved successfully",
             data: {
@@ -47,6 +66,10 @@ const getPaginatedGenres = async (req: Request, res: Response) => {
             },
         };
 
+        // Set the ETag header
+        cacheController.controllCacheHeader(res,etag);
+        console.log("send 200");
+        
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({
@@ -122,7 +145,7 @@ const createGenre = async (req: Request, res: Response) => {
             message: 'Genre created successfully.',
             data: responseData,
         };
-
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME)
         res.status(201).json(response);
     } catch (error) {
         // Create a consistent error response object
@@ -156,7 +179,7 @@ const updateGenre = async (req: Request, res: Response) => {
             message: 'Genre updated successfully.',
             data: isReturnNewData ? updatedGenre : null,
         };
-
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME);
         res.status(200).json(response);
     } catch (error) {
         const errorResponse: GenericResponse<null> = {

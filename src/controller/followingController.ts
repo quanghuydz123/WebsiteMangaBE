@@ -215,7 +215,7 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
     const skip: number = (page - 1) * limit;
 
     try {
-        const totalFollowings = await FollowingModel.countDocuments({ user: userId });
+        
 
         const followingList: MangaFollowed[] = await FollowingModel.aggregate([
             { $match: { user: userId } }, // Filter for the user
@@ -239,7 +239,8 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
                     foreignField: 'manga', // Field in the Chapter collection that references Manga
                     as: 'latestChapter', // Output array field
                     pipeline: [
-                        { $sort: { title: -1 } }, // Sort by title in descending order
+                        { $match: { isDeleted: false } }, // Filter chapters where isDeleted is false
+                        { $sort: { chapterNum: -1 } }, // Sort by chapNum in descending order
                         { $limit: 1 } // Limit to the latest chapter
                     ]
                 }
@@ -265,7 +266,6 @@ const getUserLibrary = async (req: Request, res: Response<GenericResponse<MangaF
 
         // Prepare response data
         const responseData: MangaFollowed[] = followingList;
-
         res.status(200).json({
             message: 'User library retrieved successfully.',
             data: responseData,
@@ -357,7 +357,7 @@ const getUserListByMangaId = async (mangaId: mongoose.Types.ObjectId): Promise<s
 }
 
 const checkIsFollow = async (req: Request, res: Response<GenericResponse<boolean | null>>) => {
-    const { idManga,idUser } = req.query; // Assuming idManga is passed as a route parameter
+    const { idManga, idUser } = req.query; // Assuming idManga is passed as a route parameter
 
     if (!idManga || !idUser) {
         return res.status(400).json({
@@ -367,19 +367,19 @@ const checkIsFollow = async (req: Request, res: Response<GenericResponse<boolean
     }
 
     try {
-        const follow = await FollowingModel.findOne({manga:idManga,user:idUser})
-        if(follow){
+        const follow = await FollowingModel.findOne({ manga: idManga, user: idUser })
+        if (follow) {
             res.status(200).json({
                 message: 'Người dùng có theo dõi truyện này',
                 data: true as boolean
             });
-        }else{
+        } else {
             res.status(200).json({
                 message: 'Người dùng không có theo dõi truyện này',
                 data: false as boolean
             });
         }
-        
+
     } catch (error: any) {
         res.status(500).json({
             message: "Server error: " + error.message,
