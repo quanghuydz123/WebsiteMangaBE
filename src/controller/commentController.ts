@@ -147,20 +147,24 @@ const createComment = async (req: Request, res: Response) => {
             data: responseData // data will be null if isReturnNewData is false
         };
 
-        res.status(201).json(response);
+        return res.status(201).json(response);
     } catch (error: any) {
         // Use GenericResponse for error
         const errorResponse: GenericResponse<null> = {
             message: "Server error: " + error.message,
             data: null
         };
-        res.status(500).json(errorResponse);
+        return res.status(500).json(errorResponse);
     }
 };
-
-const updateComment = async (req: Request, res: Response) => {
+interface UpdateCommentRequestBody {
+    text: string;
+    isDeleted: boolean;
+    isReturnNewData: boolean;
+  }
+const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res: Response) => {
     const { id } = req.query;  // Get ID from the query
-    const { text = "", isDeleted, isReturnNewData } = req.body;
+    const { text = "", isDeleted=false, isReturnNewData=false } = req.body;
 
     if (typeof id !== 'string') {
         return res.status(400).json({
