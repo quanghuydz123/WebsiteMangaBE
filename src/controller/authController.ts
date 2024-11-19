@@ -8,31 +8,19 @@ dotenv.config();
 const generateJWT = async (req: Request, res: Response) => {
 
     try {
-        // Ensure user exists before accessing properties
-        if (!req.user || !req.user.id) {
-            // Reset user cookie before returning
-            res.cookie('jwt', '', {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'none',
-                expires: new Date(0), // Expire the cookie immediately
-            });
-            return res.status(401).send('User not authenticated');
+        if (req.user && req.user.id) {
+            const userFromDatabase: IUser | null = await UserModel.findById(req.user.id, { isDeleted: 1 });
+            if (!userFromDatabase || userFromDatabase.isDeleted) {
+                // Reset user cookie before returning
+                res.cookie('jwt', '', {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'none',
+                    expires: new Date(0), // Expire the cookie immediately
+                });
+                return res.status(403).json({ message: "User is blocked", data: null });
+            }
         }
-
-        const userFromDatabase: IUser | null = await UserModel.findById(req.user.id, { isDeleted: 1 });
-        if (!userFromDatabase || userFromDatabase.isDeleted) {
-            // Reset user cookie before returning
-            res.cookie('jwt', '', {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'none',
-                expires: new Date(0), // Expire the cookie immediately
-            });
-            return res.status(403).json({ message: "User is blocked", data: null });
-        }
-
-
         // Generate a JWT token
         const token = jwt.sign(
             { id: req.user._id, roleId: req.user.role },
