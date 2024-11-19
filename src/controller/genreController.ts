@@ -41,6 +41,8 @@ const getPaginatedGenres = async (req: Request, res: Response): Promise<void> =>
         const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
         
         if (etag === null) {
+            console.log("send 304");
+            
             res.status(304).send();
             return;
         }
@@ -66,7 +68,8 @@ const getPaginatedGenres = async (req: Request, res: Response): Promise<void> =>
 
         // Set the ETag header
         cacheController.controllCacheHeader(res,etag);
-
+        console.log("send 200");
+        
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({

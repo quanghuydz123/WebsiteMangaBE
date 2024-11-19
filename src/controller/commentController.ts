@@ -133,10 +133,10 @@ const createComment = async (req: Request, res: Response) => {
         };
         return res.status(403).json(errorResponse);
     }
-    const comment = new CommentModel({ user, text, manga });
+
 
     try {
-        const newComment: Comment = await comment.save();
+        const newComment: Comment = await CommentModel.create({ user, text, manga });
 
         // Set responseData based on isReturnNewData
         const responseData = isReturnNewData ? newComment : null; // Return comment if requested, otherwise null

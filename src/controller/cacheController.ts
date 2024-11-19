@@ -9,7 +9,8 @@ async function getEtag(
     currentModelName: string
 ): Promise<string | null> {
     try {
-
+        console.log(`api: ${apiParam.apiRoute}`);
+        
         // Perform both queries in parallel
         const [cachedAPIParams, modelModified] = await Promise.all([
             // Query APIParamsModel to check if the parameters exist
@@ -21,7 +22,8 @@ async function getEtag(
         if (cachedAPIParams && modelModified) {
             const lastUpdatedAt = modelModified.updatedAt;
             const requestHash = generateETag(cachedAPIParams.params, lastUpdatedAt);
-
+            console.log(`comming:${req.headers["if-none-match"]} ,\n hash: ${requestHash}`);
+            
             // If the ETag matches the client header, return `null` (indicates 304)
             if (req.headers["if-none-match"] === requestHash) {
                 return null; // Data hasn't changed
@@ -30,25 +32,25 @@ async function getEtag(
 
         if (!cachedAPIParams) {
             // Cache the request parameters if not already cached
+            console.log("-->create API");
+            
             await upsertAPIParamsModel(apiParam);
         }
 
         // Generate a new ETag based on the latest data
         if (!modelModified) {
+            console.log("=-=- createModel");
+            
             const newTime = new Date();
             // Update the modification timestamp for the model
             upsertModelModified(currentModelName, newTime);  // dont need await because if it fail it not break the system
             return generateETag(apiParam.params, newTime);
         }
-
-
-
         return generateETag(apiParam.params, modelModified.updatedAt);// Return the new ETag
     } catch (error) {
         console.error("Error in getEtag:", error);
         return null;
     }
-
 }
 
 // Helper function to create or update the ModelModified record

@@ -30,6 +30,7 @@ app.use(cors({
         }
     },
     credentials: true,
+    exposedHeaders: ['ETag'],
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
