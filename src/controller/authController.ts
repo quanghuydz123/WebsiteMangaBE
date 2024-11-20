@@ -35,7 +35,7 @@ const generateJWT = async (req: Request, res: Response) => {
             sameSite: 'none', // Required for cross-domain cookie
             maxAge: 604800000,
         });
-        res.redirect(`http://localhost:3000?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
+        res.redirect(`${process.env.FRONTEND_API || 'http://localhost:3000'}?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
 
         // Redirect to the frontend with user info
     } catch (error) {
