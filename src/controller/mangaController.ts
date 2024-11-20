@@ -419,16 +419,7 @@ const deleteManga = asyncHandler(async (req: Request, res: Response<GenericRespo
 const getAllAdminManga = async (req: Request, res: Response) => {
     try {
         const { page = 1, limit = 10 } = req.query;
-        const apiParam: IAPIParams = {
-            apiRoute: "/genres/get-page",
-            params: `${page}-${limit}`
-        }
-        const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
 
-        if (etag === null) {
-            res.status(304).send();
-            return;
-        }
         const options = {
             page: Number(page),
             limit: Number(limit),
@@ -467,8 +458,7 @@ const getAllAdminManga = async (req: Request, res: Response) => {
                 nextPage: paginatedManga.nextPage
             },
         };
-        // Set the ETag header
-        cacheController.controllCacheHeader(res, etag);
+
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({

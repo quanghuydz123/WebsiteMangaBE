@@ -67,7 +67,7 @@ const getPaginatedGenres = async (req: Request, res: Response): Promise<void> =>
         };
 
         // Set the ETag header
-        cacheController.controllCacheHeader(res,etag);
+        cacheController.controllCacheHeader(res,etag,5);
         console.log("send 200");
         
         res.status(200).json(response);
