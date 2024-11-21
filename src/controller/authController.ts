@@ -35,7 +35,8 @@ const generateJWT = async (req: Request, res: Response) => {
             sameSite: 'none', // Required for cross-domain cookie
             maxAge: 604800000,
         });
-        res.redirect(`http://localhost:3000?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
+        const frontendURL = `${process.env.FRONTEND_API}/mangastore/#`
+        res.redirect(`${ frontendURL || 'http://localhost:3000'}?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
 
         // Redirect to the frontend with user info
     } catch (error) {

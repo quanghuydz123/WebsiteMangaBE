@@ -16,7 +16,7 @@ dotenv.config(); // Load environment variables at the start
 const app = express();
 const port = process.env.PORT || 3001;
 const SERVER_URL = process.env.SERVER_API || 'http://localhost:3001';
-const FRONTEND_URL = 'http://localhost:3000';
+const FRONTEND_URL = process.env.FRONTEND_API || 'http://localhost:3000';
 const allowedOrigins = [FRONTEND_URL, SERVER_URL];// Specify allowed origins
 
 // Middleware Setup
