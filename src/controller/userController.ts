@@ -51,7 +51,7 @@ const getAll = asyncHandler(async (req: Request, res: Response<any>): Promise<vo
     }
 });
 
-const createManyUser = asyncHandler(async (req: Request, res: Response) => {
+const createManyUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_User } = req.body;
     const userNews: IUser[] = [];
 
@@ -308,8 +308,10 @@ const addReadingHistory = asyncHandler(async (req: Request, res: Response<Generi
     const { idUser, idChapter } = req.body;
 
     try {
-        const user = await UserModel.findById(idUser);
-        const chapter = await ChapterModel.findById(idChapter);
+        const [user, chapter] = await Promise.all([
+            UserModel.findById(idUser),
+            ChapterModel.findById(idChapter)
+        ])
 
         if (!user || !chapter) {
             res.status(404).json({
@@ -377,7 +379,7 @@ const totalUser = asyncHandler(async (req: Request, res: Response<GenericRespons
     });
 });
 
-const changeRole = async (req: Request, res: Response) => {
+const changeRole = async (req: Request, res: Response): Promise<void> => {
     const { userId, newRoleId } = req.body;
 
     // Validate input
@@ -386,7 +388,8 @@ const changeRole = async (req: Request, res: Response) => {
             message: 'Invalid userId or newRoleId.',
             data: null
         };
-        return res.status(400).json(errorResponse);
+        res.status(400).json(errorResponse);
+        return;
     }
 
     try {
@@ -397,11 +400,12 @@ const changeRole = async (req: Request, res: Response) => {
                 message: 'User not found or is deleted.',
                 data: null
             };
-            return res.status(404).json(errorResponse);
+            res.status(404).json(errorResponse);
+            return;
         }
 
         // Update user's role
-        user.role = new mongoose.Types.ObjectId(newRoleId);
+        user.role = new mongoose.Types.ObjectId(newRoleId as string);
         await user.save();
 
         const successResponse: GenericResponse<IUser> = {

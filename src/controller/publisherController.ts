@@ -7,7 +7,7 @@ import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
-const createManyPublisher = asyncHandler(async (req: Request, res: Response) => {
+const createManyPublisher = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Publisher } = req.body;
 
     await Promise.all(tb_Publisher.map(async (publisher: { _id: string }) => {
