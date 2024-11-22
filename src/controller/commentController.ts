@@ -5,10 +5,12 @@ import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { GenericResponse } from '../models/GenericResponse';
 import crypto from 'crypto';
+import cacheController from './cacheController';
+import { IAPIParams } from '../models/APIPramsModel';
 
 dotenv.config();
-
-const createManyComment = asyncHandler(async (req: Request, res: Response) => {
+const CURRENT_MODEL_NAME = "comments" as const;
+const createManyComment = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Comment } = req.body;
 
     await Promise.all(tb_Comment.map(async (comment: { _id: string }) => {
@@ -24,7 +26,7 @@ const createManyComment = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
-const getPaginatedComment = async (req: Request, res: Response) => {
+const getPaginatedComment = async (req: Request, res: Response): Promise<void> => {
     const page: number = parseInt(req.query.page as string, 10) || 1; // Default to page 1
     const limit: number = parseInt(req.query.limit as string, 10) || 10; // Default to limit 10
     const skip: number = (page - 1) * limit;
@@ -62,7 +64,7 @@ const getPaginatedComment = async (req: Request, res: Response) => {
     }
 };
 
-const getAdvancedPaginatedComment = async (req: Request, res: Response) => {
+const getAdvancedPaginatedComment = async (req: Request, res: Response): Promise<void> => {
     const { page, limit, filter } = req.query;
 
     const pageNumber: number = parseInt(page as string, 10) || 1; // Default to page 1
@@ -115,7 +117,7 @@ const getAdvancedPaginatedComment = async (req: Request, res: Response) => {
     }
 };
 
-const createComment = async (req: Request, res: Response) => {
+const createComment = async (req: Request, res: Response): Promise<void> => {
     let { user, text = "", manga, isReturnNewData } = req.body;
 
     // Check for required fields
@@ -124,14 +126,16 @@ const createComment = async (req: Request, res: Response) => {
             message: "User, text, and manga are required.",
             data: null
         };
-        return res.status(400).json(errorResponse);
+        res.status(400).json(errorResponse);
+        return;
     }
     if (containsToxicWords(text as string)) {
         const errorResponse: GenericResponse<null> = {
             message: "vi phạm tiêu chuẩn cộng đồng",
             data: null
         };
-        return res.status(403).json(errorResponse);
+        res.status(403).json(errorResponse);
+        return;
     }
 
 
@@ -147,30 +151,31 @@ const createComment = async (req: Request, res: Response) => {
             data: responseData // data will be null if isReturnNewData is false
         };
 
-        return res.status(201).json(response);
+        res.status(201).json(response);
     } catch (error: any) {
         // Use GenericResponse for error
         const errorResponse: GenericResponse<null> = {
             message: "Server error: " + error.message,
             data: null
         };
-        return res.status(500).json(errorResponse);
+        res.status(500).json(errorResponse);
     }
 };
 interface UpdateCommentRequestBody {
     text: string;
     isDeleted: boolean;
     isReturnNewData: boolean;
-  }
-const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res: Response) => {
+}
+const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res: Response): Promise<void> => {
     const { id } = req.query;  // Get ID from the query
-    const { text = "", isDeleted=false, isReturnNewData=false } = req.body;
+    const { text = "", isDeleted = false, isReturnNewData = false } = req.body;
 
     if (typeof id !== 'string') {
-        return res.status(400).json({
+        res.status(400).json({
             message: "Invalid or missing 'id' in query",
             data: null
         });
+        return;
     }
 
     // Check for toxic words in the comment text
@@ -179,7 +184,8 @@ const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res
             message: "vi phạm tiêu chuẩn cộng đồng",
             data: null
         };
-        return res.status(403).json(errorResponse);
+        res.status(403).json(errorResponse);
+        return;
     }
 
     try {
@@ -194,7 +200,8 @@ const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res
                 message: 'Comment not found.',
                 data: null
             };
-            return res.status(404).json(notFoundResponse);
+            res.status(404).json(notFoundResponse);
+            return;
         }
 
         // Use GenericResponse for success
@@ -215,12 +222,15 @@ const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res
 };
 
 
-const getPaginatedCommentForManga = async (req: Request, res: Response) => {
+const getPaginatedCommentForManga = async (req: Request, res: Response): Promise<void> => {
     const mangaId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.query.id as string);
     const page: number = parseInt(req.query.page as string, 10) || 1; // Default to page 1
     const limit: number = parseInt(req.query.limit as string, 10) || 10; // Default to limit 10
     const skip: number = (page - 1) * limit;
-
+    const apiParam: IAPIParams = {
+        apiRoute: req.url,
+        params: `${page}_${limit}`
+    }
     try {
         const totalComment = await CommentModel.countDocuments({ manga: mangaId }); // Get the total number of comments
         const commentList = await CommentModel.aggregate([
@@ -261,19 +271,12 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
             }
         ]);
 
-        // Generate a hash for the comment data
-        const dataHash = crypto
-            .createHash('md5')
-            .update(JSON.stringify({ mangaId, page, limit, totalComment, comments: commentList }))
-            .digest('hex');
-        
-        const clientETag = req.headers['if-none-match'];
 
-        // If the ETag matches, return 304 Not Modified
-        if (clientETag === dataHash) {
-            return res.status(304).end(); // Not Modified
+        const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
+        if (etag === null) {
+            res.status(304).end(); // Not Modified
+            return;
         }
-
         // Create the response object using GenericResponse
         const response: GenericResponse<{
             page: number;
@@ -290,8 +293,8 @@ const getPaginatedCommentForManga = async (req: Request, res: Response) => {
             },
         };
 
-        // Set the ETag header for caching
-        res.setHeader('ETag', dataHash);
+        // Set the ETag header
+        cacheController.controllCacheHeader(res, etag,1);
         res.status(200).json(response);
     } catch (error) {
         const errorResponse: GenericResponse<null> = {
@@ -308,31 +311,34 @@ function containsToxicWords(comment: string): boolean {
 }
 
 
-const deleteComment = async (req: Request, res: Response) => {
+const deleteComment = async (req: Request, res: Response): Promise<void> => {
     try {
-        const {idComment} = req.body
-        if(!idComment){
+        const { idComment } = req.body
+        if (!idComment) {
             const errorResponse: GenericResponse<null> = {
                 message: 'Hãy truyền idComment vô',
                 data: null
             };
             res.status(500).json(errorResponse);
+            return;
         }
         const comment = await CommentModel.findById(idComment)
-        if(comment){
+        if (comment) {
             await CommentModel.findByIdAndDelete(comment._id)
             res.status(200).json({
-                message:'Xóa comment thành công',
-                data:null
+                message: 'Xóa comment thành công',
+                data: null
             });
-        }else{
+            return;
+        } else {
             const errorResponse: GenericResponse<null> = {
                 message: 'Comment không tồn tại',
                 data: null
             };
             res.status(500).json(errorResponse);
+            return;
         }
-        
+
     } catch (error) {
         const errorResponse: GenericResponse<null> = {
             message: 'Error retrieving comments',

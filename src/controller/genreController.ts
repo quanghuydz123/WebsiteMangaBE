@@ -11,7 +11,7 @@ dotenv.config();
 
 const CURRENT_MODEL_NAME = "genres" as const;
 
-const createManyGenre = asyncHandler(async (req: Request, res: Response) => {
+const createManyGenre = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Genre } = req.body;
 
     await Promise.all(tb_Genre.map(async (genre: { _id: string }) => {
@@ -39,10 +39,10 @@ const getPaginatedGenres = async (req: Request, res: Response): Promise<void> =>
 
     try {
         const etag = await cacheController.getEtag(req, apiParam, CURRENT_MODEL_NAME);
-        
+
         if (etag === null) {
             console.log("send 304");
-            
+
             res.status(304).send();
             return;
         }
@@ -67,9 +67,9 @@ const getPaginatedGenres = async (req: Request, res: Response): Promise<void> =>
         };
 
         // Set the ETag header
-        cacheController.controllCacheHeader(res,etag,5);
+        cacheController.controllCacheHeader(res, etag, 5);
         console.log("send 200");
-        
+
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({
@@ -79,7 +79,7 @@ const getPaginatedGenres = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
-const getAdvancedPaginatedGenres = async (req: Request, res: Response) => {
+const getAdvancedPaginatedGenres = async (req: Request, res: Response): Promise<void> => {
     const { page, limit, filter } = req.query;
 
     const pageNumber: number = parseInt(page as string, 10) || 1;
@@ -122,7 +122,7 @@ const getAdvancedPaginatedGenres = async (req: Request, res: Response) => {
     }
 };
 
-const createGenre = async (req: Request, res: Response) => {
+const createGenre = async (req: Request, res: Response): Promise<void> => {
     const { name, slug, isReturnNewData } = req.body;
 
     if (!name || !slug) {
@@ -131,7 +131,8 @@ const createGenre = async (req: Request, res: Response) => {
             message: 'Name and slug are required.',
             data: null,
         };
-        return res.status(400).json(errorResponse);
+        res.status(400).json(errorResponse);
+        return;
     }
 
     const genre = new GenreModel({ name, slug });
@@ -157,7 +158,7 @@ const createGenre = async (req: Request, res: Response) => {
     }
 };
 
-const updateGenre = async (req: Request, res: Response) => {
+const updateGenre = async (req: Request, res: Response): Promise<void> => {
     const { id, name, slug, isDeleted = false, isReturnNewData = true } = req.body;
 
     try {
@@ -172,7 +173,8 @@ const updateGenre = async (req: Request, res: Response) => {
                 message: 'Genre not found.',
                 data: null,
             };
-            return res.status(404).json(notFoundResponse);
+            res.status(404).json(notFoundResponse);
+            return;
         }
 
         const response: GenericResponse<Genre | null> = {

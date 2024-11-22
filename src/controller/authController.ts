@@ -18,7 +18,8 @@ const generateJWT = async (req: Request, res: Response) => {
                     sameSite: 'none',
                     expires: new Date(0), // Expire the cookie immediately
                 });
-                return res.status(403).json({ message: "User is blocked", data: null });
+                res.status(403).json({ message: "User is blocked", data: null });
+                return;
             }
         }
         // Generate a JWT token
@@ -35,8 +36,9 @@ const generateJWT = async (req: Request, res: Response) => {
             sameSite: 'none', // Required for cross-domain cookie
             maxAge: 604800000,
         });
-        const frontendURL = `${process.env.FRONTEND_API}/mangastore/#`
-        res.redirect(`${ frontendURL || 'http://localhost:3000'}?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
+        const origin = req.get('origin') || req.get('referer');
+        const frontendURL = origin != 'http://localhost:3000' ? `${process.env.FRONTEND_API}/WebsiteMangaFE/#` : 'http://localhost:3000';
+        res.redirect(`${frontendURL}?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
 
         // Redirect to the frontend with user info
     } catch (error) {
@@ -45,11 +47,12 @@ const generateJWT = async (req: Request, res: Response) => {
     }
 };
 
-const generateSwaggerJWT = async (req: Request, res: Response) => {
+const generateSwaggerJWT = async (req: Request, res: Response):Promise<void> => {
     try {
         // Ensure user exists before accessing properties
         if (!req.user) {
-            return res.status(401).send('User not authenticated');
+            res.status(401).send('User not authenticated');
+            return;
         }
 
         // Generate a JWT token

@@ -7,7 +7,7 @@ import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
-const createFile = async (req: Request, res: Response) => {
+const createFile = async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, type, parentId, data } = req.body;
 
@@ -47,13 +47,14 @@ const createFile = async (req: Request, res: Response) => {
     }
 };
 
-const createFolder = async (req: Request, res: Response) => {
+const createFolder = async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, parentId } = req.body;
 
         // Check if the name is provided
         if (!name) {
-            return res.status(400).json({ message: 'Folder name is required.' });
+            res.status(400).json({ message: 'Folder name is required.' });
+            return ;
         }
 
         // Check if parentId is provided before querying the database
@@ -98,12 +99,13 @@ const isValidImageExtension = (filename: string): boolean => {
     return validExtensions.includes(`.${extension}`);
 };
 
-const convertComputerImagesToLink = async (req: Request, res: Response) => {
+const convertComputerImagesToLink = async (req: Request, res: Response): Promise<void> => {
     try {
         const { mangaName, chapterTitle } = req.query as { mangaName: string; chapterTitle: string };
 
         if (!chapterTitle || !mangaName || !req.files) {
-            return res.status(400).json({ message: 'Manga name, chapter title, and images are required.', data: null });
+            res.status(400).json({ message: 'Manga name, chapter title, and images are required.', data: null });
+            return;
         }
 
         let mangaFolder = await FileModel.findOne({ name: mangaName, type: 'folder', parentId: null });
@@ -168,7 +170,7 @@ const convertComputerImagesToLink = async (req: Request, res: Response) => {
 };
 
 
-const getFiles = async (req: Request, res: Response) => {
+const getFiles = async (req: Request, res: Response): Promise<void> => {
     try {
         const { parentId, page = 1, limit = 10 } = req.query;
 
@@ -205,7 +207,7 @@ const getFiles = async (req: Request, res: Response) => {
     }
 };
 
-const getFilesByName = async (req: Request, res: Response) => {
+const getFilesByName = async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, parentId, page = 1, limit = 10 } = req.query;
 
@@ -218,7 +220,8 @@ const getFilesByName = async (req: Request, res: Response) => {
                 message: 'Name cannot be empty.',
                 data: null,
             };
-            return res.status(400).json(errorResponse);
+            res.status(400).json(errorResponse);
+            return ;
         }
 
         // Construct the query with a regex for the name and the parentId
@@ -257,7 +260,7 @@ const getFilesByName = async (req: Request, res: Response) => {
     }
 };
 
-const moveFile = async (req: Request, res: Response) => {
+const moveFile = async (req: Request, res: Response): Promise<void> => {
     try {
         const { fileId, newParentId } = req.body;
 
@@ -268,7 +271,8 @@ const moveFile = async (req: Request, res: Response) => {
                 message: 'File not found.',
                 data: null,
             };
-            return res.status(404).json(errorResponse);
+            res.status(404).json(errorResponse);
+            return;
         }
 
         // Find the new parent folder
@@ -301,7 +305,7 @@ const moveFile = async (req: Request, res: Response) => {
         res.status(500).json(errorResponse);
     }
 };
-const deleteFile = async (req: Request, res: Response) => {
+const deleteFile = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.query;
 
@@ -311,7 +315,8 @@ const deleteFile = async (req: Request, res: Response) => {
                 message: 'Invalid file ID.',
                 data: null,
             };
-            return res.status(400).json(errorResponse);
+            res.status(400).json(errorResponse);
+            return ;
         }
 
         // Find the file by ID
@@ -321,7 +326,8 @@ const deleteFile = async (req: Request, res: Response) => {
                 message: 'File not found.',
                 data: null,
             };
-            return res.status(404).json(errorResponse);
+            res.status(404).json(errorResponse);
+            return ;
         }
 
         // Mark the current file as deleted
@@ -351,7 +357,7 @@ const deleteFile = async (req: Request, res: Response) => {
     }
 };
 
-const restoreFile = async (req: Request, res: Response) => {
+const restoreFile = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.query;
 
@@ -361,7 +367,8 @@ const restoreFile = async (req: Request, res: Response) => {
                 message: 'Invalid file ID.',
                 data: null,
             };
-            return res.status(400).json(errorResponse);
+            res.status(400).json(errorResponse);
+            return ;
         }
 
         // Find the file by ID
@@ -371,7 +378,8 @@ const restoreFile = async (req: Request, res: Response) => {
                 message: 'File not found.',
                 data: null,
             };
-            return res.status(404).json(errorResponse);
+            res.status(404).json(errorResponse);
+            return ;
         }
 
         // Restore the current file
@@ -402,20 +410,23 @@ const restoreFile = async (req: Request, res: Response) => {
 };
 
 // Function to recursively restore child files
-const restoreChildFiles = async (parentId: mongoose.Types.ObjectId) => {
+const restoreChildFiles = async (parentId: mongoose.Types.ObjectId): Promise<void> => {
     const childFiles = await FileModel.find({ parentId, isDeleted: true });
 
-    // Restore each child file
-    for (const child of childFiles) {
-        child.isDeleted = false;
-        await child.save();
+    // Process all child files concurrently
+    await Promise.all(
+        childFiles.map(async (child) => {
+            child.isDeleted = false;
+            await child.save();
 
-        // Recursively restore its children
-        await restoreChildFiles(child._id);
-    }
+            // Recursively restore its children
+            await restoreChildFiles(child._id);
+        })
+    );
 };
 
-const getDeletedFiles = async (req: Request, res: Response) => {
+
+const getDeletedFiles = async (req: Request, res: Response): Promise<void> => {
     try {
         const { parentId, page = 1, limit = 10 } = req.query;
 
@@ -453,14 +464,15 @@ const getDeletedFiles = async (req: Request, res: Response) => {
     }
 };
 
-const createImageFromLink = async (req: Request, res: Response) => {
+const createImageFromLink = async (req: Request, res: Response): Promise<void> => {
     try {
         const { link, name, parentId } = req.body;
 
         // Fetch the image from the URL using fetch
         const response = await fetch(link);
         if (!response.ok) {
-            return res.status(400).json({ message: 'Failed to fetch image from the provided link.' });
+            res.status(400).json({ message: 'Failed to fetch image from the provided link.' });
+            return ;
         }
 
         const buffer = await response.arrayBuffer();
@@ -504,17 +516,19 @@ const createImageFromLink = async (req: Request, res: Response) => {
     }
 };
 
-const getImageForHTMLImgTag = async (req: Request, res: Response) => {
+const getImageForHTMLImgTag = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.query;
 
         // Find the image by ID
         const image = await FileModel.findById(id);
         if (!image || image.isDeleted || image.type !== 'image') {
-            return res.status(404).json({ message: 'Image not found', data: null });
+            res.status(404).json({ message: 'Image not found', data: null });
+            return ;
         }
         if (!image.data) {
-            return res.status(404).json({ message: 'Image data not found', data: null });
+            res.status(404).json({ message: 'Image data not found', data: null });
+            return ;
         }
 
         // Determine the content type from the base64 string
@@ -528,7 +542,8 @@ const getImageForHTMLImgTag = async (req: Request, res: Response) => {
         } else if (image.data.startsWith('data:image/webp')) {
             contentType = 'image/webp';
         } else {
-            return res.status(500).json({ message: 'Unsupported image format', data: null });
+            res.status(500).json({ message: 'Unsupported image format', data: null });
+            return ;
         }
 
         // Remove the prefix and convert to buffer
@@ -549,7 +564,7 @@ const getImageForHTMLImgTag = async (req: Request, res: Response) => {
 };
 
 
-const getImagesFromFolderPaginate = async (req: Request, res: Response) => {
+const getImagesFromFolderPaginate = async (req: Request, res: Response): Promise<void> => {
     try {
         const { folder, page = 1, limit = 10 } = req.query;
 
@@ -583,18 +598,21 @@ const getImagesFromFolderPaginate = async (req: Request, res: Response) => {
 };
 
 // Function to recursively mark child files as deleted
-const markChildFilesAsDeleted = async (parentId: mongoose.Types.ObjectId) => {
+const markChildFilesAsDeleted = async (parentId: mongoose.Types.ObjectId): Promise<void> => {
     const childFiles = await FileModel.find({ parentId, isDeleted: false });
 
-    // Mark each child file as deleted
-    for (const child of childFiles) {
-        child.isDeleted = true;
-        await child.save();
+    // Process all child files concurrently
+    await Promise.all(
+        childFiles.map(async (child) => {
+            child.isDeleted = true;
+            await child.save();
 
-        // Recursively delete its children
-        await markChildFilesAsDeleted(child._id);
-    }
+            // Recursively mark its children as deleted
+            await markChildFilesAsDeleted(child._id);
+        })
+    );
 };
+
 
 const changeFolderName = async (oldName: string, newName: string): Promise<boolean> => {
     try {

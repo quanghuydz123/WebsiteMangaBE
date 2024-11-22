@@ -10,7 +10,7 @@ import { log } from 'console';
 
 dotenv.config();
 
-const createManyNotification = asyncHandler(async (req: Request, res: Response) => {
+const createManyNotification = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Notification } = req.body;
 
     await Promise.all(tb_Notification.map(async (notification: { _id: string }) => {
@@ -26,7 +26,7 @@ const createManyNotification = asyncHandler(async (req: Request, res: Response) 
     });
 });
 
-const getAll = asyncHandler(async (req: Request, res: Response) => {
+const getAll = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     try {
         const notifications = await NotificationModel.find().populate('user');
 
@@ -85,7 +85,7 @@ const createNotification = asyncHandler(async (req: Request, res: Response<Gener
 
 const broadcastNewChapter = async (message: string, mangaId: mongoose.Types.ObjectId): Promise<boolean> => {
     const usersList = await followingController.getUserListByMangaId(mangaId);
-    
+
     usersList.forEach((userId) => {
         NotificationModel.create({
             content: message,
@@ -95,55 +95,57 @@ const broadcastNewChapter = async (message: string, mangaId: mongoose.Types.Obje
     return true;
 }
 
-const getNotificationByIdUser = asyncHandler( async (req: Request, res: Response) => {
-    const {idUser} = req.query
-    if(!idUser){
+const getNotificationByIdUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { idUser } = req.query
+    if (!idUser) {
         res.status(500).json({
             message: "Hãy truyền idUser vô",
             data: null,
         });
+        return;
     }
     const user = await UserModel.findById(idUser)
-    if(user){
-        const notifications = await NotificationModel.find({user:user._id}).sort({createdAt:-1})
-    
+    if (user) {
+        const notifications = await NotificationModel.find({ user: user._id }).sort({ createdAt: -1 })
+
         res.status(200).json({
             message: "Thành công",
             data: notifications,
         });
-    }else{
+    } else {
         res.status(500).json({
             message: "user không tồn tại",
             data: null,
         });
     }
-    
+
 })
 
-const updateViewedByIdUser = asyncHandler( async (req: Request, res: Response) => {
-    const {idUser} = req.body
-    if(!idUser){
+const updateViewedByIdUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { idUser } = req.body
+    if (!idUser) {
         res.status(500).json({
             message: "Hãy truyền idUser vô",
             data: null,
         });
+        return;
     }
     const user = await UserModel.findById(idUser)
-    if(user){
-        await NotificationModel.updateMany({user:user._id},{isViewed:true},{new:true})
-        const notifications = await NotificationModel.find({user:user._id}).sort({createdAt:-1})
+    if (user) {
+        await NotificationModel.updateMany({ user: user._id }, { isViewed: true }, { new: true })
+        const notifications = await NotificationModel.find({ user: user._id }).sort({ createdAt: -1 })
 
         res.status(200).json({
             message: "Thành công",
             data: notifications,
         });
-    }else{
+    } else {
         res.status(500).json({
             message: "user không tồn tại",
             data: null,
         });
     }
-    
+
 })
 
 export default {

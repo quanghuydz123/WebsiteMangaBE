@@ -8,7 +8,7 @@ import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
-const createManyRole = asyncHandler(async (req: Request, res: Response) => {
+const createManyRole = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { roles } = req.body;
     const roleNews: any[] = []; // Use a specific type if you have one for roleNew
 
@@ -30,25 +30,6 @@ const createManyRole = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<Role[] | null>>): Promise<void> => {
-    // const role = await FollowingModel.aggregate(
-    //     [
-    //         {
-    //             $group: {
-    //                 _id: "$manga", // Nhóm theo manga
-    //                 totalFollows: { $sum: 1 } // Đếm số lượng follow
-    //               }
-    //         },
-    //         // {
-    //         //     // Kết hợp với bảng Manga để lấy thông tin manga chi tiết
-    //         //     $lookup: {
-    //         //       from: "mangas", // Tên collection của Manga trong MongoDB
-    //         //       localField: "_id", // Trường _id của Manga (sau khi nhóm)
-    //         //       foreignField: "_id", // Trường _id trong bảng Manga
-    //         //       as: "mangaDetails" // Tên trường để chứa thông tin manga sau khi lookup
-    //         //     }
-    //         //   },
-    //     ]
-    // )
     try {
         const roles = await RoleModel.find();
 

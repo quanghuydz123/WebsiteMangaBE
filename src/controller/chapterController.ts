@@ -10,7 +10,7 @@ import MangaModel, { Manga } from '../models/MangaModel';
 
 dotenv.config();
 
-const createManyChapter = asyncHandler(async (req: Request, res: Response) => {
+const createManyChapter = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Chapter } = req.body;
 
     // Delete all existing chapters
@@ -24,7 +24,7 @@ const createManyChapter = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
-const getPaginatedChapters = async (req: Request, res: Response) => {
+const getPaginatedChapters = async (req: Request, res: Response): Promise<void> => {
     const mangaId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.query.mangaId as string); // Get mangaId from query
     const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
     const limit: number = parseInt(req.query.limit as string) || 10; // Default to limit 10
@@ -33,7 +33,7 @@ const getPaginatedChapters = async (req: Request, res: Response) => {
     let mangaFilter = {};
 
     if (mangaId) {
-        mangaFilter = { manga: mangaId, isDeleted: false  };
+        mangaFilter = { manga: mangaId, isDeleted: false };
     }
 
     try {
@@ -68,7 +68,7 @@ const getPaginatedChapters = async (req: Request, res: Response) => {
     }
 };
 
-const getAdvancedPaginatedChapter = async (req: Request, res: Response) => {
+const getAdvancedPaginatedChapter = async (req: Request, res: Response): Promise<void> => {
     const mangaId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId(req.query.mangaId as string); // Get mangaId from query
     const filter: string = (req.query.filter as string) ?? "";
     const pageNumber: number = parseInt(req.query.page as string, 10) || 1; // Default to page 1
@@ -126,7 +126,7 @@ const getAdvancedPaginatedChapter = async (req: Request, res: Response) => {
     }
 };
 
-const getChapterListByMangaId = async (req: Request, res: Response) => {
+const getChapterListByMangaId = async (req: Request, res: Response): Promise<void> => {
     try {
         const { mangaId, orderType = 'DESC', page = 1, limit = 10 } = req.query;
 
@@ -135,7 +135,8 @@ const getChapterListByMangaId = async (req: Request, res: Response) => {
                 message: 'mangaId is required',
                 data: null
             };
-            return res.status(400).json(errorResponse);
+            res.status(400).json(errorResponse);
+            return;
         }
 
         // Determine sort order based on orderType
@@ -160,19 +161,19 @@ const getChapterListByMangaId = async (req: Request, res: Response) => {
             data: chapters
         };
 
-        return res.status(200).json(response);
+        res.status(200).json(response);
     } catch (error) {
         const errorResponse: GenericResponse<null> = {
             message: 'Error fetching chapters:' + error,
             data: null,
         };
-        return res.status(500).json(errorResponse);
+        res.status(500).json(errorResponse);
     }
 };
 
 
 
-const appendChapter = async (req: Request, res: Response) => {
+const appendChapter = async (req: Request, res: Response): Promise<void> => {
     const { manga = "", title = "", imageLinks = [], isReturnNewData = false } = req.body;
 
     if (!manga || !title) {
@@ -180,7 +181,8 @@ const appendChapter = async (req: Request, res: Response) => {
             message: "Manga and title are required.",
             data: null
         };
-        return res.status(400).json(errorResponse);
+        res.status(400).json(errorResponse);
+        return;
     }
     try {
         // Find the last chapter of the manga based on chapterNum
@@ -219,7 +221,7 @@ const appendChapter = async (req: Request, res: Response) => {
 };
 
 
-const updateChapter = async (req: Request, res: Response) => {
+const updateChapter = async (req: Request, res: Response): Promise<void> => {
     const id = new mongoose.Types.ObjectId(req.query.id as string);
     const { title, isDeleted, imageLinks, chapterNum, isReturnNewData } = req.body;
 
@@ -238,7 +240,8 @@ const updateChapter = async (req: Request, res: Response) => {
                     message: `Chapter number ${chapterNum} already exists.`,
                     data: null
                 };
-                return res.status(400).json(errorResponse);
+                res.status(400).json(errorResponse);
+                return;
             }
         }
 
@@ -259,7 +262,8 @@ const updateChapter = async (req: Request, res: Response) => {
                 message: "Chapter not found.",
                 data: null
             };
-            return res.status(404).json(errorResponse);
+            res.status(404).json(errorResponse);
+            return;
         }
 
         const response: GenericResponse<typeof updatedChapter | null> = {
@@ -279,7 +283,7 @@ const updateChapter = async (req: Request, res: Response) => {
     }
 };
 
-const getAllImageLinksByChapterId = async (req: Request, res: Response) => {
+const getAllImageLinksByChapterId = async (req: Request, res: Response): Promise<void> => {
     const { chapterId = "" } = req.query;
 
     if (!chapterId) {
@@ -287,7 +291,8 @@ const getAllImageLinksByChapterId = async (req: Request, res: Response) => {
             message: "chapterId is required.",
             data: null
         }
-        return res.status(400).json(response);
+        res.status(400).json(response);
+        return;
     }
 
     try {
@@ -302,7 +307,8 @@ const getAllImageLinksByChapterId = async (req: Request, res: Response) => {
                 message: "image links not found.",
                 data: null
             }
-            return res.status(404).json(response);
+            res.status(404).json(response);
+            return;
         }
 
         const response: GenericResponse<typeof imageLinks> = {
@@ -315,11 +321,11 @@ const getAllImageLinksByChapterId = async (req: Request, res: Response) => {
             message: "Error fetching image links:" + error,
             data: null
         };
-        return res.status(500).json(response);
+        res.status(500).json(response);
     }
 };
 
-const selfQueryChapter = async (req: Request, res: Response) => {
+const selfQueryChapter = async (req: Request, res: Response): Promise<void> => {
     try {
         const { page = 1, limit = 10, filter = {}, options = {} } = req.body;
 
@@ -351,18 +357,19 @@ const selfQueryChapter = async (req: Request, res: Response) => {
             data: result
         };
 
-        return res.status(200).json(response);
+        res.status(200).json(response);
+        return;
     } catch (error: any) {
         // Use GenericResponse for error
         const errorResponse: GenericResponse<null> = {
             message: 'Error retrieving chapters: ' + error.message,
             data: null
         };
-        return res.status(500).json(errorResponse);
+        res.status(500).json(errorResponse);
     }
 };
 
-const getNextChapter = async (req: Request, res: Response) => {
+const getNextChapter = async (req: Request, res: Response): Promise<void> => {
     const { mangaId, chapterNum } = req.query;
 
     if (!mangaId || !chapterNum) {
@@ -370,7 +377,8 @@ const getNextChapter = async (req: Request, res: Response) => {
             message: "mangaId and chapterNum are required.",
             data: null
         }
-        return res.status(400).json(response);
+        res.status(400).json(response);
+        return;
     }
 
     try {
@@ -388,7 +396,8 @@ const getNextChapter = async (req: Request, res: Response) => {
                 message: "Next chapter not found.",
                 data: null
             }
-            return res.status(404).json(response);
+            res.status(404).json(response);
+            return;
         }
 
         const response: GenericResponse<typeof nextChapter> = {
@@ -401,11 +410,11 @@ const getNextChapter = async (req: Request, res: Response) => {
             message: "Error fetching next chapter:" + error,
             data: null
         };
-        return res.status(500).json(response);
+        res.status(500).json(response);
     }
 };
 
-const getPreviousChapter = async (req: Request, res: Response) => {
+const getPreviousChapter = async (req: Request, res: Response): Promise<void> => {
     const { mangaId, chapterNum } = req.query;
 
     if (!mangaId || !chapterNum) {
@@ -413,7 +422,8 @@ const getPreviousChapter = async (req: Request, res: Response) => {
             message: "mangaId and chapterNum are required.",
             data: null
         }
-        return res.status(400).json(response);
+        res.status(400).json(response);
+        return;
     }
 
     try {
@@ -431,7 +441,8 @@ const getPreviousChapter = async (req: Request, res: Response) => {
                 message: "Previous chapter not found.",
                 data: null
             }
-            return res.status(404).json(response);
+            res.status(404).json(response);
+            return;
         }
 
         const response: GenericResponse<typeof previousChapter> = {
@@ -444,7 +455,7 @@ const getPreviousChapter = async (req: Request, res: Response) => {
             message: "Error fetching previous chapter:" + error,
             data: null
         };
-        return res.status(500).json(response);
+        res.status(500).json(response);
     }
 };
 
@@ -454,10 +465,10 @@ const insertImageLink = async (req: Request, res: Response): Promise<void> => {
         const { chapterId, imageLinks, pos } = req.body;
         const result = await ChapterModel.updateOne(
             { _id: chapterId },
-            { 
-                $push: { 
+            {
+                $push: {
                     imageLinks: { $each: [imageLinks], $position: pos } // Insert at position
-                } 
+                }
             }
         );
 
@@ -577,9 +588,6 @@ async function broadcastToUser(mangaId: mongoose.Types.ObjectId, newChapterTitle
     notificationController.broadcastNewChapter(`${manga.imageUrl}||Truyện bạn theo dõi ${manga.name} đã có chapter mới: ${newChapterTitle}`, mangaId)
 }
 
-async function getNextChapterById() {
-
-}
 
 export default {
     createManyChapter,

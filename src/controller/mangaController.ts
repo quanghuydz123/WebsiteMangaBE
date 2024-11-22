@@ -22,7 +22,7 @@ interface MangaResponse {
     updatedAt: Date;
 }
 
-const createManyManga = asyncHandler(async (req: Request, res: Response) => {
+const createManyManga = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Manga } = req.body;
 
     await Promise.all(tb_Manga.map(async (manga: { _id: string }) => {
@@ -38,7 +38,7 @@ const createManyManga = asyncHandler(async (req: Request, res: Response) => {
     });
 });
 
-const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const {
         searchValue,
         fillterGenre,
@@ -145,7 +145,7 @@ const getAll = asyncHandler(async (req: Request, res: Response<GenericResponse<a
     res.status(200).json(response);
 });
 
-const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { id } = req.query;
 
     if (id) {
@@ -173,7 +173,7 @@ const getMangaById = asyncHandler(async (req: Request, res: Response<GenericResp
 });
 
 
-const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { _id } = req.body;
     // Ensure _id is provided
     if (!_id) {
@@ -208,7 +208,7 @@ const updateMangaById = asyncHandler(async (req: Request, res: Response<GenericR
     res.status(200).json(response);
 });
 
-const createManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const createManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const data = req.body;
 
     try {
@@ -231,7 +231,7 @@ const createManga = asyncHandler(async (req: Request, res: Response<GenericRespo
     }
 });
 
-const increaseView = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const increaseView = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { _id } = req.body;
 
     // Ensure _id is provided
@@ -252,11 +252,13 @@ const increaseView = asyncHandler(async (req: Request, res: Response<GenericResp
             };
             cacheController.upsertModelModified(CURRENT_MODEL_NAME);
             res.status(200).json(response);
+            return;
         } else {
             res.status(400).json({ // Handle potential error in update
                 message: "Lỗi khi cập nhật lượt xem",
                 data: null,
             });
+            return;
         }
     } else {
         res.status(404); // Not Found
@@ -264,7 +266,7 @@ const increaseView = asyncHandler(async (req: Request, res: Response<GenericResp
     }
 });
 
-const getPosters = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const getPosters = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const {
         searchValue,
         fillterGenre,
@@ -350,7 +352,7 @@ const getPosters = asyncHandler(async (req: Request, res: Response<GenericRespon
 });
 
 
-const StatisticsByView = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const StatisticsByView = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { page = 1, limit = 10 } = req.query
     const options: any = {
         page,
@@ -365,7 +367,7 @@ const StatisticsByView = asyncHandler(async (req: Request, res: Response<Generic
     });
 });
 
-const StatisticsByFollow = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const StatisticsByFollow = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { page = 1, limit = 10 } = req.query
     const options: any = {
         page,
@@ -380,7 +382,7 @@ const StatisticsByFollow = asyncHandler(async (req: Request, res: Response<Gener
     });
 });
 
-const StatisticsByRating = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const StatisticsByRating = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { page = 1, limit = 10 } = req.query
     const options: any = {
         page,
@@ -395,7 +397,7 @@ const StatisticsByRating = asyncHandler(async (req: Request, res: Response<Gener
     });
 });
 
-const deleteManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const deleteManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const { idManga } = req.body
     if (!idManga) {
         res.status(400);
@@ -416,7 +418,7 @@ const deleteManga = asyncHandler(async (req: Request, res: Response<GenericRespo
 });
 
 
-const getAllAdminManga = async (req: Request, res: Response) => {
+const getAllAdminManga = async (req: Request, res: Response): Promise<void> => {
     try {
         const { page = 1, limit = 10 } = req.query;
 
@@ -467,16 +469,17 @@ const getAllAdminManga = async (req: Request, res: Response) => {
         });
     }
 };
-export const updateAdminManga = async (req: Request, res: Response) => {
+export const updateAdminManga = async (req: Request, res: Response): Promise<void> => {
     try {
         const { _id, updatedData } = req.body;
 
         // Check if _id and updatedData are provided
         if (!_id || !updatedData) {
-            return res.status(400).json({
+            res.status(400).json({
                 message: '_id and updatedData are required',
                 data: null
             });
+            return;
         }
 
         // Find manga by ID and update with the provided data
@@ -490,10 +493,11 @@ export const updateAdminManga = async (req: Request, res: Response) => {
 
         // Check if the manga was found and updated
         if (!manga) {
-            return res.status(404).json({
+            res.status(404).json({
                 message: 'Manga not found',
                 data: null
             });
+            return;
         }
 
         // Format the response data as MangaResponse
@@ -527,7 +531,7 @@ export const updateAdminManga = async (req: Request, res: Response) => {
 
 
 
-const totalManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>) => {
+const totalManga = asyncHandler(async (req: Request, res: Response<GenericResponse<any>>): Promise<void> => {
     const totalManga = await MangaModel.find().countDocuments()
     res.status(200).json({
         message: 'Thành công',

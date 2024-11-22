@@ -24,7 +24,7 @@ const createManyAuthor = asyncHandler(async (req: Request, res: Response, next: 
 });
 
 
-const getPaginatedAuthor = async (req: Request, res: Response) => {
+const getPaginatedAuthor = async (req: Request, res: Response): Promise<void> => {
     const page: number = parseInt(req.query.page as string) || 1; // Default to page 1
     const limit: number = parseInt(req.query.limit as string) || 10; // Default to 10
     const skip: number = (page - 1) * limit; // Calculate how many items to skip
@@ -60,7 +60,7 @@ const getPaginatedAuthor = async (req: Request, res: Response) => {
     }
 };
 
-const selfQueryAuthor = async (req: Request, res: Response) => {
+const selfQueryAuthor = async (req: Request, res: Response): Promise<void> => {
     try {
         const { page = 1, limit = 10, filter = {}, options = {} } = req.body;
 
@@ -90,18 +90,18 @@ const selfQueryAuthor = async (req: Request, res: Response) => {
         };
 
         // Send the paginated results back to the client
-        return res.status(200).json(response);
+        res.status(200).json(response);
     } catch (error) {
         // Use GenericResponse for error
         const errorResponse: GenericResponse<null> = {
             message: 'Error retrieving authors',
             data: null
         };
-        return res.status(500).json(errorResponse);
+        res.status(500).json(errorResponse);
     }
 };
 
-const getAdvancedPaginatedAuthor = async (req: Request, res: Response) => {
+const getAdvancedPaginatedAuthor = async (req: Request, res: Response): Promise<void> => {
     const { page, limit, filter } = req.query;
 
     const pageNumber: number = parseInt(page as string, 10) || 1; // Default to page 1
@@ -154,7 +154,7 @@ const getAdvancedPaginatedAuthor = async (req: Request, res: Response) => {
     }
 };
 
-const createAuthor = async (req: Request, res: Response) => {
+const createAuthor = async (req: Request, res: Response): Promise<void> => {
     const { name, isReturnNewData } = req.body;
 
     if (!name) {
@@ -162,14 +162,14 @@ const createAuthor = async (req: Request, res: Response) => {
             message: "Name is required.",
             data: null
         };
-        return res.status(400).json(errorResponse);
+        res.status(400).json(errorResponse);
+        return;
     }
 
     const author = new AuthorModel({ name });
 
     try {
         const newAuthor = await author.save();
-        console.log(newAuthor);
 
         // Set responseData based on isReturnNewData
         const responseData = isReturnNewData ? newAuthor : null; // Return author if requested, otherwise null
@@ -189,7 +189,7 @@ const createAuthor = async (req: Request, res: Response) => {
     }
 };
 
-const updateAuthor = async (req: Request, res: Response) => {
+const updateAuthor = async (req: Request, res: Response): Promise<void> => {
     const { id, name, isDeleted, isReturnNewData } = req.body;
 
     try {
@@ -204,7 +204,8 @@ const updateAuthor = async (req: Request, res: Response) => {
                 message: "Author not found.",
                 data: null
             };
-            return res.status(404).json(errorResponse);
+            res.status(404).json(errorResponse);
+            return;
         }
 
         const responseData = isReturnNewData ? updatedAuthor : null;

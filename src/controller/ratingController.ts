@@ -9,7 +9,7 @@ import { GenericResponse } from '../models/GenericResponse';
 
 dotenv.config();
 
-const createManyRating = asyncHandler(async (req: Request, res: Response) => {
+const createManyRating = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { tb_Rating } = req.body;
 
     await Promise.all(tb_Rating.map(async (rating: { _id: string }) => {
@@ -123,36 +123,42 @@ const toggleRating = asyncHandler(async (req: Request, res: Response<GenericResp
     }
 });
 
-const getRatingByIdUserAndManga = asyncHandler(async (req: Request, res: Response) => {
-    const { idUser,idManga } = req.query;
-    if(!idUser || !idManga ){
+const getRatingByIdUserAndManga = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { idUser, idManga } = req.query;
+    if (!idUser || !idManga) {
         res.status(500).json({
             message: "hãy nhập idUser và idManga",
             data: null,
         });
+        return;
     }
-    const user = await UserModel.findById(idUser)
-    const manga = await MangaModel.findById(idManga)
-    if(!user || !manga){
+    const [user, manga] = await Promise.all([
+        UserModel.findById(idUser),
+        MangaModel.findById(idManga)
+
+    ])
+
+    if (!user || !manga) {
         res.status(500).json({
             message: "user hoặc manga không tồn tại",
             data: null,
         });
+        return;
     }
-    const rating = await RatingModel.findOne({user:idUser,manga:idManga})
-    if(rating){
+    const rating = await RatingModel.findOne({ user: idUser, manga: idManga })
+    if (rating) {
         res.status(200).json({
             message: "Thành công",
             data: rating,
         });
-    }else{
+    } else {
         res.status(200).json({
             message: "Chưa có rating",
             data: null,
         });
     }
 
-    
+
 });
 export default {
     createManyRating,
