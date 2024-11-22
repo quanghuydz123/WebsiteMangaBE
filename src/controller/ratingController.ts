@@ -125,7 +125,7 @@ const toggleRating = asyncHandler(async (req: Request, res: Response<GenericResp
 
 const getRatingByIdUserAndManga = asyncHandler(async (req: Request, res: Response) => {
     const { idUser,idManga } = req.query;
-    if(!idUser && !idManga ){
+    if(!idUser || !idManga ){
         res.status(500).json({
             message: "hãy nhập idUser và idManga",
             data: null,
