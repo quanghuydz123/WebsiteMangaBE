@@ -1,12 +1,11 @@
-import asyncHandler from 'express-async-handler';
 import dotenv from 'dotenv';
-import CommentModel, { Comment, TOEXICWORDS } from '../models/CommentModel';
-import mongoose from 'mongoose';
 import { Request, Response } from 'express';
-import { GenericResponse } from '../models/GenericResponse';
-import crypto from 'crypto';
-import cacheController from './cacheController';
+import asyncHandler from 'express-async-handler';
+import mongoose from 'mongoose';
 import { IAPIParams } from '../models/APIPramsModel';
+import CommentModel, { Comment, TOEXICWORDS } from '../models/CommentModel';
+import { GenericResponse } from '../models/GenericResponse';
+import cacheController from './cacheController';
 
 dotenv.config();
 const CURRENT_MODEL_NAME = "comments" as const;
@@ -150,7 +149,8 @@ const createComment = async (req: Request, res: Response): Promise<void> => {
             message: "Comment created successfully.",
             data: responseData // data will be null if isReturnNewData is false
         };
-
+        
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME);
         res.status(201).json(response);
     } catch (error: any) {
         // Use GenericResponse for error
@@ -209,7 +209,8 @@ const updateComment = async (req: Request<{}, {}, UpdateCommentRequestBody>, res
             message: 'Comment updated successfully.',
             data: isReturnNewData ? updatedComment : null,
         };
-
+        
+        cacheController.upsertModelModified(CURRENT_MODEL_NAME);
         res.status(200).json(response);
     } catch (error: any) {
         // Use GenericResponse for error
@@ -325,6 +326,7 @@ const deleteComment = async (req: Request, res: Response): Promise<void> => {
         const comment = await CommentModel.findById(idComment)
         if (comment) {
             await CommentModel.findByIdAndDelete(comment._id)
+            cacheController.upsertModelModified(CURRENT_MODEL_NAME);
             res.status(200).json({
                 message: 'Xóa comment thành công',
                 data: null

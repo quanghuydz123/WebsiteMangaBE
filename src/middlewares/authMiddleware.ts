@@ -76,3 +76,23 @@ export const authUserMiddleWare = (req: Request, res: Response, next: NextFuncti
     });
 
 };
+
+export const decodeJWT = (req: Request, res: Response, next: NextFunction): void => {
+    const token = req.cookies.jwt; // Extract token from cookies
+
+    if (!token) {
+        res.status(403).json({ error: 'Access denied: No token provided.' });
+        return;
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET!, (err: any, user: any) => {
+        if (err) {
+            console.error('JWT verification failed');
+            res.status(403).json({ error: 'Access denied: Invalid token.' });
+            return;
+        }
+
+        req.user = user; // Attach decoded user data to the request object
+        next(); // Proceed to the next middleware or controller
+    });
+};
