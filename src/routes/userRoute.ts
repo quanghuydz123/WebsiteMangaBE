@@ -1,13 +1,13 @@
 import express, { NextFunction } from 'express';
 import { Request, Response } from 'express';
 import userController from '../controller/userController';
-import { authenticateJWT, authUserMiddleWare } from '../middlewares/authMiddleware';
+import { authenticateJWT, authUserMiddleWare, decodeJWT } from '../middlewares/authMiddleware';
 const userRouter = express.Router();
 
 
 
-userRouter.get('/get-all', (req: Request, res: Response,next :NextFunction) => {
-    userController.getAll(req, res,next);
+userRouter.get('/get-all', (req: Request, res: Response, next: NextFunction) => {
+    userController.getAll(req, res, next);
 });
 /**
  * @swagger
@@ -33,8 +33,8 @@ userRouter.get('/get-all', (req: Request, res: Response,next :NextFunction) => {
  * */
 
 
-userRouter.get('/get-user-byid',authUserMiddleWare, (req: Request, res: Response,next :NextFunction) => {
-    userController.getUserById(req, res,next);
+userRouter.get('/get-user-byid', authUserMiddleWare, (req: Request, res: Response, next: NextFunction) => {
+    userController.getUserById(req, res, next);
 });
 
 /**
@@ -68,8 +68,8 @@ userRouter.get('/get-user-byid',authUserMiddleWare, (req: Request, res: Response
  *         description: id không có or user không tồn tại
  * 
  * */
-userRouter.post('/login', (req: Request, res: Response,next :NextFunction) => {
-    userController.login(req, res,next);
+userRouter.post('/login', (req: Request, res: Response, next: NextFunction) => {
+    userController.login(req, res, next);
 });
 
 /**
@@ -113,8 +113,8 @@ userRouter.post('/login', (req: Request, res: Response,next :NextFunction) => {
  * 
  * */
 
-userRouter.post('/login-google', (req: Request, res: Response,next :NextFunction) => {
-    userController.loginGoogle(req, res,next);
+userRouter.post('/login-google', (req: Request, res: Response, next: NextFunction) => {
+    userController.loginGoogle(req, res, next);
 });
 /**
  * @swagger
@@ -154,8 +154,8 @@ userRouter.post('/login-google', (req: Request, res: Response,next :NextFunction
  * 
  * */
 
-userRouter.post('/register', (req: Request, res: Response,next :NextFunction) => {
-    userController.register(req, res,next);
+userRouter.post('/register', (req: Request, res: Response, next: NextFunction) => {
+    userController.register(req, res, next);
 });
 
 /**
@@ -205,8 +205,8 @@ userRouter.post('/register', (req: Request, res: Response,next :NextFunction) =>
  * */
 
 
-userRouter.put('/change-password', (req: Request, res: Response,next :NextFunction) => {
-    userController.changePassword(req, res,next);
+userRouter.put('/change-password', (req: Request, res: Response, next: NextFunction) => {
+    userController.changePassword(req, res, next);
 });
 /**
  * @swagger
@@ -255,8 +255,8 @@ userRouter.put('/change-password', (req: Request, res: Response,next :NextFuncti
  * */
 
 //reading_history
-userRouter.post('/add-reading-history',authUserMiddleWare, (req: Request, res: Response,next :NextFunction) => {
-    userController.addReadingHistory(req, res,next);
+userRouter.post('/add-reading-history', authUserMiddleWare, (req: Request, res: Response, next: NextFunction) => {
+    userController.addReadingHistory(req, res, next);
 });
 /**
  * @swagger
@@ -296,8 +296,8 @@ userRouter.post('/add-reading-history',authUserMiddleWare, (req: Request, res: R
  * */
 
 
-userRouter.put('/block-user',authenticateJWT, (req: Request, res: Response,next :NextFunction) => {
-    userController.blockUser(req, res,next);
+userRouter.put('/block-user', authenticateJWT, (req: Request, res: Response, next: NextFunction) => {
+    userController.blockUser(req, res, next);
 });
 /**
  * @swagger
@@ -332,12 +332,12 @@ userRouter.put('/block-user',authenticateJWT, (req: Request, res: Response,next 
  * 
  * */
 
-userRouter.post('/create-many-user', (req: Request, res: Response,next :NextFunction) => {
-    userController.createManyUser(req, res,next);
+userRouter.post('/create-many-user', (req: Request, res: Response, next: NextFunction) => {
+    userController.createManyUser(req, res, next);
 });
 
-userRouter.get('/total-user', (req: Request, res: Response,next :NextFunction) => {
-    userController.totalUser(req, res,next);
+userRouter.get('/total-user', (req: Request, res: Response, next: NextFunction) => {
+    userController.totalUser(req, res, next);
 });
 /**
  * @swagger
@@ -362,7 +362,7 @@ userRouter.get('/total-user', (req: Request, res: Response,next :NextFunction) =
  * 
  * */
 
-userRouter.put("/change-role",authenticateJWT,userController.changeRole);
+userRouter.put("/change-role", authenticateJWT, userController.changeRole);
 /**
  * @swagger
  * /users/change-role:
@@ -435,4 +435,5 @@ userRouter.put("/change-role",authenticateJWT,userController.changeRole);
  *                 data:
  *                   type: null
  */
+userRouter.get("/is-admin", decodeJWT, userController.IsAdmin);
 export default userRouter;

@@ -422,6 +422,15 @@ const changeRole = async (req: Request, res: Response): Promise<void> => {
         res.status(500).json(errorResponse);
     }
 };
+
+export const IsAdmin = async (req: Request, res: Response): Promise<void> => {
+    if (!req.user || req.user.roleId !== process.env.ADMIN_ROLE_ID) {
+        res.status(200).send('user');
+        return;
+    }
+    res.status(200).send('admin');
+};
+
 export default {
     getAll,
     createManyUser,
@@ -434,4 +443,5 @@ export default {
     blockUser,
     totalUser,
     changeRole,
+    IsAdmin
 };

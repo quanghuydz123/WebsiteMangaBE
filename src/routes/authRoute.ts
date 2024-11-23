@@ -20,18 +20,21 @@ const authRouter = express.Router();
  *       500:
  *         description: Internal server error.
  */
-authRouter.get('/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
-}));
+// authRouter.get('/google', passport.authenticate('google', {
+//     scope: ['profile', 'email']
 
+// }));
+/////////////////////////////////////////////////
+authRouter.get('/google', authController.versionControl);
+//////////////////////////////////////////////////
 // Swagger Google Authentication
 // authRouter.get('/swagger/google', swaggerMode.passport.authenticate('google', {
 //     scope: ['profile', 'email']
 // }));
 
 // Standard Google Callback
-authRouter.get('/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/' }), 
+authRouter.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
     authController.generateJWT
 );
 

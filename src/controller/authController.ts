@@ -1,9 +1,9 @@
 
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import UserModel, { IUser } from '../models/UserModel';
-
+import passport from '../configs/passport-setup';
 dotenv.config();
 const generateJWT = async (req: Request, res: Response) => {
 
@@ -36,8 +36,14 @@ const generateJWT = async (req: Request, res: Response) => {
             sameSite: 'none', // Required for cross-domain cookie
             maxAge: 604800000,
         });
-        const origin = req.get('origin') || req.get('referer');
-        const frontendURL = origin != 'http://localhost:3000' ? `${process.env.FRONTEND_API}/WebsiteMangaFE/#` : 'http://localhost:3000';
+
+        const state = req.query.state ? JSON.parse(decodeURIComponent(req.query.state as string)) : null;
+
+
+        const frontendURL = state.version === 123 ?
+            `${process.env.FRONTEND_API}/WebsiteMangaFE/#`
+            : 'http://localhost:3000';
+        console.log(frontendURL);
         res.redirect(`${frontendURL}?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
 
         // Redirect to the frontend with user info
@@ -47,7 +53,7 @@ const generateJWT = async (req: Request, res: Response) => {
     }
 };
 
-const generateSwaggerJWT = async (req: Request, res: Response):Promise<void> => {
+const generateSwaggerJWT = async (req: Request, res: Response): Promise<void> => {
     try {
         // Ensure user exists before accessing properties
         if (!req.user) {
@@ -75,7 +81,20 @@ const generateSwaggerJWT = async (req: Request, res: Response):Promise<void> => 
 };
 
 
+const versionControl = async (req: Request, res: Response, next: NextFunction) => {
+    const version = parseInt(req.query.version as string, 10) || 3000;
+
+    const state = JSON.stringify({ version });
+    console.log(`version: ${version}`);
+
+    passport.authenticate('google', {
+        scope: ['profile', 'email'],
+        state,  // Include the custom state in the authenticate options
+    })(req, res, next);  // Ensure we call the passport.authenticate function
+}
+
 export default {
     generateJWT,
-    generateSwaggerJWT
+    generateSwaggerJWT,
+    versionControl
 }
